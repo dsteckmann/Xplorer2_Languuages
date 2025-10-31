@@ -162,19 +162,7 @@ extern unsigned int LCD_timeout,LCD_timer;
 /* On Macro */
 #define LCD_NChar_DisplayOn() LCD_NChar_WriteControl(LCD_NChar_DISPLAY_ON_CURSOR_OFF)
 
-
-
-
-
-/* This structure is used for defining 'screens' for the LCD */
-typedef struct
-{
-	uint32 const	lineloc;                            // Location of initial character on line
-	char * linestring;                        // LCDSTRING const * const s_calWaitingToFoamC [4]Pointer to string
-}  LCDSTRING;
-
 typedef char *STRING;
-
 
 /* Some Key Global Variables */
 extern int    KeyActive;                       // Key active, 0 if none pending
@@ -227,6 +215,8 @@ extern void LCD_PrintAtPositionCentered ( char * buffer, uint8_t line_position )
 extern uint8_t centerStart( uint8_t stringLength );
 extern void CtrStrNC(char *buf, uint8 line); // centers string on given line, does not clear the line
 extern void CtrStrC(char *buf, uint8 line);  // centers string on given line, Clears the entire line
+
+void displine_e(int linenum, LCDSTRING const * dispstring, int clearline, uint8 lang);
 
 #endif /* endif !LCD_DRIVERS_H for "if we haven't included this file already..."    */
 

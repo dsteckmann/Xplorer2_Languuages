@@ -967,10 +967,11 @@ void DisplayStrCentered(uint8 line, char *str)
  *
  */
 
-void displine(int linenum, LCDSTRING const *dispstring, int clearline)
+void displine(int linenum, LCDSTRING const * dispstring, int clearline)
 {
 	char lineloc;
-
+  
+  
 	// First, if clearline, write blanks.
 	if (clearline)
 	{
@@ -991,7 +992,53 @@ void displine(int linenum, LCDSTRING const *dispstring, int clearline)
 	else
 		gotoloc(linenum,dispstring->lineloc);  // Go to start of text.
 
-   printStringOnLCD( dispstring->linestring);   // Print the string.
+  printStringOnLCD( dispstring->linestring);   // Print the string.
+
+
+}
+
+
+/*
+ *  FUNCTION: displine
+ *
+ *  PARAMETERS: int linenum, LCDSTRING const *dispstring, int clearline, index into language to use
+ *
+ *  DESCRIPTION: displine places the string from dispstring on the lcd at the location
+ *               given by lineloc. The clearline flag can erase the line before putting
+ *               the string up. This allows the routine to be used fur updating a
+ *               whole line or just adding a short string.
+ *
+ *  Note: displine expects a pointer to an LCDSTRING, not the LCDSTRING
+ *        structure itself.
+ *
+ *  RETURNS: None
+ *
+ */
+
+void displine_e(int linenum, LCDSTRING const * dispstring, int clearline, uint8 lang)
+{
+	char lineloc;
+  
+  // First, if clearline, write blanks.
+	if (clearline)
+	{
+		gotoloc(linenum, 0);    // Start at beginning of line.
+		// Grab the LCD Semaphore
+ 	  printStringOnLCD( "                    " );
+	}
+
+	// now, write the line
+	if( 10 == dispstring[lang].lineloc )
+	{
+		lineloc = (char)floor(((19 - strlen(dispstring[lang].linestring)) / 2 + 0.5));
+		gotoloc( linenum, lineloc );
+
+	}
+	else
+		gotoloc(linenum,dispstring[lang].lineloc);  // Go to start of text.
+
+    
+  printStringOnLCD( dispstring[lang].linestring);   // Print the string.
 
 
 }

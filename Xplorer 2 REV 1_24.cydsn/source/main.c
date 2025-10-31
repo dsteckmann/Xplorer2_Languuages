@@ -29,15 +29,16 @@
 #include "DataStructs.h"
 #include "StoreFunctions.h"
 #include "Utilities.h"
-#include "interrupts.h"
+#include "Interrupts.h"
 #include "Keypad_functions.h"
 #include "LCD_drivers.h"
 #include "prompts.h"
 #include "Alfat.h"
 #include "Utilities.h"
 #include "Batteries.h"
-#include "UARTS.H"
+#include "UARTS.h"
 #include "ProjectData.h"
+#include "screens.h"
 /*-------------------------[   Global Functions   ]---------------------------*/
 extern void pulseBuzzer ( void );
 extern void print_menu ( void ); 
@@ -169,6 +170,10 @@ int main() { //initialization and main loop
    initUARTPlus();
    //Features.auto_depth = 1;
   }
+  CLEAR_DISP;
+  displine_e ( LINE1, &mEscToExit[0] , 1, 0 );
+  displine_e ( LINE2, &mEscToExit[0] , 1, 1 );
+  
   
   tst_depth_g = 0;
   calibration_date =  NV_RAM_MEMBER_RD  (Constants.CAL_DATE ); //read date of last calibration date from EEPROM 

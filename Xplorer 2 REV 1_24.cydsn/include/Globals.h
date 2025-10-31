@@ -1,13 +1,12 @@
 /******************************************************************************
  *                                                                            
  *  InstroTek, Inc. 2010                  
- *  5908 Triangle Dr.
- *  Raleigh,NC 27617
+ *  1 Triangle Dr.
+ *  RTP,NC 27709
  *  www.instrotek.com  (919) 875-8371                                         
  *                                                                               
  *           File Name:  Globals.h
- *  Originating Author:  Chris Churavy
- *       Creation Date:  10/21/2010 
+ *
  *
  ******************************************************************************/ 
  
@@ -17,14 +16,13 @@
 /*
  *  when?       who?    what?
  *  ----------- ------- ------------------------------------------------------
- *  10/21/2010  CC      Original
+ *  l
  *
  *---------------------------------------------------------------------------*/
 
 /*  If we haven't included this file already.... */
 #ifndef GLOBALS_H
 #define GLOBALS_H
-
   
 #include <project.h>
 #include "elite.h"
@@ -33,8 +31,6 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stddef.h>
-//#include <CYDEVICE.H> //Generated
-#include "CyLib.h"    //Generated  
   
 
 /*----------------------------------------------------------------------------*/
@@ -158,11 +154,18 @@
 /*-------------------------[   Global Variables   ]---------------------------*/
 /*----------------------------------------------------------------------------*/
 extern char gps_fix;
-  
-  
+   
+/* This structure is used for defining 'screens' for the LCD */
+typedef struct sLCDSTRING
+{
+	const uint8_t lineloc;                      // Location of initial character on line
+	char * linestring;                        // LCDSTRING const * const s_calWaitingToFoamC [4]Pointer to string
+}  LCDSTRING;
+
+
 // These are the actual global definitions of the flags, coudn't define individual bits as extern
 
-extern struct flag_struct
+struct flag_struct
 {
    uint16_t button_pressed        : 1; // Flag is high when "key" is pressed
    uint16_t stat_flag             : 1; // set during stat test   
@@ -176,13 +179,13 @@ extern struct flag_struct
    uint16_t Abort                 : 1; // Set when ON pressed for 3 seconds.
 } Flags;
 
-extern union 
+union 
 {
   uint16_t * flag_value;
   struct flag_struct * flag_bitfield;
 }  Flag_U;
 
-extern struct control_struct
+struct control_struct
 {
    uint16_t buzz_enable           : 1; // set to enable buzzer when sound_on is enabled
    uint16_t shut_dwn              : 1; // set when "auto" shut off is enabled, some tests temporarily turn this off.
@@ -192,13 +195,13 @@ extern struct control_struct
    uint16_t update_time           : 1; // controls when the display will update countdown clock
 } Controls;
 
-extern union 
+ union 
 {
   uint16_t * controls_value;
   struct control_struct * controls_bitfield;
 }  Controls_U;
 
-extern struct features_struct
+ struct features_struct
 {
 	uint16_t auto_depth            : 1; // 0 flag for auto depth setting, set high when enabled
 	uint16_t avg_std_mode          : 1; // 1 flag for average standard mode, set when enabled
@@ -218,7 +221,7 @@ extern struct features_struct
   uint16_t temp_15               : 1; // 15
 } Features;
 
-extern union 
+ union 
 {
   uint16_t * features_value;
   struct features_struct * features_bitfield;
@@ -227,20 +230,20 @@ extern union
 
 
 
-extern struct offsets_struct
+ struct offsets_struct
 {
    uint16_t den_offset_pos        : 1; // Density offset flag, set when "ON"
    uint16_t moist_offset_pos      : 1; // Moisture offset flag, set when "ON"
    uint16_t tren_offset_pos       : 1; // Trench offset flag, set when "ON"
 } Offsets;
 
-extern union 
+ union 
 {
   uint16_t * offsets_value;
   struct offsets_struct * offsets_bitfield;
 }  Offsets_U;
 
-extern struct spec_flag_struct
+ struct spec_flag_struct
 {
    uint16_t spec_cal_flag         : 1;
    uint16_t nomograph_flag        : 1;
@@ -253,7 +256,7 @@ extern struct spec_flag_struct
    uint16_t trench_offset_flag    : 1; // set when doing a trench offset count
 } Spec_flags;
 
-extern union 
+ union 
 {
   uint16_t * spec_flags_value;
   struct spec_flag_struct * spec_flags_bitfield;
@@ -286,7 +289,6 @@ typedef struct date_time_s
   uint8_t   ihour;
   uint8_t   iminute;
   uint8_t   isecond;
-
 } date_time_t;
 
 #pragma pack(1)  
@@ -337,7 +339,7 @@ extern fp32_t volts_calc;
 
 extern char s1[4];
 
-extern char buffer2[32];
+extern BYTE buffer2[32];
 
 extern char lcdstr[80];
 extern date_time_t date_time_g;
