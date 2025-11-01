@@ -73,7 +73,12 @@ extern unsigned int LCD_timeout,LCD_timer;
   #define LINE2 				20
 	#define LINE3					40
 	#define LINE4					60
-
+  #define LCD_LINE_1    0
+  #define LCD_LINE_2    1
+  #define LCD_LINE_3    2
+  #define LCD_LINE_4    3
+  
+  
   #define LINE_LENGTH 20
   #define NUMBER_CHARS1    	NUMBER_CHARS+1 
 #endif
@@ -217,6 +222,6 @@ extern void CtrStrNC(char *buf, uint8 line); // centers string on given line, do
 extern void CtrStrC(char *buf, uint8 line);  // centers string on given line, Clears the entire line
 
 void displine_e(int linenum, LCDSTRING const * dispstring, int clearline, uint8 lang);
-
+void dispscrn_e(LCDSTRING const * const scrn[] , uint8 lang);
 #endif /* endif !LCD_DRIVERS_H for "if we haven't included this file already..."    */
 

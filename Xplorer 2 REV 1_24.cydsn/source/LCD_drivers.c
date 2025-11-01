@@ -1030,8 +1030,10 @@ void displine_e(int linenum, LCDSTRING const * dispstring, int clearline, uint8 
 	// now, write the line
 	if( 10 == dispstring[lang].lineloc )
 	{
-		lineloc = (char)floor(((19 - strlen(dispstring[lang].linestring)) / 2 + 0.5));
-		gotoloc( linenum, lineloc );
+		uint8 len, spaces;
+    len = strlen(dispstring[lang].linestring);
+    spaces = (20 - len ) / 2 ;
+		gotoloc( linenum, spaces );
 
 	}
 	else
@@ -1152,6 +1154,33 @@ void dispscrn(LCDSTRING const * const scrn[] )
 	{
 		// Note displine is expecting a pointer to an LCDSTRING.
 		displine(i,scrn[i],1);	
+								
+	}
+
+}
+
+
+/*
+ *  FUNCTION: dispscrn
+ *
+ *  PARAMETERS: LCDSTRING const * const scrn[]
+ *
+ *  DESCRIPTION: dispscrn is used to overwrite all four lines on the lcd. It receives a pointer
+ *               to an array of LCDSTRING. There should be four strings in this array. Displine
+ *               is called four times, starting at each line, clearing first with clearline.
+ *
+ *  RETURNS: None
+ *
+ */
+
+void dispscrn_e(LCDSTRING const * const scrn[] , uint8 lang)
+{
+	int  i;
+
+  for ( i=0;i<4;i++)
+	{
+		// Note displine is expecting a pointer to an LCDSTRING.
+		displine_e(i,scrn[i],1,lang);	
 								
 	}
 

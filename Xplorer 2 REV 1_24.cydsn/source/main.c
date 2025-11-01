@@ -171,10 +171,13 @@ int main() { //initialization and main loop
    //Features.auto_depth = 1;
   }
   CLEAR_DISP;
-  displine_e ( LINE1, &mEscToExit[0] , 1, 0 );
-  displine_e ( LINE2, &mEscToExit[0] , 1, 1 );
+
+  displine_e ( LCD_LINE_1, mESC_to_Exit , 1, 1 );  
+  displine_e ( LCD_LINE_2, mESC_to_Exit , 1, 0 );
   
-  
+  dispscrn_e  ( sESCToExit,1 );
+
+
   tst_depth_g = 0;
   calibration_date =  NV_RAM_MEMBER_RD  (Constants.CAL_DATE ); //read date of last calibration date from EEPROM 
   updateProjectInfo ( );
