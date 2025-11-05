@@ -26,7 +26,11 @@
   
 #include <project.h>
 #include "elite.h"
-
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+#include "stdbool.h"
+  
 /*----------------------------------------------------------------------------*/
 /*-------------------------[   Global Constants   ]---------------------------*/
 /*----------------------------------------------------------------------------*/
@@ -35,7 +39,7 @@
 
 #define VERSION 1.24
 
-#define LANGUAGES 2  
+
 #define L_ENGLISH 0
 #define L_SPANISH 1  
   
@@ -152,18 +156,10 @@
 /*-------------------------[   Global Variables   ]---------------------------*/
 /*----------------------------------------------------------------------------*/
 extern char gps_fix;
-   
-/* This structure is used for defining 'screens' for the LCD */
-typedef struct sLCDSTRING
-{
-	const uint8_t lineloc;                      // Location of initial character on line
-	char * linestring;                        // LCDSTRING const * const s_calWaitingToFoamC [4]Pointer to string
-}  LCDSTRING;
-
 
 // These are the actual global definitions of the flags, coudn't define individual bits as extern
 
-struct flag_struct
+typedef struct flag_struct
 {
    uint16_t button_pressed        : 1; // Flag is high when "key" is pressed
    uint16_t stat_flag             : 1; // set during stat test   
@@ -175,7 +171,7 @@ struct flag_struct
    uint16_t diag                  : 1; // set during diagnostic self test  
    uint16_t usb_stopped           : 1; // set when usb in stop mode
    uint16_t Abort                 : 1; // Set when ON pressed for 3 seconds.
-} Flags;
+} Flags_t;
 
 union 
 {
@@ -183,7 +179,7 @@ union
   struct flag_struct * flag_bitfield;
 }  Flag_U;
 
-struct control_struct
+typedef struct control_struct
 {
    uint16_t buzz_enable           : 1; // set to enable buzzer when sound_on is enabled
    uint16_t shut_dwn              : 1; // set when "auto" shut off is enabled, some tests temporarily turn this off.
@@ -191,7 +187,7 @@ struct control_struct
    uint16_t bat_sel               : 1; // selects NICAD or ALK (via scaler board connector only).  EBB pins should not be used.
    uint16_t reset_count           : 1; // resets count when enter is pressed during test
    uint16_t update_time           : 1; // controls when the display will update countdown clock
-} Controls;
+} Controls_t;
 
  union 
 {
@@ -199,7 +195,7 @@ struct control_struct
   struct control_struct * controls_bitfield;
 }  Controls_U;
 
- struct features_struct
+typedef struct features_struct
 {
 	uint16_t auto_depth            : 1; // 0 flag for auto depth setting, set high when enabled
 	uint16_t avg_std_mode          : 1; // 1 flag for average standard mode, set when enabled
@@ -217,7 +213,8 @@ struct control_struct
   uint16_t temp_13               : 1; // 13 
   uint16_t temp_14               : 1; // 14
   uint16_t temp_15               : 1; // 15
-} Features;
+} Features_t;
+
 
  union 
 {
@@ -226,14 +223,12 @@ struct control_struct
 }  Features_U;
 
 
-
-
- struct offsets_struct
+typedef struct offsets_struct
 {
    uint16_t den_offset_pos        : 1; // Density offset flag, set when "ON"
    uint16_t moist_offset_pos      : 1; // Moisture offset flag, set when "ON"
    uint16_t tren_offset_pos       : 1; // Trench offset flag, set when "ON"
-} Offsets;
+} Offsets_t;
 
  union 
 {
@@ -241,7 +236,7 @@ struct control_struct
   struct offsets_struct * offsets_bitfield;
 }  Offsets_U;
 
- struct spec_flag_struct
+typedef struct spec_flag_struct
 {
    uint16_t spec_cal_flag         : 1;
    uint16_t nomograph_flag        : 1;
@@ -252,12 +247,12 @@ struct control_struct
    uint16_t self_test             : 1; // self test flag
    uint16_t RDA_CR                : 1; // '\r' has been read into uart1 buffer
    uint16_t trench_offset_flag    : 1; // set when doing a trench offset count
-} Spec_flags;
+} Spec_flags_t;
 
  union 
 {
   uint16_t * spec_flags_value;
-  struct spec_flag_struct * spec_flags_bitfield;
+  Spec_flags_t * spec_flags_bitfield;
 }  Spec_flags_U;
 
 
@@ -349,6 +344,12 @@ extern GPSDATA gdata;
 extern uint8 PCB_REV;
 extern uint8 charger_state;
 extern uint8 g_language;
+extern Features_t Features;
+extern Spec_flags_t Spec_flags;
+extern Offsets_t Offsets;
+extern Flags_t Flags;
+extern Controls_t Controls;
+
 
 /*---------------------------------------------------------------------------*/
 /*------------------------------[  Global Macros  ]--------------------------*/
@@ -469,5 +470,7 @@ extern void soilvoids_menu () ;
 extern void initDepthVoltages (void);
 extern void  convertRTCtoAlfatTime ( date_time_t date );
 void idle_shutdown(void) ;
+extern void print_menu(void);  // controls the project menu (PROJECT button initiates);
+//void serial_port_text();
 
 #endif /* endif !GLOBALS_H for "if we haven't included this file already..."    */

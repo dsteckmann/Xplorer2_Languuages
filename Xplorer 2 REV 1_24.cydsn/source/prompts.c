@@ -1,9 +1,13 @@
 
-#include "project.h"
+//#include "project.h"
 #include "Globals.h"
 #include "DataStructs.h"
 #include "LCD_drivers.h"
+#include "prompts.h"
 #include "screens.h"
+//#include <stdio.h>
+//#include <string.h>
+
 
 void Press_YES_or_NO (BYTE position)
 { 
@@ -44,7 +48,7 @@ void YES_to_Accept(BYTE position)
 
 }
 
-void up_down_select_text(int both)
+void up_down_select_text(int16_t both)
 {  
   if(both)
   {
@@ -607,7 +611,7 @@ void display_count_time(BYTE value_temp, uint8_t position )
       _LCD_PRINTF(" %u min. ",value_temp/60); 
   }
 }
-void select_test_or_spec_cal(int inspec)
+void select_test_or_spec_cal(int16_t inspec)
 {  
   CLEAR_DISP;  
   LCD_position(LINE1);
@@ -1922,7 +1926,7 @@ void offsets_text(void)
 }
 
 
-void offset_on_off_text(char *temp_str, int enabled)
+void offset_on_off_text(char *temp_str, int16_t enabled)
 {
   if(Features.language_f)
   {
@@ -1980,7 +1984,7 @@ void enter_offset_text(char *temp_str)
     }
 }
 
-void offset_enable_disable_text(char *temp_str, int enabled)
+void offset_enable_disable_text(char *temp_str, int16_t enabled)
 {  
   CLEAR_DISP;
   LCD_position(LINE2);
@@ -2258,7 +2262,7 @@ void cal_menu_text(BYTE display_set)
       }       
     }
 }
-void cal_depth_text(signed int depth_temp)
+void cal_depth_text(int16_t depth_temp)
 {
   char dstr[10];
   
@@ -2365,7 +2369,7 @@ void memory_reset_text(void)
       _LCD_PRINT("a Inicio?");
     }
 }
-void enable_disable_speccal_text(int condition)
+void enable_disable_speccal_text(int16_t condition)
 {
   CLEAR_DISP;
   LCD_position(LINE1);
@@ -2558,7 +2562,7 @@ void start_speccal_text(void)
       _LCD_PRINT("Comensar a Contar");       
     }
 }
-void speccal_results_text(signed int loops,unsigned int cnt_temp)
+void speccal_results_text(int16_t loops,uint16_t cnt_temp)
 {
   CLEAR_DISP;
   LCD_position(LINE1);
@@ -2596,7 +2600,7 @@ void speccal_enabled_text(void)
       _LCD_PRINT("     Habilitada");
     }
 }
-void enable_disable_nomograph_text(int condition)
+void enable_disable_nomograph_text(int16_t condition)
 {
   CLEAR_DISP;
   LCD_position(LINE1);
@@ -3045,7 +3049,7 @@ void station_start_text(char *temp_str)
       _LCD_PRINTF("Numero de Estacion: %s",temp_str); 
     }
 }
-void station_increment_text(unsigned int inc)
+void station_increment_text(uint16_t inc)
 { 
   LCD_position(LINE1);
   if(Features.language_f)
@@ -3473,7 +3477,7 @@ void stat_drift_count_text(BYTE source)
     }
 }
 
-void self_test_pf_text(BYTE source, int test_failed)
+void self_test_pf_text(BYTE source, int16_t test_failed)
 { 
   char source_text[16][14] =    {{"Teclado:     "},{"Keypad:      "},
                                  {"Tubos GM:    "},{"GM Tubes:    "},
@@ -3833,9 +3837,9 @@ void display_count_text ( uint16_t moist, uint32_t dens,uint32_t dens_combo )
     LCD_position (LINE1);
     _LCD_PRINTF("      M Count:%u", moist); 
     LCD_position (LINE2);
-    _LCD_PRINTF(" Combo DCount:%lu",dens_combo); 
+    _LCD_PRINTF(" Combo DCount:%lu",(unsigned long)dens_combo); 
     LCD_position (LINE3);
-    _LCD_PRINTF("Single DCount:%lu",dens); 
+    _LCD_PRINTF("Single DCount:%lu",(unsigned long)dens); 
     LCD_position(LINE4);
     _LCD_PRINT("  Press ESC to Exit ");  
   }
@@ -3852,261 +3856,6 @@ void display_count_text ( uint16_t moist, uint32_t dens,uint32_t dens_combo )
   }
 }
 
-
-
-void cnt_display_txt(BYTE display_set, int j)
-{
-  if(Features.language_f)
-  {   
-      LCD_position(LINE1);
-      _LCD_PRINT(" Count in Progress  ");
-	  switch(display_set)
-	  {
-		case 0:
-	  	if(j == 1){
-		LCD_position(LINE2);
-		_LCD_PRINT("Depth:BSCA LOW BLOCK");
-		}
-		else{
-			if(Features.SI_units){                                  //         in "kg/m3" mode
-				LCD_position(LINE2);
-				_LCD_PRINTF("Depth:%3umm LOW BLOCK", j * 25);
-			}
-			else{
-				LCD_position(LINE2);
-				_LCD_PRINTF("Depth:%2uin LOW BLOCK", j);        //    in "PCF" mode
-			}
-		}		
-      break;
-
-	  case 1:
-	  	if(j == 1){
-		LCD_position(LINE2);
-		_LCD_PRINT("Depth:BSCA MED BLOCK");
-		}
-		else{
-			if(Features.SI_units){                                 //          in "kg/m3" mode
-				LCD_position(LINE2);
-				_LCD_PRINTF("Depth:%3umm MED BLOCK", j * 25);
-			}
-			else{
-				LCD_position(LINE2);
-				_LCD_PRINTF("Depth:%2uin MED BLOCK", j);           // in "PCF" mode
-			}
-		}    
-      break;
-	  
-	  case 2:
-	  	if(j == 1){
-		LCD_position(LINE2);
-		_LCD_PRINT("Depth:BSCA HGH BLOCK");
-		}
-		else{
-			if(Features.SI_units){                                //           in "kg/m3" mode
-				LCD_position(LINE2);
-				_LCD_PRINTF("Depth:%3umm HGH BLOCK", j * 25);
-			}
-			else{
-				LCD_position(LINE2);
-				_LCD_PRINTF("Depth:%2uin HGH BLOCK", j);         //   in "PCF" mode
-			}
-		}    
-      break;
-	  
-	  case 3:
-		LCD_position(LINE2);
-		_LCD_PRINT("BSCA HGH MOIST BLOCK");	   
-      break;
-	 }
-  }
-  else
-    {
-      switch(display_set)
-      {
-        case 0:
-	  	  if(j == 1){
-		  LCD_position(LINE2);
-		  _LCD_PRINT("BSCA Bloqueo bajo");
-		  }
-		  else{
-			  if(Features.SI_units){                            //               in "kg/m3" mode
-				  LCD_position(LINE2);
-				  _LCD_PRINTF("%3umm Bloqueo bajo", j * 25);
-			  }
-			  else{
-				  LCD_position(LINE2);
-				  _LCD_PRINTF("%2uin Bloqueo bajo", j);          //  in "PCF" mode
-			  }
-		  }       
-        break;
-
-	    case 1:
-	  	  if(j == 1){
-		  LCD_position(LINE2);
-		  _LCD_PRINT("BSCA Bloquear Medio");
-		  }
-		  else{
-			  if(Features.SI_units){                                 //          in "kg/m3" mode
-				  LCD_position(LINE2);
-				  _LCD_PRINTF("%3umm Bloquear Medio", j * 25);
-			  }
-			  else{
-				  LCD_position(LINE2);
-				  _LCD_PRINTF("%2uin Bloquear Medio", j);           // in "PCF" mode
-			  }
-		  }    
-        break;
-	  
-	    case 2:
-	  	  if(j == 1){
-		  LCD_position(LINE2);
-		  _LCD_PRINT("Depth:BSCA Bloque de alta");
-		  }
-		  else{
-			  if(Features.SI_units){                                   //        in "kg/m3" mode
-				  LCD_position(LINE2);
-				  _LCD_PRINTF("Depth:%3umm Bloque de alta", j * 25);
-			  }
-			  else{
-				  LCD_position(LINE2);
-				  _LCD_PRINTF("Depth:%2uin Bloque de alta", j);        //    in "PCF" mode
-			  }
-		  }    
-        break;
-	  
-	  	    case 3:
-		  LCD_position(LINE2);
-		  _LCD_PRINT("BSCA BLOQUE MOIST HGH");	   
-        break;
-	  
-      }
-        
-    }
-}
-/*
-void cnt_result_display_txt(BYTE display_set, int j)
-{
-	
-  UINT16 den_temp;
-  UINT16 moist_temp;
-
-  CLEAR_DISP;   
-  
-   if(Features.language_f)
-   {  
-    switch(display_set)
-    {
-      case 0:
-    	  	if(j == 1)
-      	  {
-        		LCD_position(LINE1);
-        		_LCD_PRINT("Depth:BSCA LOW BLOCK");
-        		
-        		den_temp = NV_RAM_MEMBER_RD(autocal_data.Depth_Low_Bscatter[0]);
-        		moist_temp = NV_RAM_MEMBER_RD(autocal_data.Depth_Low_Bscatter[1] );
-        		LCD_position(LINE2);
-        		_LCD_PRINTF("Density Count %u", den_temp);
-        		LCD_position(LINE3);
-        		_LCD_PRINTF("Moisture Count %u", moist_temp);
-    	  	}
-    		else{
-    			if(Features.SI_units)
-      		{                                           in "kg/m3" mode
-    				LCD_position(LINE1);
-    				_LCD_PRINTF("Depth:%3umm LOW BLOCK", j * 25);
-    			}
-    			else{
-    				LCD_position(LINE1);
-    				_LCD_PRINTF("Depth:%2uin LOW BLOCK", j);            in "PCF" mode
-    			}
-    			
-    		den_temp = NV_RAM_MEMBER_RD(autocal_data.Depth_Low_Bscatter+((j-1)*8));
-    		LCD_position(LINE2);
-    		_LCD_PRINTF("Density Count %u", den_temp);
-    
-    		}
-
-		
-      break;
-
-	  case 1:
-    	  	if (j == 1)
-      	  {
-        		LCD_position(LINE1);
-        		_LCD_PRINT("Depth:BSCA MED BLOCK");
-        		
-        		den_temp = NV_RAM_MEMBER_RD(autocal_data.Depth_Med_Bscatter[0]);
-        		moist_temp = NV_RAM_MEMBER_RD(autocal_data.Depth_Med_Bscatter[1]);
-        		LCD_position(LINE2);
-        		_LCD_PRINTF("Density Count %u", den_temp);
-        		LCD_position(LINE3);
-        		_LCD_PRINTF("Moisture Count %u", moist_temp);
-    		
-    		  }
-    		else
-      	{
-    			if(Features.SI_units){                                           in "kg/m3" mode
-    				LCD_position(LINE1);
-    				_LCD_PRINTF("Depth:%3umm MED BLOCK", j * 25);
-    			}
-    			else{
-    				LCD_position(LINE1);
-    				_LCD_PRINTF("Depth:%2uin MED BLOCK", j);            in "PCF" mode
-    			}
-    			
-    		den_temp = NV_RAM_MEMBER_RD(autocal_data.Depth_Med_Bscatter+((j-1)*8));
-    		LCD_position(LINE2);
-    		_LCD_PRINTF("Density Count %u", den_temp);
-    		  LCD_position(LINE3);
-    		  _LCD_PRINT("Moisture Count  N/A");
-    		
-    		}    
-          break;
-	  
-	  case 2:
-	  	if(j == 1){
-		LCD_position(LINE1);
-		_LCD_PRINT("Depth:BSCA HGH BLOCK");
-		
-		den_temp = NV_RAM_MEMBER_RD(autocal_data.Depth_High_Bscatter[0]);
-		moist_temp = NV_RAM_MEMBER_RD(autocal_data.Depth_High_Bscatter[1]);
-		LCD_position(LINE2);
-		_LCD_PRINTF("Density Count %u", den_temp);
-		LCD_position(LINE3);
-		_LCD_PRINTF("Moisture Count %u", moist_temp);
-		}
-		else{
-			if(Features.SI_units){                                           in "kg/m3" mode
-				LCD_position(LINE1);
-				_LCD_PRINTF("Depth:%3umm HGH BLOCK", j * 25);
-			}
-			else{
-				LCD_position(LINE1);
-				_LCD_PRINTF("Depth:%2uin HGH BLOCK", j);            in "PCF" mode
-			}
-			
-		den_temp = NV_RAM_MEMBER_RD(autocal_data.Depth_High_Bscatter+((j-1)*8));
-		LCD_position(LINE2);
-		_LCD_PRINTF("Density Count %u", den_temp);
-
-		}    
-      break;
-	  
-	  case 3:
-		LCD_position(LINE1);
-		_LCD_PRINT("BSCA HGH MOIST BLOCK");
-		
-		den_temp = NV_RAM_MEMBER_RD(autocal_data.Depth_High_Moist_Bscatter[0]);
-		moist_temp =NV_RAM_MEMBER_RD(autocal_data.Depth_High_Moist_Bscatter[1]);
-		  LCD_position(LINE2);
-		  _LCD_PRINT("Density Count N/A");
-		LCD_position(LINE3);
-		_LCD_PRINTF("Moisture Count %u", moist_temp);		   
-      break;
-    }
-  }
-}
-*/
 
 
 void review_consts(){ 
@@ -4133,46 +3882,6 @@ void store_consts(){
   
 }
 
-void select_mode_text()
-{                                                        
-  CLEAR_DISP;
-  LCD_position(LINE1); 
-  _LCD_PRINT("1. CPN MC3 Elite    ");
-  LCD_position(LINE2);
-  _LCD_PRINT("2. SMART MC         ");
-  LCD_position(LINE3);
-  _LCD_PRINT("3. Strata           ");
-  LCD_position(LINE4);
-  _LCD_PRINT("4. CPN MC1 ELITE    ");
-
-}
-
-void recount_txt(){
-
-if(Features.language_f){
-LCD_position(LINE1); 
-_LCD_PRINT("1.Stat     2.Drift  ");
-LCD_position(LINE2); 
-_LCD_PRINT("3.Low Blk  4.Med Blk");
-LCD_position(LINE3); 
-_LCD_PRINT("5.High Blk");
-LCD_position(LINE4); 
-_LCD_PRINT("Select #, ESC Exit  "); 
-}
-  else{
-  LCD_position(LINE1); 
-  _LCD_PRINT("1.Stat     2.Deriva ");
-  LCD_position(LINE2); 
-  _LCD_PRINT("3.Bajo     4.Medio  ");
-  LCD_position(LINE3); 
-  _LCD_PRINT("5.Alto");
-  LCD_position(LINE4); 
-  _LCD_PRINT("Sel #,ESC para Salir");
- 
-  }
-
-
-}
 
 
 void press_yes_txt(){

@@ -15,6 +15,7 @@
 
 /** include files **/
 #include "Globals.h"
+#include "screens.h"
 
 #define CONST_LCDSTRING const LCDSTRING
 #define CONST_LCDSTRING_PTR CONST_LCDSTRING * const
@@ -23,7 +24,7 @@
 /* --------------------------------------------------------------------- */
 
 
-CONST_LCDSTRING  Blank[2]  =  {{ 0, "                    " },{ 0, "                    "} };   
+CONST_LCDSTRING  mBlank[2]  =  {{ 0, "                    " },{ 0, "                    "} };   
 
 //<ESC> to Exit
 CONST_LCDSTRING  mESC_to_Exit[2]        =  {{ 10, "<ESC> to Exit"     }, { 10, "<ESC> para Salir"}      };       
@@ -51,7 +52,7 @@ CONST_LCDSTRING SelectNumber[2]        =  {{ 10, "Select #, ESC Exit" },{ 10, "S
 //
 //UP/DOWN for Next
 //Select #, ESC Exit
-CONST_LCDSTRING_PTR s_up_down_select_text[4]    = { &Blank[0],&Blank[0],&Up_Down_Next[0],&SelectNumber[0] };
+CONST_LCDSTRING_PTR s_up_down_select_text[4]    = { &mBlank[0],&mBlank[0],&Up_Down_Next[0],&SelectNumber[0] };
 
 // <ENTER> to Select
 CONST_LCDSTRING Enter_to_Select[2]    =  {{ 10, "<ENTER> to Select" }, { 10, "<ENTER> a Escoger"}      };
@@ -60,13 +61,13 @@ CONST_LCDSTRING Enter_to_Select[2]    =  {{ 10, "<ENTER> to Select" }, { 10, "<E
 //  UP/DOWN to Change
 //  <YES> to Accept
 //  <ESC> Exit
-CONST_LCDSTRING_PTR s_Up_Down_Change_Exit[4]    = { Blank,Up_Down_Change,mYES_to_Accept,mESC_to_Exit };
+CONST_LCDSTRING_PTR s_Up_Down_Change_Exit[4]    = { mBlank,Up_Down_Change,mYES_to_Accept,mESC_to_Exit };
 
 //
 //<ENTER> to Select
 //  UP/DOWN for Next 
 //  <ESC> Exit
-CONST_LCDSTRING_PTR s_up_down_Enter_select_text[4]    = { &Blank[0],&Enter_to_Select[0],&Up_Down_Next[0],&mESC_to_Exit[0] };
+CONST_LCDSTRING_PTR s_up_down_Enter_select_text[4]    = { &mBlank[0],&Enter_to_Select[0],&Up_Down_Next[0],&mESC_to_Exit[0] };
 
 
 //Calibration Due!
@@ -75,7 +76,7 @@ CONST_LCDSTRING_PTR s_up_down_Enter_select_text[4]    = { &Blank[0],&Enter_to_Se
 //<ESC> to Exit
 CONST_LCDSTRING calib_due[2]           = {{ 10, "Calibration Due!" },    { 10, "Require Calibracion"} };
 CONST_LCDSTRING last_calibration[2]    = {{ 10, "Last Calibration On" }, { 10, "Ultima cal. hecha en"}};
-CONST_LCDSTRING_PTR s_Calibration_due[4]    = { &calib_due[0],&last_calibration[0],&Blank[0],mESC_to_Exit };
+CONST_LCDSTRING_PTR s_Calibration_due[4]    = { &calib_due[0],&last_calibration[0],&mBlank[0],mESC_to_Exit };
 
 //GAUGE READY  
 CONST_LCDSTRING mGaugeReady[2]          = {{ 10, "GAUGE READY" },    { 10, "PREPARADO"} };

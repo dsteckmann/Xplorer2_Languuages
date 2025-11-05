@@ -51,6 +51,7 @@ enum buttons button;
 /*-------------------------[   Global Functions   ]---------------------------*/
 /*----------------------------------------------------------------------------*/
 
+
 extern void pulseBuzzer ( void );
 extern uint8 getPlusRemoteKey ( void );  // Remote Key for Plus BB.
 

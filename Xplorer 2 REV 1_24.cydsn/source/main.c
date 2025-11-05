@@ -23,9 +23,7 @@
         added a diag prompt to reset the BLE module, it also displays the BLE version
 **********************************************************************************************************************/
 /*********************************************  INCLUDE FILES  ***************************************************/
-#include "elite.h"
 #include "Globals.h"
-#include "DataTypes.h"
 #include "DataStructs.h"
 #include "StoreFunctions.h"
 #include "Utilities.h"
@@ -39,9 +37,10 @@
 #include "UARTS.h"
 #include "ProjectData.h"
 #include "screens.h"
+#include "Tests.h"
+
 /*-------------------------[   Global Functions   ]---------------------------*/
 extern void pulseBuzzer ( void );
-extern void print_menu ( void ); 
 extern void initUARTPlus ( void );
 
 extern uint8 read_I2C_RTC ( date_time_t* d_time );
@@ -91,11 +90,12 @@ void GetLastStationName()
       getStationName(project_info.current_project,project_info.current_station_name,project_info.station_index - 1);
     }  
 }
+   
 
-    
 void CheckBleVersion()
 {
-    if(BleVersionHi == 0 && BleVersionLo == 0) 
+  
+  if(BleVersionHi == 0 && BleVersionLo == 0) 
     {
         RequestBleVersion();        // try again, versions 1.0 and above answer this request
         CyDelay(500);

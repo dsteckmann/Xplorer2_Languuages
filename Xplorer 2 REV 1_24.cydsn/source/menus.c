@@ -36,7 +36,6 @@
 
 extern void standCountMode(void);
 
-
 void enterTimeRTCI2C (void);
 void gps_test();
 

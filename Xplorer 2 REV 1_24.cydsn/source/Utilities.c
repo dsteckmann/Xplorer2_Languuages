@@ -22,22 +22,16 @@
 
 /*********************************************  INCLUDE FILES  ***************************************************/
 #include "project.h"
-#include "Globals.h"
-#include "conversions.h"
-#include "DataStructs.h"
+#include "Utilities.h"
 #include "StoreFunctions.h"
-#include "Alfat.h"
-#include "prompts.h"
 #include "Keypad_functions.h"
 #include "LCD_drivers.h"
 #include "Tests.h"
-#include "Utilities.h"
 #include "Interrupts.h"
 #include "SDcard.h"
-#include "UARTS.h"
-#include "BlueTooth.h"
 #include "Batteries.h"
-#include <FS.h>
+
+
 /************************************* EXTERNAL VARIABLE AND BUFFER DECLARATIONS  *************************************/
  extern uint8_t getCalibrationDepth ( uint8_t depth_inches );
  extern void initPulseCntStrt( void );

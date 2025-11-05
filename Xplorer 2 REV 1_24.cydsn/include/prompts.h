@@ -2,14 +2,17 @@
 #ifndef PROMPTS_H
 #define PROMPTS_H
 
-#include "Globals.h"
-
+//#include "Globals.h"
+#include <project.h>
+#include "DataTypes.h"
+  
+void serial_port_text();  
+  
 void date_usb_error_text ( void );
 void trench_text(void);
 void shutdown_inactivity_text_text(void);
 void select_test_or_spec_cal(int16_t inspec);
 void ESC_to_Exit(BYTE position);
-void up_down_select_text(int16_t both);
 void mat_thickness_error ( void );
 void display_version(void);
 void calibration_due();
@@ -32,7 +35,6 @@ void initializing(void);
 void main_menu_display(uint8_t menu_trk);
 void project_menu_display(uint8_t menu_trk);
 void display_depth(BYTE function, BYTE depth_temp);
-void select_test_or_spec_cal(int16_t inspec);
 void new_std_count();
 void press_start(BYTE which_test);
 void use_new_std_count();
@@ -85,7 +87,7 @@ void activate_speccal_text(void);
 void enter_number_counts_text(void);
 
 void start_speccal_text(void);
-void Press_YES_or_NO (BYTE position);
+extern void Press_YES_or_NO (BYTE position);
 //void gauge_type_txt(BYTE display_set);
 void press_enter_txt();
 void recount_txt();
@@ -107,7 +109,7 @@ void self_test_pf_text(BYTE source, int16_t test_failed);
 void stat_drift_count_text(BYTE source);
 void count_text(BYTE source);
 void select_language_text();
-void serial_port_text();
+
 void enter_station_name_text();
 void print_complete_text();
 void print_data_text();

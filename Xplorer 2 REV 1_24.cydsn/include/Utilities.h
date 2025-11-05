@@ -26,8 +26,7 @@
 #define UTILITIES_H
 
 #include "Globals.h"
-#include  "ProjectData.h" 
-#include  "stdbool.h" 
+#include "ProjectData.h" 
     
 #define NICAD_ADC_CHAN             0
 #define TEMPERATURE_ADC_CHAN       1

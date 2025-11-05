@@ -16,7 +16,7 @@
 #include "stdbool.h"
 #include <stdio.h>
 #include "AlfatUart.h"  // contains definitions for uart functions
-#include "Elite.h"
+#include "elite.h"
 #include "prompts.h"
 
 #define alfatRxBufSize 255

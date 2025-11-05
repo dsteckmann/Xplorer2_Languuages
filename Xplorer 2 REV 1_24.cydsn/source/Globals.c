@@ -97,6 +97,11 @@ uint8 PCB_REV;
 uint8 charger_state = 0;
 
 uint8 g_language = L_ENGLISH;
+Features_t Features;
+Spec_flags_t Spec_flags;
+Offsets_t Offsets;
+Flags_t Flags;
+Controls_t Controls;
 
 /*---------------------------------------------------------------------------*/
 /*------------------------------[  Global Macros  ]--------------------------*/

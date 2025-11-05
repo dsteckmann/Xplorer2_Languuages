@@ -14,7 +14,6 @@
 
 #include "Globals.h"
 #include <FS.h>
-
   
 #define PROJECT_NOT_VALID 0  
   

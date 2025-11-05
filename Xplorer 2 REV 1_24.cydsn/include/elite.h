@@ -23,11 +23,8 @@
 
 /*  If we haven't included this file already.... */
 #ifndef ELITE_H
-#define elite_H
+#define ELITE_H
 
-//#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
 #include <math.h>
 #include <ctype.h>
 #include "DataTypes.h"

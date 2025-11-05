@@ -25,8 +25,9 @@
 #ifndef BATTERIES_H
 #define BATTERIES_H
 
-#include <project.h> 
+//#include <project.h> 
 #include "Globals.h"  
+//#include "DataTypes.h"
   
 extern void monitorBatteries ( void );
 extern void checkAlkalines (void);

@@ -15,7 +15,7 @@
 
 #include "prompts.h"
 #include "Alfat.h"
-#include "device.h"
+#include <project.h>
 #include "FS.h"
 #define SD_CARD_OUT 1
 
