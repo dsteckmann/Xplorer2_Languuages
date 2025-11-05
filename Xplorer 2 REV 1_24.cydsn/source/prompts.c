@@ -125,19 +125,6 @@ void calibration_due()
     CtrStrNC("Require Calibracion",LINE1);
     CtrStrNC("Ultima cal. hecha en", LINE2);
   }
-//  LCD_position(LINE1);
-//  if(Features.language_f)
-//  {
-//    _LCD_PRINT("  Calibration Due!");
-//    LCD_position(LINE2);  
-//    _LCD_PRINT("Last Calibration On");
-//  }
-//  else
-//  {    
-//    _LCD_PRINT("Require Calibracion");  
-//    LCD_position(LINE2);  
-//     _LCD_PRINT("Ultima cal. hecha en");  
-//  }
 }
 
 void eeprom_msg(void)
