@@ -221,7 +221,7 @@ extern uint8_t centerStart( uint8_t stringLength );
 extern void CtrStrNC(char *buf, uint8 line); // centers string on given line, does not clear the line
 extern void CtrStrC(char *buf, uint8 line);  // centers string on given line, Clears the entire line
 
-void displine_e(int linenum, LCDSTRING const * dispstring, int clearline, uint8 lang);
-void dispscrn_e(LCDSTRING const * const scrn[] , uint8 lang);
+void displine_e(int linenum, LCDSTRING const * dispstring, int clearline);
+void dispscrn_e(LCDSTRING const * const scrn[]);
 #endif /* endif !LCD_DRIVERS_H for "if we haven't included this file already..."    */
 

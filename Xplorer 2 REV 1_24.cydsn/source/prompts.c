@@ -3,6 +3,7 @@
 #include "Globals.h"
 #include "DataStructs.h"
 #include "LCD_drivers.h"
+#include "screens.h"
 
 void Press_YES_or_NO (BYTE position)
 { 
@@ -1235,30 +1236,53 @@ void display_offset_on ( struct offsets_struct  which_offsets)
   LCD_position (LINE2 + 12);
   if ( which_offsets.den_offset_pos ||  which_offsets.moist_offset_pos ||  which_offsets.tren_offset_pos )
   { 
-   _LCD_PRINT("OFFSET:Y");  
+   switch (g_language )
+   {
+      case L_ENGLISH:
+        _LCD_PRINT("OFFSET:Y");  
+        break;
+      case L_SPANISH:
+        _LCD_PRINT("COMPEN:S");  
+        break;
+      default:
+        _LCD_PRINT("OFFSET:Y");  
+        break;
+    }    
   }
   else
   { 
-   _LCD_PRINT("OFFSET:N");  
+    switch (g_language )
+    {
+      case L_ENGLISH:
+        _LCD_PRINT("OFFSET:N");  
+        break;
+      case L_SPANISH:
+        _LCD_PRINT("COMPEN:N");  
+        break;
+      default:
+        _LCD_PRINT("OFFSET:N");  
+        break;  
+    }    
   } 	
-
 }
 
 void display_time(BYTE cnt_temp,uint8_t line)
 {
   LCD_position(line);
-  if(Features.language_f)
+  switch (g_language)
   {
-    _LCD_PRINT( "Count Time:");
-    _LCD_PRINTF("%3u sec. ",cnt_temp);
+    case L_ENGLISH:
+    default:
+      displine_e( line,mCountTime,1);
+      _LCD_PRINTF("%3u sec. ",cnt_temp);
+      break;
+    case L_SPANISH: 
+      _LCD_PRINT( "    Tiempo:");
+      _LCD_PRINTF("%3u seg. ",cnt_temp);
+      break;
   }
-  else
-  {
-    _LCD_PRINT( "    Tiempo:");
-    _LCD_PRINTF("%3u seg. ",cnt_temp);
-  }
- 
 }
+
 void display_station_name(char *temp_str)
 {
   if(Features.language_f)

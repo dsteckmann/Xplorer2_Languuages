@@ -367,8 +367,13 @@ LCDSTRING const m_matThickness;
 LCDSTRING const * const s_matThickness [4] ;
 LCDSTRING const * const s_EnterThickness [4] ;
 
-CONST_LCDSTRING  mESC_to_Exit[2];
+CONST_LCDSTRING  mESC_to_Exit[LANGUAGES];
 CONST_LCDSTRING_PTR sESCToExit[4]  ;
+CONST_LCDSTRING_PTR s_IncorrectBLE[4];
+CONST_LCDSTRING_PTR s_Calibration_due[4] ;
+CONST_LCDSTRING mGaugeReady[LANGUAGES] ;
+CONST_LCDSTRING mCountTime[LANGUAGES];
+CONST_LCDSTRING_PTR s_Up_Down_Change_Exit[4]; 
 #endif
 
 

@@ -77,6 +77,8 @@ extern void initGPS ( void ) ;
 //  Returns:   
 /***************************************************************************/
 
+#define LANG    0
+
 void GetLastStationName() 
 {
     // project_info.station_index updated in updateProjectInfo(), called just before this function
@@ -99,12 +101,12 @@ void CheckBleVersion()
         CyDelay(500);
         if(BleVersionHi == 0) 
         {
-            CLEAR_DISP;
-            CtrStrNC( "Incorrect BLE",   LINE1 );
-            CtrStrNC( "Module Firmware", LINE2 );
-            CtrStrNC( "The MyGauge App", LINE3 );
-            CtrStrNC( "may not work!",   LINE4 );
-            CyDelay(4000);
+          //"Incorrect BLE"
+          //"Module Firmware"
+          //"The MyGauge App"
+          //"may not work!"  
+          dispscrn_e  ( s_IncorrectBLE );
+          CyDelay(4000);
         }
     }
 }
@@ -128,7 +130,7 @@ int main() { //initialization and main loop
   { 
     initGPS ();
   }
-  
+  g_language =  Features.language_f;
   // retrieve last display position
   gp_disp  =  NV_RAM_MEMBER_RD( GP_DISPLAY );
   splashScreen = TRUE;              // do the alkaline notification on bootup.
@@ -172,10 +174,9 @@ int main() { //initialization and main loop
   }
   CLEAR_DISP;
 
-  displine_e ( LCD_LINE_1, mESC_to_Exit , 1, 1 );  
-  displine_e ( LCD_LINE_2, mESC_to_Exit , 1, 0 );
-  
-  dispscrn_e  ( sESCToExit,1 );
+  //displine_e ( LCD_LINE_1, mESC_to_Exit , 1, 1 );  
+ // displine_e ( LCD_LINE_2, mESC_to_Exit , 1, 0 );
+ //dispscrn_e  ( sESCToExit,1 );
 
 
   tst_depth_g = 0;
@@ -192,12 +193,14 @@ int main() { //initialization and main loop
     day_counter_g = decode_date( date_time_g ) - decode_date ( NV_RAM_MEMBER_RD (Constants.CAL_DATE) ); // gets days since last calibration
     if ( day_counter_g >= (365 -30) ) 
     {
-        CLEAR_DISP;
-        calibration_due ( );  //display calibration due text
-        LCD_position (LINE3);
-        printTimeDate( calibration_date );
-        ESC_to_Exit (LINE4+4);  // display "ESC tp EXIT"  
-        button = getKey(TIME_DELAY_MAX);  
+      //Calibration Due!
+      //Last Calibration On
+      //
+      // <ESC> to Exit 
+      dispscrn_e  ( s_Calibration_due );
+      LCD_position (LINE3);
+      printTimeDate( calibration_date );
+      button = getKey(TIME_DELAY_MAX);  
     }
   }
   CheckBleVersion(); // try again, display error on fail
@@ -223,11 +226,9 @@ int main() { //initialization and main loop
     tst_depth_g = get_depth_auto(0);  
    }   
 
-   LCD_position(LINE1);
-   ready(cnt_time, 1);  //display <READY> Time
-
+   //GAUGE READY  
+   displine_e ( LCD_LINE_1, mGaugeReady, 1 );  
    LCD_position(LINE2);
-    
    display_depth ( 0, tst_depth_g );  //display Depth:      
    display_offset_on ( Offsets );     // display OFFSET
    LCD_light_timer(5);
@@ -451,8 +452,6 @@ int main() { //initialization and main loop
     }while ( button == TIME || button == STAND || button == MAPR || button == MENU || button == PROJ || button == PRINT );
   	// set to read clock immediately
     clock_timer = 100;
-    
-  }  // end of main loop  
- }
-
-}                  // end of Main
+  } // end of refresh loop 
+ }  // end of Main
+}                  

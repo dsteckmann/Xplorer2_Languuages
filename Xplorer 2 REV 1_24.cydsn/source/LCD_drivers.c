@@ -1015,10 +1015,9 @@ void displine(int linenum, LCDSTRING const * dispstring, int clearline)
  *
  */
 
-void displine_e(int linenum, LCDSTRING const * dispstring, int clearline, uint8 lang)
+void displine_e(int linenum, LCDSTRING const * dispstring, int clearline)
 {
-	char lineloc;
-  
+	 
   // First, if clearline, write blanks.
 	if (clearline)
 	{
@@ -1028,19 +1027,18 @@ void displine_e(int linenum, LCDSTRING const * dispstring, int clearline, uint8 
 	}
 
 	// now, write the line
-	if( 10 == dispstring[lang].lineloc )
+	if( 10 == dispstring[g_language].lineloc )
 	{
 		uint8 len, spaces;
-    len = strlen(dispstring[lang].linestring);
+    len = strlen(dispstring[g_language].linestring);
     spaces = (20 - len ) / 2 ;
 		gotoloc( linenum, spaces );
 
 	}
 	else
-		gotoloc(linenum,dispstring[lang].lineloc);  // Go to start of text.
-
-    
-  printStringOnLCD( dispstring[lang].linestring);   // Print the string.
+		gotoloc(linenum,dispstring[g_language].lineloc);  // Go to start of text.
+ 
+  printStringOnLCD( dispstring[g_language].linestring);   // Print the string.
 
 
 }
@@ -1173,17 +1171,15 @@ void dispscrn(LCDSTRING const * const scrn[] )
  *
  */
 
-void dispscrn_e(LCDSTRING const * const scrn[] , uint8 lang)
+void dispscrn_e(LCDSTRING const * const scrn[])
 {
 	int  i;
 
   for ( i=0;i<4;i++)
 	{
 		// Note displine is expecting a pointer to an LCDSTRING.
-		displine_e(i,scrn[i],1,lang);	
-								
-	}
-
+		displine_e(i,scrn[i],1);	
+  }
 }
 
 											

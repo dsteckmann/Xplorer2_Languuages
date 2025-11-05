@@ -26,12 +26,6 @@
   
 #include <project.h>
 #include "elite.h"
-#include <math.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <stddef.h>
-  
 
 /*----------------------------------------------------------------------------*/
 /*-------------------------[   Global Constants   ]---------------------------*/
@@ -41,6 +35,10 @@
 
 #define VERSION 1.24
 
+#define LANGUAGES 2  
+#define L_ENGLISH 0
+#define L_SPANISH 1  
+  
 #define DEL_SIG 1
    
 #define MAX_PROJECTS    10
@@ -350,6 +348,7 @@ extern uint8_t alfat_error;
 extern GPSDATA gdata;
 extern uint8 PCB_REV;
 extern uint8 charger_state;
+extern uint8 g_language;
 
 /*---------------------------------------------------------------------------*/
 /*------------------------------[  Global Macros  ]--------------------------*/

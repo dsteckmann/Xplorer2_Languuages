@@ -30,6 +30,7 @@
 #include "Globals.h"
 #include "DataStructs.h"
 #include "prompts.h"
+#include "screens.h"
 #include "Keypad_functions.h"
 #include "LCD_drivers.h"
 #include "Utilities.h"
@@ -114,38 +115,84 @@ void initDepthVoltages ( void )
  *****************************************************************************/ 
 void display_depth(BYTE function, BYTE depth_temp_inches)
 {  
-    if ( (depth_temp_inches == 0) && Features.auto_depth )
+  switch ( g_language )
+  {
+    case L_ENGLISH:
+    default: 
     {
-      if((depth_temp_inches == 0) && (function == 0))
-       { 
-         _LCD_PRINT("Depth:SAFE "); 
-       }
-    }    
-    else if( bit_test(valid_depth,depth_temp_inches))    
-    {    
-      if ( depth_temp_inches == 1)
+      if ( (depth_temp_inches == 0) && Features.auto_depth )
       {
-       _LCD_PRINT("Depth:BS   ");
-      }
-      else if ( depth_temp_inches == 13  )
-      {
-       _LCD_PRINT("Depth:None ");
+        if((depth_temp_inches == 0) && (function == 0))
+         { 
+           printStringOnLCD("Depth:SAFE "); 
+         }
+      }    
+      else if( bit_test(valid_depth,depth_temp_inches))    
+      {    
+        if ( depth_temp_inches == 1)
+        {
+         printStringOnLCD("Depth:BS   ");
+        }
+        else if ( depth_temp_inches == 13  )
+        {
+         printStringOnLCD("Depth:None ");
+        }
+        else
+        {
+          if(Features.SI_units)       // in "kg/m3" mode
+          { _LCD_PRINTF("Depth:%3umm", depth_temp_inches * 25);}
+          else
+          { _LCD_PRINTF("Depth:%2uin.", depth_temp_inches);  }        // in "PCF" mode   
+         
+        } 
       }
       else
       {
-        if(Features.SI_units)       // in "kg/m3" mode
-        { _LCD_PRINTF("Depth:%3umm", depth_temp_inches * 25);}
+        //sprintf ( lcdstr,"%s", "Depth: No Depth" );
+        //LCD_print ( lcdstr );
+        printStringOnLCD("Depth:None  ");  
+      }
+   } 
+   break;     
+    
+   case L_SPANISH:
+   {
+      if ( (depth_temp_inches == 0) && Features.auto_depth )
+      {
+        if((depth_temp_inches == 0) && (function == 0))
+         { 
+           printStringOnLCD("Prof.:SEG. "); 
+         }
+      }    
+      else if( bit_test(valid_depth,depth_temp_inches))    
+      {    
+        if ( depth_temp_inches == 1)
+        {
+         printStringOnLCD("Prof.:RD   ");
+        }
+        else if ( depth_temp_inches == 13  )
+        {
+         printStringOnLCD("Prof.:None ");
+        }
         else
-        { _LCD_PRINTF("Depth:%2uin.", depth_temp_inches);  }        // in "PCF" mode   
-       
-      } 
-    }
-    else
-    {
-      //sprintf ( lcdstr,"%s", "Depth: No Depth" );
-      //LCD_print ( lcdstr );
-      _LCD_PRINT("Depth:None  ");  
-    }
+        {
+          if(Features.SI_units)       // in "kg/m3" mode
+          { _LCD_PRINTF("Prof.:%3umm", depth_temp_inches * 25);}
+          else
+          { _LCD_PRINTF("Prof.:%2uin.", depth_temp_inches);  }        // in "PCF" mode   
+         
+        } 
+      }
+      else
+      {
+        //sprintf ( lcdstr,"%s", "Depth: No Depth" );
+        //LCD_print ( lcdstr );
+        printStringOnLCD("Depth:None  ");  
+      }
+   } 
+    break; 
+  }  
+    
 }
 /******************************************************************************
  *  Name:
@@ -178,17 +225,17 @@ void display_invalid_depth( BYTE depth_temp_inches)
   LCD_position(LINE2);
   if ( (depth_temp_inches == 0) && Features.auto_depth )
   {
-   _LCD_PRINT("Depth:SAFE "); 
+   printStringOnLCD("Depth:SAFE "); 
   }    
   else    
   {    
       if ( depth_temp_inches == 1)
       {
-       _LCD_PRINT("Depth:BS   ");
+       printStringOnLCD("Depth:BS   ");
       }
       else if ( depth_temp_inches >= 13 ) // 12 is the last height. Anything greater than 12 is not a valid depth
       {
-        _LCD_PRINT("Depth:NOT MEASURED ");
+        printStringOnLCD("Depth:NOT MEASURED ");
       }
       else
       {
@@ -218,22 +265,12 @@ void set_count_time(void)  // set duration of count (TIME button initiates)
   enum buttons button;
                   
   value = cnt_time;  
- // select_test_or_spec_cal(Flags.in_spec_cal);  // display "Select Test" or "Select Spec. Cal" on LINE1
-  
-  CLEAR_DISP;  
-
-  LCD_position(LINE2);
-  if(Features.language_f)
-  {
-    _LCD_PRINT("UP/DOWN TO CHANGE   "); 
-  }
-   else 
-  {
-    _LCD_PRINT ("Arriba/Abajo       ");       
-  } 
-   
-  YES_to_Accept(LINE3);   
-  ESC_to_Exit(LINE4);
+ 
+  //
+  // UP/DOWN to CHANGE
+  // YES to ACCEPT
+  // <ESC> to Exit
+  dispscrn_e ( s_Up_Down_Change_Exit );
  
   while(1)                                   // neither abort or enter key is pressed
   {            

@@ -22,84 +22,85 @@
 /************************* Reuseable Lines *******************************/
 /* --------------------------------------------------------------------- */
 
-//CONST_LCDSTRING_PTR sESCToExit[4]    = { &mESC_to_Exit[0],&mESC_to_Exit[0],&mESC_to_Exit[0],&mESC_to_Exit[0] };
-//CONST_LCDSTRING Enter_to_Accept    = { 10, "<ENTER> to Accept" };   // <ENTER> to Accept
-//CONST_LCDSTRING YES_to_Accept      = { 10, "<YES> to Accept" };  
-//CONST_LCDSTRING up_down_select_text = { 10, " UP/DOWN for Next" };   
-//CONST_LCDSTRING ENTER_select_text   = { 10, "<ENTER> to Select" };   // <ENTER> to Accept
-//CONST_LCDSTRING UpDownforNext       = { 10, " UP/DOWN for Next" }; 
 
-CONST_LCDSTRING  Blank[2]  =  {  // <ESC> to Exit
-                                  { 0, "                    " },
-                                  { 0, "                    "} 
-                              };   
+CONST_LCDSTRING  Blank[2]  =  {{ 0, "                    " },{ 0, "                    "} };   
 
+//<ESC> to Exit
+CONST_LCDSTRING  mESC_to_Exit[2]        =  {{ 10, "<ESC> to Exit"     }, { 10, "<ESC> para Salir"}      };       
 
-CONST_LCDSTRING  ESC_to_Exit[2]  =  {  // <ESC> to Exit
-                                        { 10, "<ESC> to Exit" },
-                                        { 10, "<ESC> para Salir"} 
-                                     };       
+//Press YES or NO
+CONST_LCDSTRING  mPress_YES_or_NO[2]    =  {{ 10, "Press YES or NO"   }, { 10, "Presione SI/YES o NO"}  };
 
-CONST_LCDSTRING  Press_YES_or_NO[2]  =  {  // <ESC> to Exit
-                                           { 10, "Press YES or NO" },
-                                           { 10, "Presione SI/YES o NO"} 
-                                        };
+// <ENTER to Accept
+CONST_LCDSTRING  mEnter_to_Accept[2]    =  {{ 10, "<ENTER> to Accept" }, { 10, "ENTER para Aceptar"}    };
 
-CONST_LCDSTRING Enter_to_Accept[2]    = {  // <ENTER> to Accept
-                                           { 10, "<ENTER> to Accept" },
-                                           { 10, "ENTER para Aceptar"} 
-                                         };
+//<YES> to Accept
+CONST_LCDSTRING mYES_to_Accept[2]       =  {{ 10, "<YES> to Accept"    }, { 10, "YES/Si para Aceptar"}       };
+
+//UP/DOWN for Next
+CONST_LCDSTRING Up_Down_Next[2]        =  {{ 10, "UP/DOWN for Next" },  { 10, "Arriba/Abajo"}          };
 
 
-CONST_LCDSTRING YES_to_Accept[2]  = {  // YES to Accept
-                                      { 10, "<YES to Accept" },
-                                      { 10, "SI para Aceptar"} 
-                                    };
+//UP/DOWN to CHANGE
+CONST_LCDSTRING Up_Down_Change[2]        =  {{ 10, "UP/DOWN to Change" },  { 10, "Arriba/Abajo"}          };
 
+//Select #, ESC Exit
+CONST_LCDSTRING SelectNumber[2]        =  {{ 10, "Select #, ESC Exit" },{ 10, "Sel #,ESC para Salir"}  };
 
-CONST_LCDSTRING Up_Down_Next[2] =  {  // UP/DOWN for Next
-                                      { 10, "UP/DOWN for Next" },
-                                      { 10, "Arriba/Abajo"} 
-                                    };
+//
+//
+//UP/DOWN for Next
+//Select #, ESC Exit
+CONST_LCDSTRING_PTR s_up_down_select_text[4]    = { &Blank[0],&Blank[0],&Up_Down_Next[0],&SelectNumber[0] };
 
-CONST_LCDSTRING SelectNumber[2] =  {  // Select #, ESC Exit
-                                      { 10, "Select #, ESC Exit" },
-                                      { 10, "Sel #,ESC para Salir"} 
-                                    };
+// <ENTER> to Select
+CONST_LCDSTRING Enter_to_Select[2]    =  {{ 10, "<ENTER> to Select" }, { 10, "<ENTER> a Escoger"}      };
 
-CONST_LCDSTRING_PTR up_down_select_text[4]    = { &Blank[0],&Blank[0],&Up_Down_Next[0],&SelectNumber[0] };
+//
+//  UP/DOWN to Change
+//  <YES> to Accept
+//  <ESC> Exit
+CONST_LCDSTRING_PTR s_Up_Down_Change_Exit[4]    = { Blank,Up_Down_Change,mYES_to_Accept,mESC_to_Exit };
 
-
-CONST_LCDSTRING Enter_to_Select[2]    = {  // <ENTER> to Select
-                                           { 10, "<ENTER> to Select" },
-                                           { 10, "<ENTER> a Escoger"} 
-                                        };
-
+//
 //<ENTER> to Select
 //  UP/DOWN for Next 
 //  <ESC> Exit
-CONST_LCDSTRING_PTR up_down_Enter_select_text[4]    = { &Blank[0],&Enter_to_Select[0],&Up_Down_Next[0],&ESC_to_Exit[0] };
+CONST_LCDSTRING_PTR s_up_down_Enter_select_text[4]    = { &Blank[0],&Enter_to_Select[0],&Up_Down_Next[0],&mESC_to_Exit[0] };
 
 
 //Calibration Due!
 //Last Calibration On
 //
-//
-CONST_LCDSTRING calib_due[2]    = {  // Calibration Due!
-                                           { 10, "Calibration Due!" },
-                                           { 10, "Require Calibracion"} 
-                                        };
+//<ESC> to Exit
+CONST_LCDSTRING calib_due[2]           = {{ 10, "Calibration Due!" },    { 10, "Require Calibracion"} };
+CONST_LCDSTRING last_calibration[2]    = {{ 10, "Last Calibration On" }, { 10, "Ultima cal. hecha en"}};
+CONST_LCDSTRING_PTR s_Calibration_due[4]    = { &calib_due[0],&last_calibration[0],&Blank[0],mESC_to_Exit };
 
-CONST_LCDSTRING last_calibration[2]    = {  //Last Calibration On
-                                           { 10, "Last Calibration On" },
-                                           { 10, "Ultima cal. hecha en"} 
-                                         };
+//GAUGE READY  
+CONST_LCDSTRING mGaugeReady[2]          = {{ 10, "GAUGE READY" },    { 10, "PREPARADO"} };
 
-CONST_LCDSTRING_PTR calibration_due[4]    = { &calib_due[0],&last_calibration[0],&Blank[0],&Blank[0] };
-
-  
 
 // display for the main menu
+//1. Recall
+//2. Offset 
+//3. Auto Scroll
+//4. Backlight
+//5. Stat Test
+//6. Drift Test
+//7. GPS
+//8. Autp Depth
+//9. Review STD cnts.
+//10. Select Language
+//11. Set Units
+//13. Serial Number
+//14. Date/Time
+//15. Buzzer/Alarm
+//16. Special Cal.
+//17. Nomograph
+//18. Cal. Constants
+//19. Soil Air Voids
+//20. Diagnostic Test
 CONST_LCDSTRING M1  = {0,"1. Recall           "};
 CONST_LCDSTRING M2  = {0,"2. Offset           "};
 CONST_LCDSTRING M3  = {0,"3. Auto Scroll      "};
@@ -124,4 +125,18 @@ CONST_LCDSTRING_PTR s_MenuNum [20] = {&M1,&M2,&M3,&M4,&M5,&M6,&M7,&M8,&M9,&MP10,
 
 //CONST_LCDSTRING C0  = {0,"0."};
 //CONST_LCDSTRING_PTR s_CalIDMenuNum [20] = {&C0, &M1,&M2,&M3,&M4,&M5,&M6,&M7,&M8,&M9,&MP0,&MP1,&MP2,&MP3,&MP4,&MP5,&MP6,&MP7,&MP8,&MP9 };
+
+
+//"Incorrect BLE"
+//"Module Firmware"
+//"The MyGauge App"
+//"may not work!"
+CONST_LCDSTRING  mIncorrectBLE_1  = {10,"Incorrect BLE"};
+CONST_LCDSTRING  mIncorrectBLE_2  = {10,"Module Firmware"};
+CONST_LCDSTRING  mIncorrectBLE_3  = {10,"The MyGauge App"};
+CONST_LCDSTRING  mIncorrectBLE_4  = {10,"may not work!"};
+CONST_LCDSTRING_PTR s_IncorrectBLE[4] = { &mIncorrectBLE_1,&mIncorrectBLE_2,&mIncorrectBLE_3,&mIncorrectBLE_4 };      
+
+//Count Time
+CONST_LCDSTRING mCountTime[] = {{0,"Count Time:"}, {0,"    Tiempo:"}};
 
