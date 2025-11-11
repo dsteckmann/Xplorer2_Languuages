@@ -630,15 +630,6 @@ void select_test_or_spec_cal(int16_t inspec)
         _LCD_PRINT("Sel. Calib. Especial");  
     }
 }
-void new_std_count()
-{  
-  LCD_position (LINE3);
-  if(Features.language_f)
-    { _LCD_PRINT("Take New Std Count? "); }
-    else
-    {  _LCD_PRINT("Nueva Cuenta Std?"); }
-  
-}
 
 void press_start(BYTE which_test)
 {
@@ -682,40 +673,6 @@ void press_start(BYTE which_test)
       else if(which_test==3)
       {  _LCD_PRINT(" Cuenta a Iniciarse"); }
     }
-}
-
-void std_count_press_start(void)
-{
-  
-  char temp_str[10];
-  CLEAR_DISP; 
-  
-  
-  if (  Features.SI_units ==  TRUE  )
-  {
-   sprintf (temp_str,"50mm");
-  }
-  else
-  {
-   sprintf(temp_str, "2in");
-  }
-  
-
-  if(Features.language_f)
-  {
-    LCD_PrintAtPosition("Place Gauge on Poly ",LINE1);
-    LCD_PrintAtPosition("Std. Block in SAFE  ",LINE2);
-    LCD_PrintAtPositionCentered("Position",LINE3+10);
-  	LCD_PrintAtPositionCentered("Press Start", LINE4+10 );
-  }
-  else
-  {
-    LCD_PrintAtPosition("Place Gauge on Poly ",LINE1);
-    LCD_PrintAtPosition("Std. Block in SAFE  ",LINE2);
-    LCD_PrintAtPositionCentered("Position",LINE3+10);
-  	LCD_PrintAtPositionCentered("Press Start", LINE4+10 );
-  }
-    
 }
 
 // trench count
@@ -941,7 +898,7 @@ void mat_thickness_error ( void )
   }
   else
   {
-       _LCD_PRINT("Thickness is between");
+     _LCD_PRINT("Thickness is between");
     LCD_position (LINE2);
     if ( Features.SI_units == FALSE )
     {
@@ -962,61 +919,51 @@ void reading(void)
   CLEAR_DISP;
   LCD_position(LINE2);
   if(Features.language_f)
-   { _LCD_PRINT("Reading # "); }
-    else
-      _LCD_PRINT("Lectura # ");
+  {
+    _LCD_PRINT("Reading # "); 
+  }
+  else
+  {
+    _LCD_PRINT("Lectura # ");
+  }  
 }
 
+
+// Keep This
 void self_test_text(BYTE which_test)
 {  
-  LCD_position(LINE2);
-  if(Features.language_f)
-  {
+  CLEAR_DISP;
     if(which_test < 3)  
     {
       if(which_test==0)
       {      
-        _LCD_PRINT(" High Voltage Test");  
-        LCD_position(LINE3);
-        _LCD_PRINT("    In Progress");
+        //
+        //High Voltage Test
+        // In Progess
+        //
+        dispscrn_e( s_HighVoltageTest );
       }
-      else if(which_test==1)
-        _LCD_PRINT("    Keypad Test   ");
+      else if (which_test==1)
+      {
+        //Keypad Test
+        displine_e ( LINE2, KeyPadTest,1 );
+      }  
       else if(which_test==2)
-        _LCD_PRINT("     Tube Test    ");    
-    
+      {
+        // Tube Test
+        displine_e ( LINE2, TubeTest,1 );
+      }  
     }
     else 
     {     
-      _LCD_PRINT("     Self Test");
-      LCD_position(LINE3);
-      _LCD_PRINT("      Passed");
+      // 
+      // Self Test
+      // Passed
+      //
+      dispscrn_e ( s_SelfTestPassedTest );
     }
-  }
-    else
-    {
-      if(which_test < 3)  
-      {
-        if(which_test==0)
-        {      
-          _LCD_PRINT("Prueba de Alto Volt.");
-          LCD_position(LINE3);
-          _LCD_PRINT("    En Progreso");
-        }
-        else if(which_test==1)
-          _LCD_PRINT(" Prueba del Teclado");  
-        else if(which_test==2)
-          _LCD_PRINT("  Prueba de Tubos");    
-    
-      }
-      else 
-      {     
-        _LCD_PRINT("    Auto Prueba");
-        LCD_position(LINE3);
-        _LCD_PRINT("      Aprobada");  
-      }
-    }  
 }
+   
 void voltage_out_of_range(float volts_temp)
 {
   CLEAR_DISP;
@@ -1297,14 +1244,6 @@ void display_station_name(char *temp_str)
 }
 
 
-void std_text(void)
-{
-  if(Features.language_f)
-   { _LCD_PRINT("   Standard Count   "); }
-    else
-   {  _LCD_PRINT("  Cuenta Standard  ");}
-}
-
 void stat_text(void)
 {
   if(Features.language_f)
@@ -1313,24 +1252,6 @@ void stat_text(void)
      { _LCD_PRINT("Prueba Estadistica"); }
 }
 
-void not_in_safe_text ( void )
-{
- CLEAR_DISP;
- LCD_position (LINE1);
- if(Features.language_f)
- {
-  _LCD_PRINT("Depth not at Safe    ");
-  LCD_position (LINE2);
-  _LCD_PRINT("Position             ");
- } 
- else 
- {
-  _LCD_PRINT("Depth not at Safe    ");
-  LCD_position (LINE2);
-  _LCD_PRINT("Position             ");
- } 
-
-}
 
 void not_in_bs_text ( void )
 {

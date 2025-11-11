@@ -873,7 +873,16 @@ void select_language(void)
     {
       return;
     }  
-  }    
+  }
+  
+  if ( Features.language_f == 1 )
+  {
+    g_language =  L_ENGLISH;
+  }
+  else if ( Features.language_f == 0 )
+  {
+   g_language =  L_SPANISH;
+  }
   NV_MEMBER_STORE(FEATURE_SETTINGS,Features);  //save settings to EEPROM
   delay_ms ( 1000 );
   
@@ -1086,7 +1095,11 @@ void offset(void)  // leads user through process to enable/disable or enter offs
                  tst_depth_g = get_depth_auto( 0 );   // update depth     
                  if ( tst_depth_g != 0 )              // test for SAFE position
                  {
-                  not_in_safe_text();                 // TEXT: "NOT IN SAFE POSITION
+                  //Depth not in SAFE
+                  //Position
+                  //
+                  //
+                  dispscrn_e (s_DepthNotInSafePos);
                   delay_ms(1000);
                  }
                  else

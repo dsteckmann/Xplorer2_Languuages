@@ -34,7 +34,7 @@
 #include "Keypad_functions.h"
 #include "LCD_drivers.h"
 #include "Batteries.h"
-#include "uarts.h"
+#include "UARTS.h"
 #include <math.h>
 
 
@@ -475,8 +475,8 @@ void measurePulses ( uint8_t line, uint8_t time1, uint16_t * moisture_count, uin
    
     if(Flags.stand_flag)
     {
-      
-      std_text();                                     //TEXT// display "Standard Count"      
+      //"Standard Count"      
+      displine_e (LINE1,mStandardCount,1);
     }    
     else if(Flags.stat_flag)
     {
@@ -725,7 +725,8 @@ void measurePulsesStandardCount ( uint8_t line, uint32_t * moisture_count, uint3
   // When key is released, stop running the keyscanner
   wait_for_key_release();  
     
-  LCD_PrintAtPositionCentered ( "Standard Count",LINE2+10 );
+  //Standard Count
+  displine_e ( LINE2,mStandardCount,1);
  //TEXT// display "Time: %3u sec. " on LCD_LINE   
   
   display_time(240,line );
@@ -817,9 +818,8 @@ void stand_test(void)  // leads user through standard count procedure (STD butto
   uint16_t moisture_count[4],moisture_cnt ;
   uint32_t density_cnt,density_count[4],density[SMART_MC_CHI_COUNTS],moisture[SMART_MC_CHI_COUNTS],moisture_mean,density_mean;
   int32_t date_int;
-  
   float percent_diff_dense, percent_diff_moist, avg_std_moist, avg_std_dense, d_stand_cal;
-  char moist_pass_fail[10] , dense_pass_fail[10];
+  //char moist_pass_fail[10] , dense_pass_fail[10];
   
   enum buttons button;
   uint16_t d_stand;
@@ -827,9 +827,10 @@ void stand_test(void)  // leads user through standard count procedure (STD butto
   float temp, moist_sd,density_sd ;
 
   static uint8 dummy_tests = 0;
-
-  sprintf( moist_pass_fail,"PASS" );
-  sprintf( dense_pass_fail,"PASS" );
+  
+  //PASS 
+  const char *moist_pass_fail  = m_PASS[g_language].linestring;
+  const char *dense_pass_fail  = m_PASS[g_language].linestring;
  
   Flags.stand_flag = TRUE;                           // set "Stand" flag for display format during measuring
   Global_IE();
@@ -837,7 +838,6 @@ void stand_test(void)  // leads user through standard count procedure (STD butto
   Controls.shut_dwn = FALSE;                         // disable shut down feature when NO is pressed 
 
   d_stand = NV_RAM_MEMBER_RD(DEN_STAND);             //read the last stored density stand from eeprom 
-
   m_stand = NV_RAM_MEMBER_RD(MOIST_STAND);           //read the last stored moisture stand from eeprom   
 
   CLEAR_DISP;
@@ -853,8 +853,11 @@ void stand_test(void)  // leads user through standard count procedure (STD butto
   
   LCD_position(LINE2);
   _LCD_PRINTF ( "MS = %u",m_stand);  //0x25 is '%' symbol 
-  new_std_count();         // display "New STD Count?" on LINE3
-  Press_YES_or_NO(LINE4);  // display "Press YES or NO"  
+  
+  // Take New Std. Count?
+  displine_e ( LINE3, m_TakeNewStdCont,1 );
+  //Press YES or NO  
+  displine_e ( LINE4, mPress_YES_or_NO,1 );
   
   while(1)
   {
@@ -867,7 +870,11 @@ void stand_test(void)  // leads user through standard count procedure (STD butto
     else if(button == YES)
     {
       
-      std_count_press_start();  // display "  Press START for\n  Standard Count" 
+      //Place Gauge on Poly
+      //Std. Block in SAFE
+      //Position
+      //Press START
+      dispscrn_e (s_PlaceGaugeOnStdBLock);
       while(1)
       {
         button = getKey ( TIME_DELAY_MAX );
@@ -884,7 +891,11 @@ void stand_test(void)  // leads user through standard count procedure (STD butto
   
        if ( tst_depth_g != 0 )              // test for SAFE position
        {
-        not_in_safe_text();                 // TEXT: "NOT IN SAFE POSITION
+        //Depth not in SAFE
+        //Position
+        //
+        //
+        dispscrn_e (s_DepthNotInSafePos);
         delay_ms(1000);
         break;
        }
@@ -900,9 +911,8 @@ void stand_test(void)  // leads user through standard count procedure (STD butto
       {
         if  (  ( NO_ERROR == alfat_error ) )
         {
-          AlfatStart();   
           read_RTC ( &date_time_g ); //get time and date, date_unformatted now contains coded date value
-          AlfatStop();   
+          
         }  
         
         Controls.shut_dwn = TRUE;                         // enable shut down feature when NO is pressed
@@ -1034,14 +1044,17 @@ void stand_test(void)  // leads user through standard count procedure (STD butto
           avg_std_dense = d_stand_cal * temp;
         }          
         percent_diff_dense = ((float)density_cnt - avg_std_dense) / avg_std_dense;       //calculate % difference in density cnt from rolling avg.
+       
         if(fabsf(percent_diff_dense) > DENSITY_PASS_PERCENT)
         {
-          sprintf ( dense_pass_fail, "FAIL" );
+          //FAIL
+          dense_pass_fail  = m_FAIL[g_language].linestring;
         }  
         percent_diff_moist = ((float)moisture_cnt - avg_std_moist) / avg_std_moist;      //calculate % difference in moist cnt from rolling avg.
         if(fabsf(percent_diff_moist) > MOISTURE_PASS_PERCENT)
         {
-          sprintf(moist_pass_fail, "FAIL");
+          //FAIL
+          moist_pass_fail  = m_FAIL[g_language].linestring;
         }  
         CLEAR_DISP;
 
@@ -1053,8 +1066,11 @@ void stand_test(void)  // leads user through standard count procedure (STD butto
         sprintf ( lcdstr,"MS=%u %.1f%c %s",moisture_cnt,(double)(percent_diff_moist*100.0),0x25,moist_pass_fail);  //0x25 is '%' symbol 
         LCD_print ( lcdstr );
         
-        use_new_std_count();     // display "Use New STD Count?"
-        Press_YES_or_NO(LINE4);  // display "Press YES or NO"         
+        //Use New STD Count?
+        //Press YES or NO                 
+        displine_e ( LINE3, m_UseNewStdCont, 1);
+        displine_e ( LINE4, mPress_YES_or_NO, 1);
+        
         while(1)
         {
          button = getKey ( TIME_DELAY_MAX );
@@ -1715,7 +1731,7 @@ void selftest(void)  // tests high voltage,keypad,tubes and temp
   }
   output_low(ROW_2);
   Global_IE();
-  CLEAR_DISP;
+
   Spec_flags.self_test = TRUE;                      // set self test flag
     
     self_test_text(1);  // display "    Keypad Test\n    "In Progress"  on LINE2 and LINE3    
@@ -1749,16 +1765,31 @@ void selftest(void)  // tests high voltage,keypad,tubes and temp
   if( test_failed > 0 )  // at least one test failed
   {    
       CLEAR_DISP;      
-      LCD_position(LINE1);
-      self_test_pf_text(0,bit_test(test_failed,0));  //TEXT// display "Keypad: PASSED/FAILED"
+           
+      if ( bit_test(test_failed,0 ) )
+      {
+        //Keypad: PASSED/FAILED"
+        displine_e ( LINE1, KeypadFAIL, 1 );
+      }  
+      else
+      {
+        displine_e ( LINE1, KeypadPass, 1 );
+      }  
            
       // if 3500 X2, test temperature. No sensor in 3440.
       if ((eepromData.gauge_type == GAUGE_3500 ) || (eepromData.gauge_type == GAUGE_3440_PLUS) )
       {
-        LCD_position(LINE2);
-        self_test_pf_text(8,bit_test(test_failed,2));  //TEMP
+        if ( bit_test(test_failed,2 ) )
+        {
+          //Temp: PASSED/FAILED"
+          displine_e ( LINE2, TempFAIL, 1 );
+        }  
+        else
+        {
+          displine_e ( LINE2, TempPass, 1 );
+        } 
       }  
-      CyDelay ( 5000 );
+      CyDelay ( 3000 );
      
   }
   else

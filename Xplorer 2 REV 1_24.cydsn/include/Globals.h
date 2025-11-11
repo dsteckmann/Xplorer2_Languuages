@@ -204,7 +204,7 @@ typedef struct features_struct
 	uint16_t sound_on              : 1; // 4 set to enable buzzer 
 	uint16_t kg_gcc_units          : 1; // 5 Cleared when kg_m3 enable. Set when GCC enabled
 	uint16_t auto_scroll           : 1; // 6 automatically scrolls data if set
-	uint16_t language_f            : 1; // 7 Select English "bit 1" or Spanish "bit 0"
+	uint16_t language_f            : 3; // 7 Select English:1, Spanish:0
 	uint16_t mc_mode               : 2; // 8 0: Elite Mode, 1: Smart MC Mode
 	uint16_t dummy_mode            : 1; // 9 0: Normal, 1:DUMMY
   uint16_t chi_sq_mode           : 1; // 10 0: Chi squared test enabled, 1 chi test disabled

@@ -17,8 +17,7 @@
 #include "Globals.h"
 #include "screens.h"
 
-#define CONST_LCDSTRING const LCDSTRING
-#define CONST_LCDSTRING_PTR CONST_LCDSTRING * const
+
 /* --------------------------------------------------------------------- */
 /************************* Reuseable Lines *******************************/
 /* --------------------------------------------------------------------- */
@@ -47,6 +46,9 @@ CONST_LCDSTRING Up_Down_Change[2]        =  {{ 10, "UP/DOWN to Change" },  { 10,
 
 //Select #, ESC Exit
 CONST_LCDSTRING SelectNumber[2]        =  {{ 10, "Select #, ESC Exit" },{ 10, "Sel #,ESC para Salir"}  };
+
+//Press START to Test
+CONST_LCDSTRING m_PressStart[]                = {{ 10, "Press START" }, { 10, "Presione <START>"} };
 
 //
 //
@@ -81,6 +83,97 @@ CONST_LCDSTRING_PTR s_Calibration_due[4]    = { &calib_due[0],&last_calibration[
 //GAUGE READY  
 CONST_LCDSTRING mGaugeReady[2]          = {{ 10, "GAUGE READY" },    { 10, "PREPARADO"} };
 
+//
+//High Voltage Test
+// In Progess
+//
+CONST_LCDSTRING HighVoltageTest[2]          = {{ 10, "High Voltage Test" },    { 10, "Prueba de Alto Volt."} };
+CONST_LCDSTRING InProgress[2]               = {{ 10, "In Progress" }, { 10, "En Progreso"}};
+CONST_LCDSTRING_PTR s_HighVoltageTest[4]    = { mBlank,HighVoltageTest,InProgress,mBlank };
+
+//Keypad Test
+CONST_LCDSTRING KeyPadTest[2]           = {{ 10, "Keypad Test" },    { 10, "Prueba del Teclado"} };
+
+//Tube Test
+CONST_LCDSTRING TubeTest[2]           = {{ 10, "Tube Test" },    { 10, "Prueba de Tubos"} };
+
+// 
+// Self Test
+// Passed
+//
+CONST_LCDSTRING SelfTest[]                  = {{ 10, "Self Test" },    { 10, "Auto Prueba"} };
+CONST_LCDSTRING Passed[]                    = {{ 10, "Passed" }, { 10, "Aprobada"}};
+CONST_LCDSTRING_PTR s_SelfTestPassedTest[ ] = { mBlank,SelfTest,Passed,mBlank };
+
+// "Depth" must be 6 characters
+//Depth:Safe
+CONST_LCDSTRING DepthSafe[]                 = {{ 0, "Depth:Safe  " }, { 0, "Prof.:SEG.  "} };
+//Depth:BS
+CONST_LCDSTRING DepthBS[]                   = {{ 0, "Depth:BS    " }, { 0, "Prof.:RD    " } };
+//Depth:None
+CONST_LCDSTRING DepthNone[]                 = {{ 0, "Depth:None  " }, { 0, "Prof.:None  "} };
+//Depth:
+CONST_LCDSTRING Depth[]                     = {{ 0, "Depth:      " }, { 0, "Prof.:      "} };
+
+
+//Keypad:PASS
+CONST_LCDSTRING KeypadPass[]                = {{ 0, "Keypad:PASS" }, { 0, "Teclado:PASADO"} };
+//Keypad:FAIL
+CONST_LCDSTRING KeypadFAIL[]                = {{ 0, "Keypad:FAIL" }, { 0, "Teclado:FALLADO"} };
+
+//TEMP:PASS
+CONST_LCDSTRING TempPass[]                = {{ 0, "Temp.:PASS" }, { 0, "Temp.:PASADO"} };
+//TEMP:FAIL
+CONST_LCDSTRING TempFAIL[]                = {{ 0, "Temp.:FAIL" }, { 0, "Temp.:FALLADO"} };
+
+
+//Press START to Test
+CONST_LCDSTRING m_PressStartToTest[]                = {{ 10, "Press START to Test" }, { 10, "Presione <START>"} };
+
+//RECHARGE BATTERY
+CONST_LCDSTRING m_RechargeBattery[]                = {{ 10, "RECHARGE BATTERY" }, { 10, "Recargar la Bateria"} };
+
+//Reading # 
+CONST_LCDSTRING m_ReadingNumber[]                = {{ 10, "Reading # " }, { 10, "Lectura # "} };
+
+
+//FAIL
+CONST_LCDSTRING m_FAIL[]                = {{ 0, "FAIL" }, { 0, "FALLADO"} };
+
+//PASS
+CONST_LCDSTRING m_PASS[]                = {{ 0, "PASS" }, { 0, "PASADO"} };
+
+//Take New Standard Count?
+CONST_LCDSTRING m_TakeNewStdCont[]       = {{10,"Take New Std Count?"}, {10,"Nueva Cuenta Std?"}};
+
+//Use New STD Count?
+CONST_LCDSTRING m_UseNewStdCont[]       = {{10,"Use New STD Count?"}, {10,"Use Nueva Cuent Std?"}};
+
+//DS (Density Standard Count)
+//MS (Moisture Standard Count)
+
+
+//Place Gauge on 
+//Standard Block 
+//in SAFE Position
+//Press START
+CONST_LCDSTRING m_PlaceGauge[]       = {{10,"Place Gauge on"},{10,"Coloque el Equipo en"}};
+CONST_LCDSTRING m_StdBlock[]         = {{10,"Standard Block"},{10,"el Bloque Standard"}};
+CONST_LCDSTRING m_Position[]         = {{10,"in SAFE Position"},{10,"en Posicion se Segur"}};
+CONST_LCDSTRING_PTR s_PlaceGaugeOnStdBLock[ ] = { m_PlaceGauge,m_StdBlock,m_Position,m_PressStart };
+
+
+
+//Depth not in SAFE
+//Position
+//
+//
+CONST_LCDSTRING m_DepthNotinSafe[]  = {{10,"Depth not at Safe"},{10,"Profundidad no en la"}};
+CONST_LCDSTRING Position[]           = {{10,"Position"},{10,"Posicion de Segura"}};
+CONST_LCDSTRING_PTR s_DepthNotInSafePos[ ] = { m_DepthNotinSafe,Position,mBlank,mBlank }; 
+
+//Standard Count
+CONST_LCDSTRING mStandardCount[] = {{10,"Standard Count"},{10,"Conteo Estandar"}};
 
 // display for the main menu
 //1. Recall
@@ -132,11 +225,11 @@ CONST_LCDSTRING_PTR s_MenuNum [20] = {&M1,&M2,&M3,&M4,&M5,&M6,&M7,&M8,&M9,&MP10,
 //"Module Firmware"
 //"The MyGauge App"
 //"may not work!"
-CONST_LCDSTRING  mIncorrectBLE_1  = {10,"Incorrect BLE"};
-CONST_LCDSTRING  mIncorrectBLE_2  = {10,"Module Firmware"};
-CONST_LCDSTRING  mIncorrectBLE_3  = {10,"The MyGauge App"};
-CONST_LCDSTRING  mIncorrectBLE_4  = {10,"may not work!"};
-CONST_LCDSTRING_PTR s_IncorrectBLE[4] = { &mIncorrectBLE_1,&mIncorrectBLE_2,&mIncorrectBLE_3,&mIncorrectBLE_4 };      
+CONST_LCDSTRING  mIncorrectBLE_1[]  = {{10,"Incorrect BLE"},  {10,"Incorrect BLE"}};
+CONST_LCDSTRING  mIncorrectBLE_2[]  = {{10,"Module Firmware"},{10,"Module Firmware"}};
+CONST_LCDSTRING  mIncorrectBLE_3[]  = {{10,"The MyGauge App"},{10,"The MyGauge App"}};
+CONST_LCDSTRING  mIncorrectBLE_4[]  = {{10,"may not work!"},  {10,"may not work!"}};
+CONST_LCDSTRING_PTR s_IncorrectBLE[4] = { mIncorrectBLE_1,mIncorrectBLE_2,mIncorrectBLE_3,mIncorrectBLE_4 };      
 
 //Count Time
 CONST_LCDSTRING mCountTime[] = {{0,"Count Time:"}, {0,"    Tiempo:"}};

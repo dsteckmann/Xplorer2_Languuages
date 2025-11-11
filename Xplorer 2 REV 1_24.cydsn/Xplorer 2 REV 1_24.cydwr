@@ -739,6 +739,7 @@
       <Data key="22e67977-6125-42dc-aa7b-e38b7134ffe7" value="isr_HE3" />
       <Data key="48ad60bf-cbb7-463e-adea-fafd5602e2a6/0758f7e0-b58c-4a6b-bb59-e7d003cac7de" value="UART2_TXInternalInterrupt" />
       <Data key="590b6395-556d-4623-8647-78ce0a3fade8" value="AlfatRxtInt" />
+      <Data key="949e7190-f785-47cd-8109-0dbce1afe658/10dce1ed-dd83-44c0-9cff-cc3ee25204cd" value="BlueToothUart_RXInternalInterrupt" />
       <Data key="949e7190-f785-47cd-8109-0dbce1afe658/0758f7e0-b58c-4a6b-bb59-e7d003cac7de" value="BlueToothUart_TXInternalInterrupt" />
       <Data key="b2dfc5cf-bc12-430e-a83a-3b7c046589dc" value="isrTIMER_1" />
       <Data key="b8b92ec3-4c79-4ac7-ad9e-4c50a155145a" value="isr_ON_OFF" />
@@ -3982,7 +3983,7 @@
     <Group key="949e7190-f785-47cd-8109-0dbce1afe658/0758f7e0-b58c-4a6b-bb59-e7d003cac7de">
       <Group key="CortexM3">
         <Data key="Assigned" value="True" />
-        <Data key="Priority" value="5" />
+        <Data key="Priority" value="4" />
         <Data key="Vector" value="-1" />
       </Group>
     </Group>
@@ -4017,7 +4018,7 @@
     <Group key="ce22ff0e-02a3-46df-a964-80fb54a5574e">
       <Group key="CortexM3">
         <Data key="Assigned" value="True" />
-        <Data key="Priority" value="5" />
+        <Data key="Priority" value="7" />
         <Data key="Vector" value="-1" />
       </Group>
     </Group>

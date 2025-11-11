@@ -355,13 +355,13 @@ void LCD_NChar_Position(uint8 row, uint8 column)
         case (uint8)0:
             LCD_NChar_WriteControl(LCD_NChar_ROW_0_START + column);
             break;
-        case (uint8) 1:
+        case (uint8) 20:
             LCD_NChar_WriteControl(LCD_NChar_ROW_1_START + column);
             break;
-        case (uint8) 2:
+        case (uint8) 40:
             LCD_NChar_WriteControl(LCD_NChar_ROW_2_START + column);
             break;
-        case (uint8) 3:
+        case (uint8) 60:
             LCD_NChar_WriteControl(LCD_NChar_ROW_3_START + column);
             break;
         default:
@@ -840,6 +840,40 @@ void printCharOnLCD ( char cdata )
 }
 
 
+void printStringOnLCD_e ( LCDSTRING const * dispstring )
+{
+  printStringOnLCD( dispstring[g_language].linestring);   // Print the string.;
+}
+
+void displine_e(int linenum, LCDSTRING const * dispstring, int clearline)
+{
+	 
+  // First, if clearline, write blanks.
+	if (clearline)
+	{
+		gotoloc(linenum, 0);    // Start at beginning of line.
+		// Grab the LCD Semaphore
+ 	  printStringOnLCD( "                    " );
+	}
+
+	// now, write the line
+	if( 10 == dispstring[g_language].lineloc )
+	{
+		uint8 len, spaces;
+    len = strlen(dispstring[g_language].linestring);
+    spaces = (20 - len ) / 2 ;
+		gotoloc( linenum, spaces );
+
+	}
+	else
+		gotoloc(linenum,dispstring[g_language].lineloc);  // Go to start of text.
+ 
+  printStringOnLCD( dispstring[g_language].linestring);   // Print the string.
+
+
+}
+
+
 void printStringOnLCD ( char * string )
 {
 		if ( strlen ( string ) < 21 )
@@ -851,7 +885,6 @@ void printStringOnLCD ( char * string )
       string[20] = 0; 
       LCD_NChar_PrintString ( string );
     }
-  
 }
 
 void printOnLCDLineLocString ( uint8_t line, uint8_t loc, char * string )
@@ -999,53 +1032,6 @@ void displine(int linenum, LCDSTRING const * dispstring, int clearline)
 
 
 /*
- *  FUNCTION: displine
- *
- *  PARAMETERS: int linenum, LCDSTRING const *dispstring, int clearline, index into language to use
- *
- *  DESCRIPTION: displine places the string from dispstring on the lcd at the location
- *               given by lineloc. The clearline flag can erase the line before putting
- *               the string up. This allows the routine to be used fur updating a
- *               whole line or just adding a short string.
- *
- *  Note: displine expects a pointer to an LCDSTRING, not the LCDSTRING
- *        structure itself.
- *
- *  RETURNS: None
- *
- */
-
-void displine_e(int linenum, LCDSTRING const * dispstring, int clearline)
-{
-	 
-  // First, if clearline, write blanks.
-	if (clearline)
-	{
-		gotoloc(linenum, 0);    // Start at beginning of line.
-		// Grab the LCD Semaphore
- 	  printStringOnLCD( "                    " );
-	}
-
-	// now, write the line
-	if( 10 == dispstring[g_language].lineloc )
-	{
-		uint8 len, spaces;
-    len = strlen(dispstring[g_language].linestring);
-    spaces = (20 - len ) / 2 ;
-		gotoloc( linenum, spaces );
-
-	}
-	else
-		gotoloc(linenum,dispstring[g_language].lineloc);  // Go to start of text.
- 
-  printStringOnLCD( dispstring[g_language].linestring);   // Print the string.
-
-
-}
-
-
-
-/*
  *  FUNCTION: displine_var
  *
  *  PARAMETERS: int linenum, LCDSTRING *dispstring, int clearline
@@ -1178,7 +1164,7 @@ void dispscrn_e(LCDSTRING const * const scrn[])
   for ( i=0;i<4;i++)
 	{
 		// Note displine is expecting a pointer to an LCDSTRING.
-		displine_e(i,scrn[i],1);	
+		displine_e(i*20,scrn[i],1);	
   }
 }
 
@@ -1282,8 +1268,8 @@ void LCD_position ( BYTE cX )
     scan = 0;
   }
   
-  row = cX / 20;
-  col = cX - (20 * row);
+  row = (cX/20) * 20;
+  col = cX - row;
   
   LCD_NChar_Position( row,col);
   //LCD_NChar_WriteControl(cX + 0x80);  //set DDRAM address

@@ -15,8 +15,10 @@
  */
 #ifndef SCREENSH
 #define SCREENSH  	
-
 #include <project.h>
+
+#define CONST_LCDSTRING const LCDSTRING
+#define CONST_LCDSTRING_PTR CONST_LCDSTRING * const  
   
 #define LANGUAGES 2   
   
@@ -38,6 +40,29 @@ extern CONST_LCDSTRING mGaugeReady[] ;
 extern CONST_LCDSTRING mCountTime[];
 extern CONST_LCDSTRING_PTR s_Up_Down_Change_Exit[]; 
 extern CONST_LCDSTRING_PTR s_IncorrectBLE[];
+extern CONST_LCDSTRING_PTR s_HighVoltageTest[]  ;
+extern CONST_LCDSTRING KeyPadTest[];
+extern CONST_LCDSTRING TubeTest[] ;
+extern CONST_LCDSTRING_PTR s_SelfTestPassedTest[] ;
+extern CONST_LCDSTRING DepthSafe[];
+extern CONST_LCDSTRING DepthBS[] ;
+extern CONST_LCDSTRING DepthNone[];
+extern CONST_LCDSTRING Depth[] ;
+extern CONST_LCDSTRING KeypadFAIL[];
+extern CONST_LCDSTRING KeypadPass[];
+extern CONST_LCDSTRING TempFAIL[] ;
+extern CONST_LCDSTRING TempPass[];
+extern CONST_LCDSTRING m_PressStartToTest[] ;
+extern CONST_LCDSTRING m_RechargeBattery[]  ;
+extern CONST_LCDSTRING m_ReadingNumber[]  ;
+extern CONST_LCDSTRING m_FAIL[] ;
+extern CONST_LCDSTRING m_PASS[];
+extern CONST_LCDSTRING m_TakeNewStdCont[];
+extern CONST_LCDSTRING  mPress_YES_or_NO[];
+extern CONST_LCDSTRING m_UseNewStdCont[] ;
+extern CONST_LCDSTRING_PTR s_PlaceGaugeOnStdBLock[ ] ;
+extern CONST_LCDSTRING_PTR s_DepthNotInSafePos[ ];
+extern CONST_LCDSTRING mStandardCount[];
 
 #endif
 

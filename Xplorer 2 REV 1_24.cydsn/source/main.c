@@ -113,7 +113,9 @@ void CheckBleVersion()
 
 int main() { //initialization and main loop
   //uint32_t size_proj;
-  uint8_t last_power_down, auto_depth_timer = 0, refresh = 0;
+
+  
+  uint8_t  auto_depth_timer = 0, refresh = 0;
   uint16_t  clock_timer = 0;
   enum buttons button;
   static uint8_t b_counter = 25;
@@ -122,43 +124,40 @@ int main() { //initialization and main loop
   initSystem();             // starts the interrupts, prints the version
   GPS_EN_REG_Write ( 1 );
   COM_SELECT_Write ( 0 );
-  
-  Global_IE();
-  last_power_down = NV_RAM_MEMBER_RD( OFF_MODE );      //check to see if auto shutdown or operator shutdown
   Features        =  NV_RAM_MEMBER_RD(FEATURE_SETTINGS);
   if ( Features.gps_on == TRUE )
   { 
     initGPS ();
   }
-  g_language =  Features.language_f;
+ 
+  OFFSETS = FLAGS = 0;            // reinitialize all settings to "0" if operator shut down
+  CONTROL = 0x02;                 // initialize control register, all 0 except shut_dwn  
+  Global_IE();
+  updateProjectInfo ( );
+  GetLastStationName();
+  RequestBleVersion();                  // determines which packets the BLE module is expecting
+  InitBleCharacteristics();
+  
+  if ( Features.language_f == 1 )
+  {
+    g_language =  L_ENGLISH;
+  }
+  else if ( Features.language_f == 0 )
+  {
+     g_language =  L_SPANISH;
+  }
+  
   // retrieve last display position
   gp_disp  =  NV_RAM_MEMBER_RD( GP_DISPLAY );
   splashScreen = TRUE;              // do the alkaline notification on bootup.
   SPEC_FLAG = 0;                    // auto turn off is disabled
- 
-  if ( last_power_down == MANUAL ) 
-  {
-    OFFSETS = FLAGS = 0;            // reinitialize all settings to "0" if operator shut down
-    CONTROL = 0x02;                 // initialize control register, all 0 except shut_dwn  
-  }
-  else
-  {                            // reinitialize settings to previous settings if auto shutdown
-    Flags     = NV_RAM_MEMBER_RD( FLAG_SETTINGS  );      
-    Flags.bat_volt = 0; //FALSE;
-    Flags.drift_flag = FALSE;
-    Flags.stat_flag = 0;
-    Flags.stand_flag = 0;
-    Flags.in_spec_cal = 0;
-    Controls  = NV_RAM_MEMBER_RD( CONTROL_SETTINGS);
-    Offsets   = NV_RAM_MEMBER_RD( OFFSET_SETTINGS );    
-    Controls.LCD_light = 0;
-  }
   Controls.shut_dwn = TRUE;
   cnt_time =  NV_RAM_MEMBER_RD( COUNT_TIME );   // check to see if memory is initialized
   KEYSCAN_DISABLE();                            // Keyscan disabled
  
   if ( RS232_CABLE_DETECT_Read() == 1)
-  {        // check to see if serial cable is connected
+  {        
+    // check to see if serial cable is connected
     serial_port_text();                         //TEXT// display "    Serial Port\n      Activated"     
     wait_for_serial();
     UART2_Stop();
@@ -172,65 +171,53 @@ int main() { //initialization and main loop
    initUARTPlus();
    //Features.auto_depth = 1;
   }
-  CLEAR_DISP;
-
-  //displine_e ( LCD_LINE_1, mESC_to_Exit , 1, 1 );  
- // displine_e ( LCD_LINE_2, mESC_to_Exit , 1, 0 );
- //dispscrn_e  ( sESCToExit,1 );
-
 
   tst_depth_g = 0;
   calibration_date =  NV_RAM_MEMBER_RD  (Constants.CAL_DATE ); //read date of last calibration date from EEPROM 
-  updateProjectInfo ( );
-  GetLastStationName();
-  CLEAR_DISP;
+
   KEYSCAN_ENABLE();                     // This enables the keypad task
-  RequestBleVersion();                  // determines which packets the BLE module is expecting
-  if ( last_power_down == MANUAL )
-  {    // conduct a self test if there was a manual shutdown
-    selftest ( );    
-    read_RTC( &date_time_g );
-    day_counter_g = decode_date( date_time_g ) - decode_date ( NV_RAM_MEMBER_RD (Constants.CAL_DATE) ); // gets days since last calibration
-    if ( day_counter_g >= (365 -30) ) 
-    {
-      //Calibration Due!
-      //Last Calibration On
-      //
-      // <ESC> to Exit 
-      dispscrn_e  ( s_Calibration_due );
-      LCD_position (LINE3);
-      printTimeDate( calibration_date );
-      button = getKey(TIME_DELAY_MAX);  
-    }
+
+
+  selftest ( );    
+  read_RTC( &date_time_g );
+  day_counter_g = decode_date( date_time_g ) - decode_date ( NV_RAM_MEMBER_RD (Constants.CAL_DATE) ); // gets days since last calibration
+  if ( day_counter_g >= (365 -30) ) 
+  {
+    //Calibration Due!
+    //Last Calibration On
+    //
+    // <ESC> to Exit 
+    dispscrn_e  ( s_Calibration_due );
+    LCD_position (LINE3);
+    printTimeDate( calibration_date );
+    button = getKey(TIME_DELAY_MAX);  
   }
-  CheckBleVersion(); // try again, display error on fail
+
   Controls.buzz_enable = TRUE;
  
-  update_valid_depths(); 
+   update_valid_depths(); 
+  
   // clock timer is set to read date immediatley
   clock_timer = 100;
   pulseBuzzer();
   
   checkAlkalines();
-  
-  //InitBleCharacteristics(); // sends BLE this gauges SN, allowing it to run and advertise
-
+  CLEAR_DISP;
   while(1)  //main loop
   {    
 
    hold_buzzer();
-    
-
 	 if ( Features.auto_depth )
    {
     tst_depth_g = get_depth_auto(0);  
    }   
 
    //GAUGE READY  
-   displine_e ( LCD_LINE_1, mGaugeReady, 1 );  
+   displine_e ( LINE1, mGaugeReady, 1 );  
    LCD_position(LINE2);
    display_depth ( 0, tst_depth_g );  //display Depth:      
    display_offset_on ( Offsets );     // display OFFSET
+   displine_e ( LINE4, m_PressStartToTest, 1 ); 
    LCD_light_timer(5);
     
    if ( Controls.LCD_light )
@@ -296,7 +283,8 @@ int main() { //initialization and main loop
            LCD_position( LINE1 + 18);  
            shutdown_timer = 0;          
            _LCD_PRINT ( "C ");    
-    		   LCD_PrintAtPosition( "Press START to Test", LINE4 ); 
+    		  //Press START to Test 
+          displine_e (LINE4,m_PressStartToTest,1 );
          } 
           else
     	  {
@@ -309,20 +297,22 @@ int main() { //initialization and main loop
           	if ( ( Controls.bat_sel == NICAD )  && ( checkNICADVoltageWarning () == TRUE ) )
           	{
           	 
-              if ( flip == 0 )
+              if ( flip == 1 )
               {
-                LCD_PrintAtPosition( "  RECHARGE BATTERY  ", LINE4 );
+                //RECHARGE BATTERY
+                displine_e( LINE4,m_RechargeBattery,1 );
               }
               else
               {
-                LCD_PrintAtPosition( "Press START to Test", LINE4 );
+                //Press START to Test
+                displine_e ( LINE4, m_PressStartToTest, 1 ); 
               }  
       		  }
       	    else
       		  {
-        		 LCD_PrintAtPosition( "Press START to Test", LINE4 );
-        	
-      		  }
+        		 //Press START to Test
+              displine_e ( LINE4, m_PressStartToTest, 1 ); 
+       		  }
      
       		  
       		  if ( Controls.bat_sel == ALK )  
@@ -330,13 +320,15 @@ int main() { //initialization and main loop
       		   if ( 0 == flip )
       		   { 
         		   LCD_PrintAtPosition( "ALK", LINE1 + 17);
-        		   LCD_PrintAtPosition( "  RECHARGE BATTERY  ", LINE4 );
+        		   //RECHARGE BATTERY 
+              displine_e( LINE4,m_RechargeBattery,1 );
         		  
         		 }
         		 else
         		 {
         		   LCD_PrintAtPosition( "   ", LINE1 + 17);
-        		   LCD_PrintAtPosition( "Press START to Test", LINE4 );
+        		  //Press START to Test 
+              displine_e ( LINE4, m_PressStartToTest, 1 ); 
         		 }  
       		  }
       		  else

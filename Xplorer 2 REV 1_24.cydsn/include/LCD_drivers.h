@@ -225,5 +225,6 @@ extern void CtrStrC(char *buf, uint8 line);  // centers string on given line, Cl
 
 void displine_e(int linenum, LCDSTRING const * dispstring, int clearline);
 void dispscrn_e(LCDSTRING const * const scrn[]);
+extern  void printStringOnLCD_e ( LCDSTRING const * dispstring );
 #endif /* endif !LCD_DRIVERS_H for "if we haven't included this file already..."    */
 

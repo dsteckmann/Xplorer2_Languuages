@@ -115,84 +115,47 @@ void initDepthVoltages ( void )
  *****************************************************************************/ 
 void display_depth(BYTE function, BYTE depth_temp_inches)
 {  
-  switch ( g_language )
+  if ( (depth_temp_inches == 0) && Features.auto_depth )
   {
-    case L_ENGLISH:
-    default: 
+    if((depth_temp_inches == 0) && (function == 0))
+    { 
+      // Depth:SAFE
+      printStringOnLCD_e( DepthSafe);   // Print the string. 
+    }
+  }    
+  else if( bit_test(valid_depth,depth_temp_inches))    
+  {    
+    if ( depth_temp_inches == 1)
     {
-      if ( (depth_temp_inches == 0) && Features.auto_depth )
-      {
-        if((depth_temp_inches == 0) && (function == 0))
-         { 
-           printStringOnLCD("Depth:SAFE "); 
-         }
-      }    
-      else if( bit_test(valid_depth,depth_temp_inches))    
-      {    
-        if ( depth_temp_inches == 1)
-        {
-         printStringOnLCD("Depth:BS   ");
-        }
-        else if ( depth_temp_inches == 13  )
-        {
-         printStringOnLCD("Depth:None ");
-        }
-        else
-        {
-          if(Features.SI_units)       // in "kg/m3" mode
-          { _LCD_PRINTF("Depth:%3umm", depth_temp_inches * 25);}
-          else
-          { _LCD_PRINTF("Depth:%2uin.", depth_temp_inches);  }        // in "PCF" mode   
-         
-        } 
+      // Depth:SAFE
+      printStringOnLCD_e(DepthBS);
+    }
+    else if ( depth_temp_inches == 13  )
+    {
+      // Depth:None
+      printStringOnLCD_e(DepthNone);
+    }
+    else
+    {
+      if(Features.SI_units)       // in "kg/m3" mode
+      { 
+        // Depth:
+        printStringOnLCD_e(Depth);
+        _LCD_PRINTF("%3umm", depth_temp_inches * 25);
       }
       else
       {
-        //sprintf ( lcdstr,"%s", "Depth: No Depth" );
-        //LCD_print ( lcdstr );
-        printStringOnLCD("Depth:None  ");  
-      }
-   } 
-   break;     
-    
-   case L_SPANISH:
-   {
-      if ( (depth_temp_inches == 0) && Features.auto_depth )
-      {
-        if((depth_temp_inches == 0) && (function == 0))
-         { 
-           printStringOnLCD("Prof.:SEG. "); 
-         }
-      }    
-      else if( bit_test(valid_depth,depth_temp_inches))    
-      {    
-        if ( depth_temp_inches == 1)
-        {
-         printStringOnLCD("Prof.:RD   ");
-        }
-        else if ( depth_temp_inches == 13  )
-        {
-         printStringOnLCD("Prof.:None ");
-        }
-        else
-        {
-          if(Features.SI_units)       // in "kg/m3" mode
-          { _LCD_PRINTF("Prof.:%3umm", depth_temp_inches * 25);}
-          else
-          { _LCD_PRINTF("Prof.:%2uin.", depth_temp_inches);  }        // in "PCF" mode   
-         
-        } 
-      }
-      else
-      {
-        //sprintf ( lcdstr,"%s", "Depth: No Depth" );
-        //LCD_print ( lcdstr );
-        printStringOnLCD("Depth:None  ");  
-      }
-   } 
-    break; 
-  }  
-    
+        // Depth:
+        printStringOnLCD_e(Depth);
+        _LCD_PRINTF("%2uin.", depth_temp_inches); 
+      }        // in "PCF" mode   
+    } 
+  }
+  else
+  {
+    //Depth:None
+    printStringOnLCD_e(DepthNone);  
+  }
 }
 /******************************************************************************
  *  Name:
