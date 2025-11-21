@@ -52,18 +52,11 @@ void up_down_select_text(int16_t both)
 {  
   if(both)
   {
-    LCD_position(LINE3);
-    if(Features.language_f)
-     _LCD_PRINT("  UP/DOWN for Next  ");
-     else 
-     _LCD_PRINT("    Arriba/Abajo    ");       
+    //   UP/DOWN for Next  
+    displine_e ( LINE3, Up_Down_Next, 1 );
   }
-  LCD_position(LINE4);
-  if(Features.language_f)
-    _LCD_PRINT("Select #, ESC Exit  "); 
-   else
-   _LCD_PRINT("Sel #,ESC para Salir");  
-   
+  //Select #, ESC Exit   
+  displine_e ( LINE4, SelectNumber, 1 );
 }
 
 
@@ -150,140 +143,79 @@ void initializing(void)
 
 void main_menu_display(uint8_t menu_trk)   // display for the main menu
 {  
-  LCD_position(LINE1);  
-  if(Features.language_f)
+  switch (menu_trk)
   {
-    switch (menu_trk)
-    {
+    
+    case 1: 
+      // 1. Recall
+      // 2. Offset
+      displine_e ( LINE1, M1, 1 );    
+      displine_e ( LINE2, M2, 1 );    
+      break;    
+    
+    case 2: 
+      // 3. Auto Scroll
+      // 4. Backlight
+      displine_e ( LINE1, M3, 1 );    
+      displine_e ( LINE2, M4, 1 );       
+      break;
       
-      case 1: 
-          _LCD_PRINT(" 1. Recall          ");
-          LCD_position(LINE2);
-          _LCD_PRINT(" 2. Offset          ");   
-          break;    
-      
-      case 2: 
-          _LCD_PRINT(" 3. Auto Scroll     ");   
-          LCD_position(LINE2);
-          _LCD_PRINT(" 4. Backlight       ");
-          break;    
-        
-      case 3:    
-          _LCD_PRINT(" 5. Stat Test       ");   
-           LCD_position(LINE2);               
-          _LCD_PRINT(" 6. Drift Test      ");  
-          break;
-  
-      case 4:    
-           _LCD_PRINT(" 7. GPS             ");
-           LCD_position(LINE2);
-           _LCD_PRINT(" 8. Auto Depth      ");           
-           break; 
-      
-      case 5:    
-          _LCD_PRINT(" 9. Review STD cnts.");
-          LCD_position(LINE2); 
-          _LCD_PRINT("10. Select Language ");            
-          break;    
-          
-      case 6:   
-          _LCD_PRINT("11. Set Units       ");
-           LCD_position(LINE2);
-          _LCD_PRINT("12. Standard Mode   ");      
-          break;    
-     
-      case 7:   
-          _LCD_PRINT("13. Serial Number   ");
-          LCD_position(LINE2);      
-          _LCD_PRINT("14. Date/Time       ");      
-          break;   
-     
-      case 8:
-          _LCD_PRINT("15. Buzzer/Alarm    ");
-           LCD_position(LINE2);
-          _LCD_PRINT("16. Special Cal.    ");
-           break;    
-     
-      case 9:    
-          _LCD_PRINT("17. Nomograph       ");
-          LCD_position(LINE2);
-          _LCD_PRINT("18. Cal. Constants  ");
-           break;    
-          
-      case 0:    
-         _LCD_PRINT("19. Soil Air Voids   ");         
-         LCD_position(LINE2);          
-         _LCD_PRINT("20. Diagnostic Test ");         
-          break;      
-          
+    case 3:    
+      // 5. Stat Test
+      // 6. Drift Test
+      displine_e ( LINE1, M5, 1 );    
+      displine_e ( LINE2, M6, 1 );         
+      break;
 
-          
-   }
-  }
-   else
-   {
-     switch (menu_trk)
-     {
-        case 1: 
-             _LCD_PRINT("1. Recordar         ");     //RECALL
-             LCD_position(LINE2);
-             _LCD_PRINT("2. Compensacion     ");  
-             break;    
-       
-       case 2 :
-             _LCD_PRINT("3. Voluta Auto      ");         // AUTO SCROLL        
-             LCD_position(LINE2);
-             _LCD_PRINT("4. Iluninacion LCD  ");         // LCD LIGHT 
-             break;    
-       case 3: 
-          
-            _LCD_PRINT("5. Prueba estadist. ");      // STAT TEST
-            LCD_position(LINE2);
-            _LCD_PRINT("6. Prueba desviacion");      // DRIFT TESTT   
-            break;
+    case 4: 
+      // 7. GPS
+      // 8. Auto Depth
+      displine_e ( LINE1, M7, 1 );    
+      displine_e ( LINE2, M8, 1 );        
+      break;
+    case 5: 
+       // 9. Review STD cnts.
+       // 10. Select Language
+       displine_e ( LINE1, M9, 1 );    
+       displine_e ( LINE2, MP10, 1 );
+       break;    
         
-      case 4:    
-            _LCD_PRINT("7. GPS             ");        // GPS
-            LCD_position(LINE2);
-            _LCD_PRINT("8. Profundidad Auto ");        // AUTO DEPTH  
-            break;    
-      case 5:    
-             _LCD_PRINT("9. Revisar STD Cnts");        // review standard counts 
-            LCD_position(LINE2);
-            _LCD_PRINT("10. Lengua           ");       // language   
-            break;        
-        case 6:   
-            _LCD_PRINT("11. Unidades        ");         // SET UNITS
-            LCD_position(LINE2);            
-            _LCD_PRINT("12. Modo AVG del STD  ");        // AVG STANDARD COUNT MODE
-            break;    
-        case 7:   
-            _LCD_PRINT("13. Numero de Serie  ");           // Serial Number
-            LCD_position(LINE2);
-            _LCD_PRINT("14. Fecha y Hora     ");        // DATE TIME 
-            break;   
-        case 8:
-            _LCD_PRINT("15. Alarma En. / Ap.");         // BUZZER ON/OFF
-            LCD_position(LINE2);
-            _LCD_PRINT("16. Calib. Especial ");           // Special Calibration
-            break;    
-        case 9:    
-            _LCD_PRINT("17.  Nomograph      ");       //  Nomograph
-            LCD_position(LINE2);
-            _LCD_PRINT("18. Const. de Calib.");       // Cal constants
-            break; 
-            
-       case 0:    
-            _LCD_PRINT("19. Tierra Aire Nulo");         
-            LCD_position(LINE2);          
-            _LCD_PRINT("20. Auto Diagnostico ");           // Diagnostics   
-          
-          break; 
-         
-       break;
-         
-     }
-   }
+    case 6:   
+       // 11. Set Units
+       // 12. Standard Mode
+       displine_e ( LINE1, MP11, 1 );    
+       displine_e ( LINE2, MP12, 1 );      
+       break;    
+   
+    case 7: 
+       // 13. Serial Number
+       // 14. Date/Time
+       displine_e ( LINE1, MP13, 1 );    
+       displine_e ( LINE2, MP14, 1 );      
+       break;   
+   
+    case 8:
+       // 15. Buzzer/Alarm
+       // 16. Special Cal.
+       displine_e ( LINE1, MP15, 1 );    
+       displine_e ( LINE2, MP16, 1 );      
+       break;    
+   
+    case 9:
+       // 17. Nomograph
+       // 18. Cal. Constants
+       displine_e ( LINE1, MP17, 1 );    
+       displine_e ( LINE2, MP18, 1 );       
+       break;    
+        
+    case 0:   
+       // 19. Soil Air Voids
+       // 20. Diagnostic Test
+       displine_e ( LINE1, MP19, 1 );    
+       displine_e ( LINE2, MP20, 1 );       
+       break;      
+  }
+
   if(in_menu)
   {  up_down_select_text(1);  }
 }
@@ -344,33 +276,6 @@ void project_menu_display(uint8_t menu_trk)   // display for the project menu
   if(in_menu)
   {  up_down_select_text(1);  }
 }
-
-void print_menu_display( void )   // display for the print menu
-{
-  CLEAR_DISP; 
-  if(Features.language_f)
-  {
-    LCD_position(LINE1);
-    _LCD_PRINT("1. Send Data to USB ");  
-    LCD_position(LINE2);
-    _LCD_PRINT("2. Print Data       ");
-     LCD_position(LINE4);
-    _LCD_PRINT("Select #, ESC Exit  "); 
-
-  }
-  else
-  {
-    LCD_position(LINE1);
-    _LCD_PRINT("1. Trans. Info al USB");     
-     LCD_position(LINE2);
-    _LCD_PRINT("2. Imprimir Info.    ");
-     LCD_position(LINE4);
-    _LCD_PRINT("Sel #,ESC para Salir"); 
-  }
-   
-}
-
-
 
 
 void mode_menu_display(unsigned int menu_trk)
@@ -584,33 +489,28 @@ void ready(BYTE cnt_temp, int line)
 
 void display_count_time(BYTE value_temp, uint8_t position )
 {
-  LCD_position  (position );
-  if(Features.language_f)
-    {
-      _LCD_PRINT("Count Time: ");
-    }
-    else
-    {
-      _LCD_PRINT("Tiempo Cont ");
-    }
-      
+  // Count Time:
+  displine_e ( position, mCountTime ,1);
+     
   if(value_temp <= 30)
   {
-    if(Features.language_f)
-      {
-        _LCD_PRINTF( "%u sec. ",value_temp );
-      
-      }
-      else
-      {
-        _LCD_PRINTF( "%u seg.",value_temp ); 
-      }  
+    switch ( g_language )
+    {
+      default:
+      case L_ENGLISH :     
+          _LCD_PRINTF( "%u sec. ",value_temp );
+          break;
+      case L_SPANISH:
+          _LCD_PRINTF( "%u seg.",value_temp ); 
+          break;
+    }       
   }
   else
   {
-      _LCD_PRINTF(" %u min. ",value_temp/60); 
+    _LCD_PRINTF(" %u min. ",value_temp/60); 
   }
 }
+
 void select_test_or_spec_cal(int16_t inspec)
 {  
   CLEAR_DISP;  
@@ -1034,70 +934,40 @@ void diagnostics_text(BYTE which_prompt)
 
 void USB_text(BYTE which_prompt)
 {
-  CLEAR_DISP; 
-  LCD_position(LINE2);
-  if(Features.language_f)
-  {
-    if(which_prompt==1)
-    {   
-      _LCD_PRINT("    Writing Data");
-      LCD_position(LINE3);
-      _LCD_PRINT("    to USB Drive");
-    }
-    else if(which_prompt==2)
-    {   
-      _LCD_PRINT("   No USB Device");  
-      LCD_position (LINE3);
-      _LCD_PRINT("    Detected.");
-    }
-    else if(which_prompt==3)
-    {    
-      _LCD_PRINT("   Data Download");
-      LCD_position(LINE3);
-      _LCD_PRINT("     Complete");    
-    }
-    else if(which_prompt==0)
-    {
-      LCD_position(LINE1);
-      _LCD_PRINT("  Insert External   ");
-      LCD_position(LINE2);
-      _LCD_PRINT(" Drive in USB Port  ");      
-      LCD_position(LINE4);
-      _LCD_PRINT("    Press ENTER     ");  
-    }
+  if(which_prompt==1)
+  {   
+    //
+    //   Writing Data
+    //   to USB Drive
+    //
+    dispscrn_e ( s_writingDataUSB_text );
   }
-    else
-    {
-      if(which_prompt==1)
-      {   
-        _LCD_PRINT("   Escribiendo la"); 
-        LCD_position(LINE3);
-        _LCD_PRINT(" Informacion al USB");  
-      }
-      else if(which_prompt==2)
-      {   
-        _LCD_PRINT("   No se Detecta"); 
-        LCD_position (LINE3);
-        _LCD_PRINT("        USB");  
-      }
-      else if(which_prompt==3)
-      {    
-        _LCD_PRINT("     Descarga de"); 
-        LCD_position(LINE3);
-        _LCD_PRINT("Informacion Completa");     
-      }
-      else if(which_prompt==0)
-      {
-        LCD_position(LINE1);
-        _LCD_PRINT("Conecte el Disposit-");  // Conecte el dispositivo de memoria externa al USB Presione iniciar
-        LCD_position(LINE2);
-        _LCD_PRINT("ivo de Memoria");      
-        LCD_position(LINE3);
-        _LCD_PRINT("Externa al USB.");
-        LCD_position(LINE4);
-        _LCD_PRINT("Presione Inciar.");   
-      }    
-    }
+  else if(which_prompt==2)
+  {   
+    //
+    //   No USB Device
+    //   Detected
+    //
+    dispscrn_e ( s_noUSBDeviceDetected );
+  }
+  else if(which_prompt==3)
+  {    
+    //
+    //   Data Download
+    //   Complete
+    //
+    dispscrn_e ( s_DataDownloadComplete );
+  }
+  else if(which_prompt==0)
+  {
+    //Insert External
+    //Drive in USB Port
+    //
+    // Press ENTER
+    dispscrn_e ( s_insertExternalUSB_text );
+  }
+
+
 }
 
 
@@ -3031,24 +2901,6 @@ void project_limit_text()
     }
 }
 
-
-void no_stored_projects_text()
-{ 
-  CLEAR_DISP;
-  LCD_position(LINE2);  
-  if(Features.language_f)
-  {
-    _LCD_PRINT("    No Projects");
-    LCD_position(LINE3);
-    _LCD_PRINT("      Stored"); 
-  }
-    else
-    {
-      _LCD_PRINT("  No Hay Proyectos");   //No hay proyectos en la memoria
-      LCD_position(LINE3);
-      _LCD_PRINT("   En la Memoria"); 
-    }
-}
 void select_from_list_text(BYTE from_where)
 {
   CLEAR_DISP;
@@ -3191,27 +3043,7 @@ void erase_project_data_text()
     }
   
 }
-void write_USB_text()
-{  
-  CLEAR_DISP;
-  LCD_position(LINE1);
-  if(Features.language_f)
-  {
-    _LCD_PRINT(" Write Data to USB"); 
-    LCD_position(LINE2);
-    _LCD_PRINT("1. Write All Data");
-    LCD_position(LINE3);
-    _LCD_PRINT("2. Write One Project"); 
-  }
-    else
-    {
-      _LCD_PRINT("Escriba Datos a USB");  //Escriba Datos a USB  1. Escriba toda la Informacion  2. Escriba un Proyecto
-      LCD_position(LINE2);
-      _LCD_PRINT("1. Toda la Info.");
-      LCD_position(LINE3);
-      _LCD_PRINT("2. Un Proyecto"); 
-    }
-}
+
 void batt_volt_text()
 {  
   CLEAR_DISP;

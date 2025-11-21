@@ -32,6 +32,28 @@ typedef struct sLCDSTRING
 #define CONST_LCDSTRING const LCDSTRING
 #define CONST_LCDSTRING_PTR CONST_LCDSTRING * const  
 
+extern CONST_LCDSTRING M1[];  
+extern CONST_LCDSTRING M2[];  
+extern CONST_LCDSTRING M3[];  
+extern CONST_LCDSTRING M4[];  
+extern CONST_LCDSTRING M5[];  
+extern CONST_LCDSTRING M6[];  
+extern CONST_LCDSTRING M7[];  
+extern CONST_LCDSTRING M8[];  
+extern CONST_LCDSTRING M9[];  
+extern CONST_LCDSTRING MP10[];
+extern CONST_LCDSTRING MP11[];
+extern CONST_LCDSTRING MP12[];
+extern CONST_LCDSTRING MP13[];
+extern CONST_LCDSTRING MP14[];
+extern CONST_LCDSTRING MP15[];
+extern CONST_LCDSTRING MP16[];
+extern CONST_LCDSTRING MP17[];
+extern CONST_LCDSTRING MP18[];
+extern CONST_LCDSTRING MP19[];
+extern CONST_LCDSTRING MP20[];
+
+
 extern CONST_LCDSTRING  mESC_to_Exit[];
 extern CONST_LCDSTRING_PTR sESCToExit[]  ;
 
@@ -63,6 +85,15 @@ extern CONST_LCDSTRING m_UseNewStdCont[] ;
 extern CONST_LCDSTRING_PTR s_PlaceGaugeOnStdBLock[ ] ;
 extern CONST_LCDSTRING_PTR s_DepthNotInSafePos[ ];
 extern CONST_LCDSTRING mStandardCount[];
+extern CONST_LCDSTRING Up_Down_Next[];
+extern CONST_LCDSTRING SelectNumber[] ;
+extern CONST_LCDSTRING_PTR s_printMenuDisplay[ ];
+extern CONST_LCDSTRING_PTR s_writeUSB_text[ ];
+extern CONST_LCDSTRING_PTR s_insertExternalUSB_text[ ] ;
+extern CONST_LCDSTRING_PTR s_writingDataUSB_text[ ];
+extern CONST_LCDSTRING_PTR s_noUSBDeviceDetected[ ];
+extern CONST_LCDSTRING_PTR s_DataDownloadComplete[ ];
+extern CONST_LCDSTRING_PTR snoProjectsStored[ ];
 
 #endif
 

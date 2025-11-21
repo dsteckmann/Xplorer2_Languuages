@@ -34,6 +34,9 @@ CONST_LCDSTRING  mPress_YES_or_NO[2]    =  {{ 10, "Press YES or NO"   }, { 10, "
 // <ENTER to Accept
 CONST_LCDSTRING  mEnter_to_Accept[2]    =  {{ 10, "<ENTER> to Accept" }, { 10, "ENTER para Aceptar"}    };
 
+// Press ENTER
+CONST_LCDSTRING  mPressEnter[2]         =  {{ 10, "Press <ENTER>" }, { 10, "Presione <ENTER>"}};
+
 //<YES> to Accept
 CONST_LCDSTRING mYES_to_Accept[2]       =  {{ 10, "<YES> to Accept"    }, { 10, "YES/Si para Aceptar"}       };
 
@@ -195,30 +198,26 @@ CONST_LCDSTRING mStandardCount[] = {{10,"Standard Count"},{10,"Conteo Estandar"}
 //18. Cal. Constants
 //19. Soil Air Voids
 //20. Diagnostic Test
-CONST_LCDSTRING M1  = {0,"1. Recall           "};
-CONST_LCDSTRING M2  = {0,"2. Offset           "};
-CONST_LCDSTRING M3  = {0,"3. Auto Scroll      "};
-CONST_LCDSTRING M4  = {0,"4. Backlight        "};
-CONST_LCDSTRING M5  = {0,"5. Stat Test        "};
-CONST_LCDSTRING M6  = {0,"6. Drift Test       "};
-CONST_LCDSTRING M7  = {0,"7. GPS              "};
-CONST_LCDSTRING M8  = {0,"8. Autp Depth       "};
-CONST_LCDSTRING M9  = {0,"9. Review STD cnts. "};
-CONST_LCDSTRING MP10 = {0,"10. Select Language "};
-CONST_LCDSTRING MP11 = {0,"11. Set Units       "};
-CONST_LCDSTRING MP12 = {0,"12. Standard Mode   "};
-CONST_LCDSTRING MP13 = {0,"13. Serial Number   "};
-CONST_LCDSTRING MP14 = {0,"14. Date/Time       "};
-CONST_LCDSTRING MP15 = {0,"15. Buzzer/Alarm    "};
-CONST_LCDSTRING MP16 = {0,"16. Special Cal.    "};
-CONST_LCDSTRING MP17 = {0,"17. Nomograph       "};
-CONST_LCDSTRING MP18 = {0,"18. Cal. Constants  "};
-CONST_LCDSTRING MP19 = {0,"19. Soil Air Voids  "};
-CONST_LCDSTRING MP20 = {0,"20. Diagnostic Test "};
-CONST_LCDSTRING_PTR s_MenuNum [20] = {&M1,&M2,&M3,&M4,&M5,&M6,&M7,&M8,&M9,&MP10,&MP11,&MP12,&MP13,&MP14,&MP15,&MP16,&MP17,&MP18,&MP19,&MP20};
-
-//CONST_LCDSTRING C0  = {0,"0."};
-//CONST_LCDSTRING_PTR s_CalIDMenuNum [20] = {&C0, &M1,&M2,&M3,&M4,&M5,&M6,&M7,&M8,&M9,&MP0,&MP1,&MP2,&MP3,&MP4,&MP5,&MP6,&MP7,&MP8,&MP9 };
+CONST_LCDSTRING M1[]  = {{0,"1. Recall           "},{0,"1. Recordar          "}};
+CONST_LCDSTRING M2[]  = {{0,"2. Offset           "},{0,"2. Compensacion      "}};
+CONST_LCDSTRING M3[]  = {{0,"3. Auto Scroll      "},{0,"3. Voluta Auto       "}};
+CONST_LCDSTRING M4[]  = {{0,"4. Backlight        "},{0,"4. Iluninacion LCD   "}};
+CONST_LCDSTRING M5[]  = {{0,"5. Stat Test        "},{0,"5. Prueba estadist.  "}};
+CONST_LCDSTRING M6[]  = {{0,"6. Drift Test       "},{0,"6. Prueba desviacion "}};
+CONST_LCDSTRING M7[]  = {{0,"7. GPS              "},{0,"7. GPS               "}};
+CONST_LCDSTRING M8[]  = {{0,"8. Auto Depth       "},{0,"8. Profundidad Auto  "}};
+CONST_LCDSTRING M9[]  = {{0,"9. Review STD cnts. "},{0,"9. Revisar STD Cnts  "}};
+CONST_LCDSTRING MP10[] = {{0,"10. Select Language "},{0,"10. Lengua          "}};
+CONST_LCDSTRING MP11[] = {{0,"11. Set Units       "},{0,"11. Unidades        "}};
+CONST_LCDSTRING MP12[] = {{0,"12. Standard Mode   "},{0,"12. Modo AVG del STD"}};
+CONST_LCDSTRING MP13[] = {{0,"13. Serial Number   "},{0,"13. Numero de Serie "}};
+CONST_LCDSTRING MP14[] = {{0,"14. Date/Time       "},{0,"14. Fecha y Hora    "}};
+CONST_LCDSTRING MP15[] = {{0,"15. Buzzer/Alarm    "},{0,"15. Alarma En. / Ap."}};
+CONST_LCDSTRING MP16[] = {{0,"16. Special Cal.    "},{0,"16. Calib. Especial "}};
+CONST_LCDSTRING MP17[] = {{0,"17. Nomograph       "},{0,"17. Nomograph       "}};
+CONST_LCDSTRING MP18[] = {{0,"18. Cal. Constants  "},{0,"18. Const. de Calib."}};
+CONST_LCDSTRING MP19[] = {{0,"19. Soil Air Voids  "},{0,"19. Tierra Aire Nulo"}};
+CONST_LCDSTRING MP20[] = {{0,"20. Diagnostic Test "},{0,"20. Auto Diagnostico"}};
 
 
 //"Incorrect BLE"
@@ -232,5 +231,65 @@ CONST_LCDSTRING  mIncorrectBLE_4[]  = {{10,"may not work!"},  {10,"may not work!
 CONST_LCDSTRING_PTR s_IncorrectBLE[4] = { mIncorrectBLE_1,mIncorrectBLE_2,mIncorrectBLE_3,mIncorrectBLE_4 };      
 
 //Count Time
-CONST_LCDSTRING mCountTime[] = {{0,"Count Time:"}, {0,"    Tiempo:"}};
+CONST_LCDSTRING mCountTime[] = {{0,"Count Time:"}, {0,"Tiempo Cont:"}};
 
+
+//1. Send Data to USB
+//2. Print Data
+//
+//Select #, ESC Exit
+CONST_LCDSTRING sendDataUSB[]  = {{10,"1. Send Data to USB"},{10,"1. Trans. Info al USB"}};
+CONST_LCDSTRING   printData[]  = {{10,"2. Print Data"},{10,"2. Imprimir Info."}};
+CONST_LCDSTRING_PTR s_printMenuDisplay[ ] = { sendDataUSB,printData,mBlank,SelectNumber };
+
+//Write Data to USB
+//1. Write All Data
+//2. Write One Project
+// <ESC> to Exit
+CONST_LCDSTRING writeDataToUSB[]   = {{10,"Write Data to USB"},{10,"Escriba Datos a USB"}};
+CONST_LCDSTRING writeAllDataUSB[]  = {{10,"1. Write All Data"},{10,"1. Toda la Info."}};
+CONST_LCDSTRING writeOneProj[]     = {{10,"2. Write One Project"},{10,"2. Un Proyecto"}};
+CONST_LCDSTRING_PTR s_writeUSB_text[ ] = { writeDataToUSB,writeAllDataUSB,writeOneProj,mESC_to_Exit};
+
+//Insert External
+//Drive in USB Port
+//
+// Press ENTER
+CONST_LCDSTRING insertExternal_1[]   = {{10,"Insert External"},  {10,"Conecte el Disposit-"}};
+CONST_LCDSTRING insertExternal_2[]   = {{10,"Drive in USB Port"},{10,"ivo de Memoria"}};
+CONST_LCDSTRING insertExternal_3[]   = {{10,"                 "},{10,"Externa al USB."}} ;
+CONST_LCDSTRING_PTR s_insertExternalUSB_text[ ] = { insertExternal_1,insertExternal_2,insertExternal_3,mPressEnter};
+
+//
+//   Writing Data
+//   to USB Drive
+//
+CONST_LCDSTRING writingData_1[]   = {{10,"Writing Data"},  {10,"Escribiendo la"}};
+CONST_LCDSTRING writingData_2[]   = {{10,"to USB Drive"},{10,"Informacion al USB"}};
+CONST_LCDSTRING_PTR s_writingDataUSB_text[ ] = { mBlank,writingData_1,writingData_2,mBlank};
+
+//
+//   No USB Device
+//   Detected
+//
+CONST_LCDSTRING noUSB_1[]   = {{10,"No USB Device"},  {10,"No se Detecta"}};
+CONST_LCDSTRING noUSB_2[]   = {{10,"Detected"},{10,"USB"}};
+CONST_LCDSTRING_PTR s_noUSBDeviceDetected[ ] = { mBlank,noUSB_1,noUSB_2,mBlank};
+
+
+//
+//   Data Download
+//   Complete
+//
+CONST_LCDSTRING DataDownload_1[]   = {{10,"Data Download"},  {10,"Descarga de"}};
+CONST_LCDSTRING DataDownload_2[]   = {{10,"Complete"},{10,"Informacion Completa"}};
+CONST_LCDSTRING_PTR s_DataDownloadComplete[ ] = { mBlank,DataDownload_1,DataDownload_2,mBlank};
+
+
+//
+//   No Projects
+//    Stored
+//
+CONST_LCDSTRING noProjects_1[]   = {{10,"No Projects"},  {10,"No Hay Proyectos"}};
+CONST_LCDSTRING noProjects_2[]   = {{10,"Stored"},{10,"En la Memoria"}};
+CONST_LCDSTRING_PTR snoProjectsStored[ ] = { mBlank,noProjects_1,noProjects_2,mBlank};

@@ -275,7 +275,11 @@ uint16_t getProjectIndex ( char * project )
   CURSOR_OFF;
   if ( project_count == 0 )
   {
-    no_stored_projects_text();  //TEXT// display "    No Projects\n      Stored" LINE2,3
+    //
+    //   No Projects
+    //    Stored
+    //
+    dispscrn_e ( snoProjectsStored );
     hold_buzzer();
     SDstop(null );
     delay_ms(1000);
@@ -457,7 +461,11 @@ uint16_t select_stored_project ( uint8_t function, char* prj_name )
   CURSOR_OFF;
   if ( project_count == 0 )
   {
-    no_stored_projects_text();  //TEXT// display "    No Projects\n      Stored" LINE2,3
+    //
+    //   No Projects
+    //    Stored
+    //
+    dispscrn_e ( snoProjectsStored );
     hold_buzzer();
     SDstop(null);
     delay_ms(1000);
@@ -616,8 +624,12 @@ void delete_projects(void)  // allows user to delete one or all project(s)
   updateProjectInfo();
   if ( project_info.number_of_projects == 0 )
   {
-   no_stored_projects_text();  //TEXT// display "    No Projects\n     Stored" LINE2,3
-   hold_buzzer();
+    //
+    //   No Projects
+    //    Stored
+    //
+    dispscrn_e ( snoProjectsStored );
+     hold_buzzer();
     delay_ms(1500);
     return;
   }
@@ -1368,22 +1380,20 @@ void write_data_to_USB ( void )  // leads user though process to write project(s
   enum buttons button;
   Bool pass = TRUE;
   FILE_PARAMETERS  file;
-  if ( alfat_errors > 0 )
-  {
-    date_usb_error_text();  // if alfat errors put up message
-    getKey(TIME_DELAY_MAX);
-    CLEAR_DISP;
-    return;
-  }
+
   updateProjectInfo();
   if ( project_info.number_of_projects == 0 )
   {
-    no_stored_projects_text();  //TEXT// display "    No Projects\n      Stored" LINE2,3
+    //
+    //   No Projects
+    //    Stored
+    //
+    dispscrn_e ( snoProjectsStored );
     hold_buzzer();
     delay_ms(2000);
     return;
   }
- // AlfatStart();    // wake up the ALFAT device to full power
+
   AlfatStart();
   while(!escape)
   {
@@ -1391,8 +1401,11 @@ void write_data_to_USB ( void )  // leads user though process to write project(s
     switch(go_to_screen)
     {
       case 0:
-            write_USB_text();  //TEXT// display " Write Data to USB\n1. Write All Data\n2. Write One Project" LINE1,2,3
-            ESC_to_Exit(LINE4);
+            //Write Data to USB
+            //1. Write All Data
+            //2. Write One Project
+            // <ESC> to Exit
+            dispscrn_e ( s_writeUSB_text );       
             while(1)
             {
              button = getKey ( TIME_DELAY_MAX );
@@ -1753,7 +1766,11 @@ void write_data_to_printer(void)  // leads user though process to write project(
   project_info.number_of_projects = getProjectNumber ();
   if ( getProjectNumber()  == 0)
   {
-    no_stored_projects_text();  //TEXT// display "    No Projects\n      Stored"  LINE2,3
+    //
+    //   No Projects
+    //    Stored
+    //
+    dispscrn_e ( snoProjectsStored );
     hold_buzzer();
     delay_ms(1000);
     return;

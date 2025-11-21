@@ -33,6 +33,7 @@
 #include "Utilities.h"
 #include "Tests.h"
 #include "SDcard.h"
+#include "LCD_drivers.h"
 
 extern void standCountMode(void);
 
@@ -267,7 +268,11 @@ void print_menu(void)  // controls the project menu (PROJECT button initiates)
   
   while(1)                    // only exit menu when ESC is pressed
   { 
-    print_menu_display();
+    //1. Send Data to USB
+    //2. Print Data
+    //
+    //Select #, ESC Exit
+    dispscrn_e (s_printMenuDisplay);
     in_menu = FALSE;
     while(1)
     {
