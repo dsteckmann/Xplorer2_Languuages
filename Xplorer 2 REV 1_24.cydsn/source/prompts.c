@@ -13,27 +13,27 @@ void Press_YES_or_NO (BYTE position)
 { 
   LCD_position(position); 
   if(Features.language_f)
-  {  _LCD_PRINT("Press YES or NO"); }
+  {  LCD_print("Press YES or NO"); }
    else
-  {  _LCD_PRINT("Presione SI o NO"); } 
+  {  LCD_print("Presione SI o NO"); } 
 }
 
 void ESC_to_Exit(BYTE position)
 {
   LCD_position(position);
   if(Features.language_f)
-  {  _LCD_PRINT("ESC to Exit"); }
+  {  LCD_print("ESC to Exit"); }
    else
-  { _LCD_PRINT("ESC para Salir");}
+  { LCD_print("ESC para Salir");}
 }
 
 void Enter_to_Accept(BYTE position)
 { 
   LCD_position(position);
   if(Features.language_f)
-    _LCD_PRINT("ENTER to Accept");
+    LCD_print("ENTER to Accept");
    else
-   _LCD_PRINT("SI para Aceptar");  
+   LCD_print("SI para Aceptar");  
 
 }
 
@@ -42,9 +42,9 @@ void YES_to_Accept(BYTE position)
 { 
   LCD_position(position);
   if(Features.language_f)
-    _LCD_PRINT("YES to Accept");
+    LCD_print("YES to Accept");
    else
-   _LCD_PRINT("SI para Aceptar");  
+   LCD_print("SI para Aceptar");  
 
 }
 
@@ -65,21 +65,21 @@ void up_down_ENTER_select_text()
 
   LCD_position(LINE2);
   if(Features.language_f)
-    _LCD_PRINT(" <ENTER> to Select  "); 
+    LCD_print(" <ENTER> to Select  "); 
   else
-   _LCD_PRINT(" <ENTER> a Escoger  ");
+   LCD_print(" <ENTER> a Escoger  ");
   
   LCD_position(LINE3);
   if(Features.language_f)
-    _LCD_PRINT("  UP/DOWN for Next  ");
+    LCD_print("  UP/DOWN for Next  ");
   else 
-    _LCD_PRINT("   Arriba/Abajo     ");       
+    LCD_print("   Arriba/Abajo     ");       
   
   LCD_position(LINE4);
   if(Features.language_f)
-    _LCD_PRINT("     <ESC> Exit     "); 
+    LCD_print("     <ESC> Exit     "); 
   else
-    _LCD_PRINT("     <ESC> Salir    ");  
+    LCD_print("     <ESC> Salir    ");  
    
 }
 
@@ -91,15 +91,15 @@ void display_version(void) {
   // if 3440 
   if ( GAUGE_3440 == NV_RAM_MEMBER_RD (gauge_type ) )
   {
-     _LCD_PRINT("      3400     ");
+     LCD_print("      3400     ");
   }  
   else if ( GAUGE_3500 == NV_RAM_MEMBER_RD (gauge_type ) )
   {
-    _LCD_PRINT("      Xplorer 2");
+    LCD_print("      Xplorer 2");
   } 
   else if ( GAUGE_3440_PLUS == NV_RAM_MEMBER_RD (gauge_type ) )
   {
-    _LCD_PRINT("    3400 PLUS  ");
+    LCD_print("    3400 PLUS  ");
   }
   
   sprintf(temp_str,"    Version %.2f",VERSION );
@@ -129,7 +129,7 @@ void eeprom_msg(void)
 { 
   CLEAR_DISP;    
   LCD_position (LINE2+9);
-  _LCD_PRINT("EE");  
+  LCD_print("EE");  
   CyDelay ( 1000 );
 }
 
@@ -138,7 +138,7 @@ void initializing(void)
 { 
   CLEAR_DISP;    
   LCD_position (LINE2+5);
-  _LCD_PRINT("Initializing");  // no spanish needed now.  Should only see on first programming
+  LCD_print("Initializing");  // no spanish needed now.  Should only see on first programming
 }
 
 void main_menu_display(uint8_t menu_trk)   // display for the main menu
@@ -228,23 +228,23 @@ void project_menu_display(uint8_t menu_trk)   // display for the project menu
     {
       case 1:
       LCD_position(LINE1);
-      _LCD_PRINT("1. Auto Store       ");
+      LCD_print("1. Auto Store       ");
       LCD_position(LINE2);
-      _LCD_PRINT("2. Start New Project");
+      LCD_print("2. Start New Project");
       break;
       
       case 2:
       LCD_position(LINE1);
-      _LCD_PRINT("3. Sel. Stored Proj.");
+      LCD_print("3. Sel. Stored Proj.");
       LCD_position(LINE2);
-      _LCD_PRINT("4. Review Data      ");
+      LCD_print("4. Review Data      ");
       break;
       
       case 0:
       LCD_position(LINE1);
-      _LCD_PRINT("5. Delete Data      ");
+      LCD_print("5. Delete Data      ");
       LCD_position(LINE2);
-      _LCD_PRINT("                    ");      
+      LCD_print("                    ");      
       break;   
      }
    }
@@ -254,23 +254,23 @@ void project_menu_display(uint8_t menu_trk)   // display for the project menu
       {
         case 1:
         LCD_position(LINE1);
-        _LCD_PRINT("1. Auto Memoria      ");
+        LCD_print("1. Auto Memoria      ");
         LCD_position(LINE2);
-        _LCD_PRINT("2. Nuevo Proyecto    ");
+        LCD_print("2. Nuevo Proyecto    ");
         break;
       
         case 2:
         LCD_position(LINE1);
-        _LCD_PRINT("3. Proyect Memorizado");
+        LCD_print("3. Proyect Memorizado");
         LCD_position(LINE2);
-        _LCD_PRINT("4. Revisar la Info.  ");
+        LCD_print("4. Revisar la Info.  ");
         break;
        
         case 0 :
         LCD_position(LINE1);
-        _LCD_PRINT("5. Borrar la Info.   ");       
+        LCD_print("5. Borrar la Info.   ");       
         LCD_position(LINE2);
-        _LCD_PRINT("                    ");       
+        LCD_print("                    ");       
       }
    }
   if(in_menu)
@@ -283,19 +283,19 @@ void mode_menu_display(unsigned int menu_trk)
   LCD_position(LINE1);    
   switch (menu_trk)
   {
-    case 1: _LCD_PRINT("1. NORMAL           ");     
+    case 1: LCD_print("1. NORMAL           ");     
             LCD_position(LINE2);      
-            _LCD_PRINT("2. DUMMY            ");
+            LCD_print("2. DUMMY            ");
             break;
     case 2:    
-            _LCD_PRINT("3. InstroTek        ");
+            LCD_print("3. InstroTek        ");
             LCD_position(LINE2);      
-            _LCD_PRINT("4. Troxler  3440    ");   
+            LCD_print("4. Troxler  3440    ");   
            break; 
     case 0:    
-            _LCD_PRINT("5. Troxler 3440 Plus");
+            LCD_print("5. Troxler 3440 Plus");
             LCD_position(LINE2);      
-            _LCD_PRINT("                    ");   
+            LCD_print("                    ");   
             break;
             
     default:
@@ -313,40 +313,40 @@ void main_menu_strata_display(uint8_t menu_trk)   // display for the main menu
   {
     
     case 1: 
-        _LCD_PRINT(" 1. Stat Test        ");
+        LCD_print(" 1. Stat Test        ");
         LCD_position(LINE2);
-        _LCD_PRINT(" 2. Drift Test       ");     
+        LCD_print(" 2. Drift Test       ");     
         break;    
     
     case 2: 
-        _LCD_PRINT(" 3. Recall           ");
+        LCD_print(" 3. Recall           ");
         LCD_position(LINE2);
-        _LCD_PRINT(" 4. Offset           ");     
+        LCD_print(" 4. Offset           ");     
         break;    
     case 3:    
-        _LCD_PRINT(" 5. Diagnostic Test ");            
+        LCD_print(" 5. Diagnostic Test ");            
         LCD_position(LINE2);      
-        _LCD_PRINT(" 6. Review STD cnts.");
+        LCD_print(" 6. Review STD cnts.");
         break;
    case 4:    
-        _LCD_PRINT(" 7. Standard Mode   ");
+        LCD_print(" 7. Standard Mode   ");
         LCD_position(LINE2);          
-        _LCD_PRINT(" 8. Auto Scroll     ");    
+        LCD_print(" 8. Auto Scroll     ");    
         break;        
     case 5:   
-        _LCD_PRINT(" 9. Set Units       ");
+        LCD_print(" 9. Set Units       ");
          LCD_position(LINE2);
-        _LCD_PRINT("10. LCD Light       ");      
+        LCD_print("10. LCD Light       ");      
         break;    
     case 6:   
-        _LCD_PRINT("11. Serial Number   ");
+        LCD_print("11. Serial Number   ");
         LCD_position(LINE2);      
-        _LCD_PRINT("12. Date/Time       ");      
+        LCD_print("12. Date/Time       ");      
         break;   
     case 0:
-        _LCD_PRINT("13. Buzzer/Alarm    ");
+        LCD_print("13. Buzzer/Alarm    ");
          LCD_position(LINE2);
-        _LCD_PRINT("14. Cal. Constants  ");
+        LCD_print("14. Cal. Constants  ");
          break;    
   }  
  
@@ -363,53 +363,53 @@ void diag_menu_display( uint8_t menu_trk)
   switch (menu_trk)
     {
       case 1:    
-          _LCD_PRINT("1. Battery Voltage  ");     
+          LCD_print("1. Battery Voltage  ");     
           LCD_position(LINE2);      
-          _LCD_PRINT("2. Extended Counts  ");
+          LCD_print("2. Extended Counts  ");
           break;    
       case 2:    
-          _LCD_PRINT("3. Check Temperature");  
+          LCD_print("3. Check Temperature");  
           LCD_position(LINE2);          
-          _LCD_PRINT("4. Memory Reset    ");
+          LCD_print("4. Memory Reset    ");
           break;   
       case 3:
           LCD_position(LINE1);
-         _LCD_PRINT("5. Depth Sensor Test");
+         LCD_print("5. Depth Sensor Test");
          LCD_position(LINE2);
-         _LCD_PRINT("6. KEY PAD Test     ");      
+         LCD_print("6. KEY PAD Test     ");      
           break;           
       case 4:
           LCD_position(LINE1);
-         _LCD_PRINT("7. USB Store Test   ");
+         LCD_print("7. USB Store Test   ");
          LCD_position(LINE2);
-         _LCD_PRINT("8. Count Test       ");      
+         LCD_print("8. Count Test       ");      
           break;                   
       case 5:
           LCD_position(LINE1);
-         _LCD_PRINT("9.  Shut Down Test  ");
+         LCD_print("9.  Shut Down Test  ");
          LCD_position(LINE2);
-         _LCD_PRINT("10. Light Test      ");      
+         LCD_print("10. Light Test      ");      
           break;                   
       
       case 6:
           LCD_position(LINE1);
-         _LCD_PRINT("11.  GPS Test       ");
+         LCD_print("11.  GPS Test       ");
          LCD_position(LINE2);
-         _LCD_PRINT("12.  Update Firmware");      
+         LCD_print("12.  Update Firmware");      
           break;      
     
      case 7:
           LCD_position(LINE1);
-         _LCD_PRINT("13.  SD Card Test   ");
+         LCD_print("13.  SD Card Test   ");
          LCD_position(LINE2);
-         _LCD_PRINT("14. Reset BLE Module");        
+         LCD_print("14. Reset BLE Module");        
           break;    
         
       case 0:
           LCD_position(LINE1);
-         _LCD_PRINT("15.Idle Shutdwn Time");
+         LCD_print("15.Idle Shutdwn Time");
          LCD_position(LINE2);
-         _LCD_PRINT("                    ");      
+         LCD_print("                    ");      
         break;      
         
       break;                  
@@ -427,23 +427,23 @@ void sd_menu_display(uint8_t menu_trk)   // display for the project menu
   {
     case 1:
     LCD_position(LINE1);
-    _LCD_PRINT("1. SD Card Test     ");
+    LCD_print("1. SD Card Test     ");
     LCD_position(LINE2);
-    _LCD_PRINT("2. Format SD Card   ");
+    LCD_print("2. Format SD Card   ");
     break;
     
     case 2:
     LCD_position(LINE1);
-    _LCD_PRINT("3. Delete Proj. Dir.");
+    LCD_print("3. Delete Proj. Dir.");
     LCD_position(LINE2);
-    _LCD_PRINT("4. Create Proj. Dir.");
+    LCD_print("4. Create Proj. Dir.");
     break;
     
     case 0:
     LCD_position(LINE1);
-    _LCD_PRINT("5. Add/Delete Files ");
+    LCD_print("5. Add/Delete Files ");
     LCD_position(LINE2);
-    _LCD_PRINT("                    ");
+    LCD_print("                    ");
     break;
     
   }
@@ -483,7 +483,7 @@ void ready(BYTE cnt_temp, int line)
     
   */  
   LCD_position ( LINE4 );
-  _LCD_PRINT ("Press START to Test "); 
+  LCD_print ("Press START to Test "); 
 }
 
 
@@ -518,16 +518,16 @@ void select_test_or_spec_cal(int16_t inspec)
   if(Features.language_f)
   {
     if(!inspec)
-    {  _LCD_PRINT("Select Test");  }
+    {  LCD_print("Select Test");  }
     else 
-     { _LCD_PRINT("Select Spec. Cal"); }
+     { LCD_print("Select Spec. Cal"); }
   }
     else
     {
       if(!inspec)
-        _LCD_PRINT("Sel. la Prueba");  
+        LCD_print("Sel. la Prueba");  
       else 
-        _LCD_PRINT("Sel. Calib. Especial");  
+        LCD_print("Sel. Calib. Especial");  
     }
 }
 
@@ -537,41 +537,41 @@ void press_start(BYTE which_test)
   LCD_position (LINE2);
   if(Features.language_f)
   {
-    _LCD_PRINT ( "  Press START for   ");
+    LCD_print ( "  Press START for   ");
     LCD_position (LINE3);
     if(which_test==0) //  stat test
     { 
-      _LCD_PRINT("  20 one min counts ");  
+      LCD_print("  20 one min counts ");  
       LCD_position ( LINE1 );
-      _LCD_PRINT("      Stat Test     ");  
+      LCD_print("      Stat Test     ");  
     }
     else if(which_test==1) //  drift test
     {
-      _LCD_PRINT(" 5 four min counts  ");  
+      LCD_print(" 5 four min counts  ");  
       LCD_position ( LINE1 );
-      _LCD_PRINT("     Drift Test     ");  
+      LCD_print("     Drift Test     ");  
     }
     else if (which_test==2)  // standard
     { 
-       _LCD_PRINT("  Standard Count."); 
+       LCD_print("  Standard Count."); 
     }
     else if (which_test==3 )
     {
-      _LCD_PRINT("  Count to Begin");  
+      LCD_print("  Count to Begin");  
     }
   }
     else
     {
-      _LCD_PRINT(" Pres. Iniciar Para ");
+      LCD_print(" Pres. Iniciar Para ");
       LCD_position (LINE3);
       if(which_test==0) //  stat test
-      {  _LCD_PRINT("20m Prb estadistica"); }    
+      {  LCD_print("20m Prb estadistica"); }    
       else if(which_test==1)//   drift test
-      {  _LCD_PRINT("20m Prb Desviacion"); }
+      {  LCD_print("20m Prb Desviacion"); }
       else if(which_test==2)//   standard
-      { _LCD_PRINT(" Cuenta Standard"); }
+      { LCD_print(" Cuenta Standard"); }
       else if(which_test==3)
-      {  _LCD_PRINT(" Cuenta a Iniciarse"); }
+      {  LCD_print(" Cuenta a Iniciarse"); }
     }
 }
 
@@ -615,9 +615,9 @@ void use_new_std_count()
 {  
   LCD_position (LINE3);
   if(Features.language_f)
-    { _LCD_PRINT("Use New STD Count?");   }
+    { LCD_print("Use New STD Count?");   }
   else
-    { _LCD_PRINT("Use Nueva Cuent Std?"); }
+    { LCD_print("Use Nueva Cuent Std?"); }
     
 }
 
@@ -632,23 +632,23 @@ void max_stations_text(char *temp_str)
   LCD_position(LINE1);
   if(Features.language_f)
   {
-    _LCD_PRINT("Max # of Stations");
+    LCD_print("Max # of Stations");
     LCD_position(LINE2);
     _LCD_PRINTF("For %s has",temp_str);
     LCD_position(LINE3);
-    _LCD_PRINT("Been Exceeded.");
+    LCD_print("Been Exceeded.");
     LCD_position(LINE4);
-    _LCD_PRINT("Start New Project");  
+    LCD_print("Start New Project");  
   }
     else
     {
-      _LCD_PRINT("Max # de Estaciones");  
+      LCD_print("Max # de Estaciones");  
       LCD_position(LINE2);
       _LCD_PRINTF("Para %s se ha",temp_str);
       LCD_position(LINE3);
-      _LCD_PRINT("Execido. Inicie un");
+      LCD_print("Execido. Inicie un");
       LCD_position(LINE4);
-      _LCD_PRINT("Nuevo Proyecto.");   
+      LCD_print("Nuevo Proyecto.");   
     }
 }
 void no_project_selected ( void )
@@ -657,23 +657,23 @@ void no_project_selected ( void )
   LCD_position(LINE1);
   if(Features.language_f)
   { 
-    _LCD_PRINT("No Project Has Been");
+    LCD_print("No Project Has Been");
     LCD_position(LINE2);
-    _LCD_PRINT("Selected. Please");
+    LCD_print("Selected. Please");
     LCD_position(LINE3);
-    _LCD_PRINT("Create or Select");
+    LCD_print("Create or Select");
     LCD_position(LINE4);
-    _LCD_PRINT("Project.");  
+    LCD_print("Project.");  
   }
     else
     { 
-      _LCD_PRINT("Ningun Projecto se a");  
+      LCD_print("Ningun Projecto se a");  
       LCD_position(LINE2);
-      _LCD_PRINT("Seleccionado.       ");
+      LCD_print("Seleccionado.       ");
       LCD_position(LINE3);
-      _LCD_PRINT("Elabore o Seleccione");
+      LCD_print("Elabore o Seleccione");
       LCD_position(LINE4);
-      _LCD_PRINT("un Projecto.");   
+      LCD_print("un Projecto.");   
     }  
 }
 
@@ -683,19 +683,19 @@ void no_valid_depth_selected ( void )
   LCD_position(LINE1);
   if(Features.language_f)
   { 
-    _LCD_PRINT(" No Valid Depth Has ");
+    LCD_print(" No Valid Depth Has ");
     LCD_position(LINE2);
-    _LCD_PRINT("   Been Selected.");
+    LCD_print("   Been Selected.");
   }
     else
     { 
-      _LCD_PRINT("Ningun Projecto se a");  
+      LCD_print("Ningun Projecto se a");  
       LCD_position(LINE2);
-      _LCD_PRINT("Seleccionado.       ");
+      LCD_print("Seleccionado.       ");
       LCD_position(LINE3);
-      _LCD_PRINT("Elabore o Seleccione");
+      LCD_print("Elabore o Seleccione");
       LCD_position(LINE4);
-      _LCD_PRINT("un Projecto.");   
+      LCD_print("un Projecto.");   
     }  
 }
 
@@ -705,15 +705,15 @@ void disable_auto_depth()
   LCD_position(LINE1);
   if(Features.language_f)
   {
-    _LCD_PRINT("Disable Auto");
+    LCD_print("Disable Auto");
     LCD_position(LINE2);
-    _LCD_PRINT("Depth?");
+    LCD_print("Depth?");
   }
     else
     {
-      _LCD_PRINT("Desconectar");  
+      LCD_print("Desconectar");  
       LCD_position(LINE2);
-      _LCD_PRINT("Profundidad Auto.?");  
+      LCD_print("Profundidad Auto.?");  
     }
 }
 
@@ -722,12 +722,12 @@ void calibration_date_txt ( void )
   LCD_position(LINE1);
   if(Features.language_f)
   {
-    _LCD_PRINT("Cal Date:           ");
+    LCD_print("Cal Date:           ");
     
   }
     else
     {
-    _LCD_PRINT("Cal Date:           ");
+    LCD_print("Cal Date:           ");
     }
 }
 
@@ -737,15 +737,15 @@ void invalid_std_or_const(void)
   LCD_position (LINE2);
   if(Features.language_f)
   {
-    _LCD_PRINT("   Invalid STD or");
+    LCD_print("   Invalid STD or");
     LCD_position (LINE3);
-    _LCD_PRINT("   Cal. Constants");
+    LCD_print("   Cal. Constants");
   }
     else
     {
-      _LCD_PRINT("Conteo STD const. de");  
+      LCD_print("Conteo STD const. de");  
       LCD_position (LINE3);
-      _LCD_PRINT("  Calib. Invalidas");  
+      LCD_print("  Calib. Invalidas");  
     }
 }
 
@@ -755,11 +755,11 @@ void invalid_den_std_text(void)
   LCD_position (LINE2);
   if(Features.language_f)
   {
-    _LCD_PRINT("Invalid Density Std.");
+    LCD_print("Invalid Density Std.");
   }
   else
   {
-    _LCD_PRINT("Invalid Density Std.");
+    LCD_print("Invalid Density Std.");
   }
 }
 
@@ -769,11 +769,11 @@ void invalid_mois_std_text(void)
   LCD_position (LINE2);
   if(Features.language_f)
   {
-    _LCD_PRINT("Invalid Moist. Std. ");
+    LCD_print("Invalid Moist. Std. ");
   }
   else
   {
-    _LCD_PRINT("Invalid Moist. Std. ");
+    LCD_print("Invalid Moist. Std. ");
   }
 }
 
@@ -785,28 +785,28 @@ void mat_thickness_error ( void )
   LCD_position (LINE1);
   if(Features.language_f)
   {
-    _LCD_PRINT("Thickness is between");
+    LCD_print("Thickness is between");
     LCD_position (LINE2);
     if ( Features.SI_units == FALSE )
     {
-      _LCD_PRINT ("1 and 4 inches      ");
+      LCD_print ("1 and 4 inches      ");
     }
     else
     {
-     _LCD_PRINT ( "25 and 100 mm       ");
+     LCD_print ( "25 and 100 mm       ");
     }  
   }
   else
   {
-     _LCD_PRINT("Thickness is between");
+     LCD_print("Thickness is between");
     LCD_position (LINE2);
     if ( Features.SI_units == FALSE )
     {
-      _LCD_PRINT ("1 and 4 inches      ");
+      LCD_print ("1 and 4 inches      ");
     }
     else
     {
-     _LCD_PRINT ( "25 and 100 mm       ");
+     LCD_print ( "25 and 100 mm       ");
     } 
   }
 
@@ -820,11 +820,11 @@ void reading(void)
   LCD_position(LINE2);
   if(Features.language_f)
   {
-    _LCD_PRINT("Reading # "); 
+    LCD_print("Reading # "); 
   }
   else
   {
-    _LCD_PRINT("Lectura # ");
+    LCD_print("Lectura # ");
   }  
 }
 
@@ -872,17 +872,17 @@ void voltage_out_of_range(float volts_temp)
   {
     _LCD_PRINTF("   Voltage = %3.0f",(double)volts_temp);
     LCD_position(LINE2);
-    _LCD_PRINT("    Out of Range");
+    LCD_print("    Out of Range");
     LCD_position(LINE4);
-    _LCD_PRINT("    Test Aborted!");
+    LCD_print("    Test Aborted!");
   }
     else 
     {
       _LCD_PRINTF("   Voltaje = %3.0f",volts_temp);  
       LCD_position(LINE2);
-      _LCD_PRINT("   Fuera de Rango");
+      LCD_print("   Fuera de Rango");
       LCD_position(LINE4);
-      _LCD_PRINT("  Pruebo Abortada!"); 
+      LCD_print("  Pruebo Abortada!"); 
     }
 }
 
@@ -894,40 +894,40 @@ void diagnostics_text(BYTE which_prompt)
   {
     if(which_prompt==1)
     {
-      _LCD_PRINT("Place Gauge on");
+      LCD_print("Place Gauge on");
       LCD_position(LINE2);
-      _LCD_PRINT("Standard Block");
+      LCD_print("Standard Block");
       LCD_position(LINE3);
-      _LCD_PRINT("in SAFE Position");
+      LCD_print("in SAFE Position");
       LCD_position(LINE4);
-      _LCD_PRINT("and Press START");
+      LCD_print("and Press START");
     }
     else if(which_prompt==2)
     {         
       LCD_position(LINE2);
-      _LCD_PRINT("    Please Wait");
+      LCD_print("    Please Wait");
       LCD_position(LINE3);
-      _LCD_PRINT("  Time Left 60:00");   
+      LCD_print("  Time Left 60:00");   
     }     
   }
     else
     {
       if(which_prompt==1)
       {
-        _LCD_PRINT("Coloque el Equipo en");  
+        LCD_print("Coloque el Equipo en");  
         LCD_position(LINE2);
-        _LCD_PRINT("el Bloque Standard");
+        LCD_print("el Bloque Standard");
         LCD_position(LINE3);
-        _LCD_PRINT("en Posicion se Segur");
+        LCD_print("en Posicion se Segur");
         LCD_position(LINE4);
-        _LCD_PRINT("Presione Inciar");
+        LCD_print("Presione Inciar");
       }
       else if(which_prompt==2)
       {   
         LCD_position(LINE2);
-        _LCD_PRINT("  Por Favor Espere");  
+        LCD_print("  Por Favor Espere");  
         LCD_position(LINE3);
-        _LCD_PRINT("     Tiempo 60:00");   
+        LCD_print("     Tiempo 60:00");   
       }     
     }
 }
@@ -980,25 +980,25 @@ void printer_text(BYTE which_prompt)
     if(which_prompt==0)
     {   
       LCD_position(LINE2);
-      _LCD_PRINT("   Printing Data");
+      LCD_print("   Printing Data");
       LCD_position(LINE3);
-      _LCD_PRINT("    Please Wait");
+      LCD_print("    Please Wait");
     }
     else if(which_prompt==1)
     {   
       LCD_position (LINE2);
-      _LCD_PRINT("     No Printer");  
+      LCD_print("     No Printer");  
       LCD_position (LINE3);
-      _LCD_PRINT("      Detected!");
+      LCD_print("      Detected!");
     }
     else if(which_prompt==2)
     {   
       LCD_position(LINE1);
-      _LCD_PRINT("  Connect Printer");
+      LCD_print("  Connect Printer");
       LCD_position(LINE2);
-      _LCD_PRINT("     To Gauge");      
+      LCD_print("     To Gauge");      
       LCD_position(LINE4);
-      _LCD_PRINT("    Press ENTER");  
+      LCD_print("    Press ENTER");  
     } 
   }
     else
@@ -1006,27 +1006,27 @@ void printer_text(BYTE which_prompt)
       if(which_prompt==0)
       {   
         LCD_position(LINE1);
-        _LCD_PRINT("   Imprimiendo la");  
+        LCD_print("   Imprimiendo la");  
         LCD_position(LINE2);
-        _LCD_PRINT("    Informacion");
+        LCD_print("    Informacion");
         LCD_position(LINE3);
-        _LCD_PRINT("  Por Favor Espere.");   
+        LCD_print("  Por Favor Espere.");   
       }
       else if(which_prompt==1)
       {   
         LCD_position (LINE2);
-        _LCD_PRINT("   No se Detecta    ");  
+        LCD_print("   No se Detecta    ");  
         LCD_position (LINE3);
-        _LCD_PRINT("    Impresora!");  
+        LCD_print("    Impresora!");  
       }
       else if(which_prompt==2)
       {   
         LCD_position(LINE1);
-        _LCD_PRINT("Conecte la Impresora"); 
+        LCD_print("Conecte la Impresora"); 
         LCD_position(LINE2);
-        _LCD_PRINT("    al Equipo.");      
+        LCD_print("    al Equipo.");      
         LCD_position(LINE4);
-        _LCD_PRINT("  Presione Iniciar");   
+        LCD_print("  Presione Iniciar");   
       } 
     }
 }
@@ -1034,19 +1034,19 @@ void display_offset ( struct offsets_struct  which_offsets)
 {
    
   LCD_position (LINE3+17);
-  //_LCD_PRINT("Offset:");
+  //LCD_print("Offset:");
      
      if ( which_offsets.den_offset_pos )
      {
-      _LCD_PRINT("D");
+      LCD_print("D");
      }
      if ( which_offsets.moist_offset_pos )
      {
-      _LCD_PRINT("M");
+      LCD_print("M");
      }  
      if ( which_offsets.tren_offset_pos )
      {
-      _LCD_PRINT("T");
+      LCD_print("T");
      }   
   
 }
@@ -1060,13 +1060,13 @@ void display_offset_on ( struct offsets_struct  which_offsets)
    switch (g_language )
    {
       case L_ENGLISH:
-        _LCD_PRINT("OFFSET:Y");  
+        LCD_print("OFFSET:Y");  
         break;
       case L_SPANISH:
-        _LCD_PRINT("COMPEN:S");  
+        LCD_print("COMPEN:S");  
         break;
       default:
-        _LCD_PRINT("OFFSET:Y");  
+        LCD_print("OFFSET:Y");  
         break;
     }    
   }
@@ -1075,13 +1075,13 @@ void display_offset_on ( struct offsets_struct  which_offsets)
     switch (g_language )
     {
       case L_ENGLISH:
-        _LCD_PRINT("OFFSET:N");  
+        LCD_print("OFFSET:N");  
         break;
       case L_SPANISH:
-        _LCD_PRINT("COMPEN:N");  
+        LCD_print("COMPEN:N");  
         break;
       default:
-        _LCD_PRINT("OFFSET:N");  
+        LCD_print("OFFSET:N");  
         break;  
     }    
   } 	
@@ -1098,7 +1098,7 @@ void display_time(BYTE cnt_temp,uint8_t line)
       _LCD_PRINTF("%3u sec. ",cnt_temp);
       break;
     case L_SPANISH: 
-      _LCD_PRINT( "    Tiempo:");
+      LCD_print( "    Tiempo:");
       _LCD_PRINTF("%3u seg. ",cnt_temp);
       break;
   }
@@ -1107,9 +1107,9 @@ void display_time(BYTE cnt_temp,uint8_t line)
 void display_station_name(char *temp_str)
 {
   if(Features.language_f)
-   { _LCD_PRINT("Station: "); }
+   { LCD_print("Station: "); }
     else 
-   {  _LCD_PRINT("Estacion: "); } 
+   {  LCD_print("Estacion: "); } 
   _LCD_PRINTF("%s",temp_str);
 }
 
@@ -1117,9 +1117,9 @@ void display_station_name(char *temp_str)
 void stat_text(void)
 {
   if(Features.language_f)
-     { _LCD_PRINT("Stat Test"); }
+     { LCD_print("Stat Test"); }
     else 
-     { _LCD_PRINT("Prueba Estadistica"); }
+     { LCD_print("Prueba Estadistica"); }
 }
 
 
@@ -1129,19 +1129,19 @@ void not_in_bs_text ( void )
  LCD_position (LINE1);
  if(Features.language_f)
  {
-  _LCD_PRINT("Nomograph Enabled   ");
+  LCD_print("Nomograph Enabled   ");
   LCD_position (LINE2);
-  _LCD_PRINT("Depth not at BS     ");
+  LCD_print("Depth not at BS     ");
   LCD_position (LINE3);
-  _LCD_PRINT("Position            ");
+  LCD_print("Position            ");
  } 
  else 
  {
-  _LCD_PRINT("Nomograph Enabled   ");
+  LCD_print("Nomograph Enabled   ");
   LCD_position (LINE2);
-  _LCD_PRINT("Depth not at BS     ");
+  LCD_print("Depth not at BS     ");
   LCD_position (LINE3);
-  _LCD_PRINT("Position            ");
+  LCD_print("Position            ");
  }  
 
 }
@@ -1152,15 +1152,15 @@ void depth_not_in_bs_text ( void )
  LCD_position (LINE1);
  if(Features.language_f)
  {
-  _LCD_PRINT("Depth not at BS     ");
+  LCD_print("Depth not at BS     ");
   LCD_position (LINE2);
-  _LCD_PRINT("Position            ");
+  LCD_print("Position            ");
  } 
  else 
  {
-  _LCD_PRINT("Depth not at BS     ");
+  LCD_print("Depth not at BS     ");
   LCD_position (LINE2);
-  _LCD_PRINT("Position            ");
+  LCD_print("Position            ");
  }  
 
 }
@@ -1172,15 +1172,15 @@ void depth_not_in_ac_text ( void )
  LCD_position (LINE1);
  if(Features.language_f)
  {
-  _LCD_PRINT("Depth not at AC     ");
+  LCD_print("Depth not at AC     ");
   LCD_position (LINE2);
-  _LCD_PRINT("Position            ");
+  LCD_print("Position            ");
  } 
  else 
  {
-  _LCD_PRINT("Depth not at AC     ");
+  LCD_print("Depth not at AC     ");
   LCD_position (LINE2);
-  _LCD_PRINT("Position            ");
+  LCD_print("Position            ");
  }  
 
 }
@@ -1206,13 +1206,13 @@ void depth_not_in_2_text ( void )
  {
   _LCD_PRINTF("Depth not at %s",temp_str);
   LCD_position (LINE2);
-  _LCD_PRINT("Position            ");
+  LCD_print("Position            ");
  } 
  else 
  {
   _LCD_PRINTF("Depth not at %s",temp_str);
   LCD_position (LINE2);
-  _LCD_PRINT("Position            ");
+  LCD_print("Position            ");
  }  
 
 }
@@ -1225,19 +1225,19 @@ void place_in_bs_text ( void )
  
  if(Features.language_f)
  {
-  _LCD_PRINT("Thin Layer Enabled  ");
+  LCD_print("Thin Layer Enabled  ");
   LCD_position (LINE2);
-  _LCD_PRINT("Place in BS Position");
+  LCD_print("Place in BS Position");
   LCD_position (LINE4);   
-  _LCD_PRINT("    Press Enter    ");
+  LCD_print("    Press Enter    ");
  } 
  else 
  {
-   _LCD_PRINT ("Thin Layer Enabled  ");
+   LCD_print ("Thin Layer Enabled  ");
   LCD_position (LINE2);
-   _LCD_PRINT ("Place in BS Position");
+   LCD_print ("Place in BS Position");
   LCD_position (LINE4);   
-  _LCD_PRINT  ("    Press Enter     ");
+  LCD_print  ("    Press Enter     ");
  }  
 }  
 
@@ -1248,19 +1248,19 @@ void place_in_ac_text ( void )
  
  if(Features.language_f)
  {
-  _LCD_PRINT("Thin Layer Enabled  ");
+  LCD_print("Thin Layer Enabled  ");
   LCD_position (LINE2);
-  _LCD_PRINT("Place in AC Position");
+  LCD_print("Place in AC Position");
   LCD_position (LINE4);   
-  _LCD_PRINT  ("    Press Enter     ");
+  LCD_print  ("    Press Enter     ");
  } 
  else 
  {
-   _LCD_PRINT("Thin Layer Enabled  ");
+   LCD_print("Thin Layer Enabled  ");
   LCD_position (LINE2);
-  _LCD_PRINT("Place in AC Position");
+  LCD_print("Place in AC Position");
   LCD_position (LINE4);   
-  _LCD_PRINT  ("    Press Enter     ");
+  LCD_print  ("    Press Enter     ");
  }  
 }
 
@@ -1268,9 +1268,9 @@ void place_in_ac_text ( void )
 void nomograph_text(void)
 {
   if(Features.language_f)
-     { _LCD_PRINT("      Nomograph     "); }
+     { LCD_print("      Nomograph     "); }
     else 
-     { _LCD_PRINT("      Nomograph     "); }
+     { LCD_print("      Nomograph     "); }
 }
 
 
@@ -1278,25 +1278,25 @@ void nomograph_text(void)
 void drift_text(void)
 {
   if(Features.language_f)
-    { _LCD_PRINT("Drift Test"); }
+    { LCD_print("Drift Test"); }
     else
-    {  _LCD_PRINT("Prueba de Desviacion");  }
+    {  LCD_print("Prueba de Desviacion");  }
 }
 
 void spec_text(void)
 {
   if(Features.language_f)
-    { _LCD_PRINT("Special Calibration"); }
+    { LCD_print("Special Calibration"); }
     else
-    {  _LCD_PRINT("Calibracion Especial"); }
+    {  LCD_print("Calibracion Especial"); }
 }
 
 void trench_text(void)
 {
   if(Features.language_f)
-    { _LCD_PRINT("Trench Offset Count "); }
+    { LCD_print("Trench Offset Count "); }
     else
-    {  _LCD_PRINT("Trench Offset Count "); }
+    {  LCD_print("Trench Offset Count "); }
 }
 
 
@@ -1311,31 +1311,31 @@ void enable_disable_text(char *temp_str,char c)
       case 'L':
       _LCD_PRINTF("%s LCD/Keypad",temp_str);
       LCD_position(LINE2);
-      _LCD_PRINT("Backlight?");   
+      LCD_print("Backlight?");   
       break;
       
       case 'S':
       _LCD_PRINTF("%s Auto",temp_str);
       LCD_position(LINE2);
-      _LCD_PRINT("Scroll?");  
+      LCD_print("Scroll?");  
       break;
       
       case 'D':
       _LCD_PRINTF("%s Auto",temp_str);
       LCD_position(LINE2);
-      _LCD_PRINT("Depth?");   
+      LCD_print("Depth?");   
       break;
       
       case 'A':
       _LCD_PRINTF("%s AVG STD",temp_str);
       LCD_position(LINE2);
-      _LCD_PRINT("Mode?");      
+      LCD_print("Mode?");      
       break;
       
       case 'O':
       _LCD_PRINTF("%s Auto",temp_str);
       LCD_position(LINE2);
-      _LCD_PRINT("Store?");
+      LCD_print("Store?");
       break;
       
       case 'B':
@@ -1363,31 +1363,31 @@ void enable_disable_text(char *temp_str,char c)
         case 'L':
         _LCD_PRINTF("%s Iluminacion",temp_str); // Encender / Apagar Iluminacion LCD
         LCD_position(LINE2);
-        _LCD_PRINT("LCD?");   
+        LCD_print("LCD?");   
         break;
       
         case 'S':
         _LCD_PRINTF("%s Cambia Auto",temp_str); // Habilitar / Deshabilitar Cambio Automático de Pantalla
         LCD_position(LINE2);
-        _LCD_PRINT("de Pantalla?");  
+        LCD_print("de Pantalla?");  
         break;
       
         case 'D':
         _LCD_PRINTF("%s",temp_str); // Habilitar / Deshabilitar  Profundidad Automatica
         LCD_position(LINE2);
-        _LCD_PRINT("Profundidad Auto?");   
+        LCD_print("Profundidad Auto?");   
         break;
       
         case 'A':
         _LCD_PRINTF("%s Modo",temp_str); // Habilitar / Deshabilitar Modo AVG STD
         LCD_position(LINE2);
-        _LCD_PRINT("AVG STD?");      
+        LCD_print("AVG STD?");      
         break;
       
         case 'O':
         _LCD_PRINTF("%s Auto",temp_str);  // Habilitar / Deshabilitar Auto Memoria
         LCD_position(LINE2);
-        _LCD_PRINT("Memoria?");
+        LCD_print("Memoria?");
         break;
       
         case 'B':
@@ -1413,9 +1413,9 @@ void reset_avg_count(void)
   CLEAR_DISP;
   LCD_position(LINE1);
   if(Features.language_f)
-   { _LCD_PRINT("Reset AVG Count?"); }
+   { LCD_print("Reset AVG Count?"); }
     else
-      _LCD_PRINT("Borrar Cuentas AVG?");   //  Borrar cuentas AVG?
+      LCD_print("Borrar Cuentas AVG?");   //  Borrar cuentas AVG?
 }
 
 void auto_depth_settings(void)
@@ -1424,25 +1424,25 @@ void auto_depth_settings(void)
   LCD_position(LINE1);
   if(Features.language_f)
   {
-    _LCD_PRINT("Auto Depth Settings");
+    LCD_print("Auto Depth Settings");
     LCD_position(LINE2);
-    _LCD_PRINT("1. Enable/Disable");
+    LCD_print("1. Enable/Disable");
      if ( NV_RAM_MEMBER_RD( gauge_type ) != GAUGE_3440_PLUS )
      {
       LCD_position(LINE3);
-      _LCD_PRINT("2. Depth Strip Type");
+      LCD_print("2. Depth Strip Type");
      } 
     
   }
     else 
      {
-      _LCD_PRINT("Profund. Automatica");   //Opciones de Profundidad Automatica 1. Habilitar / Deshabilitar 2. Calibrar.
+      LCD_print("Profund. Automatica");   //Opciones de Profundidad Automatica 1. Habilitar / Deshabilitar 2. Calibrar.
       LCD_position(LINE2);
-      _LCD_PRINT("1. Habil./Deshabil.");
+      LCD_print("1. Habil./Deshabil.");
       if ( NV_RAM_MEMBER_RD( gauge_type ) != GAUGE_3440_PLUS )
       {
        LCD_position(LINE3);
-       _LCD_PRINT("2. Depth Strip Type");
+       LCD_print("2. Depth Strip Type");
       }        
     }
 }
@@ -1453,19 +1453,19 @@ void depth_strip_type(void)
   LCD_position(LINE1);
   if(Features.language_f)
   {
-    _LCD_PRINT("Depth Strip Type");
+    LCD_print("Depth Strip Type");
     LCD_position(LINE2);
-    _LCD_PRINT("1. Xplorer");
+    LCD_print("1. Xplorer");
     LCD_position(LINE3);
-    _LCD_PRINT("2. 3440");
+    LCD_print("2. 3440");
   }
   else 
   {
-    _LCD_PRINT("Depth Strip Type");
+    LCD_print("Depth Strip Type");
     LCD_position(LINE2);
-    _LCD_PRINT("1. Xplorer");
+    LCD_print("1. Xplorer");
     LCD_position(LINE3);
-    _LCD_PRINT("2. 3440");
+    LCD_print("2. 3440");
   }
 }
 
@@ -1476,24 +1476,24 @@ void date_usb_error_text ( void )
  LCD_position (LINE1);
  if(Features.language_f)
  {
-  _LCD_PRINT("Clock/USB Disabled  ");
+  LCD_print("Clock/USB Disabled  ");
   LCD_position (LINE2);
-  _LCD_PRINT("Unplugging Ribbon   ");
+  LCD_print("Unplugging Ribbon   ");
   LCD_position (LINE3);
-  _LCD_PRINT("Cable May Fix Issue");
+  LCD_print("Cable May Fix Issue");
   LCD_position (LINE4);
-  _LCD_PRINT("Press <ENTER> ");
+  LCD_print("Press <ENTER> ");
 
  } 
  else 
  { 
-  _LCD_PRINT("Clock/USB Disabled  ");
+  LCD_print("Clock/USB Disabled  ");
   LCD_position (LINE2);
-  _LCD_PRINT("Unplugging Ribbon   ");
+  LCD_print("Unplugging Ribbon   ");
   LCD_position (LINE3);
-  _LCD_PRINT("Cable May Fix Issue");
+  LCD_print("Cable May Fix Issue");
   LCD_position (LINE4);
-  _LCD_PRINT("Press <ENTER> ");
+  LCD_print("Press <ENTER> ");
  }  
 
 }
@@ -1505,24 +1505,24 @@ void clock_set_error_text ( void )
  LCD_position (LINE1);
  if(Features.language_f)
  {
-  _LCD_PRINT("    Error setting   ");
+  LCD_print("    Error setting   ");
   LCD_position (LINE2);
-  _LCD_PRINT("    Internal Clock  ");
+  LCD_print("    Internal Clock  ");
   LCD_position (LINE3);
-  _LCD_PRINT("   Restart Gauge    ");
+  LCD_print("   Restart Gauge    ");
   LCD_position (LINE4);
-  _LCD_PRINT("   Press <ENTER>    ");
+  LCD_print("   Press <ENTER>    ");
 
  } 
  else 
  { 
-  _LCD_PRINT("    Error setting   ");
+  LCD_print("    Error setting   ");
   LCD_position (LINE2);
-  _LCD_PRINT("    Internal Clock  ");
+  LCD_print("    Internal Clock  ");
   LCD_position (LINE3);
-  _LCD_PRINT("   Restart Gauge    ");
+  LCD_print("   Restart Gauge    ");
   LCD_position (LINE4);
-  _LCD_PRINT("   Press <ENTER>    ");
+  LCD_print("   Press <ENTER>    ");
  }  
 
 }
@@ -1533,19 +1533,19 @@ void no_data_to_store_text ( void )
  LCD_position (LINE1);
  if(Features.language_f)
  {
-  _LCD_PRINT("  No Data To Store  ");
+  LCD_print("  No Data To Store  ");
   LCD_position (LINE2);
-  _LCD_PRINT("        Start       ");
+  LCD_print("        Start       ");
   LCD_position (LINE3);
-  _LCD_PRINT("   New Measurement  ");
+  LCD_print("   New Measurement  ");
  } 
  else 
  {
-  _LCD_PRINT("  No Data To Store  ");
+  LCD_print("  No Data To Store  ");
   LCD_position (LINE2);
-  _LCD_PRINT("        Start       ");
+  LCD_print("        Start       ");
   LCD_position (LINE3);
-  _LCD_PRINT("   New Measurement  ");
+  LCD_print("   New Measurement  ");
  }  
 
 }
@@ -1556,15 +1556,15 @@ void stand_mode_settings_text(void)
   LCD_position(LINE1);
   if(Features.language_f)
   {
-    _LCD_PRINT("1. Average Mode     ");
+    LCD_print("1. Average Mode     ");
     LCD_position(LINE2);
-    _LCD_PRINT("2. Decay Mode       ");
+    LCD_print("2. Decay Mode       ");
   }
   else 
   {
-    _LCD_PRINT("1. Media Modo     ");
+    LCD_print("1. Media Modo     ");
     LCD_position(LINE2);
-    _LCD_PRINT("2. Desinteg. Modo");
+    LCD_print("2. Desinteg. Modo");
   }
 }
 
@@ -1576,12 +1576,12 @@ void avg_stand_mode_enabled_text(void)
   if(Features.language_f)
   {
     LCD_position(LINE2);
-    _LCD_PRINT("Avg Std Mode Enabled");
+    LCD_print("Avg Std Mode Enabled");
   }
   else 
   {
    LCD_position(LINE2);
-   _LCD_PRINT("Media Modo Activar");
+   LCD_print("Media Modo Activar");
   }
 }
 
@@ -1593,12 +1593,12 @@ void decay_stand_mode_enabled_text(void)
   if(Features.language_f)
   {
     LCD_position(LINE2);
-    _LCD_PRINT("Decay Mode Enabled  ");
+    LCD_print("Decay Mode Enabled  ");
   }
   else 
   {
    LCD_position(LINE2);
-   _LCD_PRINT("Desint. Modo Activar");
+   LCD_print("Desint. Modo Activar");
   }
 }
 
@@ -1609,19 +1609,19 @@ void gauge_in_safe(void)
   LCD_position(LINE1);
   if(Features.language_f)
   {
-    _LCD_PRINT("Place Gauge in");
+    LCD_print("Place Gauge in");
     LCD_position(LINE2);
-    _LCD_PRINT("SAFE Position");
+    LCD_print("SAFE Position");
     LCD_position(LINE3);
-    _LCD_PRINT("and Press ENTER"); 
+    LCD_print("and Press ENTER"); 
   }
     else
     {    
-      _LCD_PRINT("Coloque el Equipo");  // Coloque el equipo en posicion de seguridad.  Presione Iniciar
+      LCD_print("Coloque el Equipo");  // Coloque el equipo en posicion de seguridad.  Presione Iniciar
       LCD_position(LINE2);
-      _LCD_PRINT("en Posicion de Segur");
+      LCD_print("en Posicion de Segur");
       LCD_position(LINE3);
-      _LCD_PRINT("Presione Inciar.");
+      LCD_print("Presione Inciar.");
     }
 }
 
@@ -1632,19 +1632,19 @@ void gauge_in_bs_text(void)
   LCD_position(LINE1);
   if(Features.language_f)
   {
-    _LCD_PRINT("Place Gauge in      ");
+    LCD_print("Place Gauge in      ");
     LCD_position(LINE2);
-    _LCD_PRINT("BS Position         ");
+    LCD_print("BS Position         ");
     LCD_position(LINE3);
-    _LCD_PRINT("and Press ENTER     "); 
+    LCD_print("and Press ENTER     "); 
   }
     else
     {    
-      _LCD_PRINT("Coloque el Equipo");  // Coloque el equipo en posicion de seguridad.  Presione Iniciar
+      LCD_print("Coloque el Equipo");  // Coloque el equipo en posicion de seguridad.  Presione Iniciar
       LCD_position(LINE2);
-      _LCD_PRINT("en Posicion de BS");
+      LCD_print("en Posicion de BS");
       LCD_position(LINE3);
-      _LCD_PRINT("Presione Inciar.");
+      LCD_print("Presione Inciar.");
     }
 }
 
@@ -1655,15 +1655,15 @@ void calibration_complete_text(void)
   LCD_position(LINE1);
   if(Features.language_f)
   {
-    _LCD_PRINT("    Calibration");
+    LCD_print("    Calibration");
     LCD_position(LINE2);
-    _LCD_PRINT("     Complete");
+    LCD_print("     Complete");
   }
     else
     { 
-      _LCD_PRINT("    Calibracion");  //Calibración Terminada
+      LCD_print("    Calibracion");  //Calibración Terminada
       LCD_position(LINE2);
-      _LCD_PRINT("     Terminada");
+      LCD_print("     Terminada");
     }
 }
 
@@ -1673,15 +1673,15 @@ void calibration_fail_text(void)
   LCD_position(LINE2);
   if(Features.language_f)
   {
-    _LCD_PRINT("    Calibration     ");
+    LCD_print("    Calibration     ");
     LCD_position(LINE3);
-    _LCD_PRINT("     Failed         ");
+    LCD_print("     Failed         ");
   }
     else
     { 
-      _LCD_PRINT("    Calibracion");  //Calibración Terminada
+      LCD_print("    Calibracion");  //Calibración Terminada
       LCD_position(LINE3);
-      _LCD_PRINT("     Failed    ");
+      LCD_print("     Failed    ");
     }
 }
 
@@ -1700,19 +1700,19 @@ void offsets_text(void)
   LCD_position(LINE1);
   if(Features.language_f)
   {
-    _LCD_PRINT("1. Density");
+    LCD_print("1. Density");
     LCD_position(LINE2);
-    _LCD_PRINT("2. Moisture");
+    LCD_print("2. Moisture");
     LCD_position(LINE3);
-    _LCD_PRINT("3. Trench"); 
+    LCD_print("3. Trench"); 
   }
     else
     {
-      _LCD_PRINT("1. Densidad");  // 1.Densidad. 2. Humedad 3. Zanja.
+      LCD_print("1. Densidad");  // 1.Densidad. 2. Humedad 3. Zanja.
       LCD_position(LINE2);
-      _LCD_PRINT("2. Humedad");
+      LCD_print("2. Humedad");
       LCD_position(LINE3);
-      _LCD_PRINT("3. Zanja"); 
+      LCD_print("3. Zanja"); 
     }  
 }
 
@@ -1726,14 +1726,14 @@ void offset_on_off_text(char *temp_str, int16_t enabled)
       LCD_position (LINE1);
       _LCD_PRINTF("%s Offset ON",temp_str);        
       LCD_position (LINE2);
-      _LCD_PRINT("Want to Disable?");
+      LCD_print("Want to Disable?");
     }
     else
     {
       LCD_position (LINE1);
       _LCD_PRINTF("%s Offset OFF",temp_str);             
       LCD_position (LINE2);
-      _LCD_PRINT("Want to Enable?");
+      LCD_print("Want to Enable?");
     }      
   }
     else
@@ -1743,18 +1743,18 @@ void offset_on_off_text(char *temp_str, int16_t enabled)
         LCD_position (LINE1);
         _LCD_PRINTF("%s Compensacion",temp_str);        
         LCD_position (LINE2);
-        _LCD_PRINT("Habilitado Desea");
+        LCD_print("Habilitado Desea");
         LCD_position(LINE3); 
-        _LCD_PRINT("Deshabilitarlo?");
+        LCD_print("Deshabilitarlo?");
       }
       else
       {
         LCD_position (LINE1);
         _LCD_PRINTF("%s Compensacion",temp_str);  // Densidad / Humedad / Zanja - Compensacion Deshabilitado desea Habilitarlo?               
         LCD_position (LINE2);
-        _LCD_PRINT("Deshabilitado Desea");
+        LCD_print("Deshabilitado Desea");
         LCD_position(LINE3);
-        _LCD_PRINT("Habilitarlo?");
+        LCD_print("Habilitarlo?");
       }      
     }  
 }
@@ -1765,11 +1765,11 @@ void enter_offset_text(char *temp_str)
   {
     _LCD_PRINTF("Enter %s",temp_str);  
     LCD_position(LINE2);
-    _LCD_PRINT("Offset:");
+    LCD_print("Offset:");
   }
     else
     {
-      _LCD_PRINT("Ingresar Compensac'n");
+      LCD_print("Ingresar Compensac'n");
       LCD_position(LINE2);
       _LCD_PRINTF("%s",temp_str);
     }
@@ -1785,13 +1785,13 @@ void offset_enable_disable_text(char *temp_str, int16_t enabled)
     {    
       _LCD_PRINTF(" %s Offset",temp_str);
       LCD_position(LINE3);
-      _LCD_PRINT("   Disabled");           
+      LCD_print("   Disabled");           
     }
     else
     {
       _LCD_PRINTF(" %s Offset",temp_str);
       LCD_position(LINE3);
-      _LCD_PRINT("   Enabled");
+      LCD_print("   Enabled");
     }
   }
     else
@@ -1800,13 +1800,13 @@ void offset_enable_disable_text(char *temp_str, int16_t enabled)
       {    
         _LCD_PRINTF(" %s Compensacion",temp_str);
         LCD_position(LINE3);
-        _LCD_PRINT("   Deshabilitado");           
+        LCD_print("   Deshabilitado");           
       }
       else
       {
         _LCD_PRINTF(" %s Offset",temp_str);
         LCD_position(LINE3);
-        _LCD_PRINT("   Habilitado"); 
+        LCD_print("   Habilitado"); 
       }
     }
 }
@@ -1823,23 +1823,23 @@ void SAV_enable_disable_text( int enabled )
     if(enabled == 0)
     {    
       LCD_position(LINE1);
-      _LCD_PRINT("%%Soil Air Voids ");
+      LCD_print("%%Soil Air Voids ");
       LCD_position(LINE2);
-      _LCD_PRINT("   Disabled");           
+      LCD_print("   Disabled");           
       LCD_position(LINE3);
-      _LCD_PRINT("Want to Enable?");           
+      LCD_print("Want to Enable?");           
     }
     else
     {
       LCD_position(LINE1);
-      _LCD_PRINT("%%Soil Air Voids ");
+      LCD_print("%%Soil Air Voids ");
       LCD_position(LINE2);
-      _LCD_PRINT("   Enabled");           
+      LCD_print("   Enabled");           
       LCD_position(LINE3);
-      _LCD_PRINT("Want to Disable?");  
+      LCD_print("Want to Disable?");  
     }
      LCD_position(LINE4);
-     _LCD_PRINT("Press YES or NO ");
+     LCD_print("Press YES or NO ");
     
   }
   else
@@ -1847,24 +1847,24 @@ void SAV_enable_disable_text( int enabled )
     if(!enabled)
     {    
       LCD_position(LINE1);
-      _LCD_PRINT("%%Tiearra Aire Nulo  ");  // Soil air voids
+      LCD_print("%%Tiearra Aire Nulo  ");  // Soil air voids
       LCD_position(LINE2);
-      _LCD_PRINT("   Deshabilitado");       // Disabled
+      LCD_print("   Deshabilitado");       // Disabled
       LCD_position(LINE3);
-      _LCD_PRINT("desea habilitar?");       //Want to Enable
+      LCD_print("desea habilitar?");       //Want to Enable
       
     }
     else
     {
       LCD_position(LINE1);
-      _LCD_PRINT("%%Tiearra Aire Nulo  ");
+      LCD_print("%%Tiearra Aire Nulo  ");
       LCD_position(LINE2);
-      _LCD_PRINT("   Habilitado"); 
+      LCD_print("   Habilitado"); 
        LCD_position(LINE3);
-      _LCD_PRINT("desea desactivar?");    // Want to disable
+      LCD_print("desea desactivar?");    // Want to disable
     }
     LCD_position(LINE4);
-    _LCD_PRINT("Pulsa YES or NO ");
+    LCD_print("Pulsa YES or NO ");
   }
 }
 
@@ -1874,15 +1874,15 @@ void enter_access_number_text(void)
   LCD_position(LINE1);
   if(Features.language_f)
   {
-    _LCD_PRINT("Enter Access"); 
+    LCD_print("Enter Access"); 
     LCD_position(LINE2);
-    _LCD_PRINT("Number: ");
+    LCD_print("Number: ");
   }
     else
     {
-      _LCD_PRINT("Ingrese el Codego de");    //Ingrese el Código de Acceso.
+      LCD_print("Ingrese el Codego de");    //Ingrese el Código de Acceso.
       LCD_position(LINE2);
-      _LCD_PRINT("Acceso: ");
+      LCD_print("Acceso: ");
     }
 }
 
@@ -1892,15 +1892,15 @@ void enter_cal_den_std_text (void)
   LCD_position(LINE1);
   if(Features.language_f)
   {
-    _LCD_PRINT("Enter Density Std   "); 
+    LCD_print("Enter Density Std   "); 
     LCD_position(LINE2);
-    _LCD_PRINT("Count:              ");
+    LCD_print("Count:              ");
   }
     else
     {
-     _LCD_PRINT("Enter Density Std   "); 
+     LCD_print("Enter Density Std   "); 
      LCD_position(LINE2);
-     _LCD_PRINT("Count:              ");
+     LCD_print("Count:              ");
     }
 }
 
@@ -1910,15 +1910,15 @@ void enter_cal_mois_std_text (void)
   LCD_position(LINE1);
   if(Features.language_f)
   {
-    _LCD_PRINT("Enter Moisture Std  "); 
+    LCD_print("Enter Moisture Std  "); 
     LCD_position(LINE2);
-    _LCD_PRINT("Count:              ");
+    LCD_print("Count:              ");
   }
     else
     {
-     _LCD_PRINT("Enter Moisture Std  "); 
+     LCD_print("Enter Moisture Std  "); 
      LCD_position(LINE2);
-     _LCD_PRINT("Count:              ");
+     LCD_print("Count:              ");
     }
 }
 
@@ -1928,15 +1928,15 @@ void access_number_incorrect_text(void)
   LCD_position(LINE2);
   if(Features.language_f)
   {
-    _LCD_PRINT("    Access Code");
+    LCD_print("    Access Code");
     LCD_position(LINE3);
-    _LCD_PRINT("     Incorrect"); 
+    LCD_print("     Incorrect"); 
   }
     else
     {
-      _LCD_PRINT("  Codego de Acceso");  // Codigo de Acceso Incorrecto
+      LCD_print("  Codego de Acceso");  // Codigo de Acceso Incorrecto
       LCD_position(LINE3);
-      _LCD_PRINT("     Incorrecto"); 
+      LCD_print("     Incorrecto"); 
     }  
 }
 void cal_menu_text(BYTE display_set)
@@ -1947,52 +1947,52 @@ void cal_menu_text(BYTE display_set)
     {
       case 1:
             LCD_position(LINE1);
-            _LCD_PRINT("0. Moist Consts     ");
+            LCD_print("0. Moist Consts     ");
             LCD_position(LINE2);
-            _LCD_PRINT("1. Depth BS         ");
+            LCD_print("1. Depth BS         ");
             break;
       case 2:
             LCD_position(LINE1);
-            _LCD_PRINT("2. Depth 2          ");
+            LCD_print("2. Depth 2          ");
             LCD_position(LINE2);
-            _LCD_PRINT("3. Depth 3          ");
+            LCD_print("3. Depth 3          ");
             break;
       case 3:
             LCD_position(LINE1);
-            _LCD_PRINT("4. Depth 4          ");
+            LCD_print("4. Depth 4          ");
             LCD_position(LINE2);
-            _LCD_PRINT("5. Depth 5          ");
+            LCD_print("5. Depth 5          ");
             break;
       case 4:
             LCD_position(LINE1);
-            _LCD_PRINT("6. Depth 6          ");
+            LCD_print("6. Depth 6          ");
             LCD_position(LINE2);
-            _LCD_PRINT("7. Depth 7          ");
+            LCD_print("7. Depth 7          ");
             break;
       case 5:
             LCD_position(LINE1);
-            _LCD_PRINT("8. Depth 8          ");
+            LCD_print("8. Depth 8          ");
             LCD_position(LINE2);
-            _LCD_PRINT("9. Depth 9          ");
+            LCD_print("9. Depth 9          ");
             break;
       case 6:
             LCD_position(LINE1);
-            _LCD_PRINT("10. Depth 10        ");
+            LCD_print("10. Depth 10        ");
             LCD_position(LINE2);
-            _LCD_PRINT("11. Depth 11        ");
+            LCD_print("11. Depth 11        ");
             break;
       case 7:
             LCD_position(LINE1);
-            _LCD_PRINT("12. Depth 12        ");        
+            LCD_print("12. Depth 12        ");        
              LCD_position(LINE2);
-            _LCD_PRINT("13. Calibration Date");       
+            LCD_print("13. Calibration Date");       
       break;
             
       case 0:
             LCD_position(LINE1);
-            _LCD_PRINT("14. Calib Std Counts");
+            LCD_print("14. Calib Std Counts");
             LCD_position(LINE2);
-            _LCD_PRINT("                    ");
+            LCD_print("                    ");
             break;
      
     }       
@@ -2003,51 +2003,51 @@ void cal_menu_text(BYTE display_set)
       {
         case 1:
         LCD_position(LINE1);
-        _LCD_PRINT("0. Const. de Humedad");
+        LCD_print("0. Const. de Humedad");
         LCD_position(LINE2);
-        _LCD_PRINT("1. Retro-Dispercion ");
+        LCD_print("1. Retro-Dispercion ");
         break;
         case 2:
         LCD_position(LINE1);
-        _LCD_PRINT("2. Profundidad # 2  ");
+        LCD_print("2. Profundidad # 2  ");
         LCD_position(LINE2);
-        _LCD_PRINT("3. Profundidad # 3  ");
+        LCD_print("3. Profundidad # 3  ");
         break;
         case 3:
         LCD_position(LINE1);
-        _LCD_PRINT("4. Profundidad # 4  ");
+        LCD_print("4. Profundidad # 4  ");
         LCD_position(LINE2);
-        _LCD_PRINT("5. Profundidad # 5  ");
+        LCD_print("5. Profundidad # 5  ");
         break;
         case 4:
         LCD_position(LINE1);
-        _LCD_PRINT("6. Profundidad # 6  ");
+        LCD_print("6. Profundidad # 6  ");
         LCD_position(LINE2);
-        _LCD_PRINT("7. Profundidad # 7  ");
+        LCD_print("7. Profundidad # 7  ");
         break;
         case 5:
         LCD_position(LINE1);
-        _LCD_PRINT("8. Profundidad # 8  ");
+        LCD_print("8. Profundidad # 8  ");
         LCD_position(LINE2);
-        _LCD_PRINT("9. Profundidad # 9  ");
+        LCD_print("9. Profundidad # 9  ");
         break;
         case 6:
             LCD_position(LINE1);
-            _LCD_PRINT("10. Profundidad # 10");
+            LCD_print("10. Profundidad # 10");
             LCD_position(LINE2);
-            _LCD_PRINT("11. Profundidad # 11");
+            LCD_print("11. Profundidad # 11");
         break;
         case 7:
              LCD_position(LINE1);
-            _LCD_PRINT("12. Profundidad # 12");        
+            LCD_print("12. Profundidad # 12");        
             LCD_position(LINE2);
-            _LCD_PRINT("13. Cal Date  ");
+            LCD_print("13. Cal Date  ");
             break;
          case 0:
             LCD_position(LINE1);
-            _LCD_PRINT("14. Cal Std Counts  ");
+            LCD_print("14. Cal Std Counts  ");
             LCD_position(LINE2);
-            _LCD_PRINT("15. Thin Layer      ");
+            LCD_print("15. Thin Layer      ");
             break;
 
       }       
@@ -2095,30 +2095,30 @@ void reset_cal_date_text(BYTE which_prompt)
   {
     if(which_prompt==0)
     {
-      _LCD_PRINT("Reset Calibration   ");
+      LCD_print("Reset Calibration   ");
       LCD_position(LINE2);
-      _LCD_PRINT("Date?");
+      LCD_print("Date?");
     }
     else
     {   
-      _LCD_PRINT("  Calibration Date  ");
+      LCD_print("  Calibration Date  ");
       LCD_position(LINE2);
-      _LCD_PRINT("       Reset        ");
+      LCD_print("       Reset        ");
     }
   }
     else
     {
       if(which_prompt==0)
       {
-        _LCD_PRINT("Borrar la Fecha de  ");  // Borrar la fecha de Calibracion?
+        LCD_print("Borrar la Fecha de  ");  // Borrar la fecha de Calibracion?
         LCD_position(LINE2);
-        _LCD_PRINT("Calibracion?");
+        LCD_print("Calibracion?");
       }
       else
       {   
-        _LCD_PRINT("Fecha de Calibracion");  // Fecha de Calibracion Borrada
+        LCD_print("Fecha de Calibracion");  // Fecha de Calibracion Borrada
         LCD_position(LINE2);
-        _LCD_PRINT("      Borrada       ");
+        LCD_print("      Borrada       ");
       }
     }  
 }
@@ -2130,18 +2130,18 @@ void moisture_const_text(void)
   CLEAR_DISP;
   LCD_position(LINE1);
   if(Features.language_f)
-   { _LCD_PRINT("MOISTURE CONST");   }
+   { LCD_print("MOISTURE CONST");   }
     else
-      _LCD_PRINT("CONSTANTE DE HUMEDAD");
+      LCD_print("CONSTANTE DE HUMEDAD");
 }
 void bscatter_const_text(void)
 {
   CLEAR_DISP;
   LCD_position(LINE1);
   if(Features.language_f)
-   {  _LCD_PRINT("BSCATTER CONST"); }
+   {  LCD_print("BSCATTER CONST"); }
     else
-      _LCD_PRINT("RETRO-DISPERSION");  // Constante de Retro-Dispersión
+      LCD_print("RETRO-DISPERSION");  // Constante de Retro-Dispersión
 }
 void memory_reset_text(void)
 {
@@ -2149,15 +2149,15 @@ void memory_reset_text(void)
   LCD_position (LINE1);
   if(Features.language_f)
   {
-    _LCD_PRINT("Reset Memory");
+    LCD_print("Reset Memory");
     LCD_position(LINE2);
-    _LCD_PRINT("to Default?");
+    LCD_print("to Default?");
   }
     else
     {
-      _LCD_PRINT("Borrar Memoria");  // Borrar memoria a Inicio?
+      LCD_print("Borrar Memoria");  // Borrar memoria a Inicio?
       LCD_position(LINE2);
-      _LCD_PRINT("a Inicio?");
+      LCD_print("a Inicio?");
     }
 }
 void enable_disable_speccal_text(int16_t condition)
@@ -2167,21 +2167,21 @@ void enable_disable_speccal_text(int16_t condition)
   if(Features.language_f)
   {
     if(condition)
-     { _LCD_PRINT("Disable Special"); }
+     { LCD_print("Disable Special"); }
     else
-     { _LCD_PRINT("Enable Special");  }
+     { LCD_print("Enable Special");  }
     
     LCD_position(LINE2);
-    _LCD_PRINT("Calibration?");
+    LCD_print("Calibration?");
   }
     else
     {
       if(condition)
-        _LCD_PRINT("Deshabilitar Calib.");  //   Habilitar / Deshabilitar Calibracion Especial?
+        LCD_print("Deshabilitar Calib.");  //   Habilitar / Deshabilitar Calibracion Especial?
       else
-        _LCD_PRINT("Habilitar Calib."); 
+        LCD_print("Habilitar Calib."); 
       LCD_position(LINE2);
-      _LCD_PRINT("Especial?");
+      LCD_print("Especial?");
     }
 }
 void view_last_speccal_text(void)
@@ -2190,24 +2190,24 @@ void view_last_speccal_text(void)
   LCD_position(LINE1);
   if(Features.language_f)
   {
-    _LCD_PRINT("View Last Saved     ");                  //   Use existing calibration value?
+    LCD_print("View Last Saved     ");                  //   Use existing calibration value?
     LCD_position(LINE2);
-    _LCD_PRINT("Spec Cal. Data?     ");
+    LCD_print("Spec Cal. Data?     ");
   }
     else
     {
-      _LCD_PRINT("Vista de la Ultima");              //       Vista de la Ultima Calibracion Especial Registrada?
+      LCD_print("Vista de la Ultima");              //       Vista de la Ultima Calibracion Especial Registrada?
       LCD_position(LINE2);
-      _LCD_PRINT("Cal. Esp Registrada?");
+      LCD_print("Cal. Esp Registrada?");
     }  
 }
 void vals_ok_text(void)
 {
   LCD_position(LINE4);
   if(Features.language_f)
-   { _LCD_PRINT("Values OK? YES/NO   "); }
+   { LCD_print("Values OK? YES/NO   "); }
     else
-      _LCD_PRINT("Valores OK? SI/NO  ");  
+      LCD_print("Valores OK? SI/NO  ");  
 }
 void use_gauge_text(void)
 {
@@ -2215,15 +2215,15 @@ void use_gauge_text(void)
   LCD_position(LINE1);
   if(Features.language_f)
   {
-    _LCD_PRINT("Use Gauge to Derive ");
+    LCD_print("Use Gauge to Derive ");
     LCD_position(LINE2);  
-    _LCD_PRINT("B Value?            ");
+    LCD_print("B Value?            ");
   }
     else
     {
-      _LCD_PRINT("Use el Equipo Para");  // Use el Equipo para obtener el  valor "B"
+      LCD_print("Use el Equipo Para");  // Use el Equipo para obtener el  valor "B"
       LCD_position(LINE2);  
-      _LCD_PRINT("Obtener el Valor B?");
+      LCD_print("Obtener el Valor B?");
     }
 }
 
@@ -2233,46 +2233,46 @@ void enter_value_text(BYTE which_value)
   LCD_position(LINE1);
   if(Features.language_f)
   {
-    _LCD_PRINT("Enter Value For");
+    LCD_print("Enter Value For");
     LCD_position(LINE2);
     if(which_value==0)
-      _LCD_PRINT("B =");
+      LCD_print("B =");
     else if(which_value==1)
-      _LCD_PRINT("Density =");
+      LCD_print("Density =");
     else if(which_value==2)
-      _LCD_PRINT("Density Now?");
+      LCD_print("Density Now?");
     else if(which_value==3)
-      _LCD_PRINT("Proctor:");
+      LCD_print("Proctor:");
     else if(which_value==4)
-      _LCD_PRINT("MAX DENS:");
+      LCD_print("MAX DENS:");
     else if( which_value == 5)
-      _LCD_PRINT("SOIL SG:");  
+      LCD_print("SOIL SG:");  
     else if( which_value == 6)
-    _LCD_PRINT("SHT DWN (HOURS):");     
+    LCD_print("SHT DWN (HOURS):");     
     else if( which_value == 7)
-      _LCD_PRINT("Depth Slope:");    
+      LCD_print("Depth Slope:");    
       
   }
     else
     {    
-      _LCD_PRINT("Entre el Valor de"); //  Entre el Valor de Densidad:
+      LCD_print("Entre el Valor de"); //  Entre el Valor de Densidad:
       LCD_position(LINE2);
       if(which_value==0)
-        _LCD_PRINT("B =");
+        LCD_print("B =");
       else if(which_value==1)
-        _LCD_PRINT("Densidad=");
+        LCD_print("Densidad=");
       else if(which_value==2)
-        _LCD_PRINT("Densidad Ahora?");  // Entre el Valor de Densidad Ahora:
+        LCD_print("Densidad Ahora?");  // Entre el Valor de Densidad Ahora:
       else if(which_value==3)
-        _LCD_PRINT("Proctor:");  // Ingresar valor Proctor
+        LCD_print("Proctor:");  // Ingresar valor Proctor
       else if(which_value==4)
-        _LCD_PRINT("MAX DENS:");  // Ingresar valor Proctor
+        LCD_print("MAX DENS:");  // Ingresar valor Proctor
       else if( which_value == 5)
-      _LCD_PRINT("SOIL SG:");    
+      LCD_print("SOIL SG:");    
       else if( which_value == 6)
-      _LCD_PRINT("SHT DWN (HOURS):");   
+      LCD_print("SHT DWN (HOURS):");   
       else if( which_value == 7)
-      _LCD_PRINT("Depth Slope:");       
+      LCD_print("Depth Slope:");       
       
         
     }
@@ -2283,15 +2283,15 @@ void use_stored_count_text(void)
   LCD_position (LINE1);
   if(Features.language_f)
   {
-    _LCD_PRINT("Use Stored Count");
+    LCD_print("Use Stored Count");
     LCD_position (LINE2);
-    _LCD_PRINT("Data?");
+    LCD_print("Data?");
   }
     else 
     {
-      _LCD_PRINT("Usar las Cuentas");  // Usar las Cuentas Guardadas?
+      LCD_print("Usar las Cuentas");  // Usar las Cuentas Guardadas?
       LCD_position (LINE2);
-      _LCD_PRINT("Data?");
+      LCD_print("Data?");
     }
 }
 
@@ -2300,15 +2300,15 @@ void activate_speccal_text(void)
   LCD_position (LINE2);
   if(Features.language_f)
   {
-    _LCD_PRINT("Activate Special");
+    LCD_print("Activate Special");
     LCD_position(LINE3);
-    _LCD_PRINT("Calibration?");
+    LCD_print("Calibration?");
   }
     else
     {
-      _LCD_PRINT("Activar Calibracion"); //  Activar Calibracion Especial
+      LCD_print("Activar Calibracion"); //  Activar Calibracion Especial
       LCD_position(LINE3);
-      _LCD_PRINT("Especial?");
+      LCD_print("Especial?");
     }
 }
 void enter_number_counts_text(void)
@@ -2317,15 +2317,15 @@ void enter_number_counts_text(void)
   LCD_position(LINE1);
   if(Features.language_f)
   {
-    _LCD_PRINT("Enter Number");
+    LCD_print("Enter Number");
     LCD_position (LINE2);
-    _LCD_PRINT("of Counts:   ");
+    LCD_print("of Counts:   ");
   }
     else
     {
-      _LCD_PRINT("Ingrese Numero de");  /// Ingrese Numero de Cuentas
+      LCD_print("Ingrese Numero de");  /// Ingrese Numero de Cuentas
       LCD_position (LINE2);
-      _LCD_PRINT("de Cuentas  ");
+      LCD_print("de Cuentas  ");
     }
 }
 void start_speccal_text(void)
@@ -2334,23 +2334,23 @@ void start_speccal_text(void)
   LCD_position(LINE1);
   if(Features.language_f)
   {
-    _LCD_PRINT("# of Counts:");
+    LCD_print("# of Counts:");
     LCD_position(LINE2);
-    _LCD_PRINT("Depth:");
+    LCD_print("Depth:");
     LCD_position(LINE3);
-    _LCD_PRINT("Press START to");
+    LCD_print("Press START to");
     LCD_position(LINE4);
-    _LCD_PRINT("Begin Count");       
+    LCD_print("Begin Count");       
   }
     else
      {
-      _LCD_PRINT("# de Cuentas");  // Numero de Cuentas:     Profundidad:     Precione Iniciar para comensar a contar:      
+      LCD_print("# de Cuentas");  // Numero de Cuentas:     Profundidad:     Precione Iniciar para comensar a contar:      
       LCD_position(LINE2);
-      _LCD_PRINT("Profundidad:");
+      LCD_print("Profundidad:");
       LCD_position(LINE3);
-      _LCD_PRINT("Precione Inciar Para");
+      LCD_print("Precione Inciar Para");
       LCD_position(LINE4);
-      _LCD_PRINT("Comensar a Contar");       
+      LCD_print("Comensar a Contar");       
     }
 }
 void speccal_results_text(int16_t loops,uint16_t cnt_temp)
@@ -2363,7 +2363,7 @@ void speccal_results_text(int16_t loops,uint16_t cnt_temp)
     LCD_position(LINE2);
     _LCD_PRINTF("Count: %u",cnt_temp);
     LCD_position(LINE3);
-    _LCD_PRINT("YES to Continue");
+    LCD_print("YES to Continue");
   }
     else
     {
@@ -2371,7 +2371,7 @@ void speccal_results_text(int16_t loops,uint16_t cnt_temp)
       LCD_position(LINE2);
       _LCD_PRINTF("Densidad: %u",cnt_temp);
       LCD_position(LINE3);
-      _LCD_PRINT("SI para Continuar");
+      LCD_print("SI para Continuar");
     }
 }
 void speccal_enabled_text(void)
@@ -2380,15 +2380,15 @@ void speccal_enabled_text(void)
   LCD_position (LINE2);
   if(Features.language_f)
   {
-    _LCD_PRINT("Special Calibration");
+    LCD_print("Special Calibration");
     LCD_position (LINE3);
-    _LCD_PRINT("      Enabled");
+    LCD_print("      Enabled");
   }
     else
     {
-      _LCD_PRINT("Calibracion Especial");  // Calibración Especial Habilitada
+      LCD_print("Calibracion Especial");  // Calibración Especial Habilitada
       LCD_position (LINE3);
-      _LCD_PRINT("     Habilitada");
+      LCD_print("     Habilitada");
     }
 }
 void enable_disable_nomograph_text(int16_t condition)
@@ -2398,21 +2398,21 @@ void enable_disable_nomograph_text(int16_t condition)
   if(Features.language_f)
   {
     if(condition)
-     { _LCD_PRINT("Disable Nomograph   "); }
+     { LCD_print("Disable Nomograph   "); }
     else
-     { _LCD_PRINT("Enable Nomograph    ");  }
+     { LCD_print("Enable Nomograph    ");  }
     
     LCD_position(LINE2);
-    _LCD_PRINT("Mode?");
+    LCD_print("Mode?");
   }
     else
     {
       if(condition)
-        _LCD_PRINT("Habilitar Comando");   // Habilitar/Deshabilitar Comando capa delgada?
+        LCD_print("Habilitar Comando");   // Habilitar/Deshabilitar Comando capa delgada?
       else
-        _LCD_PRINT("Deshabilitar Comando");
+        LCD_print("Deshabilitar Comando");
       LCD_position(LINE2);
-      _LCD_PRINT("Capa Delgada?");
+      LCD_print("Capa Delgada?");
     }
 }
 
@@ -2423,15 +2423,15 @@ void activate_saved_vals_text(void)
   LCD_position (LINE1);
   if(Features.language_f)
   {
-    _LCD_PRINT("Activate Saved");
+    LCD_print("Activate Saved");
     LCD_position (LINE2);
-    _LCD_PRINT("Values?");
+    LCD_print("Values?");
   }
     else
     {
-      _LCD_PRINT("Activar los Valores");  // Activar los Valores Guardados ?
+      LCD_print("Activar los Valores");  // Activar los Valores Guardados ?
       LCD_position (LINE2);
-      _LCD_PRINT("Guardados?");
+      LCD_print("Guardados?");
     }
 }
 
@@ -2441,19 +2441,19 @@ void nomograph_vals_text(void)
   LCD_position (LINE1); 
   if(Features.language_f)
   {
-    _LCD_PRINT("Mat Thick=");
+    LCD_print("Mat Thick=");
     LCD_position (LINE2);
-    _LCD_PRINT("Bot Dens =");
+    LCD_print("Bot Dens =");
     LCD_position (LINE3);
-    _LCD_PRINT("Are Values OK?");
+    LCD_print("Are Values OK?");
   }
     else
     {
-      _LCD_PRINT("Espesor Mat");   // Espesor Material =                       Densidad  de Fondo =                  Estan Los Valores Correctos?
+      LCD_print("Espesor Mat");   // Espesor Material =                       Densidad  de Fondo =                  Estan Los Valores Correctos?
       LCD_position (LINE2);
-      _LCD_PRINT("Dens. Fondo");
+      LCD_print("Dens. Fondo");
       LCD_position (LINE3);
-      _LCD_PRINT("Valores Correctos?");
+      LCD_print("Valores Correctos?");
     }
 }
 
@@ -2466,15 +2466,15 @@ void enter_mat_thickness_text(void)
   LCD_position(LINE1);
   if(Features.language_f)
   {
-    _LCD_PRINT("Enter Material");
+    LCD_print("Enter Material");
     LCD_position (LINE2);
-    _LCD_PRINT("Thickness:");
+    LCD_print("Thickness:");
   }
     else
     {
-      _LCD_PRINT("Enter Material"); 
+      LCD_print("Enter Material"); 
       LCD_position (LINE2);
-      _LCD_PRINT("Thickness:");
+      LCD_print("Thickness:");
     }
 }
 void enter_bot_dense_text(void)
@@ -2483,15 +2483,15 @@ void enter_bot_dense_text(void)
   LCD_position(LINE1);
   if(Features.language_f)
   {
-    _LCD_PRINT("Enter Bottom");
+    LCD_print("Enter Bottom");
     LCD_position (LINE2);
-    _LCD_PRINT("Density:");
+    LCD_print("Density:");
   }
     else
     {
-      _LCD_PRINT("Entre el Valor de la");  // Entre el Valor de la Densidad de fondo
+      LCD_print("Entre el Valor de la");  // Entre el Valor de la Densidad de fondo
       LCD_position (LINE2);
-      _LCD_PRINT("Densidad");
+      LCD_print("Densidad");
     }
 }
 
@@ -2501,15 +2501,15 @@ void nomograph_enabled_text(void)
   LCD_position (LINE2);
   if(Features.language_f)
   {
-    _LCD_PRINT("     Nomograph");
+    LCD_print("     Nomograph");
     LCD_position (LINE3);
-    _LCD_PRINT("      Enabled");
+    LCD_print("      Enabled");
   }
     else
     {
-      _LCD_PRINT("    Capa Delgada");  // Capa Delgada Habilitado
+      LCD_print("    Capa Delgada");  // Capa Delgada Habilitado
       LCD_position (LINE3);
-      _LCD_PRINT("     Habilitado");
+      LCD_print("     Habilitado");
     }
 }
 
@@ -2520,15 +2520,15 @@ void enter_time_text(void)
   LCD_position(LINE1);
   if(Features.language_f)
   {
-    _LCD_PRINT("Enter Present");
+    LCD_print("Enter Present");
     LCD_position(LINE2);      
-    _LCD_PRINT("Time: hh:mm"); 
+    LCD_print("Time: hh:mm"); 
   }
     else
     {
-      _LCD_PRINT("Ingrese la Hora"); //  Ingrese la Hora Actual   hh : mm 
+      LCD_print("Ingrese la Hora"); //  Ingrese la Hora Actual   hh : mm 
       LCD_position(LINE2);      
-      _LCD_PRINT("Actl: hh:mm"); 
+      LCD_print("Actl: hh:mm"); 
     }
 }
 void am_pm_text(void)
@@ -2536,13 +2536,13 @@ void am_pm_text(void)
   CLEAR_DISP;
   LCD_position(LINE1);
   if(Features.language_f)
-    { _LCD_PRINT("Select"); }
+    { LCD_print("Select"); }
     else
-      _LCD_PRINT("Seleccione");   //Seleccione 1. AM - PM     
+      LCD_print("Seleccione");   //Seleccione 1. AM - PM     
   LCD_position(LINE2);  
-  _LCD_PRINT("1. AM");       
+  LCD_print("1. AM");       
   LCD_position(LINE3);
-  _LCD_PRINT("2. PM");
+  LCD_print("2. PM");
 }
 
 void prma_text(void)
@@ -2552,25 +2552,25 @@ void prma_text(void)
   if(Features.language_f)  
   {
     LCD_position(LINE1);
-    _LCD_PRINT("1. Proctor");
+    LCD_print("1. Proctor");
     LCD_position(LINE2);
-    _LCD_PRINT("2. MAX DENS");  
+    LCD_print("2. MAX DENS");  
     if ( Features.soil_air_voids_on == 1 )
     {
      LCD_position(LINE3);
-     _LCD_PRINT("3. Soil SG");    
+     LCD_print("3. Soil SG");    
     }
   }  
   else
   {
     LCD_position(LINE1);
-    _LCD_PRINT("1. Proctor");
+    LCD_print("1. Proctor");
     LCD_position(LINE2);
-    _LCD_PRINT("2. Densidad Máxima");  
+    LCD_print("2. Densidad Máxima");  
     if ( Features.soil_air_voids_on == 1 )
     {
      LCD_position(LINE3);
-     _LCD_PRINT("3. Tierra GS");    
+     LCD_print("3. Tierra GS");    
     }
   }
   
@@ -2580,18 +2580,18 @@ void change_val_text(void)
 {
   LCD_position(LINE2);
   if(Features.language_f)
-     {_LCD_PRINT("Change Value?");}  // Cambiar Valor? 
+     {LCD_print("Change Value?");}  // Cambiar Valor? 
     else
-      _LCD_PRINT("Cambiar Valor?");
+      LCD_print("Cambiar Valor?");
 }
 
 void get_new_offset_text(void)
 {
   LCD_position(LINE2);
   if(Features.language_f)
-     {_LCD_PRINT("Get New Offset?     ");}  
+     {LCD_print("Get New Offset?     ");}  
     else
-     {_LCD_PRINT("Get New Offset?     ");}  
+     {LCD_print("Get New Offset?     ");}  
 }
 
 
@@ -2599,9 +2599,9 @@ void use_val_text(void)
 {
   LCD_position(LINE2);
   if(Features.language_f)
-     {_LCD_PRINT("Use Value?");}  // Cambiar Valor? 
+     {LCD_print("Use Value?");}  // Cambiar Valor? 
     else
-     { _LCD_PRINT("Use Value?");}
+     { LCD_print("Use Value?");}
 }
 
 void battery_shutdwn_text(void)
@@ -2610,15 +2610,15 @@ void battery_shutdwn_text(void)
   LCD_position (LINE2);
   if(Features.language_f)
   {
-    _LCD_PRINT("    Battery Low");
+    LCD_print("    Battery Low");
     LCD_position (LINE3);
-    _LCD_PRINT("  Shutdown: 5 sec.");
+    LCD_print("  Shutdown: 5 sec.");
   }
     else
     {
-      _LCD_PRINT("    Bateria Baja");   // Batería Baja       Interrupción en XX segundos
+      LCD_print("    Bateria Baja");   // Batería Baja       Interrupción en XX segundos
       LCD_position (LINE3);
-      _LCD_PRINT("Interrupcion: 5 seg.");
+      LCD_print("Interrupcion: 5 seg.");
     }
 }
 void display_alk_warning(void)
@@ -2627,19 +2627,19 @@ void display_alk_warning(void)
   LCD_position (LINE1);
   if(Features.language_f)
   {
-    _LCD_PRINT("  *** WARNING ***");
+    LCD_print("  *** WARNING ***");
     LCD_position (LINE2);
-    _LCD_PRINT("  Alkaline Battery  ");
+    LCD_print("  Alkaline Battery  ");
     LCD_position (LINE3);
-    _LCD_PRINT("      is  Low       ");
+    LCD_print("      is  Low       ");
   }
     else
     {
-      _LCD_PRINT(" *** ADVERTENCIA ***");  // *** ADVERTENCIA ***    Calibrador Demasiado Caliente    ¿Voltaje Bajo?
+      LCD_print(" *** ADVERTENCIA ***");  // *** ADVERTENCIA ***    Calibrador Demasiado Caliente    ¿Voltaje Bajo?
       LCD_position (LINE2);
-      _LCD_PRINT("  Bateria Alcalina  ");    //Batería Baja       Interrupción en XX segundos
+      LCD_print("  Bateria Alcalina  ");    //Batería Baja       Interrupción en XX segundos
       LCD_position (LINE3);
-      _LCD_PRINT("      es Baja       ");
+      LCD_print("      es Baja       ");
     }
 }
 
@@ -2649,25 +2649,25 @@ void warning_text(BYTE which_source)
   LCD_position (LINE2);
   if(Features.language_f)
   {
-    _LCD_PRINT("  *** WARNING ***");
+    LCD_print("  *** WARNING ***");
     LCD_position (LINE3);
     if(which_source==0)
-      { _LCD_PRINT("   Gauge Too Hot");   }
+      { LCD_print("   Gauge Too Hot");   }
     else 
-      { _LCD_PRINT("    Low Voltage ");   }
+      { LCD_print("    Low Voltage ");   }
   }
     else
     {
-      _LCD_PRINT(" *** ADVERTENCIA ***");   //*** ADVERTENCIA ***    Calibrador Demasiado Caliente    ¿Voltaje Bajo?
+      LCD_print(" *** ADVERTENCIA ***");   //*** ADVERTENCIA ***    Calibrador Demasiado Caliente    ¿Voltaje Bajo?
       LCD_position (LINE3);
       if(which_source==0)
       {
-        _LCD_PRINT("Calibrador Demasiado");   
+        LCD_print("Calibrador Demasiado");   
         LCD_position(LINE4);
-        _LCD_PRINT("     Caliente!");
+        LCD_print("     Caliente!");
       }
       else
-        _LCD_PRINT("    Voltaje Bajo");   
+        LCD_print("    Voltaje Bajo");   
     }  
 }
 void gauge_temp_text(void)
@@ -2675,9 +2675,9 @@ void gauge_temp_text(void)
   CLEAR_DISP;
   LCD_position(LINE2);
   if(Features.language_f)
-    { _LCD_PRINT("Gauge Temp ="); } // Temperatura del Densimetro 
+    { LCD_print("Gauge Temp ="); } // Temperatura del Densimetro 
     else
-      _LCD_PRINT("Temperatura=");
+      LCD_print("Temperatura=");
 }
 
 void depth_voltage_text(void)
@@ -2687,13 +2687,13 @@ void depth_voltage_text(void)
   
   if(Features.language_f)
   { 
-   _LCD_PRINT("DS Voltage ="); 
+   LCD_print("DS Voltage ="); 
    LCD_position(LINE3);
-   _LCD_PRINT("Depth      = "); 
+   LCD_print("Depth      = "); 
   } // Temperatura del Densimetro 
    else
   { 
-   _LCD_PRINT("DS Voltaje =");
+   LCD_print("DS Voltaje =");
   }  
 }
    
@@ -2704,15 +2704,15 @@ void press_key_text(void)
   
   if(Features.language_f)
   { 
-   _LCD_PRINT("   Press Any Key    "); 
+   LCD_print("   Press Any Key    "); 
    LCD_position(LINE2);
-   _LCD_PRINT("    ESC to Exit    "); 
+   LCD_print("    ESC to Exit    "); 
   } 
   else
   { 
-    _LCD_PRINT("   Press Any Key    "); 
+    LCD_print("   Press Any Key    "); 
    LCD_position(LINE2);
-   _LCD_PRINT("    ESC to Exit    "); 
+   LCD_print("    ESC to Exit    "); 
   }  
    
   
@@ -2724,9 +2724,9 @@ void high_voltage_text(void)
   CLEAR_DISP;
   LCD_position(LINE2);
   if(Features.language_f)
-   { _LCD_PRINT("High Voltage =");  }
+   { LCD_print("High Voltage =");  }
     else
-      _LCD_PRINT("Voltaje Alto =");  //Voltaje Alto
+      LCD_print("Voltaje Alto =");  //Voltaje Alto
 }
 void shut_down_text_text(void)
 {
@@ -2734,9 +2734,9 @@ void shut_down_text_text(void)
   CLEAR_DISP;
   LCD_position (LINE2 + 6);
   if(Features.language_f)
-    { _LCD_PRINT("Shutdown"); }
+    { LCD_print("Shutdown"); }
     else
-      _LCD_PRINT(" Apagar");  // Apagar
+      LCD_print(" Apagar");  // Apagar
 }
 void shutdown_inactivity_text_text(void)
 {
@@ -2745,9 +2745,9 @@ void shutdown_inactivity_text_text(void)
   CLEAR_DISP;
   LCD_position (LINE2 + 1);
   if(Features.language_f)
-    { _LCD_PRINT("Idle Shutdown"); }
+    { LCD_print("Idle Shutdown"); }
     else
-      _LCD_PRINT(" Inactivo Apagar");  // Apagar
+      LCD_print(" Inactivo Apagar");  // Apagar
 }
 
 void enter_valid_text(BYTE which_source)
@@ -2756,22 +2756,22 @@ void enter_valid_text(BYTE which_source)
   LCD_position(LINE2);
   if(Features.language_f)
   {
-    _LCD_PRINT("    Please Enter");
+    LCD_print("    Please Enter");
     LCD_position(LINE3);  
-    _LCD_PRINT("     Valid ");
+    LCD_print("     Valid ");
     if(which_source==0)
-      { _LCD_PRINT("Date"); }
+      { LCD_print("Date"); }
     else
-      { _LCD_PRINT("Time"); }
+      { LCD_print("Time"); }
   }
     else
     {
-      _LCD_PRINT("   Favor Ingresar");   //Favor ingresar fecha y hora validos
+      LCD_print("   Favor Ingresar");   //Favor ingresar fecha y hora validos
       LCD_position(LINE3);  
       if(which_source==0)
-        _LCD_PRINT(" Fecha y Validos");
+        LCD_print(" Fecha y Validos");
       else 
-        _LCD_PRINT(" Hora y Validos");
+        LCD_print(" Hora y Validos");
     }
   delay_ms(1000);
 }
@@ -2780,15 +2780,15 @@ void enter_project_name_text(char *temp_str)
   LCD_position(LINE1);
   if(Features.language_f)
   {
-    _LCD_PRINT("Enter Project ");
+    LCD_print("Enter Project ");
     LCD_position(LINE2);
-    _LCD_PRINT("Name: ");
+    LCD_print("Name: ");
   }
     else
     {
-      _LCD_PRINT("Ingrese Nombre del ");   // Ingrese nombre del proyecto
+      LCD_print("Ingrese Nombre del ");   // Ingrese nombre del proyecto
       LCD_position(LINE2);
-      _LCD_PRINT("Proyecto: ");
+      LCD_print("Proyecto: ");
     }
   _LCD_PRINTF("%s",temp_str);
 }
@@ -2798,9 +2798,9 @@ void project_name_text(char *temp_str)
   CLEAR_DISP;
   LCD_position(LINE2);
   if(Features.language_f)
-    { _LCD_PRINT("    Project Name");   }
+    { LCD_print("    Project Name");   }
     else
-      _LCD_PRINT("Nombre del Projecto");  // Nombre del Projecto
+      LCD_print("Nombre del Projecto");  // Nombre del Projecto
   LCD_position(LINE3);
   _LCD_PRINTF(  "    %s",temp_str);   
 }
@@ -2809,19 +2809,19 @@ void station_mode_text()
   LCD_position(LINE1);
   if(Features.language_f)
   {
-    _LCD_PRINT("Station Name Mode");
+    LCD_print("Station Name Mode");
     LCD_position(LINE2);
-    _LCD_PRINT("1. Auto (sequential)");
+    LCD_print("1. Auto (sequential)");
     LCD_position(LINE3);
-    _LCD_PRINT("2. Manual Entry"); 
+    LCD_print("2. Manual Entry"); 
   }
     else
     {
-      _LCD_PRINT("Opc. Nombre Estacion");    // Opciones Nombre Estacion  1. Automatico (Secuencial)  2. Ingreso manual
+      LCD_print("Opc. Nombre Estacion");    // Opciones Nombre Estacion  1. Automatico (Secuencial)  2. Ingreso manual
       LCD_position(LINE2);
-      _LCD_PRINT("1. Automatico");
+      LCD_print("1. Automatico");
       LCD_position(LINE3);
-      _LCD_PRINT("2. Ingreso Manual"); 
+      LCD_print("2. Ingreso Manual"); 
     }
 }
 void station_start_text(char *temp_str)
@@ -2829,13 +2829,13 @@ void station_start_text(char *temp_str)
   LCD_position(LINE1);
   if(Features.language_f)
   {
-    _LCD_PRINT("Starting Station");
+    LCD_print("Starting Station");
     LCD_position(LINE2);
     _LCD_PRINTF("Number: %s",temp_str); 
   }
     else
     {
-      _LCD_PRINT("Iniciacion del");   //  Iniciacion del  Numero de Estacion
+      LCD_print("Iniciacion del");   //  Iniciacion del  Numero de Estacion
       LCD_position(LINE2);
       _LCD_PRINTF("Numero de Estacion: %s",temp_str); 
     }
@@ -2847,17 +2847,17 @@ void station_increment_text(uint16_t inc)
   {
     _LCD_PRINTF("Station # %u",inc);
     LCD_position(LINE2);
-    _LCD_PRINT("Increments by 1");
+    LCD_print("Increments by 1");
     LCD_position(LINE3);
-    _LCD_PRINT("For Each Reading");
+    LCD_print("For Each Reading");
   }
     else
     {
       _LCD_PRINTF("Estacion# %u",inc);   //Estacion #  Incrementar en 1 (uno) para cada lectura 
       LCD_position(LINE2);
-      _LCD_PRINT("Encrementar en 1");
+      LCD_print("Encrementar en 1");
       LCD_position(LINE3);
-      _LCD_PRINT("Para Cada Lectura");
+      LCD_print("Para Cada Lectura");
     }
 }
 void station_name_text()
@@ -2865,17 +2865,17 @@ void station_name_text()
   LCD_position(LINE2);
   if(Features.language_f)
   {
-    _LCD_PRINT("Enter Station Name");
+    LCD_print("Enter Station Name");
     LCD_position(LINE3);
-    _LCD_PRINT("Before Each Reading");
+    LCD_print("Before Each Reading");
   }
     else
     {
-      _LCD_PRINT("Ingrese el Nombre de");   //Ingrese el Nombre de la Estación antes de Tomar cada lectura
+      LCD_print("Ingrese el Nombre de");   //Ingrese el Nombre de la Estación antes de Tomar cada lectura
       LCD_position(LINE3);
-      _LCD_PRINT("la Estacion Antes de");
+      LCD_print("la Estacion Antes de");
       LCD_position(LINE4);
-      _LCD_PRINT("Tomar Cada Lectura");
+      LCD_print("Tomar Cada Lectura");
     }
 }
 void project_limit_text()
@@ -2883,21 +2883,21 @@ void project_limit_text()
   LCD_position(LINE1);
   if(Features.language_f)
   {
-    _LCD_PRINT("Project Limit");
+    LCD_print("Project Limit");
     LCD_position(LINE2);
-    _LCD_PRINT("Exceeded, Delete");
+    LCD_print("Exceeded, Delete");
     LCD_position(LINE3);
-    _LCD_PRINT("One or More Projects");    
+    LCD_print("One or More Projects");    
   }
     else
     {
-      _LCD_PRINT("Proyecto Limites");    //Proyecto Limites Exceso de proyectos, Borrar uno o mas proyectos. 
+      LCD_print("Proyecto Limites");    //Proyecto Limites Exceso de proyectos, Borrar uno o mas proyectos. 
       LCD_position(LINE2);
-      _LCD_PRINT("Exceso de Proyectos,");
+      LCD_print("Exceso de Proyectos,");
       LCD_position(LINE3);
-      _LCD_PRINT("Borrar Uno o Mas");
+      LCD_print("Borrar Uno o Mas");
       LCD_position(LINE4);
-      _LCD_PRINT("Proyectos.");
+      LCD_print("Proyectos.");
     }
 }
 
@@ -2908,17 +2908,17 @@ void select_from_list_text(BYTE from_where)
   if(Features.language_f)
   {
     if(from_where==0)
-    {  _LCD_PRINT("   Select Project"); }
+    {  LCD_print("   Select Project"); }
     else if(from_where==1)
-    {  _LCD_PRINT("   Select Station"); }
+    {  LCD_print("   Select Station"); }
    
   }
   else
   {
       if(from_where==0)
-      {  _LCD_PRINT("   Select Project"); }
+      {  LCD_print("   Select Project"); }
       else if(from_where==1)
-      {  _LCD_PRINT("   Select Station"); }
+      {  LCD_print("   Select Station"); }
   }
 }
 
@@ -2927,7 +2927,7 @@ void no_data_stored_text()
   CLEAR_DISP;
   LCD_position(LINE2);
 
-  _LCD_PRINT("   No Data Stored");   
+  LCD_print("   No Data Stored");   
 }
 
 void delete_data_text()
@@ -2935,19 +2935,19 @@ void delete_data_text()
   LCD_position(LINE1);
   if(Features.language_f)
   {
-    _LCD_PRINT("Delete Data");
+    LCD_print("Delete Data");
     LCD_position(LINE2);
-    _LCD_PRINT("1. Delete All Data");
+    LCD_print("1. Delete All Data");
     LCD_position(LINE3); 
-    _LCD_PRINT("2. Delete One Proj."); 
+    LCD_print("2. Delete One Proj."); 
   }
     else
     {
-      _LCD_PRINT("Borrar la Info.");
+      LCD_print("Borrar la Info.");
       LCD_position(LINE2);
-      _LCD_PRINT("1. Toda Informacion");  // Borrar la Información; 1. Borrar toda Informacion  2.Borrar un projecto
+      LCD_print("1. Toda Informacion");  // Borrar la Información; 1. Borrar toda Informacion  2.Borrar un projecto
       LCD_position(LINE3);  
-      _LCD_PRINT("2. Un Projecto"); 
+      LCD_print("2. Un Projecto"); 
     }  
 }
 void enter_to_delete_text()
@@ -2955,17 +2955,17 @@ void enter_to_delete_text()
   LCD_position(LINE2);
   if(Features.language_f)
   {
-    _LCD_PRINT("  Press ENTER to");
+    LCD_print("  Press ENTER to");
     LCD_position(LINE3);
-    _LCD_PRINT("  Delete All Data"); 
+    LCD_print("  Delete All Data"); 
   }
     else
     {
-      _LCD_PRINT("Oprima Entrada para");  // Oprima Entrada para Borrar Toda la Información
+      LCD_print("Oprima Entrada para");  // Oprima Entrada para Borrar Toda la Información
       LCD_position(LINE3);
-      _LCD_PRINT("Borrar Toda la"); 
+      LCD_print("Borrar Toda la"); 
       LCD_position(LINE4);
-      _LCD_PRINT("Informacion.");    
+      LCD_print("Informacion.");    
     }  
 }
 void erase_data_text()
@@ -2973,19 +2973,19 @@ void erase_data_text()
   LCD_position(LINE1);
   if(Features.language_f)
   {
-    _LCD_PRINT("Erase All Data");
+    LCD_print("Erase All Data");
     LCD_position(LINE2);
-    _LCD_PRINT("From Memory?");
+    LCD_print("From Memory?");
     LCD_position(LINE3);
-    _LCD_PRINT("YES to Continue"); 
+    LCD_print("YES to Continue"); 
   }
     else
     {
-      _LCD_PRINT("Borrar Toda la Info.");  // Borrar toda la Información de la Almacenada en la Memoria SI para continuar
+      LCD_print("Borrar Toda la Info.");  // Borrar toda la Información de la Almacenada en la Memoria SI para continuar
       LCD_position(LINE2);
-      _LCD_PRINT("en la Memoria?");
+      LCD_print("en la Memoria?");
       LCD_position(LINE3);
-      _LCD_PRINT("SI Para Continuar"); 
+      LCD_print("SI Para Continuar"); 
     }
 }
 void all_data_erased_text()
@@ -2993,15 +2993,15 @@ void all_data_erased_text()
   LCD_position(LINE2);
   if(Features.language_f)
   {
-    _LCD_PRINT("      All Data");
+    LCD_print("      All Data");
     LCD_position(LINE3);
-    _LCD_PRINT("       Erased"); 
+    LCD_print("       Erased"); 
   }
     else
     {
-      _LCD_PRINT("Toda la Informacion");  // Toda la información ha sido borrada
+      LCD_print("Toda la Informacion");  // Toda la información ha sido borrada
       LCD_position(LINE3);
-      _LCD_PRINT("  Ha Sido Borrada"); 
+      LCD_print("  Ha Sido Borrada"); 
     }
 }
 void delete_project_text(char *temp_str)
@@ -3010,19 +3010,19 @@ void delete_project_text(char *temp_str)
   LCD_position(LINE1);
   if(Features.language_f)
   {
-    _LCD_PRINT("Press ENTER to"); 
+    LCD_print("Press ENTER to"); 
     LCD_position(LINE2);
-    _LCD_PRINT("Delete Data In");
+    LCD_print("Delete Data In");
     LCD_position(LINE3);
-    _LCD_PRINT("Project: "); 
+    LCD_print("Project: "); 
   }
     else
     {
-      _LCD_PRINT("Press ENTRADA Para");   //Presione Entrada para Borrar Toda la Información del Proyecto
+      LCD_print("Press ENTRADA Para");   //Presione Entrada para Borrar Toda la Información del Proyecto
       LCD_position(LINE2);
-      _LCD_PRINT("Borrar Toda la Info.");
+      LCD_print("Borrar Toda la Info.");
       LCD_position(LINE3);
-      _LCD_PRINT("Proyecto: "); 
+      LCD_print("Proyecto: "); 
     }
   _LCD_PRINTF("%s",temp_str);   //print project name
 }
@@ -3031,15 +3031,15 @@ void erase_project_data_text()
   LCD_position(LINE1);
   if(Features.language_f)
   {
-    _LCD_PRINT("Erase Project Data?");
+    LCD_print("Erase Project Data?");
     LCD_position(LINE3);
-    _LCD_PRINT("YES to Continue");
+    LCD_print("YES to Continue");
   }
     else
     {
-      _LCD_PRINT("Borrar Informacion?");  // Borrar Informacion del Projecto?
+      LCD_print("Borrar Informacion?");  // Borrar Informacion del Projecto?
       LCD_position(LINE3);
-      _LCD_PRINT("YES to Continue");
+      LCD_print("YES to Continue");
     }
   
 }
@@ -3048,9 +3048,9 @@ void batt_volt_text()
 {  
   CLEAR_DISP;
   LCD_position(LINE1);
-  _LCD_PRINT("NiCd Volt =");  
+  LCD_print("NiCd Volt =");  
   LCD_position(LINE2);
-  _LCD_PRINT(" Alk Volt =");  
+  LCD_print(" Alk Volt =");  
 }
 
 void print_data_text()
@@ -3058,19 +3058,19 @@ void print_data_text()
   LCD_position(LINE1);
   if(Features.language_f)
   {
-    _LCD_PRINT("Print Data");
+    LCD_print("Print Data");
     LCD_position(LINE2);
-    _LCD_PRINT("1. Print All Data");
+    LCD_print("1. Print All Data");
     LCD_position(LINE3);
-    _LCD_PRINT("2. Print One Project");  
+    LCD_print("2. Print One Project");  
   }
     else
     {
-      _LCD_PRINT("Imprima");    // Imprima 1. Imprima toda la Informacion  2. Imprima un Proyecto
+      LCD_print("Imprima");    // Imprima 1. Imprima toda la Informacion  2. Imprima un Proyecto
       LCD_position(LINE2);
-      _LCD_PRINT("1. Toda la Info.");
+      LCD_print("1. Toda la Info.");
       LCD_position(LINE3);
-      _LCD_PRINT("2. Un Proyecto");  
+      LCD_print("2. Un Proyecto");  
     }
 }
 
@@ -3079,70 +3079,18 @@ void print_complete_text()
   LCD_position(LINE2);
   if(Features.language_f)
   {
-    _LCD_PRINT("    Print Data");
+    LCD_print("    Print Data");
     LCD_position(LINE3);
-    _LCD_PRINT("     Complete");
+    LCD_print("     Complete");
   }
     else
     {
-      _LCD_PRINT("    Impresion");   
+      LCD_print("    Impresion");   
       LCD_position(LINE3);
-      _LCD_PRINT("     Completa");
+      LCD_print("     Completa");
     }
 }
-void enter_station_name_text()
-{  
-  CLEAR_DISP;
-  LCD_position(LINE1);
-  if(Features.language_f)
-  {
-    _LCD_PRINT("Enter Station");
-    LCD_position(LINE2);
-    _LCD_PRINT("Name:");
-  }
-    else 
-    {
-      _LCD_PRINT("Entre Nombre de la");    // Entre nombre  de la estación.
-      LCD_position(LINE2);
-      _LCD_PRINT("Estacion:");
-    }
-}
-void serial_port_text()
-{ 
-  CLEAR_DISP;
-  LCD_position(LINE2);
-  if(Features.language_f)
-  {
-    _LCD_PRINT("    Serial Port");
-    LCD_position(LINE3);
-    _LCD_PRINT("     Activated");
-  }
-    else
-    {
-      _LCD_PRINT("    Conexion de");  // Conexión de Transferencia Activada
-      LCD_position(LINE3);
-      _LCD_PRINT("   Transferencia");
-      LCD_position(LINE4);
-      _LCD_PRINT("      Activada");
-    }  
-}
-void select_language_text()
-{                                                        
-  CLEAR_DISP;
-  LCD_position(LINE1); 
-  if(Features.language_f)
-  {
-    _LCD_PRINT("1. English");
-    LCD_position(LINE2);
-    _LCD_PRINT("2. Spanish");
-  }
-    else
-    {
-      _LCD_PRINT("1. Ingles");  // Seleccione el Idioma: 1. Ingles 2. Español
-      LCD_position(LINE2);
-      _LCD_PRINT("2. Espanol");
-    }
-}
+
 
 void count_text(BYTE source)
 { 
@@ -3150,54 +3098,54 @@ void count_text(BYTE source)
   {
     switch(source)
     {
-      case  0: _LCD_PRINT("M Count:"); break;
-      case  1: _LCD_PRINT("D Count:"); break;
-      case  2: _LCD_PRINT("    MCR:"); break;
-      case  3: _LCD_PRINT("    DCR:"); break;
-      case  4: _LCD_PRINT("    DT:");  break;
-      case  5: _LCD_PRINT("    WD:");  break;
-      case  6: _LCD_PRINT("  %%MAX:"); break;
-      case  7: _LCD_PRINT("%%Voids:"); break;
-      case  8: _LCD_PRINT("Moist:");  break;
-      case  9: _LCD_PRINT("%%Moist:"); break;
-      case 10: _LCD_PRINT("   DD:");   break;
-      case 11: _LCD_PRINT("   %%PR:");  break;
+      case  0: LCD_print("M Count:"); break;
+      case  1: LCD_print("D Count:"); break;
+      case  2: LCD_print("    MCR:"); break;
+      case  3: LCD_print("    DCR:"); break;
+      case  4: LCD_print("    DT:");  break;
+      case  5: LCD_print("    WD:");  break;
+      case  6: LCD_print("  %%MAX:"); break;
+      case  7: LCD_print("%%Voids:"); break;
+      case  8: LCD_print("Moist:");  break;
+      case  9: LCD_print("%%Moist:"); break;
+      case 10: LCD_print("   DD:");   break;
+      case 11: LCD_print("   %%PR:");  break;
       
-      case 12: _LCD_PRINT("BS Count:"); break;
-      case 13: _LCD_PRINT("AC COUNT:"); break;
-      case 14: _LCD_PRINT("   BS_CR:"); break;
-      case 15: _LCD_PRINT("   AC_CR:"); break; 
-      case 16: _LCD_PRINT("MAT THICKNESS:"); break; 
-      case 17: _LCD_PRINT("   BS WD:"); break; 
-      case 18: _LCD_PRINT("   AC WD:"); break; 
-      case 19: _LCD_PRINT("Soil %%AV:"); break;   
+      case 12: LCD_print("BS Count:"); break;
+      case 13: LCD_print("AC COUNT:"); break;
+      case 14: LCD_print("   BS_CR:"); break;
+      case 15: LCD_print("   AC_CR:"); break; 
+      case 16: LCD_print("MAT THICKNESS:"); break; 
+      case 17: LCD_print("   BS WD:"); break; 
+      case 18: LCD_print("   AC WD:"); break; 
+      case 19: LCD_print("Soil %%AV:"); break;   
    }
   }
     else
     {
       switch(source)
       {
-        case  0: _LCD_PRINT("H Cuenta:"); break;
-        case  1: _LCD_PRINT("D Cuenta:"); break;
-        case  2: _LCD_PRINT("     HCR:"); break;
-        case  3: _LCD_PRINT("     DCR:"); break;
-        case  4: _LCD_PRINT("      DT:");  break;
-        case  5: _LCD_PRINT("    WD:");  break;
-        case  6: _LCD_PRINT("   %%HA:"); break;
-        case  7: _LCD_PRINT("%%Voids:"); break;
-        case  8: _LCD_PRINT(" Humedad:");  break;
-        case  9: _LCD_PRINT("%%Humedad:"); break;
-        case 10: _LCD_PRINT("      DD:");   break;
-        case 11: _LCD_PRINT("     %%PR:");  break;
+        case  0: LCD_print("H Cuenta:"); break;
+        case  1: LCD_print("D Cuenta:"); break;
+        case  2: LCD_print("     HCR:"); break;
+        case  3: LCD_print("     DCR:"); break;
+        case  4: LCD_print("      DT:");  break;
+        case  5: LCD_print("    WD:");  break;
+        case  6: LCD_print("   %%HA:"); break;
+        case  7: LCD_print("%%Voids:"); break;
+        case  8: LCD_print(" Humedad:");  break;
+        case  9: LCD_print("%%Humedad:"); break;
+        case 10: LCD_print("      DD:");   break;
+        case 11: LCD_print("     %%PR:");  break;
         
-        case 12: _LCD_PRINT("BS Count:"); break;
-        case 13: _LCD_PRINT("AC COUNT:"); break;
-        case 14: _LCD_PRINT("   BS_CR:"); break;
-        case 15: _LCD_PRINT("   AC_CR:"); break; 
-        case 16: _LCD_PRINT("MAT THICKNESS:"); break; 
-        case 17: _LCD_PRINT("   BS WD:"); break; 
-        case 18: _LCD_PRINT("   AC WD:"); break;
-        case 19: _LCD_PRINT("Tier. %%A:"); break;   
+        case 12: LCD_print("BS Count:"); break;
+        case 13: LCD_print("AC COUNT:"); break;
+        case 14: LCD_print("   BS_CR:"); break;
+        case 15: LCD_print("   AC_CR:"); break; 
+        case 16: LCD_print("MAT THICKNESS:"); break; 
+        case 17: LCD_print("   BS WD:"); break; 
+        case 18: LCD_print("   AC WD:"); break;
+        case 19: LCD_print("Tier. %%A:"); break;   
       }
     }
 }
@@ -3208,566 +3156,56 @@ void stat_drift_count_text(BYTE source)
   {
     switch(source)
     {     
-      case  0: _LCD_PRINT("D%% Drift:  "); break;
-      case  1: _LCD_PRINT("Dens. Avg: ");  break;
-      case  2: _LCD_PRINT("M%% Drift:  "); break;
-      case  3: _LCD_PRINT("Moist.AVG: ");  break;      
-      case  4: _LCD_PRINT("Dens. R:   ");  break;
-      case  5: _LCD_PRINT("Moist R:   ");  break;
+      case  0: LCD_print("D%% Drift:  "); break;
+      case  1: LCD_print("Dens. Avg: ");  break;
+      case  2: LCD_print("M%% Drift:  "); break;
+      case  3: LCD_print("Moist.AVG: ");  break;      
+      case  4: LCD_print("Dens. R:   ");  break;
+      case  5: LCD_print("Moist R:   ");  break;
     }
   }
     else
     {
       switch(source)
       {
-        case  0: _LCD_PRINT("D%% Drift:  "); break;
-        case  1: _LCD_PRINT("Dens. Avg: ");  break;
-        case  2: _LCD_PRINT("H%% Drift:  0"); break;
-        case  3: _LCD_PRINT("Humedad.AVG: ");  break;
-        case  4: _LCD_PRINT("Dens. R:   ");  break;
-        case  5: _LCD_PRINT("Humedad R:   ");  break;
+        case  0: LCD_print("D%% Drift:  "); break;
+        case  1: LCD_print("Dens. Avg: ");  break;
+        case  2: LCD_print("H%% Drift:  0"); break;
+        case  3: LCD_print("Humedad.AVG: ");  break;
+        case  4: LCD_print("Dens. R:   ");  break;
+        case  5: LCD_print("Humedad R:   ");  break;
       }
     }
 }
-
-void self_test_pf_text(BYTE source, int16_t test_failed)
-{ 
-  char source_text[16][14] =    {{"Teclado:     "},{"Keypad:      "},
-                                 {"Tubos GM:    "},{"GM Tubes:    "},
-                                 {"Tubo 1 GM:   "},{"GM Tube 1:   "},                        
-                                 {"Tubo 2 GM:   "},{"GM Tube 2:   "},
-                                 {"Temp:        "},{"Temp:        "},                                
-                                 {"Tubo He3:    "},{"He3 Tube:    "},
-                                 {"FALLADO"},{"FAILED"},
-                                 {"PASADO"},{"PASSED"}};
- 
-  _LCD_PRINTF("%s",source_text[source + Features.language_f]);
-  
-  if(test_failed)
-   { _LCD_PRINTF("%s",source_text[12+Features.language_f]); }
-  else
-   { _LCD_PRINTF("%s",source_text[14+Features.language_f]);   }
-}
-
-void auto_cal_text(BYTE display_set)
-{
-  if(Features.language_f)
-  {
-    switch(display_set)
-    {
-      case 0:
-      LCD_position(LINE1);
-      _LCD_PRINT("1. Calibrate");        
-      LCD_position(LINE2);
-      _LCD_PRINT("2. Recount  ");
-      break; 
-    }       
-  }
-    else
-    {
-      switch(display_set)  // 0. Costantes de Humedad. 1.Retro-dispercion B. 2. Profundidad
-      {
-        case 0:
-        LCD_position(LINE1);
-        _LCD_PRINT("1. Calibracion");        
-        LCD_position(LINE2);
-        _LCD_PRINT("2. Recuento   ");   //Borrar la Fecha
-        break; 
-      }       
-    }
-}
-
-void place_gauge_txt()
-{
-  if(Features.language_f)
-  {   
-      LCD_position(LINE1);
-      _LCD_PRINT("Place the Gauge on   ");        
-  }
-    else
-    {   
-        LCD_position(LINE1);
-        _LCD_PRINT("Coloque el medidor en");                  
-    }
-}
-
-void block_txt(BYTE display_set)
-{
-  if(Features.language_f)
-  {
-    switch(display_set)
-    {
-      case 0:
-      LCD_position(LINE2);
-      _LCD_PRINT("Low Block           ");        
-      break;
-
-	  case 1:
-      LCD_position(LINE2);
-      _LCD_PRINT("Medium Block        ");      
-      break;
-	  
-	  case 2:
-      LCD_position(LINE2);
-      _LCD_PRINT("High Block          ");        
-      break;
-	  
-	  case 3:
-      LCD_position(LINE2);
-      _LCD_PRINT("High Moisture Block");        
-      break;
-	  
-    }       
-  }
-    else
-    {
-      switch(display_set)
-      {
-        case 0:
-        LCD_position(LINE2);
-        _LCD_PRINT("Bloqueo bajo         ");        
-        break;
-
-	    case 1:
-        LCD_position(LINE2);
-        _LCD_PRINT("Bloquear Medio       ");      
-        break;
-	  
-	    case 2:
-        LCD_position(LINE2);
-        _LCD_PRINT("Bloque de alta       ");        
-        break;
-	  
-	    case 3:
-        LCD_position(LINE2);
-        _LCD_PRINT("Bloquear la humedad ");        
-        break;
-      }       
-    }
-}
-/*
-void auto_cal_depth(BYTE display_set, int j)
-{
-	if(Features.language_f){
-	 switch(display_set)
-	 {
-		case 0:
-		 if(bit_test(valid_depth,depth_temp))    
-		 {    
-			if(j == 1){
-				LCD_position(LINE3);
-				_LCD_PRINT("Depth: BSCA  VALID  ");
-			}
-			else
-			{
-				if(Features.SI_units){                                //           in "kg/m3" mode
-					LCD_position(LINE3);
-					_LCD_PRINTF("Depth: %3umm  VALID  ", j * 25);
-				}
-				else{
-					LCD_position(LINE3);
-					_LCD_PRINTF("Depth: %2uin  VALID  ", j);         //   in "PCF" mode
-				}
-			}
-		 }
-		break;
-	 
-		case 1:
-		 if(bit_test(valid_depth,depth_temp))    
-		 {    
-			if(j == 1){
-				LCD_position(LINE3);
-				_LCD_PRINT("Depth: BSCA  INVALID");
-			}
-			else 
-			{
-				if(Features.SI_units){                               //       in "kg/m3" mode
-					LCD_position(LINE3);
-					_LCD_PRINTF("Depth: %3umm  INVALID", j * 25);
-				}
-				else{
-					LCD_position(LINE3);
-					_LCD_PRINTF("Depth: %2uin  INVALID", j);          //  in "PCF" mode   
-				}
-			}
-		 }
-		break;
-	}
-	}
-	  else{
-	   switch(display_set)
-	   {
-		  case 0:
-		  if(bit_test(valid_depth,depth_temp))    
-		  {    
-			  if(j == 1){
-				  LCD_position(LINE3);
-				  _LCD_PRINT("Fondo: BSCA  VALIDO ");
-			  }
-			  else
-			  {
-				  if(Features.SI_units)
-  				{                                       //    in "kg/m3" mode
-					  LCD_position(LINE3);
-					  _LCD_PRINTF("Fondo: %3umm  VALIDO ", j * 25);
-				  }
-				  else
-  				{
-					  LCD_position(LINE3);
-					  _LCD_PRINTF("Fondo: %2uin  VALIDO ", j);         //   in "PCF" mode
-				  }
-			  }
-		  }
-		  break;
-	 
-		  case 1:
-		  if(bit_test(valid_depth,depth_temp))    
-		  {    
-			  if(j == 1){
-				  LCD_position(LINE3);
-				  _LCD_PRINT("Fondo: BSCA INVALIDO");
-			  }
-			  else 
-			  {
-				  if(Features.SI_units){                                  //    in "kg/m3" mode
-					  LCD_position(LINE3);
-					  _LCD_PRINTF("Fondo: %3umm INVALIDO", j * 25);
-				  }
-				  else{
-					  LCD_position(LINE3);
-					  _LCD_PRINTF("Fondo: %2uin INVALIDO", j);      //      in "PCF" mode   
-				  }
-			  }
-		  }
-		  break;
-	  }
-	  }
-}
-*/
-void yes_when_ready_txt ( void )
-{
-  if(Features.language_f)
-  {   
-      LCD_position(LINE4);
-      _LCD_PRINT("Press Yes when READY");        
-  }
-    else
-    {   
-        LCD_position(LINE4);
-        _LCD_PRINT("Sí, cuando PREPARADO");                  
-    }
-}
-
-void shut_down_txt( void )
-{
-  CLEAR_DISP;
-  if(Features.language_f)
-  {   
-      LCD_position(LINE1);
-      _LCD_PRINT("  Hold OFF Key Down ");        
-      LCD_position(LINE2);
-      _LCD_PRINT("    for 25secs      ");        
-      LCD_position(LINE4);
-      _LCD_PRINT("  Press ESC to Exit ");        
-  }
-  else
-  {   
-       LCD_position(LINE1);
-      _LCD_PRINT("  Hold OFF Key Down ");        
-      LCD_position(LINE2);
-      _LCD_PRINT("    for 25secs      ");        
-      LCD_position(LINE4);
-      _LCD_PRINT("  Press ESC to Exit ");        
-  }                 
-  
-}
-
-
-void press_off_txt ( void )
-{
-  CLEAR_DISP;
-  if(Features.language_f)
-  {   
-      LCD_position(LINE1);
-      _LCD_PRINT("  TEST IN PROCESS   ");        
-      LCD_position(LINE2);
-      _LCD_PRINT(" Keep Pressing OFF  ");        
-      LCD_position(LINE4);
-      _LCD_PRINT("  Press ESC to Exit ");        
-  }
-  else
-  {   
-       LCD_position(LINE1);
-      _LCD_PRINT("  TEST IN PROCESS   ");        
-      LCD_position(LINE2);
-      _LCD_PRINT(" Keep Pressing OFF  ");        
-      LCD_position(LINE4);
-      _LCD_PRINT("  Press ESC to Exit ");         
-  }                 
-  
-}
-
-
-void light_test_txt( void )
-{
-  CLEAR_DISP;
-  if(Features.language_f)
-  {   
-      LCD_position(LINE1);
-      _LCD_PRINT("     Press START   ");        
-      LCD_position(LINE2);
-      _LCD_PRINT(" to Turn on Lights ");        
-      LCD_position(LINE3);
-      _LCD_PRINT("    for 5 secs     ");        
-      LCD_position(LINE4);
-      _LCD_PRINT("  Press ESC to Exit ");        
-  }
-  else
-  {   
-      LCD_position(LINE1);
-      _LCD_PRINT("     Press START    ");        
-      LCD_position(LINE2);
-      _LCD_PRINT(" to Turn on Lights  ");        
-      LCD_position(LINE3);
-      _LCD_PRINT("    for 5 secs      ");        
-      LCD_position(LINE4);
-      _LCD_PRINT(" Press ESC to Exit  ");    
-  }                 
-  
-}
-
-void lights_are_on_txt( void )
-{
-  CLEAR_DISP;
-  if(Features.language_f)
-  {   
-      
-      LCD_position(LINE2);
-      _LCD_PRINT("    Lights are on   ");        
-      
-  }
-  else
-  {   
-    LCD_position(LINE2);
-    _LCD_PRINT("    Lights are on   ");        
-  }                 
-  
-}
-
-
-void count_test_txt( void )
-{
-  CLEAR_DISP;
-  if(Features.language_f)
-  {   
-      LCD_position(LINE1);
-      _LCD_PRINT("  Press START for   ");        
-      LCD_position(LINE2);
-      _LCD_PRINT("  30 s. Tube Test   ");        
-      LCD_position(LINE4);
-      _LCD_PRINT("  Press ESC to Exit ");        
-  }
-  else
-  {   
-      LCD_position(LINE1);
-      _LCD_PRINT("  Press START for   ");        
-      LCD_position(LINE2);
-      _LCD_PRINT("  30 s. Tube Test   ");        
-      LCD_position(LINE4);
-      _LCD_PRINT("  Press ESC to Exit ");    
-  }                 
-  
-}
-
 
 void display_count_text ( uint16_t moist, uint32_t dens,uint32_t dens_combo )
 { 
-
-  CLEAR_DISP;
+  char line_buff [21];
   
-  if(Features.language_f)
-  {
-    LCD_position (LINE1);
-    _LCD_PRINTF("      M Count:%u", moist); 
-    LCD_position (LINE2);
-    _LCD_PRINTF(" Combo DCount:%lu",(unsigned long)dens_combo); 
-    LCD_position (LINE3);
-    _LCD_PRINTF("Single DCount:%lu",(unsigned long)dens); 
-    LCD_position(LINE4);
-    _LCD_PRINT("  Press ESC to Exit ");  
-  }
-  else
-  {
-    LCD_position (LINE1);
-    _LCD_PRINT("      M Count:      "); 
-    LCD_position (LINE2);
-    _LCD_PRINT(" Combo DCount:      "); 
-    LCD_position (LINE3);
-    _LCD_PRINT("Single DCount:      "); 
-    LCD_position(LINE4);
-    _LCD_PRINT("  Press ESC to Exit ");     
-  }
-}
-
-
-
-void review_consts(){ 
-  if(Features.language_f)
-  {
-    LCD_position(LINE2); 
-    _LCD_PRINT(" Review Constants?  ");
-  	LCD_position(LINE3); 
-    _LCD_PRINT("  Press YES or NO   "); 	
-	}
-
+  //      M Count:
+  // Combo DCount:   
+  //Single DCount:    
+  //Press ESC to Exit
+  dispscrn_e ( s_display_count_text );
+  
+  // print moisture count
+  snprintf ( line_buff,20,"%u",moist);
+  LCD_position (LINE1+14);  
+  LCD_print( line_buff);
+  
+  // print density combo count
+  snprintf ( line_buff,20,"%lu",(unsigned long)dens_combo);
+  LCD_position (LINE2+14);  
+  LCD_print( line_buff);
  
-}
-
-void store_consts(){ 
-  if(Features.language_f)
-  {
-    LCD_position(LINE2); 
-    _LCD_PRINT(" Store Constants?  ");
-    LCD_position(LINE3); 
-    _LCD_PRINT("  Press YES or NO   "); 	
-	}
-
-  
+  // print density combo count
+  snprintf ( line_buff,20,"%lu",(unsigned long)dens);
+  LCD_position (LINE3+14);  
+  LCD_print( line_buff);  
 }
 
 
 
-void press_yes_txt(){
 
-if(Features.language_f){
-LCD_position(LINE4); 
-_LCD_PRINT("      Press YES     ");
-}
-else{
-LCD_position(LINE4); 
-_LCD_PRINT("     PULSE INTRO    "); 
-}
-}
 
-void press_enter_txt(){
 
-if(Features.language_f){
-LCD_position(LINE4); 
-_LCD_PRINT("     Press ENTER    ");
-}
-else{
-LCD_position(LINE4); 
-_LCD_PRINT("    PULSE INTRO    "); 
-}
-}
-
-void write_Calib_USB_txt(){
-
-LCD_position(LINE1); 
-_LCD_PRINT(" Write Calibra Data ");
-LCD_position(LINE2); 
-_LCD_PRINT("       To USB       ");
-Press_YES_or_NO(LINE3);
-}
-
-/*
-void gauge_type_txt ( BYTE display_set )
-  {
-
-  switch(display_set)
-  {
-  	case 0:
-  	 LCD_position(LINE1);
-       _LCD_PRINT(" Select Gauge Type ");
-  	 LCD_position(LINE2);
-       _LCD_PRINT("1. 8-1      2. 8-2 ");
-       LCD_position(LINE3); 
-       _LCD_PRINT("3. 12-1     4. 12-2");
-  	 LCD_position(LINE4); 
-  	 _LCD_PRINT("Select #, ESC Exit "); 
-  	break;
-  	
-  	case 1:
-  	LCD_position(LINE1);
-  	_LCD_PRINT("   Gauge Type 8-1   ");
-  	break;
-  	
-  	case 2:
-  	LCD_position(LINE1);
-  	_LCD_PRINT("   Gauge Type 8-2   ");
-  	break;
-  	
-  	case 3:
-  	LCD_position(LINE1);
-  	_LCD_PRINT("   Gauge Type 12-1  ");
-  	break;
-  	
-  	case 4:
-  	LCD_position(LINE1);
-  	_LCD_PRINT("   Gauge Type 12-2   ");
-  	break;	
-  		
-  	case 5:
-  	LCD_position(LINE2);
-  	_LCD_PRINT("   Special Depth?   ");
-  	LCD_position(LINE3);
-  	_LCD_PRINT("   Press Yes or No  ");
-  	break;
-  }
-
-}
-*/
-/*
-  void auto_cal_depth(BYTE function, BYTE depth_temp)
-  {  
-    if(Features.language_f)
-    {
-      if((depth_temp <= 1) && auto_depth)
-      {
-        if((depth_temp == 0) && (function == 0))
-          _LCD_PRINT("Depth: SAFE    ");             //    Safe consts.
-        else 
-          _LCD_PRINT("Depth: BSCATTER");
-      }    
-      else if(bit_test(valid_depth,depth_temp))    
-      {    
-        if(depth_temp == 0)
-          _LCD_PRINT("Depth: BSCATTER");
-        else
-        {
-          if(Features.SI_units)                                     //      in "kg/m3" mode
-            _LCD_PRINTF("Depth: %3u mm.     ", depth_temp * 25);
-          else
-            _LCD_PRINTF("Depth: %2u in.     ", depth_temp);          //  in "PCF" mode   
-        } 
-      }
-      else
-        _LCD_PRINT("Depth: No Depth");  
-    }
-    else
-    {
-      if((depth_temp <= 1) && auto_depth)
-      {
-        if((depth_temp == 0) && (function == 0))
-          _LCD_PRINT("Profundidad: SEGURO ");              //   Safe consts.
-        else 
-          _LCD_PRINT("Profundidad: RD     ");
-      }    
-      else if(bit_test(valid_depth,depth_temp))    
-      {    
-        if(depth_temp == 0)
-          _LCD_PRINT("Profundidad: RD     ");
-        else
-        {
-          if(Features.SI_units)                            //               in "kg/m3" mode
-            _LCD_PRINTF("Profundidad: %3u mm.", depth_temp * 25);
-          else
-            _LCD_PRINTF("Profundidad: %2u in. ", depth_temp);         //   in "PCF" mode   
-        } 
-      }
-      else
-        _LCD_PRINT("Profundidad: Sin    ");   
-    }  
-  }
-
-*/

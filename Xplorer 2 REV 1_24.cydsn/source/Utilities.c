@@ -785,7 +785,7 @@ void shut_down_test (void )
  //"    for 25secs      "        
  //"                    "
  //"  Press ESC to Exit "    
- shut_down_txt();
+ dispscrn_e (s_shut_down_txt);
 
  button = getKey ( TIME_DELAY_MAX ) ;
 
@@ -796,8 +796,7 @@ void shut_down_test (void )
    //"  TEST IN PROCESS   ");        
    //" Keep Pressing OFF  ");        
    //"  Press ESC to Exit ");  
-   
-   press_off_txt();
+   dispscrn_e (s_press_off_txt);
    LCD_position (LINE3) ;
 
    // Disable auto shut down
@@ -855,7 +854,7 @@ void light_test (void )
   // Press START 
   // to turn on LIGHT
   // for 5 seconds
-  light_test_txt();
+  dispscrn_e (s_light_test_txt);
   
   while(1)
   {
@@ -870,7 +869,11 @@ void light_test (void )
     }
   }
   
-  lights_are_on_txt(  );
+  //mBlank
+  //Lights are on      
+  //mBlank    
+  //mBlank
+  dispscrn_e ( s_lights_are_on_txt );
   
   KEY_B_LIGHT_ENABLE()  ;  
   
@@ -902,7 +905,11 @@ void raw_count_test (void )
   enum buttons button;
     
   // Press START to take 10 second count
-  count_test_txt();
+  //  Press START for   
+  //  30 s. Tube Test     
+  //  mBlank    
+  //  Press ESC to Exit 
+  dispscrn_e ( s_count_test_txt );               
   
   while(1)
   {
@@ -929,7 +936,11 @@ void raw_count_test (void )
   // run count for 5 seconds
   measurePulses ( LINE3, 15, &moisture_cnt, &density_cnt, tst_depth_g);  
   Spec_flags.self_test = FALSE;
-  
+ 
+  //      M Count:
+  // Combo DCount:   
+  //Single DCount:    
+  //Press ESC to Exit
   display_count_text ( moisture_cnt, density_cnt, density_1_2_cnt );
 
   while(1)

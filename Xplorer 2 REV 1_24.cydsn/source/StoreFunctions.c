@@ -1862,6 +1862,9 @@ void write_data_to_printer(void)  // leads user though process to write project(
             go_to_screen = 4;
             break;
       case 4:
+            
+            
+            
             print_complete_text();  //TEXT// display "    Print Data\n      Complete" LINE2,3
             delay_ms(1000);
             escape = TRUE;
@@ -1906,14 +1909,18 @@ void storeStationData ( char * project, station_data_t station  )
    delay_ms(1500);
    return ;
   }
+  
   CLEAR_DISP;
   LCD_position(LINE2);
   current_project_text( project );
   delay_ms(1000);
-  enter_station_name_text();  //TEXT// display "Enter Station\nName:"  LINE1,2
-  YES_to_Accept(LINE3);       //TEXT// display "YES to Accept"
-  ESC_to_Exit(LINE4);         //TEXT// display "ESC to Exit"
-  lcd_line = (Features.language_f) ? LINE2+6 : LINE2+10;
+  
+  //Enter Station
+  //    Name:
+  //YES to Accept
+  //ESC to Exit
+  dispscrn_e ( s_enter_station_name_text );  //TEXT// display "Enter Station\nName:"  LINE1,2
+   
   //write entered name of station
   enter_name ( station.name, lcd_line );
   if ( getLastKey() == ESC )

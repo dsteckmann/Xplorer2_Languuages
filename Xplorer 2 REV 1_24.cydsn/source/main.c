@@ -158,7 +158,11 @@ int main() { //initialization and main loop
   if ( RS232_CABLE_DETECT_Read() == 1)
   {        
     // check to see if serial cable is connected
-    serial_port_text();                         //TEXT// display "    Serial Port\n      Activated"     
+    //mBlank   
+    //Serial Port
+    //Activated
+    //mBlank
+    dispscrn_e (s_serial_port_text);                             
     wait_for_serial();
     UART2_Stop();
     isrUART2_Stop();

@@ -839,7 +839,11 @@ void select_language(void)
 {
   enum buttons button;
   
-  select_language_text();  //TEXT// display "1. English\n2. Spanish"  LINE1,2
+  //1. English
+  //2. Spanish   
+  //mBlank    
+  //mBlank
+  dispscrn_e ( s_select_language_text); 
 
   up_down_select_text(0);  //TEXT// display "Select #, ESC Exit"
 

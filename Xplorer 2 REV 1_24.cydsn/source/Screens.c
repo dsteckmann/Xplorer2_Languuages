@@ -293,3 +293,108 @@ CONST_LCDSTRING_PTR s_DataDownloadComplete[ ] = { mBlank,DataDownload_1,DataDown
 CONST_LCDSTRING noProjects_1[]   = {{10,"No Projects"},  {10,"No Hay Proyectos"}};
 CONST_LCDSTRING noProjects_2[]   = {{10,"Stored"},{10,"En la Memoria"}};
 CONST_LCDSTRING_PTR snoProjectsStored[ ] = { mBlank,noProjects_1,noProjects_2,mBlank};
+
+
+
+
+//  Press START for   
+//  30 s. Tube Test     
+//  mBlank    
+//  Press ESC to Exit 
+CONST_LCDSTRING m_temp10[]   = {{10,"Press START for"},  {10,"Press START for"}};
+CONST_LCDSTRING m_temp11[]   = {{10,"0 s. Tube Test"},{10,"0 s. Tube Test"}};
+CONST_LCDSTRING_PTR s_count_test_txt[ ] = { m_temp10,m_temp11,mBlank,mESC_to_Exit};
+
+
+//mBlank
+//Lights are on      
+//mBlank    
+//mBlank
+CONST_LCDSTRING m_temp12[]   = {{10,"Lights are on"},  {10,"Lights are on"}};
+CONST_LCDSTRING_PTR s_lights_are_on_txt[ ] = { mBlank,m_temp12,mBlank,mBlank};
+
+
+
+//      M Count:
+// Combo DCount:   
+//Single DCount:    
+//Press ESC to Exit
+CONST_LCDSTRING m_temp13[]   = {{0,"      M Count:"},{0,"      M Count:"}};
+CONST_LCDSTRING m_temp14[]   = {{0," Combo DCount:"},{0," Combo DCount:"}};
+CONST_LCDSTRING m_temp15[]   = {{0,"Single DCount:"},{0,"Single DCount:"}};
+CONST_LCDSTRING_PTR s_display_count_text[ ] = { m_temp13,m_temp14,m_temp15,mESC_to_Exit};
+
+
+//     Press START   
+// to Turn on Lights    
+//    for 5 secs        
+//Press ESC to Exit
+CONST_LCDSTRING m_temp16[]   = {{10,"Press START"},  {10,"Press START"}};
+CONST_LCDSTRING m_temp17[]   = {{10,"to Turn on Light"},{10,"to Turn on Light"}};
+CONST_LCDSTRING m_temp18[]   = {{10,"for 5 secs"},{10,"for 5 secs"}};
+CONST_LCDSTRING_PTR s_light_test_txt[ ] = { m_temp16,m_temp17,m_temp18,mESC_to_Exit};
+
+
+//TEST IN PROCESS
+//Keep Pressing OFF   
+//mBlank    
+//Press ESC to Exit
+CONST_LCDSTRING m_temp19[]   = {{10,"TEST IN PROCESS"},  {10,"TEST IN PROCESS"}};
+CONST_LCDSTRING m_temp20[]   = {{10,"Keep Pressing OFF "},{10,"Keep Pressing OFF "}};
+CONST_LCDSTRING_PTR s_press_off_txt[ ] = { m_temp19,m_temp20,mBlank,mESC_to_Exit};
+
+
+//Hold OFF Key Down
+//for 25secs   
+//mBlank    
+///Press ESC to Exit
+CONST_LCDSTRING m_temp21[]   = {{10,"Hold OFF Key Down"},  {10,"Hold OFF Key Down"}};
+CONST_LCDSTRING m_temp22[]   = {{10,"for 25secs"},{10,"for 25secs"}};
+CONST_LCDSTRING_PTR s_shut_down_txt[ ] = { m_temp21,m_temp22,mBlank,mESC_to_Exit};
+
+//1. English
+//2. Spanish   
+//mBlank    
+//mBlank
+CONST_LCDSTRING m_temp23[]   = {{0,"1. English"},{0,"1. Ingles"}};
+CONST_LCDSTRING m_temp24[]   = {{0,"2. Spanish"},{0,"2. Spanish"}};
+CONST_LCDSTRING_PTR s_select_language_text[ ] = { m_temp23,m_temp24,mBlank,mBlank};
+
+//mBlank   
+//Serial Port
+//Activated
+//mBlank
+CONST_LCDSTRING m_temp25[]   = {{10,"Serial Port"},  {10,"Conexion de"}};
+CONST_LCDSTRING m_temp26[]   = {{10,"Activated"},{10,"Transferencia"}};
+CONST_LCDSTRING m_temp27[]    = {{10," "},{10,"Activada"}};
+CONST_LCDSTRING_PTR s_serial_port_text[ ] = { mBlank,m_temp25,m_temp27,mBlank};
+
+
+//Enter Station
+//Name:
+//YES to Accept
+//ESC to Exit
+CONST_LCDSTRING m_temp28[]   = {{10,"Enter Station"},  {10,"Entre Nombre de la"}};
+CONST_LCDSTRING m_temp29[]   = {{0,"   Name:"},  {0,"Estacion:"}};
+CONST_LCDSTRING_PTR s_enter_station_name_text[ ] = { m_temp28,m_temp29,mYES_to_Accept,mESC_to_Exit};
+
+
+
+//
+//Print Data
+//Complete
+
+CONST_LCDSTRING m_temp30[]   = {{10,"Print Data"},  {10,""}};
+CONST_LCDSTRING m_temp31[]   = {{10,"Complete"},  {10,""}};
+CONST_LCDSTRING_PTR s_print_complete_text[ ] = { mBlank,m_temp30,m_temp31,mBlank};
+
+
+//
+//
+//
+//
+CONST_LCDSTRING m_temp1[]   = {{10,""},  {10,""}};
+CONST_LCDSTRING m_temp2[]   = {{10,""},  {10,""}};
+CONST_LCDSTRING m_temp3[]   = {{10,""},  {10,""}};
+CONST_LCDSTRING m_temp4[]   = {{10,""},  {10,""}};
+CONST_LCDSTRING_PTR s_twmp_txt[ ] = { mBlank,mBlank,mBlank,mBlank};

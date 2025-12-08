@@ -94,6 +94,15 @@ extern CONST_LCDSTRING_PTR s_writingDataUSB_text[ ];
 extern CONST_LCDSTRING_PTR s_noUSBDeviceDetected[ ];
 extern CONST_LCDSTRING_PTR s_DataDownloadComplete[ ];
 extern CONST_LCDSTRING_PTR snoProjectsStored[ ];
+extern CONST_LCDSTRING_PTR s_count_test_txt[];
+extern CONST_LCDSTRING_PTR s_lights_are_on_txt[ ] ;
+extern CONST_LCDSTRING_PTR s_display_count_text[ ] ;
+extern CONST_LCDSTRING_PTR s_light_test_txt[ ] ;
+extern CONST_LCDSTRING_PTR s_press_off_txt[ ];
+extern CONST_LCDSTRING_PTR s_shut_down_txt[ ] ;
+extern CONST_LCDSTRING_PTR s_select_language_text[ ];
+extern CONST_LCDSTRING_PTR s_serial_port_text[ ];
+extern CONST_LCDSTRING_PTR s_enter_station_name_text[ ];
 
 #endif
 
