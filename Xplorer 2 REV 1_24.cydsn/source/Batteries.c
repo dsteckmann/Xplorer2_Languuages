@@ -184,10 +184,12 @@ void batt_volt(void)
   
   Flags.bat_volt =  1;              //  TRUE
   
-  batt_volt_text();                 //  "NiCad Volt =\n  Alk Volt ="  LINE1,2  
-  
-  ESC_to_Exit(LINE4);               //  "ESC to Exit"
-       
+  //NiCd Volt =
+  // Alk Volt =
+  //
+  // ESC to Exit
+  dispscrn_e (s_batt_volt_text );     
+      
    wait_for_key_release();
    global_special_key_flag = FALSE;
 

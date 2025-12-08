@@ -53,6 +53,10 @@ CONST_LCDSTRING SelectNumber[2]        =  {{ 10, "Select #, ESC Exit" },{ 10, "S
 //Press START to Test
 CONST_LCDSTRING m_PressStart[]                = {{ 10, "Press START" }, { 10, "Presione <START>"} };
 
+
+//<YES> to Continue
+CONST_LCDSTRING m_Yes_to_Continue[]                = {{ 10, "<YES> to Continue" }, { 10, "<YES> para Continuar"} };
+
 //
 //
 //UP/DOWN for Next
@@ -383,18 +387,185 @@ CONST_LCDSTRING_PTR s_enter_station_name_text[ ] = { m_temp28,m_temp29,mYES_to_A
 //
 //Print Data
 //Complete
+//
 
-CONST_LCDSTRING m_temp30[]   = {{10,"Print Data"},  {10,""}};
-CONST_LCDSTRING m_temp31[]   = {{10,"Complete"},  {10,""}};
-CONST_LCDSTRING_PTR s_print_complete_text[ ] = { mBlank,m_temp30,m_temp31,mBlank};
+CONST_LCDSTRING m_printdata[]   = {{0,"Print Data"},  {10,"Imprima"}};
+CONST_LCDSTRING m_temp31[]   = {{0,"Complete"},  {10,"completa"}};
+CONST_LCDSTRING_PTR s_print_complete_text[ ] = { mBlank,m_printdata,m_temp31,mBlank};
+
+
+//Print Data
+//1. Print All Data
+//2. Print One Project
+// ESC to Exit
+CONST_LCDSTRING m_temp32[]   = {{0,"1. Print All Data"},    {0,"1. Toda la Info."}};
+CONST_LCDSTRING m_temp33[]   = {{0,"2. Print One Project"}, {0,"2. Un Proyecto"}};
+CONST_LCDSTRING_PTR s_print_data_text[ ] = { m_printdata,m_temp32,m_temp33,mESC_to_Exit};
+
+
+//NiCd Volt =
+// Alk Volt =
+//
+// ESC to Exit
+CONST_LCDSTRING m_temp34[]   = {{0,"NiCd Volt ="},  {0,"NiCd Volt ="}};
+CONST_LCDSTRING m_temp35[]   = {{0," Alk Volt ="},  {0," Alk Volt ="}};
+CONST_LCDSTRING_PTR s_batt_volt_text[ ] = { m_temp34,m_temp35,mBlank,mESC_to_Exit};
+
+
+//Erase Project Data?
+//
+//YES to Continue
+//ESC to Exit
+CONST_LCDSTRING m_line36[]   = {{0,"Erase Project Data?"},  {0,"Borrar Informacion?"}};
+CONST_LCDSTRING_PTR s_erase_project_data_text[ ] = { m_line36,mBlank,m_Yes_to_Continue,mESC_to_Exit};
+
+//Press ENTER to
+//Delete Data In
+//Project:
+//ESC to Exit
+CONST_LCDSTRING m_line37[]  = {{0,"Press ENTER to"},  {0,"Press ENTER Para"}};
+CONST_LCDSTRING m_line38[]  = {{0,"Delete Data In"},  {0,"Borrar Toda la Info."}};
+CONST_LCDSTRING m_line39[]  = {{0,"Project: "},       {0,"Proyecto: "}};
+CONST_LCDSTRING_PTR s_delete_project_text[ ] = { m_line37,m_line38,m_line39,mESC_to_Exit};
 
 
 //
+//All Data
+//Erased
+//
+CONST_LCDSTRING m_line40[]   = {{10,"All Data"},  {10,"Toda la Informacion"}};
+CONST_LCDSTRING m_line41[]   = {{10,"Erased"},  {10,"Ha Sido Borrada"}};
+CONST_LCDSTRING_PTR s_all_data_erased_text[ ] = { mBlank,m_line40,m_line41,mBlank};
+
+
+//Erase All Data
+//From Memory?
+//YES to Continue
+//ESC to Exit
+CONST_LCDSTRING m_line42[]   = {{10,"Erase All Data"},  {10,"Borrar Toda la Info."}};
+CONST_LCDSTRING m_line43[]   = {{10,"From Memory?"},    {10,"en la Memoria?"}};
+CONST_LCDSTRING_PTR s_erase_data_text[ ] = { m_line42,m_line43,m_Yes_to_Continue,mESC_to_Exit};
+
+
+
+//Press ENTER to
+//Delete All Data
+//
+//
+CONST_LCDSTRING m_line44[]   = {{10,"Press ENTER to"},  {10,"Oprima Entrada para"}};
+CONST_LCDSTRING m_line45[]   = {{10,"Delete All Data"},  {10,"Borrar Toda la"}};
+CONST_LCDSTRING m_line46[]   = {{10," "},  {10,"Informacion."}};
+CONST_LCDSTRING_PTR s_enter_to_delete_text[ ] = { m_line44,m_line45,m_line46,mBlank};
+
+
+//Delete Data
+//1. Delete All Data
+//2. Delete One Proj.
+//
+CONST_LCDSTRING m_line47[]   = {{0,"Delete Data"},  {0,"Borrar la Info."}};
+CONST_LCDSTRING m_line48[]   = {{0,"1. Delete All Data"},  {0,"1. Toda Informacion"}};
+CONST_LCDSTRING m_line49[]   = {{0,"2. Delete One Proj."},  {0,"2. Un Projecto"}};
+CONST_LCDSTRING_PTR s_delete_data_text[ ] = { m_line47,m_line48,m_line49,mBlank};
+
+
+//
+//No Data Stored
+//
+//
+CONST_LCDSTRING m_no_stored_data[]   = {{10,"No Data Stored"},  {10,"no hay datos"}};
+CONST_LCDSTRING m_almencendos[]   = {{10," "},  {10,"almacenados"}};
+CONST_LCDSTRING_PTR s_no_stored_data[ ] = { mBlank,m_no_stored_data,m_almencendos,mBlank};
+
+
+CONST_LCDSTRING m_SelectProject[]   = {{10,"Select Project"},  {0,"Seleccionar Proyecto"}};
+CONST_LCDSTRING m_SelectStation[]   = {{10,"Select Station"},  {0,"Seleccionar Estacion"}};
+
+
+//Project Limit
+//Exceeded, Delete
+//One or More Projects
+//
+CONST_LCDSTRING m_line50[]   = {{10,"Project Limit"},  {10,"Proyecto Limites"}};
+CONST_LCDSTRING m_line51[]   = {{10,"Exceeded, Delete"},  {10,"Exceso de Proyectos,"}};
+CONST_LCDSTRING m_line52[]   = {{10,"One or More Projects"},  {10,"Borrar Uno o Mas"}};
+CONST_LCDSTRING m_line53[]   = {{10," "},  {10,"Proyectos."}};
+CONST_LCDSTRING_PTR s_project_limit_text[ ] = { m_line50,m_line51,m_line52,m_line53};
+
+
+//
+//Enter Station Name
+//Before Each Reading
+//
+CONST_LCDSTRING m_line54[]   = {{10,"Enter Station Name"},  {10,"Ingrese el Nombre de"}};
+CONST_LCDSTRING m_line55[]   = {{10,"Before Each Reading"},  {10,"la Estacion Antes de"}};
+CONST_LCDSTRING m_line56[]   = {{10," "},  {10,"Tomar Cada Lectura"}};
+CONST_LCDSTRING_PTR s_station_name_text[ ] = { mBlank,m_line54,m_line55,m_line56};
+
+// These lines are used to display the measurement results.
+// The name of each result is abbreviated. The English meaning is given
+// M Count:   English-Moisture Count
+// D Count:   English-Density Count
+// MCR:       English-Moisture Count Ratio
+// DCR:       English-Density Count Ratio
+// DT:        English-Top Density (nomograph mode)
+// WD:        English-Wet Density
+// %MAX:      English-Percent MAX density
+// %Voids:    English-Percent Voids
+// Moist:     English-Moisture Density
+// DD:        English-Dry Density
+// %PR:       English-Percent Proctor
+// Soil %AV:  English-Percent Soil Air Voids
+
+
+// M Count:
+CONST_LCDSTRING m_M_Count[]   = {{0,"M Count:"},  {0,"H Cuenta:"}};
+
+// D Count:
+CONST_LCDSTRING m_D_Count[]   = {{0,"D Count:"},{0,"D Cuenta:"}};
+
+//MCR:
+CONST_LCDSTRING m_MCR[]       = {{0,"    MCR:"},{0,"     HCR:"}};
+
+//DCR:
+CONST_LCDSTRING m_DCR[]       = {{0,"    DCR:"},{0,"     DCR:"}};
+
+//DT:
+CONST_LCDSTRING m_DT[]        = {{0,"     DT:"},{0,"      DT:"}};
+
+//WD:
+CONST_LCDSTRING m_WD[]        = {{0,"     WD:"},{0,"    WD:"}};
+
+//%MAX:
+CONST_LCDSTRING m_per_max[]   = {{0,"   %MAX:"},{0,"    %HA:"}};
+
+//%Voids:
+CONST_LCDSTRING m_per_voids[] = {{0," %Voids:"},{0,"%Voids"}};
+
+//Moist:
+CONST_LCDSTRING m_Moist[]        = {{0,"Moist:"},{0,"Humedad:"}};
+
+//%Moist:
+CONST_LCDSTRING m_per_Moist[]   = {{0,"%Moist:"},{0,"%Humedad:"}};
+
+// DD:
+CONST_LCDSTRING m_DD[]          = {{0,"     DD:"},{0,"     DD:"}};
+
+//%PR:
+CONST_LCDSTRING m_per_proct[]  = {{0,"    %PR:"},{0,"     %PR:"}};
+
+// Soil %AV
+CONST_LCDSTRING m_soil_av[]     = {{0,"Soil %AV:"},{0,"Soil %AV:"}};
+
+
+
+
+
 //
 //
 //
-CONST_LCDSTRING m_temp1[]   = {{10,""},  {10,""}};
-CONST_LCDSTRING m_temp2[]   = {{10,""},  {10,""}};
-CONST_LCDSTRING m_temp3[]   = {{10,""},  {10,""}};
-CONST_LCDSTRING m_temp4[]   = {{10,""},  {10,""}};
+//
+CONST_LCDSTRING m_line1[]   = {{10,""},  {10,""}};
+CONST_LCDSTRING m_line2[]   = {{10,""},  {10,""}};
+CONST_LCDSTRING m_line3[]   = {{10,""},  {10,""}};
+CONST_LCDSTRING m_line4[]   = {{10,""},  {10,""}};
 CONST_LCDSTRING_PTR s_twmp_txt[ ] = { mBlank,mBlank,mBlank,mBlank};

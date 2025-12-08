@@ -9,6 +9,32 @@
 //#include <string.h>
 
 
+void display_count_text ( uint16_t moist, uint32_t dens,uint32_t dens_combo )
+{ 
+  char line_buff [21];
+  
+  //      M Count:
+  // Combo DCount:   
+  //Single DCount:    
+  //Press ESC to Exit
+  dispscrn_e ( s_display_count_text );
+  
+  // print moisture count
+  snprintf ( line_buff,20,"%u",moist);
+  LCD_position (LINE1+14);  
+  LCD_print( line_buff);
+  
+  // print density combo count
+  snprintf ( line_buff,20,"%lu",(unsigned long)dens_combo);
+  LCD_position (LINE2+14);  
+  LCD_print( line_buff);
+ 
+  // print density combo count
+  snprintf ( line_buff,20,"%lu",(unsigned long)dens);
+  LCD_position (LINE3+14);  
+  LCD_print( line_buff);  
+}
+
 void Press_YES_or_NO (BYTE position)
 { 
   LCD_position(position); 
@@ -2860,236 +2886,23 @@ void station_increment_text(uint16_t inc)
       LCD_print("Para Cada Lectura");
     }
 }
-void station_name_text()
-{  
-  LCD_position(LINE2);
-  if(Features.language_f)
-  {
-    LCD_print("Enter Station Name");
-    LCD_position(LINE3);
-    LCD_print("Before Each Reading");
-  }
-    else
-    {
-      LCD_print("Ingrese el Nombre de");   //Ingrese el Nombre de la Estación antes de Tomar cada lectura
-      LCD_position(LINE3);
-      LCD_print("la Estacion Antes de");
-      LCD_position(LINE4);
-      LCD_print("Tomar Cada Lectura");
-    }
-}
-void project_limit_text()
-{
-  LCD_position(LINE1);
-  if(Features.language_f)
-  {
-    LCD_print("Project Limit");
-    LCD_position(LINE2);
-    LCD_print("Exceeded, Delete");
-    LCD_position(LINE3);
-    LCD_print("One or More Projects");    
-  }
-    else
-    {
-      LCD_print("Proyecto Limites");    //Proyecto Limites Exceso de proyectos, Borrar uno o mas proyectos. 
-      LCD_position(LINE2);
-      LCD_print("Exceso de Proyectos,");
-      LCD_position(LINE3);
-      LCD_print("Borrar Uno o Mas");
-      LCD_position(LINE4);
-      LCD_print("Proyectos.");
-    }
-}
 
 void select_from_list_text(BYTE from_where)
 {
   CLEAR_DISP;
-  LCD_position(LINE2);
-  if(Features.language_f)
-  {
-    if(from_where==0)
-    {  LCD_print("   Select Project"); }
-    else if(from_where==1)
-    {  LCD_print("   Select Station"); }
-   
+  if(from_where==0)
+  {  
+    displine_e ( LINE2, m_SelectProject,1 );
+    //   Select Project;
   }
-  else
-  {
-      if(from_where==0)
-      {  LCD_print("   Select Project"); }
-      else if(from_where==1)
-      {  LCD_print("   Select Station"); }
+  else if(from_where==1)
+  { 
+    displine_e ( LINE2, m_SelectStation,1 );
+    // Select Station
   }
+
 }
 
-void no_data_stored_text()
-{ 
-  CLEAR_DISP;
-  LCD_position(LINE2);
-
-  LCD_print("   No Data Stored");   
-}
-
-void delete_data_text()
-{ 
-  LCD_position(LINE1);
-  if(Features.language_f)
-  {
-    LCD_print("Delete Data");
-    LCD_position(LINE2);
-    LCD_print("1. Delete All Data");
-    LCD_position(LINE3); 
-    LCD_print("2. Delete One Proj."); 
-  }
-    else
-    {
-      LCD_print("Borrar la Info.");
-      LCD_position(LINE2);
-      LCD_print("1. Toda Informacion");  // Borrar la Información; 1. Borrar toda Informacion  2.Borrar un projecto
-      LCD_position(LINE3);  
-      LCD_print("2. Un Projecto"); 
-    }  
-}
-void enter_to_delete_text()
-{  
-  LCD_position(LINE2);
-  if(Features.language_f)
-  {
-    LCD_print("  Press ENTER to");
-    LCD_position(LINE3);
-    LCD_print("  Delete All Data"); 
-  }
-    else
-    {
-      LCD_print("Oprima Entrada para");  // Oprima Entrada para Borrar Toda la Información
-      LCD_position(LINE3);
-      LCD_print("Borrar Toda la"); 
-      LCD_position(LINE4);
-      LCD_print("Informacion.");    
-    }  
-}
-void erase_data_text()
-{ 
-  LCD_position(LINE1);
-  if(Features.language_f)
-  {
-    LCD_print("Erase All Data");
-    LCD_position(LINE2);
-    LCD_print("From Memory?");
-    LCD_position(LINE3);
-    LCD_print("YES to Continue"); 
-  }
-    else
-    {
-      LCD_print("Borrar Toda la Info.");  // Borrar toda la Información de la Almacenada en la Memoria SI para continuar
-      LCD_position(LINE2);
-      LCD_print("en la Memoria?");
-      LCD_position(LINE3);
-      LCD_print("SI Para Continuar"); 
-    }
-}
-void all_data_erased_text()
-{  
-  LCD_position(LINE2);
-  if(Features.language_f)
-  {
-    LCD_print("      All Data");
-    LCD_position(LINE3);
-    LCD_print("       Erased"); 
-  }
-    else
-    {
-      LCD_print("Toda la Informacion");  // Toda la información ha sido borrada
-      LCD_position(LINE3);
-      LCD_print("  Ha Sido Borrada"); 
-    }
-}
-void delete_project_text(char *temp_str)
-{  
-  CLEAR_DISP;
-  LCD_position(LINE1);
-  if(Features.language_f)
-  {
-    LCD_print("Press ENTER to"); 
-    LCD_position(LINE2);
-    LCD_print("Delete Data In");
-    LCD_position(LINE3);
-    LCD_print("Project: "); 
-  }
-    else
-    {
-      LCD_print("Press ENTRADA Para");   //Presione Entrada para Borrar Toda la Información del Proyecto
-      LCD_position(LINE2);
-      LCD_print("Borrar Toda la Info.");
-      LCD_position(LINE3);
-      LCD_print("Proyecto: "); 
-    }
-  _LCD_PRINTF("%s",temp_str);   //print project name
-}
-void erase_project_data_text()
-{ 
-  LCD_position(LINE1);
-  if(Features.language_f)
-  {
-    LCD_print("Erase Project Data?");
-    LCD_position(LINE3);
-    LCD_print("YES to Continue");
-  }
-    else
-    {
-      LCD_print("Borrar Informacion?");  // Borrar Informacion del Projecto?
-      LCD_position(LINE3);
-      LCD_print("YES to Continue");
-    }
-  
-}
-
-void batt_volt_text()
-{  
-  CLEAR_DISP;
-  LCD_position(LINE1);
-  LCD_print("NiCd Volt =");  
-  LCD_position(LINE2);
-  LCD_print(" Alk Volt =");  
-}
-
-void print_data_text()
-{  
-  LCD_position(LINE1);
-  if(Features.language_f)
-  {
-    LCD_print("Print Data");
-    LCD_position(LINE2);
-    LCD_print("1. Print All Data");
-    LCD_position(LINE3);
-    LCD_print("2. Print One Project");  
-  }
-    else
-    {
-      LCD_print("Imprima");    // Imprima 1. Imprima toda la Informacion  2. Imprima un Proyecto
-      LCD_position(LINE2);
-      LCD_print("1. Toda la Info.");
-      LCD_position(LINE3);
-      LCD_print("2. Un Proyecto");  
-    }
-}
-
-void print_complete_text()
-{  
-  LCD_position(LINE2);
-  if(Features.language_f)
-  {
-    LCD_print("    Print Data");
-    LCD_position(LINE3);
-    LCD_print("     Complete");
-  }
-    else
-    {
-      LCD_print("    Impresion");   
-      LCD_position(LINE3);
-      LCD_print("     Completa");
-    }
-}
 
 
 void count_text(BYTE source)
@@ -3110,15 +2923,7 @@ void count_text(BYTE source)
       case  9: LCD_print("%%Moist:"); break;
       case 10: LCD_print("   DD:");   break;
       case 11: LCD_print("   %%PR:");  break;
-      
-      case 12: LCD_print("BS Count:"); break;
-      case 13: LCD_print("AC COUNT:"); break;
-      case 14: LCD_print("   BS_CR:"); break;
-      case 15: LCD_print("   AC_CR:"); break; 
-      case 16: LCD_print("MAT THICKNESS:"); break; 
-      case 17: LCD_print("   BS WD:"); break; 
-      case 18: LCD_print("   AC WD:"); break; 
-      case 19: LCD_print("Soil %%AV:"); break;   
+      case 12: LCD_print("Soil %%AV:"); break;   
    }
   }
     else
@@ -3137,15 +2942,7 @@ void count_text(BYTE source)
         case  9: LCD_print("%%Humedad:"); break;
         case 10: LCD_print("      DD:");   break;
         case 11: LCD_print("     %%PR:");  break;
-        
-        case 12: LCD_print("BS Count:"); break;
-        case 13: LCD_print("AC COUNT:"); break;
-        case 14: LCD_print("   BS_CR:"); break;
-        case 15: LCD_print("   AC_CR:"); break; 
-        case 16: LCD_print("MAT THICKNESS:"); break; 
-        case 17: LCD_print("   BS WD:"); break; 
-        case 18: LCD_print("   AC WD:"); break;
-        case 19: LCD_print("Tier. %%A:"); break;   
+        case 12: LCD_print(" Humedad:"); break;   
       }
     }
 }
@@ -3178,31 +2975,7 @@ void stat_drift_count_text(BYTE source)
     }
 }
 
-void display_count_text ( uint16_t moist, uint32_t dens,uint32_t dens_combo )
-{ 
-  char line_buff [21];
-  
-  //      M Count:
-  // Combo DCount:   
-  //Single DCount:    
-  //Press ESC to Exit
-  dispscrn_e ( s_display_count_text );
-  
-  // print moisture count
-  snprintf ( line_buff,20,"%u",moist);
-  LCD_position (LINE1+14);  
-  LCD_print( line_buff);
-  
-  // print density combo count
-  snprintf ( line_buff,20,"%lu",(unsigned long)dens_combo);
-  LCD_position (LINE2+14);  
-  LCD_print( line_buff);
- 
-  // print density combo count
-  snprintf ( line_buff,20,"%lu",(unsigned long)dens);
-  LCD_position (LINE3+14);  
-  LCD_print( line_buff);  
-}
+
 
 
 

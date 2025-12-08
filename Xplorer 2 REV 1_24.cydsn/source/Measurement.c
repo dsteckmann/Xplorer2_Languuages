@@ -237,10 +237,11 @@ uint8_t measureMoistureDensity(void)
         }
        if ( !Flags.auto_number_stations )
        { // auto name is off
-            enter_station_name_text();  //TEXT// display "Enter Station\nName:" LINE1,2
-            YES_to_Accept(LINE3);              //TEXT// display "YES to Accept"
-            ESC_to_Exit(LINE4);                //TEXT// display "ESC to Exit"
-            lcd_line = (Features.language_f) ? LINE2+6 : LINE2+10; // project_info.current_station_name[1] = 0;
+            //Enter Station
+            //Name:
+            //YES to Accept
+            //ESC to Exit
+            dispscrn_e ( s_enter_station_name_text);  
             enter_name ( project_info.current_station_name, lcd_line ); //write entered name of station
             if ( getLastKey() == ESC) 
             { //prompt_for_start = TRUE;
@@ -500,11 +501,15 @@ uint8_t measureMoistureDensity(void)
                   {
                     sprintf(temp_str,"%u",moisture_cnt);
                   }
-                  count_text(0);  //TEXT// display "M Count"
+
+                  // M Count:
+                  displine_e ( LINE1,m_M_Count,1);
+                  
                   print_string_backward(temp_str,LINE1+LCD_offset);
-                  LCD_position (LINE2);
                   sprintf(temp_str,"%lu",(unsigned long)density_cnt);
-                  count_text(1);  //TEXT// display "D Count";
+                  // D Count:
+                  displine_e ( LINE2,m_D_Count,1);
+                  
                   print_string_backward(temp_str,LINE2+LCD_offset);
                   if ( mcr > 10 || mcr < -10 )
                   {
@@ -586,7 +591,7 @@ uint8_t measureMoistureDensity(void)
                   LCD_position (LINE3);
                   if ( Features.soil_air_voids_on == 1 )
                   {
-                    count_text(19);  //TEXT// display "%SAV:"
+                    count_text(12);  //TEXT// display "%SAV:"
                     sprintf(temp_str,"%.1f",soil_air_voids);
                     _LCD_PRINTF ( "%s",temp_str);
                   }

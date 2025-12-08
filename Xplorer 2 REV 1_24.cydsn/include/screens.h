@@ -103,6 +103,33 @@ extern CONST_LCDSTRING_PTR s_shut_down_txt[ ] ;
 extern CONST_LCDSTRING_PTR s_select_language_text[ ];
 extern CONST_LCDSTRING_PTR s_serial_port_text[ ];
 extern CONST_LCDSTRING_PTR s_enter_station_name_text[ ];
+extern CONST_LCDSTRING_PTR s_print_complete_text[ ] ;
+extern CONST_LCDSTRING_PTR s_print_data_text[ ];
+extern CONST_LCDSTRING_PTR s_batt_volt_text[ ];
+extern CONST_LCDSTRING_PTR s_erase_project_data_text[ ];
+extern CONST_LCDSTRING_PTR s_delete_project_text[ ];
+extern CONST_LCDSTRING_PTR s_all_data_erased_text[ ];
+extern CONST_LCDSTRING_PTR s_erase_data_text[ ];
+extern CONST_LCDSTRING_PTR s_enter_to_delete_text[ ];
+extern CONST_LCDSTRING_PTR s_delete_data_text[ ];
+extern CONST_LCDSTRING_PTR s_no_stored_data[ ];
+extern CONST_LCDSTRING m_SelectProject[] ;
+extern CONST_LCDSTRING m_SelectStation[];
+extern CONST_LCDSTRING_PTR s_project_limit_text[ ];
+extern CONST_LCDSTRING_PTR s_station_name_text[ ];
+extern CONST_LCDSTRING m_M_Count[];   
+extern CONST_LCDSTRING m_D_Count[];   
+extern CONST_LCDSTRING m_MCR[];       
+extern CONST_LCDSTRING m_DCR[];       
+extern CONST_LCDSTRING m_DT[];        
+extern CONST_LCDSTRING m_WD[];        
+extern CONST_LCDSTRING m_per_max[];   
+extern CONST_LCDSTRING m_per_voids[]; 
+extern CONST_LCDSTRING m_Moist[];     
+extern CONST_LCDSTRING m_per_Moist[]; 
+extern CONST_LCDSTRING m_DD[];       
+extern CONST_LCDSTRING m_per_proct[];
+extern CONST_LCDSTRING m_soil_av[];
 
 #endif
 

@@ -216,7 +216,11 @@ void start_new_project ( void )  // leads user through setup for new project
               }
               else
               {
-                station_name_text();  //TEXT// display "Enter Station Name\nBefore Each Reading"
+                //
+                //Enter Station Name
+                //Before Each Reading
+                //
+                dispscrn_e (s_station_name_text);  
                 hold_buzzer();
                 delay_ms(2000);
               }
@@ -242,7 +246,11 @@ void start_new_project ( void )  // leads user through setup for new project
               setActiveProjectEE ( project ); // Put the active project name into EEPROM
               break;
       case 5:
-            project_limit_text();  //TEXT// display "Project Limit\nExceeded, Delete\nOne or More Project" LINE1,2,3
+            //Project Limit
+            //Exceeded, Delete
+            //One or More Projects
+            //
+            dispscrn_e (s_project_limit_text);  //TEXT// display "Project Limit\nExceeded, Delete\nOne or More Project" LINE1,2,3
             hold_buzzer();
             delay_ms(2000);
             escape = TRUE;
@@ -377,7 +385,11 @@ uint32_t getStation ( char * project )
   station_count = getStationNumber ( project );
   if ( station_count == 0 )
   {
-    no_data_stored_text();  //TEXT// display "   No Data Stored"  LINE2
+    //
+    //No Data Stored
+    //
+    //
+    dispscrn_e  (s_no_stored_data);  
     hold_buzzer();
     delay_ms(1000);
     return(17);
@@ -542,7 +554,13 @@ uint16_t select_stored_project ( uint8_t function, char* prj_name )
           station_count = getStationNumber ( prj_name );
           if ( station_count == 0 )
           {
-            no_data_stored_text();  //TEXT// display "   No Data Stored"  LINE2
+            
+            
+            //
+            //No Data Stored
+            //
+            //
+            dispscrn_e ( s_no_stored_data);  
             hold_buzzer();
             delay_ms(1000);
             return(17);
@@ -639,7 +657,11 @@ void delete_projects(void)  // allows user to delete one or all project(s)
     switch ( go_to_screen )
     {
       case 0:
-            delete_data_text();     //TEXT// display "Delete Data\n1. Delete All Data\n2. Delete One Proj." LINE1,2,3
+            //Delete Data
+            //1. Delete All Data
+            //2. Delete One Proj.
+            //
+            dispscrn_e ( s_delete_data_text);     //TEXT// display "Delete Data\n1. Delete All Data\n2. Delete One Proj." LINE1,2,3
             up_down_select_text(0); //TEXT// display "Select #, ESC Exit"
             while(1)
             {
@@ -663,7 +685,12 @@ void delete_projects(void)  // allows user to delete one or all project(s)
             }
             break;
       case 1: // ASk to Delete all data from project storage
-            enter_to_delete_text();  //TEXT// display "  Press ENTER to\n  Delete All Data"  LINE2,3
+           
+            //Press ENTER to
+            //Delete All Data
+            //
+            //
+            dispscrn_e ( s_enter_to_delete_text);  
             while(1)
             {
               button = getKey ( TIME_DELAY_MAX );
@@ -682,8 +709,13 @@ void delete_projects(void)  // allows user to delete one or all project(s)
             }
             break;
       case 2: // Ask to Delete All Data
-            erase_data_text();  //TEXT// display "Erase All Data\nFrom Memory?\nYES to Continue"
-            ESC_to_Exit(LINE4); //TEXT// display "ESC to Exit"
+            
+            //Erase All Data
+            //From Memory?
+            //YES to Continue
+            //ESC to Exit
+            dispscrn_e ( s_erase_data_text);  
+           
             while(1)
             {
               button = getKey ( TIME_DELAY_MAX );
@@ -704,7 +736,11 @@ void delete_projects(void)  // allows user to delete one or all project(s)
       case 3: // Delete Data after asking twice
               if ( resetProjectStorage ( ) == 0 )
               {
-                all_data_erased_text();  //TEXT// display "      All Data\n       Erased" LINE2,3
+                //
+                //All Data
+                //Erased
+                //
+                dispscrn_e (s_all_data_erased_text);  
                 hold_buzzer();
               }
               updateProjectInfo();
@@ -719,8 +755,15 @@ void delete_projects(void)  // allows user to delete one or all project(s)
               {
                 return;
               }
-              delete_project_text(selected_project_name);  //TEXT// display "Press ENTER to\nDelete Data In\nProject %s",temp_str LINE1,2,3
-              ESC_to_Exit(LINE4);             //TEXT// display "ESC to Exit"
+              
+              //Press ENTER to
+              //Delete Data In
+              //Project:
+              //ESC to Exit
+               dispscrn_e ( s_delete_project_text );
+              LCD_position(LINE3 +9);
+              _LCD_PRINTF("%s",selected_project_name);   //print project name
+             
               while(1)
               {
                 button = getKey ( TIME_DELAY_MAX );
@@ -739,8 +782,13 @@ void delete_projects(void)  // allows user to delete one or all project(s)
               }
               break;
       case 5: // Ask again to delete the project
-            erase_project_data_text();  //TEXT// display "Erase Project Data?\nYES to Continue" LINE1,3
-            ESC_to_Exit(LINE4);
+            
+            //Erase Project Data?
+            //
+            //YES to Continue
+            //ESC to Exit
+            dispscrn_e (s_erase_project_data_text);  
+
             while(1)
             {
               button = getKey ( TIME_DELAY_MAX );
@@ -831,7 +879,8 @@ void review_data(void)  // computes and displays stored data
         case 1:
               LCD_position (LINE1);
               sprintf(temp_str,"%u", review.moisture_count);
-              count_text(0);  //TEXT// display "M Count"
+              // M Count:
+              displine_e ( LINE1,m_M_Count,1);
               print_string_backward(temp_str,LINE1+LCD_offset);
               LCD_position (LINE2);
               sprintf(temp_str,"%lu",(unsigned long) review.density_count);
@@ -1781,8 +1830,12 @@ void write_data_to_printer(void)  // leads user though process to write project(
     switch(go_to_screen)
     {
       case 0:
-            print_data_text();  //TEXT// display "Print Data\n1. Print All Data\n2. Print One Project"  LINE1,2,3
-            ESC_to_Exit(LINE4); //TEXT// display "ESC to Exit"
+           //Print Data
+           //1. Print All Data
+           //2. Print One Project
+           // ESC to Exit
+           dispscrn_e ( s_print_data_text);  
+           
             while(1)
             {
               button = getKey ( TIME_DELAY_MAX );
@@ -1862,10 +1915,11 @@ void write_data_to_printer(void)  // leads user though process to write project(
             go_to_screen = 4;
             break;
       case 4:
-            
-            
-            
-            print_complete_text();  //TEXT// display "    Print Data\n      Complete" LINE2,3
+            //
+            //Print Data
+            //Complete
+            //
+            dispscrn_e ( s_print_complete_text );  
             delay_ms(1000);
             escape = TRUE;
             break;
