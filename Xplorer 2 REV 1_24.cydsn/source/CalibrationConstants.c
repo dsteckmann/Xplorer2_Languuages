@@ -261,15 +261,15 @@ void enter_cal_const(void)  // Manually Enter Calibration Constants
       }
       else if ( selection == 13)
       {
-        CLEAR_DISP;
+        //Cal Date:
+        //Change Value?
+        //Press YES or NO
+        //ESC to Exit
+        dispscrn_e ( s_change_val_text );          
+        displine_e ( LINE1, m_cal_date, 1 );
         // Display the Calibration Date
-        calibration_date_txt();
         LCD_position (LINE1+9);
         printTimeDate (  NV_RAM_MEMBER_RD (Constants.CAL_DATE) );
-        change_val_text();       //TEXT// display "Change Value?" LINE2     
-        Press_YES_or_NO (LINE3);  // display "Press YES or NO"
-        ESC_to_Exit(LINE4);
-        
 
         while(1)
         {

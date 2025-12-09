@@ -9,6 +9,130 @@
 //#include <string.h>
 
 
+
+void speccal_results_text(int16_t loops,uint16_t cnt_temp)
+{
+  CLEAR_DISP;
+  LCD_position(LINE1);
+  
+  switch ( g_language )
+  {
+    case L_ENGLISH:
+    default:
+       _LCD_PRINTF("#%d Density",loops);
+       LCD_position(LINE2);
+       _LCD_PRINTF("Count: %u",cnt_temp);
+       LCD_position(LINE3);
+       LCD_print("YES to Continue");
+      break;
+  case L_SPANISH:
+      _LCD_PRINTF("#%d Cuentas de",loops);  // Numero de Cuentas de Densidad " Si " para Continuar
+      LCD_position(LINE2);
+      _LCD_PRINTF("Densidad: %u",cnt_temp);
+      LCD_position(LINE3);
+      LCD_print("SI para Continuar");
+      break;
+  }  
+}
+
+
+//Enter Project
+//Name:
+//YES to Accept
+//ESC to Exit
+uint8 enter_project_name_text(char *temp_str)
+{
+  dispscrn_e (s_enter_project_name );
+  _LCD_PRINTF("%s",temp_str);
+  uint8 lcd_line; 
+  switch ( g_language )
+  {
+    case L_ENGLISH:
+         default:
+         lcd_line = LINE2+6;
+         break;
+  
+    case L_SPANISH:
+         lcd_line = LINE2+10;
+         break;
+  }
+  return lcd_line;
+}
+
+void station_start_text(char *temp_str)
+{ 
+  //Starting Station
+  //Number:
+  //YES to Accept
+  //ESC to Exit
+  dispscrn_e ( s_station_start ); 
+  gotoloc ( LINE1+9,1);
+  _LCD_PRINTF("%s",temp_str);
+}
+
+void station_increment_text(uint16_t inc)
+{ 
+  //Station # 
+  //Increments by 1
+  //For Each Reading
+  //
+  dispscrn_e ( s_station_increment );
+  gotoloc (LINE1+10,1);
+  _LCD_PRINTF("%u",inc);
+}
+
+void select_from_list_text(BYTE from_where)
+{
+  CLEAR_DISP;
+  if(from_where==0)
+  {  
+    displine_e ( LINE2, m_SelectProject,1 );
+    //   Select Project;
+  }
+  else if(from_where==1)
+  { 
+    displine_e ( LINE2, m_SelectStation,1 );
+    // Select Station
+  }
+
+}
+
+void stat_drift_count_text(BYTE source)
+{
+  switch (g_language )
+  {
+    case L_ENGLISH:
+    default:
+    {     
+      switch ( source )
+      {
+        case  0: LCD_print("D%% Drift:  "); break;
+        case  1: LCD_print("Dens. Avg: ");  break;
+        case  2: LCD_print("M%% Drift:  "); break;
+        case  3: LCD_print("Moist.AVG: ");  break;      
+        case  4: LCD_print("Dens. R:   ");  break;
+        case  5: LCD_print("Moist R:   ");  break;
+        default: break;
+      }
+      break;
+    }
+    
+    case L_SPANISH:
+    {     
+      switch(source)
+      {
+        case  0: LCD_print("D%% Drift:  "); break;
+        case  1: LCD_print("Dens. Avg: ");  break;
+        case  2: LCD_print("H%% Drift:  0"); break;
+        case  3: LCD_print("Humedad.AVG: ");  break;
+        case  4: LCD_print("Dens. R:   ");  break;
+        case  5: LCD_print("Humedad R:   ");  break;
+      }
+    }
+  }  
+}
+
+
 void display_count_text ( uint16_t moist, uint32_t dens,uint32_t dens_combo )
 { 
   char line_buff [21];
@@ -78,7 +202,7 @@ void up_down_select_text(int16_t both)
 {  
   if(both)
   {
-    //   UP/DOWN for Next  
+    //UP/DOWN for Next  
     displine_e ( LINE3, Up_Down_Next, 1 );
   }
   //Select #, ESC Exit   
@@ -740,20 +864,6 @@ void disable_auto_depth()
       LCD_print("Desconectar");  
       LCD_position(LINE2);
       LCD_print("Profundidad Auto.?");  
-    }
-}
-
-void calibration_date_txt ( void )
-{  
-  LCD_position(LINE1);
-  if(Features.language_f)
-  {
-    LCD_print("Cal Date:           ");
-    
-  }
-    else
-    {
-    LCD_print("Cal Date:           ");
     }
 }
 
@@ -2337,6 +2447,7 @@ void activate_speccal_text(void)
       LCD_print("Especial?");
     }
 }
+
 void enter_number_counts_text(void)
 {
   CLEAR_DISP;
@@ -2354,631 +2465,3 @@ void enter_number_counts_text(void)
       LCD_print("de Cuentas  ");
     }
 }
-void start_speccal_text(void)
-{
-  CLEAR_DISP;
-  LCD_position(LINE1);
-  if(Features.language_f)
-  {
-    LCD_print("# of Counts:");
-    LCD_position(LINE2);
-    LCD_print("Depth:");
-    LCD_position(LINE3);
-    LCD_print("Press START to");
-    LCD_position(LINE4);
-    LCD_print("Begin Count");       
-  }
-    else
-     {
-      LCD_print("# de Cuentas");  // Numero de Cuentas:     Profundidad:     Precione Iniciar para comensar a contar:      
-      LCD_position(LINE2);
-      LCD_print("Profundidad:");
-      LCD_position(LINE3);
-      LCD_print("Precione Inciar Para");
-      LCD_position(LINE4);
-      LCD_print("Comensar a Contar");       
-    }
-}
-void speccal_results_text(int16_t loops,uint16_t cnt_temp)
-{
-  CLEAR_DISP;
-  LCD_position(LINE1);
-  if(Features.language_f)
-  {
-    _LCD_PRINTF("#%d Density",loops);
-    LCD_position(LINE2);
-    _LCD_PRINTF("Count: %u",cnt_temp);
-    LCD_position(LINE3);
-    LCD_print("YES to Continue");
-  }
-    else
-    {
-      _LCD_PRINTF("#%d Cuentas de",loops);  // Numero de Cuentas de Densidad " Si " para Continuar
-      LCD_position(LINE2);
-      _LCD_PRINTF("Densidad: %u",cnt_temp);
-      LCD_position(LINE3);
-      LCD_print("SI para Continuar");
-    }
-}
-void speccal_enabled_text(void)
-{
-  CLEAR_DISP;
-  LCD_position (LINE2);
-  if(Features.language_f)
-  {
-    LCD_print("Special Calibration");
-    LCD_position (LINE3);
-    LCD_print("      Enabled");
-  }
-    else
-    {
-      LCD_print("Calibracion Especial");  // Calibración Especial Habilitada
-      LCD_position (LINE3);
-      LCD_print("     Habilitada");
-    }
-}
-void enable_disable_nomograph_text(int16_t condition)
-{
-  CLEAR_DISP;
-  LCD_position(LINE1);
-  if(Features.language_f)
-  {
-    if(condition)
-     { LCD_print("Disable Nomograph   "); }
-    else
-     { LCD_print("Enable Nomograph    ");  }
-    
-    LCD_position(LINE2);
-    LCD_print("Mode?");
-  }
-    else
-    {
-      if(condition)
-        LCD_print("Habilitar Comando");   // Habilitar/Deshabilitar Comando capa delgada?
-      else
-        LCD_print("Deshabilitar Comando");
-      LCD_position(LINE2);
-      LCD_print("Capa Delgada?");
-    }
-}
-
-
-void activate_saved_vals_text(void)
-{ 
-  CLEAR_DISP;
-  LCD_position (LINE1);
-  if(Features.language_f)
-  {
-    LCD_print("Activate Saved");
-    LCD_position (LINE2);
-    LCD_print("Values?");
-  }
-    else
-    {
-      LCD_print("Activar los Valores");  // Activar los Valores Guardados ?
-      LCD_position (LINE2);
-      LCD_print("Guardados?");
-    }
-}
-
-void nomograph_vals_text(void)
-{
-  CLEAR_DISP;       
-  LCD_position (LINE1); 
-  if(Features.language_f)
-  {
-    LCD_print("Mat Thick=");
-    LCD_position (LINE2);
-    LCD_print("Bot Dens =");
-    LCD_position (LINE3);
-    LCD_print("Are Values OK?");
-  }
-    else
-    {
-      LCD_print("Espesor Mat");   // Espesor Material =                       Densidad  de Fondo =                  Estan Los Valores Correctos?
-      LCD_position (LINE2);
-      LCD_print("Dens. Fondo");
-      LCD_position (LINE3);
-      LCD_print("Valores Correctos?");
-    }
-}
-
-
-
-
-void enter_mat_thickness_text(void)
-{
-  CLEAR_DISP;
-  LCD_position(LINE1);
-  if(Features.language_f)
-  {
-    LCD_print("Enter Material");
-    LCD_position (LINE2);
-    LCD_print("Thickness:");
-  }
-    else
-    {
-      LCD_print("Enter Material"); 
-      LCD_position (LINE2);
-      LCD_print("Thickness:");
-    }
-}
-void enter_bot_dense_text(void)
-{
-  CLEAR_DISP;
-  LCD_position(LINE1);
-  if(Features.language_f)
-  {
-    LCD_print("Enter Bottom");
-    LCD_position (LINE2);
-    LCD_print("Density:");
-  }
-    else
-    {
-      LCD_print("Entre el Valor de la");  // Entre el Valor de la Densidad de fondo
-      LCD_position (LINE2);
-      LCD_print("Densidad");
-    }
-}
-
-void nomograph_enabled_text(void)
-{
-  CLEAR_DISP;
-  LCD_position (LINE2);
-  if(Features.language_f)
-  {
-    LCD_print("     Nomograph");
-    LCD_position (LINE3);
-    LCD_print("      Enabled");
-  }
-    else
-    {
-      LCD_print("    Capa Delgada");  // Capa Delgada Habilitado
-      LCD_position (LINE3);
-      LCD_print("     Habilitado");
-    }
-}
-
-
-void enter_time_text(void)
-{
-  CLEAR_DISP;
-  LCD_position(LINE1);
-  if(Features.language_f)
-  {
-    LCD_print("Enter Present");
-    LCD_position(LINE2);      
-    LCD_print("Time: hh:mm"); 
-  }
-    else
-    {
-      LCD_print("Ingrese la Hora"); //  Ingrese la Hora Actual   hh : mm 
-      LCD_position(LINE2);      
-      LCD_print("Actl: hh:mm"); 
-    }
-}
-void am_pm_text(void)
-{
-  CLEAR_DISP;
-  LCD_position(LINE1);
-  if(Features.language_f)
-    { LCD_print("Select"); }
-    else
-      LCD_print("Seleccione");   //Seleccione 1. AM - PM     
-  LCD_position(LINE2);  
-  LCD_print("1. AM");       
-  LCD_position(LINE3);
-  LCD_print("2. PM");
-}
-
-void prma_text(void)
-{
-  CLEAR_DISP;
-  
-  if(Features.language_f)  
-  {
-    LCD_position(LINE1);
-    LCD_print("1. Proctor");
-    LCD_position(LINE2);
-    LCD_print("2. MAX DENS");  
-    if ( Features.soil_air_voids_on == 1 )
-    {
-     LCD_position(LINE3);
-     LCD_print("3. Soil SG");    
-    }
-  }  
-  else
-  {
-    LCD_position(LINE1);
-    LCD_print("1. Proctor");
-    LCD_position(LINE2);
-    LCD_print("2. Densidad Máxima");  
-    if ( Features.soil_air_voids_on == 1 )
-    {
-     LCD_position(LINE3);
-     LCD_print("3. Tierra GS");    
-    }
-  }
-  
-}
-
-void change_val_text(void)
-{
-  LCD_position(LINE2);
-  if(Features.language_f)
-     {LCD_print("Change Value?");}  // Cambiar Valor? 
-    else
-      LCD_print("Cambiar Valor?");
-}
-
-void get_new_offset_text(void)
-{
-  LCD_position(LINE2);
-  if(Features.language_f)
-     {LCD_print("Get New Offset?     ");}  
-    else
-     {LCD_print("Get New Offset?     ");}  
-}
-
-
-void use_val_text(void)
-{
-  LCD_position(LINE2);
-  if(Features.language_f)
-     {LCD_print("Use Value?");}  // Cambiar Valor? 
-    else
-     { LCD_print("Use Value?");}
-}
-
-void battery_shutdwn_text(void)
-{
-  CLEAR_DISP;
-  LCD_position (LINE2);
-  if(Features.language_f)
-  {
-    LCD_print("    Battery Low");
-    LCD_position (LINE3);
-    LCD_print("  Shutdown: 5 sec.");
-  }
-    else
-    {
-      LCD_print("    Bateria Baja");   // Batería Baja       Interrupción en XX segundos
-      LCD_position (LINE3);
-      LCD_print("Interrupcion: 5 seg.");
-    }
-}
-void display_alk_warning(void)
-{
-  CLEAR_DISP;
-  LCD_position (LINE1);
-  if(Features.language_f)
-  {
-    LCD_print("  *** WARNING ***");
-    LCD_position (LINE2);
-    LCD_print("  Alkaline Battery  ");
-    LCD_position (LINE3);
-    LCD_print("      is  Low       ");
-  }
-    else
-    {
-      LCD_print(" *** ADVERTENCIA ***");  // *** ADVERTENCIA ***    Calibrador Demasiado Caliente    ¿Voltaje Bajo?
-      LCD_position (LINE2);
-      LCD_print("  Bateria Alcalina  ");    //Batería Baja       Interrupción en XX segundos
-      LCD_position (LINE3);
-      LCD_print("      es Baja       ");
-    }
-}
-
-void warning_text(BYTE which_source)
-{
-  CLEAR_DISP;
-  LCD_position (LINE2);
-  if(Features.language_f)
-  {
-    LCD_print("  *** WARNING ***");
-    LCD_position (LINE3);
-    if(which_source==0)
-      { LCD_print("   Gauge Too Hot");   }
-    else 
-      { LCD_print("    Low Voltage ");   }
-  }
-    else
-    {
-      LCD_print(" *** ADVERTENCIA ***");   //*** ADVERTENCIA ***    Calibrador Demasiado Caliente    ¿Voltaje Bajo?
-      LCD_position (LINE3);
-      if(which_source==0)
-      {
-        LCD_print("Calibrador Demasiado");   
-        LCD_position(LINE4);
-        LCD_print("     Caliente!");
-      }
-      else
-        LCD_print("    Voltaje Bajo");   
-    }  
-}
-void gauge_temp_text(void)
-{
-  CLEAR_DISP;
-  LCD_position(LINE2);
-  if(Features.language_f)
-    { LCD_print("Gauge Temp ="); } // Temperatura del Densimetro 
-    else
-      LCD_print("Temperatura=");
-}
-
-void depth_voltage_text(void)
-{
-  CLEAR_DISP;
-  LCD_position(LINE2);
-  
-  if(Features.language_f)
-  { 
-   LCD_print("DS Voltage ="); 
-   LCD_position(LINE3);
-   LCD_print("Depth      = "); 
-  } // Temperatura del Densimetro 
-   else
-  { 
-   LCD_print("DS Voltaje =");
-  }  
-}
-   
-void press_key_text(void)
-{
-  CLEAR_DISP;
-  LCD_position(LINE1);
-  
-  if(Features.language_f)
-  { 
-   LCD_print("   Press Any Key    "); 
-   LCD_position(LINE2);
-   LCD_print("    ESC to Exit    "); 
-  } 
-  else
-  { 
-    LCD_print("   Press Any Key    "); 
-   LCD_position(LINE2);
-   LCD_print("    ESC to Exit    "); 
-  }  
-   
-  
-}
-
-
-void high_voltage_text(void)
-{
-  CLEAR_DISP;
-  LCD_position(LINE2);
-  if(Features.language_f)
-   { LCD_print("High Voltage =");  }
-    else
-      LCD_print("Voltaje Alto =");  //Voltaje Alto
-}
-void shut_down_text_text(void)
-{
-  CURSOR_OFF;
-  CLEAR_DISP;
-  LCD_position (LINE2 + 6);
-  if(Features.language_f)
-    { LCD_print("Shutdown"); }
-    else
-      LCD_print(" Apagar");  // Apagar
-}
-void shutdown_inactivity_text_text(void)
-{
-  //LCD_init();
-  CURSOR_OFF;
-  CLEAR_DISP;
-  LCD_position (LINE2 + 1);
-  if(Features.language_f)
-    { LCD_print("Idle Shutdown"); }
-    else
-      LCD_print(" Inactivo Apagar");  // Apagar
-}
-
-void enter_valid_text(BYTE which_source)
-{
-  CLEAR_DISP;
-  LCD_position(LINE2);
-  if(Features.language_f)
-  {
-    LCD_print("    Please Enter");
-    LCD_position(LINE3);  
-    LCD_print("     Valid ");
-    if(which_source==0)
-      { LCD_print("Date"); }
-    else
-      { LCD_print("Time"); }
-  }
-    else
-    {
-      LCD_print("   Favor Ingresar");   //Favor ingresar fecha y hora validos
-      LCD_position(LINE3);  
-      if(which_source==0)
-        LCD_print(" Fecha y Validos");
-      else 
-        LCD_print(" Hora y Validos");
-    }
-  delay_ms(1000);
-}
-void enter_project_name_text(char *temp_str)
-{
-  LCD_position(LINE1);
-  if(Features.language_f)
-  {
-    LCD_print("Enter Project ");
-    LCD_position(LINE2);
-    LCD_print("Name: ");
-  }
-    else
-    {
-      LCD_print("Ingrese Nombre del ");   // Ingrese nombre del proyecto
-      LCD_position(LINE2);
-      LCD_print("Proyecto: ");
-    }
-  _LCD_PRINTF("%s",temp_str);
-}
-
-void project_name_text(char *temp_str)
-{
-  CLEAR_DISP;
-  LCD_position(LINE2);
-  if(Features.language_f)
-    { LCD_print("    Project Name");   }
-    else
-      LCD_print("Nombre del Projecto");  // Nombre del Projecto
-  LCD_position(LINE3);
-  _LCD_PRINTF(  "    %s",temp_str);   
-}
-void station_mode_text()
-{
-  LCD_position(LINE1);
-  if(Features.language_f)
-  {
-    LCD_print("Station Name Mode");
-    LCD_position(LINE2);
-    LCD_print("1. Auto (sequential)");
-    LCD_position(LINE3);
-    LCD_print("2. Manual Entry"); 
-  }
-    else
-    {
-      LCD_print("Opc. Nombre Estacion");    // Opciones Nombre Estacion  1. Automatico (Secuencial)  2. Ingreso manual
-      LCD_position(LINE2);
-      LCD_print("1. Automatico");
-      LCD_position(LINE3);
-      LCD_print("2. Ingreso Manual"); 
-    }
-}
-void station_start_text(char *temp_str)
-{ 
-  LCD_position(LINE1);
-  if(Features.language_f)
-  {
-    LCD_print("Starting Station");
-    LCD_position(LINE2);
-    _LCD_PRINTF("Number: %s",temp_str); 
-  }
-    else
-    {
-      LCD_print("Iniciacion del");   //  Iniciacion del  Numero de Estacion
-      LCD_position(LINE2);
-      _LCD_PRINTF("Numero de Estacion: %s",temp_str); 
-    }
-}
-void station_increment_text(uint16_t inc)
-{ 
-  LCD_position(LINE1);
-  if(Features.language_f)
-  {
-    _LCD_PRINTF("Station # %u",inc);
-    LCD_position(LINE2);
-    LCD_print("Increments by 1");
-    LCD_position(LINE3);
-    LCD_print("For Each Reading");
-  }
-    else
-    {
-      _LCD_PRINTF("Estacion# %u",inc);   //Estacion #  Incrementar en 1 (uno) para cada lectura 
-      LCD_position(LINE2);
-      LCD_print("Encrementar en 1");
-      LCD_position(LINE3);
-      LCD_print("Para Cada Lectura");
-    }
-}
-
-void select_from_list_text(BYTE from_where)
-{
-  CLEAR_DISP;
-  if(from_where==0)
-  {  
-    displine_e ( LINE2, m_SelectProject,1 );
-    //   Select Project;
-  }
-  else if(from_where==1)
-  { 
-    displine_e ( LINE2, m_SelectStation,1 );
-    // Select Station
-  }
-
-}
-
-
-
-void count_text(BYTE source)
-{ 
-  if(Features.language_f)
-  {
-    switch(source)
-    {
-      case  0: LCD_print("M Count:"); break;
-      case  1: LCD_print("D Count:"); break;
-      case  2: LCD_print("    MCR:"); break;
-      case  3: LCD_print("    DCR:"); break;
-      case  4: LCD_print("    DT:");  break;
-      case  5: LCD_print("    WD:");  break;
-      case  6: LCD_print("  %%MAX:"); break;
-      case  7: LCD_print("%%Voids:"); break;
-      case  8: LCD_print("Moist:");  break;
-      case  9: LCD_print("%%Moist:"); break;
-      case 10: LCD_print("   DD:");   break;
-      case 11: LCD_print("   %%PR:");  break;
-      case 12: LCD_print("Soil %%AV:"); break;   
-   }
-  }
-    else
-    {
-      switch(source)
-      {
-        case  0: LCD_print("H Cuenta:"); break;
-        case  1: LCD_print("D Cuenta:"); break;
-        case  2: LCD_print("     HCR:"); break;
-        case  3: LCD_print("     DCR:"); break;
-        case  4: LCD_print("      DT:");  break;
-        case  5: LCD_print("    WD:");  break;
-        case  6: LCD_print("   %%HA:"); break;
-        case  7: LCD_print("%%Voids:"); break;
-        case  8: LCD_print(" Humedad:");  break;
-        case  9: LCD_print("%%Humedad:"); break;
-        case 10: LCD_print("      DD:");   break;
-        case 11: LCD_print("     %%PR:");  break;
-        case 12: LCD_print(" Humedad:"); break;   
-      }
-    }
-}
-
-void stat_drift_count_text(BYTE source)
-{
-  if(Features.language_f)
-  {
-    switch(source)
-    {     
-      case  0: LCD_print("D%% Drift:  "); break;
-      case  1: LCD_print("Dens. Avg: ");  break;
-      case  2: LCD_print("M%% Drift:  "); break;
-      case  3: LCD_print("Moist.AVG: ");  break;      
-      case  4: LCD_print("Dens. R:   ");  break;
-      case  5: LCD_print("Moist R:   ");  break;
-    }
-  }
-    else
-    {
-      switch(source)
-      {
-        case  0: LCD_print("D%% Drift:  "); break;
-        case  1: LCD_print("Dens. Avg: ");  break;
-        case  2: LCD_print("H%% Drift:  0"); break;
-        case  3: LCD_print("Humedad.AVG: ");  break;
-        case  4: LCD_print("Dens. R:   ");  break;
-        case  5: LCD_print("Humedad R:   ");  break;
-      }
-    }
-}
-
-
-
-
-
-
-
-

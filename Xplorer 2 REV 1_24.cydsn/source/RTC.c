@@ -665,7 +665,12 @@ Bool date_check(uint8_t month_temp, uint8_t day_temp)  // verifies that the ente
   
   if(!date_correct)
   {
-    enter_valid_text(0);  //TEXT// display "  Please Enter"\n   Valid Date" LINE2,3    
+    //
+    //Please Enter
+    //Valid Time
+    //
+    dispscrn_e ( s_enter_valid_date );
+    delay_ms(1500);
     return(0);
   }  
 return(1);  
@@ -675,8 +680,13 @@ Bool time_check(uint8_t hr)   // verifies that the entered date is valid
 {      
    if(hr > 12)
    {
-     enter_valid_text(1); //TEXT// display "    Please Enter\n     Valie Time" LINE2,3
-     return (0);
+    //
+    //Please Enter
+    //Valid Time
+    //
+    dispscrn_e ( s_enter_valid_time );
+    delay_ms(1500);
+    return (0);
    }
    return (1);
 }
@@ -730,17 +740,15 @@ void enterTimeRTCI2C (void)  // leads user through process to set the time and d
   
   enum buttons button;
   
-/////////////////////////Enter the date///////////////////////////////////////////
+   /////////////////////////Enter the date///////////////////////////////////////////
+  //
+  //Change Value?
+  //Press YES or NO
+  //ESC to Exit
+  dispscrn_e ( s_change_val_text );
   CURSOR_OFF;
-  CLEAR_DISP;
-  // Display the Calibration Date
- 
   LCD_position (LINE1);
   printTimeDate ( date_time_g ) ;
-  change_val_text();       //TEXT// display "Change Value?" LINE2     
-  Press_YES_or_NO (LINE3);  // display "Press YES or NO"
-  ESC_to_Exit(LINE4);
- 
   while(1)
   {
    button = getKey(TIME_DELAY_MAX);
@@ -983,10 +991,11 @@ void enterTimeRTCI2C (void)  // leads user through process to set the time and d
   {
     while(!escape)
     {
-      enter_time_text();    //TEXT// display "Enter Present\nTime: hh:mm" LINE1,2      
-      YES_to_Accept(LINE3); //TEXT// display "YES to Accept"    
-      ESC_to_Exit(LINE4);   //TEXT// display "ESC to Exit"    
-      
+      //Enter Present
+      //Time: hh:mm
+      //YES to Accept
+      //ESC to Exit
+      dispscrn_e ( s_enter_time_text );    //TEXT// display "Enter Present\nTime: hh:mm" LINE1,2      
       i = 0;
       time_reg = 0;
       j = 1;
@@ -1107,7 +1116,12 @@ void enterTimeRTCI2C (void)  // leads user through process to set the time and d
     }
     if(menu_exit == FALSE)
     {
-      am_pm_text();  //TEXT// display "Select\n1. AM\n2. PM" LINE1,2,3      
+      
+      //Select
+      //1. AM
+      //2. PM
+      //
+      dispscrn_e ( s_am_pm_text );       
       while(1)
       {
         button = getKey(TIME_DELAY_MAX);

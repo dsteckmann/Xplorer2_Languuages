@@ -726,7 +726,11 @@ Bool check_temp(Bool display)  // Checks Internal Temperature of Gauge
       
       if ( temp_calc >= 65.0 )                           
       {    
-        warning_text(0);  //TEXT// display "  *** WARNING ***\n   Gauge Too HOT" LINE2,3       
+        //
+        // *** WARNING ***
+        //Gauge Too Hot
+        //
+        dispscrn_e (s_warning_text);  //TEXT// display "  *** WARNING ***\n   Gauge Too HOT" LINE2,3       
         hold_buzzer();
         delay_ms(3000);      
         CLEAR_DISP;;
@@ -734,8 +738,11 @@ Bool check_temp(Bool display)  // Checks Internal Temperature of Gauge
     }
     else
     {
-      gauge_temp_text();  //TEXT// display "Gauge Temp =" LINE2     
-      ESC_to_Exit(LINE4); //TEXT// display "ESC to Exit"
+      //
+      //Gauge Temp =
+      //
+      //ESC_to_Exit
+      dispscrn_e (s_gauge_temp_text);    
  
       while(1)
       {
@@ -1103,8 +1110,11 @@ void key_pad_test (void )
 {
     enum buttons button;
     
-    press_key_text();     // PRESS any KEY
-    
+    //Press Any Key
+    //ESC to Exit
+    //
+    //
+    dispscrn_e (s_press_key_text );
     do
     {
       LCD_PrintBlanksAtPosition ( 20, LINE3 );
@@ -1218,14 +1228,13 @@ void enter_depth_slope(void)  //
       // This is in kg_m3 units
       num_temp = NV_RAM_MEMBER_RD(ds_slope);    
       
-      CLEAR_DISP;
-      LCD_position(LINE1);
-      _LCD_PRINTF ( "Depth Slope: %.3f",num_temp);
-
-      change_val_text();       //TEXT// display "Change Value?" LINE2
-      Press_YES_or_NO(LINE3);  //TEXT// display "Press YES or NO"
-      ESC_to_Exit(LINE4);      //TEXT// display "ESC to Exit" 
-      
+      //Depth Slope:
+      //Change Value?
+      //Press YES or NO
+      //ESC to Exit
+      dispscrn_e ( s_change_val_text ) ;
+      displine_e ( LINE1, m_depth_slope, 1 );
+      _LCD_PRINTF ( "%.3f", num_temp );
       while(1)
       {
         button = getKey(TIME_DELAY_MAX);
@@ -1291,9 +1300,11 @@ void check_depth (void )
   
   // get the voltage
   value = readADCVolts(DEPTH_SENS_ADC_CHAN);
-
-  depth_voltage_text(); //TEXT// display "DS Voltage =" LINE2      
-  ESC_to_Exit(LINE4);  //TEXT// display "ESC to Exit"
+  //
+  //DS Voltage =
+  //Depth      =
+  //ESC_to_Exit
+  dispscrn_e (s_depth_voltage_text);    
  
   while(1)
   {
@@ -1393,7 +1404,9 @@ void shut_down_text(void)  // sets OFF_MODE and powers OFF gauge
  NV_MEMBER_STORE( CONTROL_SETTINGS, Controls );     
  Global_ID();
 
- shut_down_text_text();  //TEXT// display "      Shutdown" LINE2  
+ CURSOR_OFF; 
+ //Shutdown LINE2  
+ dispscrn_e (s_shutdown);
  delay_ms(500);
  for ( n=0; n < 5; n++ )
  {

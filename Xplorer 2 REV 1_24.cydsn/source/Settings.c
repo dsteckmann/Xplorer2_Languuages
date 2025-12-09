@@ -1053,13 +1053,13 @@ void offset(void)  // leads user through process to enable/disable or enter offs
              num_temp = (float)NV_RAM_MEMBER_RD(T_OFFSET);
             
             //write tren_offset to string and convert for display
-            CLEAR_DISP;
-            LCD_position ( LINE1 );
-            _LCD_PRINTF("Trench Offset:%.0f", num_temp);
-             get_new_offset_text();      //TEXT// display "GET NEW OFFSET?" LINE2     
-            Press_YES_or_NO(LINE3);  //TEXT// display "Press YES or NO"
-            ESC_to_Exit(LINE4);      //TEXT// display "ESC to Exit"
-      
+            //Trench Offset:
+            //GET NEW OFFSET?
+            //Press YES or NO
+            //ESC to Exit
+            dispscrn_e ( s_get_new_offset_text );
+            displine_e ( LINE1, m_trench_offset,1 );
+            _LCD_PRINTF("%.0f", num_temp);
             while(1)
             {
               button = getKey(TIME_DELAY_MAX);
@@ -1137,14 +1137,15 @@ void offset(void)  // leads user through process to enable/disable or enter offs
                {
                 num_temp = 0.0;  // Trench count should also be greater than regular count
                }
-               //write tren_offset to string and convert for display
-                CLEAR_DISP;
-                LCD_position ( LINE1 );
-                _LCD_PRINTF("Trench Offset:%.0f", num_temp);
-                use_val_text();       //TEXT// display "Use Value?" LINE2     
-                Press_YES_or_NO(LINE3);  //TEXT// display "Press YES or NO"
-                ESC_to_Exit(LINE4);      //TEXT// display "ESC to Exit"
-                while(1)
+                //write tren_offset to string and convert for display
+                //Trench Offset:
+                //Use Value?
+                //Press YES or NO
+                //ESC to Exit
+                dispscrn_e ( s_use_val_text);       //TEXT// display "Use Value?" LINE2     
+                displine_e (LINE1,m_trench_offset,1);
+                _LCD_PRINTF("%.0f", num_temp);                
+                 while(1)
                 {
                   button = getKey(TIME_DELAY_MAX);
                   if((button == ESC) || (button == YES) || (button == NO))
@@ -1674,8 +1675,6 @@ void special_cal(void)  // Acquire/Enter Special Calibration Constants
         {
           break;          
         }  
-              
- 
         set_depth_manual();
         if(button == ESC)
         {
@@ -1692,10 +1691,14 @@ void special_cal(void)  // Acquire/Enter Special Calibration Constants
         while ( loopcnt >= 1 )
         {
           //auto_depth_timer = 99;  //reset counter for getting auto depth        
-          start_speccal_text();  //TEXT// display "# of Counts:\nDepth:\nPress Start to\nBegin Count"        
+          //# of Counts:
+          //Depth:
+          //Press START to
+          //Begin Count
+          dispscrn_e ( s_start_speccal_text );  
           LCD_position(LINE1+13);
           _LCD_PRINTF ( "%u",loopcnt);
-          LCD_position(LINE2);
+          LCD_position(LINE2+6);
           display_depth(1,tst_depth_g);  
           
           while(1)
@@ -1837,7 +1840,11 @@ void special_cal(void)  // Acquire/Enter Special Calibration Constants
   }
   if(Spec_flags.spec_cal_flag)
   {
-    speccal_enabled_text();  //TEXT// display " Special Calibration\n    Enabled" LINE2,3    
+    //
+    //Special Calibration
+    //Enabled
+    //
+    dispscrn_e ( s_speccal_enabled_text ); 
     delay_ms(1000);
   }
   Flags.in_spec_cal = FALSE;
@@ -1874,10 +1881,23 @@ void nomograph(void)  // allows user to enter  Nomograph values and enable/disab
   while(1)
   {
     Controls.shut_dwn = FALSE;  
-    enable_disable_nomograph_text(Spec_flags.nomograph_flag);  //TEXT// display "Enable Nomograph\nMode?" or "Disable  Nomograph\nMode?" LINE1,2    
-    Press_YES_or_NO(LINE3);                          //TEXT// display "Press YES or NO" 
-    ESC_to_Exit(LINE4);                              //TEXT// display "ESC to Exit"
-         
+    if ( Spec_flags.nomograph_flag ) 
+    {
+      //Disable Nomograph
+      //Mode?
+      //Press YES or NO
+      //ESC to Exit
+      dispscrn_e ( s_disable_nomograph_text ); 
+    }
+    else
+    {
+      //Enable Nomograph
+      //Mode?
+      //Press YES or NO
+      //ESC to Exit
+      dispscrn_e ( s_enable_nomograph_text ); 
+    }
+    
     while(1)
     {
       button = getKey(TIME_DELAY_MAX);
@@ -1900,10 +1920,11 @@ void nomograph(void)  // allows user to enter  Nomograph values and enable/disab
     
     if(x >= 20)            // Does  Nomograph const. exists in memory?
     {
-      activate_saved_vals_text();  //TEXT// display "Activate Saved\nValues?" LINE1,2      
-      Press_YES_or_NO(LINE3);      //TEXT// display "Press YES or NO"
-      ESC_to_Exit(LINE4);          //TEXT// display "ESC to Exit"
- 
+      //Activate Saved
+      //Values?
+      //Press YES or NO
+      //ESC to Exit     
+      dispscrn_e ( s_activate_saved_vals_text ); 
       while(1)
       {
         button = getKey(TIME_DELAY_MAX);
@@ -1921,9 +1942,11 @@ void nomograph(void)  // allows user to enter  Nomograph values and enable/disab
       {
         // Density in kg/m3
         //Bot_Dens = NV_RAM_MEMBER_RD(BOTTOM_DENS);  
-                
-        nomograph_vals_text();  //TEXT// display "Mat Thick =\nBot Dens =\nAre Values OK?
-        Press_YES_or_NO(LINE4);  //TEXT// display "Press YES or NO"        
+        //Mat Thick=
+        //Bot Dens =
+        //Are Values OK?
+        //Press YES or NO               
+        dispscrn_e ( s_nomograph_vals_text );         
         
         // display thickness
         if ( Features.SI_units == FALSE )
@@ -1964,10 +1987,11 @@ void nomograph(void)  // allows user to enter  Nomograph values and enable/disab
       }
     }
     x = 0;
-    enter_mat_thickness_text(); //TEXT// display "Enter Material\nThickness:" LINE1,2    
-    Enter_to_Accept(LINE3);     //TEXT// display "Enter to Accept"
-    ESC_to_Exit(LINE4);         //TEXT// display "ESC to Exit"
- 
+    //Enter Material
+    //Thickness:
+    //Enter to Accept
+    //ESC to Exit    
+    dispscrn_e ( s_enter_mat_thickness_text ); //TEXT// display "Enter Material\nThickness:" LINE1,2    
     // display thickness
     if ( Features.SI_units == FALSE )
     {
@@ -2027,10 +2051,11 @@ void nomograph(void)  // allows user to enter  Nomograph values and enable/disab
     NV_MEMBER_STORE(NOMOGRAPH_CORRECTION,correction);
     
     db = 0;
-    enter_bot_dense_text();  //TEXT// display "Enter Bottom\nDensity:" LINE1,2    
-    Enter_to_Accept(LINE3);  //TEXT// display "Enter to Accept"
-    ESC_to_Exit(LINE4);      //TEXT// display "ESC to Exit"
- 
+    //Enter Bottom
+    //Density:
+    //Enter to Accept
+    //ESC to Exit    
+    dispscrn_e ( s_enter_bot_dense_text );   
    
     // display bottom density
     displayValueWithUnits ( db, LINE2 + 10, number_ptr);   
@@ -2056,7 +2081,11 @@ void nomograph(void)  // allows user to enter  Nomograph values and enable/disab
   }
   if(Spec_flags.nomograph_flag)
   {
-    nomograph_enabled_text();  //TEXT// display "    Nomograph\n     Enabled" LINE2,3   
+    //
+    //Nomograph
+    //Enabled
+    //
+    dispscrn_e ( s_nomograph_enabled_text );     
     delay_ms(1000);    
   }
   Controls.shut_dwn = TRUE;   // re-enable shut down   
@@ -2257,11 +2286,15 @@ void ma_pr(void)  //
   enum buttons button;
   
   Controls.shut_dwn = FALSE;
-  prma_text();             //TEXT// display "1. Proctor\n2. Marshall" LINE1,2
-  up_down_select_text(0);  //TEXT// display "Select #, ESC Exit" LINE4
-  
-
-  
+  //1. Proctor
+  //2. MAX DENS
+  //3. Soil SG
+  //Select #, ESC Exit
+  dispscrn_e (s_prma_text); 
+  if ( Features.soil_air_voids_on == 0 )
+  {
+    displine_e (LINE3,mBlank,1);
+  }  
   while(1)
   { 
     while(1)
@@ -2281,19 +2314,16 @@ void ma_pr(void)  //
     {     
       // This is in kg_m3 units
       num_temp = NV_RAM_MEMBER_RD(PROCTOR);          
-     
-      CLEAR_DISP;
-      LCD_position(LINE1);
-      _LCD_PRINT ( "PR:" );
-      
-      
+           
       // Convert the density value to the proper units and display
       // returns the value in proper units (kg,pcf,gcc)
+      //PR:
+      //Change Value?
+      //Press YES or NO
+      //ESC to Exit
+      dispscrn_e ( s_change_val_text );      
+      displine_e ( LINE1, m_pr, 1 );
       num_temp = displayValueWithUnits ( num_temp, LINE1 + 4, number_ptr );
-      
-      change_val_text();       //TEXT// display "Change Value?" LINE2     
-      Press_YES_or_NO(LINE3);  //TEXT// display "Press YES or NO"
-      ESC_to_Exit(LINE4);      //TEXT// display "ESC to Exit"
       
       while(1)
       {
@@ -2341,19 +2371,15 @@ void ma_pr(void)  //
     {
        // This is in kg_m3 units
       num_temp = NV_RAM_MEMBER_RD(MARSHALL);     
-      
-      CLEAR_DISP;
-      LCD_position(LINE1);
-      _LCD_PRINT ( "MAX:");
-      
       // Convert the density value to the proper units and display
       // returns the value in proper units (kg,pcf,gcc)
+      // MAX:
+      //Change Value?
+      //Press YES or NO
+      //ESC to Exit
+      dispscrn_e ( s_change_val_text ) ;
+      displine_e ( LINE1,m_max,1 );
       num_temp = displayValueWithUnits ( num_temp, LINE1 + 4, number_ptr );
-      
-      change_val_text();       //TEXT// display "Change Value?" LINE2
-      Press_YES_or_NO(LINE3);  //TEXT// display "Press YES or NO"
-      ESC_to_Exit(LINE4);      //TEXT// display "ESC to Exit" 
-      
       while(1)
       {
         button = getKey(TIME_DELAY_MAX);
@@ -2411,18 +2437,16 @@ void ma_pr(void)  //
         num_temp = 2700 ;
         NV_MEMBER_STORE(SOIL_GRAVITY,num_temp);
        }
-        CLEAR_DISP;
-        LCD_position(LINE1);
-        _LCD_PRINT ( "Soil SG:");
         
         // Convert the density value to the proper units and display
         // returns the value in proper units (kg,pcf,gcc)
-        num_temp = displayValueWithUnits ( num_temp, LINE1 + 9, number_ptr );
-        
-        change_val_text();       //TEXT// display "Change Value?" LINE2
-        Press_YES_or_NO(LINE3);  //TEXT// display "Press YES or NO"
-        ESC_to_Exit(LINE4);      //TEXT// display "ESC to Exit" 
-        
+        //Soil SG:
+        //Change Value?
+        //Press YES or NO
+        //ESC to Exit
+        dispscrn_e ( s_change_val_text ); 
+        displine_e ( LINE1, m_soil_sg, 1 );
+        num_temp = displayValueWithUnits ( num_temp, LINE1 + 9, number_ptr );        
         while(1)
         {
           button = getKey(TIME_DELAY_MAX);
@@ -2483,9 +2507,9 @@ void ma_pr(void)  //
 
 
 /******************************************************************************
- *  Name: ma_pr(void)
+ *  Name: idle_shutdown
  *  
- *  PARAMETERS: Enter Marshal and Proctor Constants (MA_PR button initiates)
+ *  PARAMETERS: 
  *
  *  DESCRIPTION: 
  *
@@ -2504,14 +2528,15 @@ void idle_shutdown(void)  //
   { 
     // This is in kg_m3 units
     num_temp = NV_RAM_MEMBER_RD(SHUT_DOWN_TIME_HOURS);          
-   
-    CLEAR_DISP;
-    LCD_position(LINE1);
-    _LCD_PRINTF ("Shtdwn Time Hours:%2u",(uint8)num_temp );
-       
-    change_val_text();       //TEXT// display "Change Value?" LINE2     
-    Press_YES_or_NO(LINE4);  //TEXT// display "Press YES or NO"
-
+    
+    //Shtdwn Time Hours:
+    //Change Value?
+    //Press YES or NO
+    //ESC to Exit
+    dispscrn_e ( s_change_val_text );          
+    displine_e ( LINE1, m_sht_dwn_time, 1 );
+    _LCD_PRINTF ("%2u",(uint8)num_temp );
+    
     while(1)
     {
       button = getKey(TIME_DELAY_MAX);

@@ -114,8 +114,11 @@ static uint16_t charge_timer = 0;
       NV_MEMBER_STORE( CONTROL_SETTINGS, Controls );     
 	    Global_ID();                                                 // shutdown all competition.
 
-	    shutdown_inactivity_text_text();
-       // flash the keyboard backlight
+      CURSOR_OFF;
+      //Idle Shutdown
+      dispscrn_e ( s_shutdown_inactivity );
+      
+      // flash the keyboard backlight
       KEY_B_LIGHT_ENABLE(); 		                    // turn on keyboard backlight                  
       delay_ms(1000);    
      	KEY_B_LIGHT_DISABLE();                       // turn OFF keyboard backlight

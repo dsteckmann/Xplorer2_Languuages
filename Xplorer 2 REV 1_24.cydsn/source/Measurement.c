@@ -525,35 +525,41 @@ uint8_t measureMoistureDensity(void)
                   LCD_PrintAtPosition ( temp_str, LINE3 + 10);
                   break;
             case 2:
-                  LCD_position (LINE1);
-                  count_text(8);  //TEXT// display " Moist:"
+                  //Moist:
+                  displine_e ( LINE1,m_Moist,1);
                   displayValueWithUnitsBW ( moisture, LINE1 + 19,temp_str );
-                  LCD_position(LINE2);
-                  count_text(10);  //TEXT// display "    DD:"
+ 
+                  //m_DD:
+                  displine_e ( LINE2,m_DD,1);
                   displayValueWithUnitsBW ( dry_dens, LINE2 + 19, temp_str );
-                  if(Features.language_f)
+                  //%MOIS:    %PR:
+                  switch ( g_language )
                   {
-                    sprintf(temp_str,"%%MOIS:%.1f %%PR:%.1f",(double)moist_percent,(double)pr_temp);
+                    case L_ENGLISH:
+                    default:   
+                         sprintf(temp_str,"%%MOIS:%.1f %%PR:%.1f",(double)moist_percent,(double)pr_temp);
+                         break;
+                    case L_SPANISH:
+                          sprintf(temp_str,"%%HUME:%.1f %%PR:%.1f",(double)moist_percent,(double)pr_temp);
+                         break;
                   }
-                  else
-                  {
-                    sprintf(temp_str,"%%HUME:%.1f %%PR:%.1f",(double)moist_percent,(double)pr_temp);
-                  }
+                  
                   LCD_PrintAtPosition( temp_str, LINE3 );
                   break;
             case 3:
-                  LCD_position(LINE1);
+                  
                   // Display density or top density
                   // Depth must be in BS for nomograph mode
                   if(Spec_flags.nomograph_flag && (depth_setting == 1))
                   {
-                    count_text(4);  //TEXT// display "    DT:"
-                    //_LCD_PRINT ("    DT:");
+                    //DT:
+                    displine_e ( LINE1,m_DT,1);
                     displayValueWithUnitsBW ( dt, LINE1 + 19, temp_str );
                   }
                   else
                   {
-                    count_text(5);  //TEXT// display "    WD:"
+                    //WD:
+                    displine_e ( LINE1,m_WD,1);
                     displayValueWithUnitsBW ( density, LINE1 + 19,  temp_str );
                   }
                   // density and MARSHALL are in KG/M3
@@ -566,13 +572,15 @@ uint8_t measureMoistureDensity(void)
                     per_MA = (dt/NV_RAM_MEMBER_RD(MARSHALL))*100;
                   }
                   checkFloatLimits ( & per_MA );
-                  LCD_position (LINE2);
                   sprintf(temp_str,"%.1f",(double)per_MA);
-                  count_text(6);  //TEXT// display "   %%MA:"
+                  
+                  //%MAX:
+                  displine_e ( LINE2,m_per_max,1);
                   print_string_backward(temp_str,LINE2+LCD_offset);
-                  LCD_position (LINE3);
                   sprintf(temp_str,"%.1f",100.0 - (double)per_MA);
-                  count_text(7);  //TEXT// display ""Voids:"
+            
+                  //%Voids:
+                  displine_e ( LINE3,m_per_voids,1);
                   print_string_backward(temp_str,LINE3+LCD_offset);
                   break;
             case 4:
@@ -588,28 +596,22 @@ uint8_t measureMoistureDensity(void)
                   printTimeDate ( date_time ) ;
                   LCD_position (LINE2);
                   display_depth(1,depth_setting);
-                  LCD_position (LINE3);
                   if ( Features.soil_air_voids_on == 1 )
                   {
-                    count_text(12);  //TEXT// display "%SAV:"
+                     //Soil %AV:
+                    displine_e ( LINE3,m_soil_av,1);
                     sprintf(temp_str,"%.1f",soil_air_voids);
                     _LCD_PRINTF ( "%s",temp_str);
                   }
                   else
                   {
-                   _LCD_PRINT("          ");
+                   displine_e ( LINE3,mBlank,1);
                   }
                   break;
           }                // end of "Switch"
-          LCD_position(LINE4);
-          if(Features.language_f)
-          {
-           _LCD_PRINT("    PRESS UP/DOWN   ");
-          }
-          else
-          {
-            _LCD_PRINT ("Arriba/Abajo       ");
-          }
+         
+           //UP/DOWN for Next
+          displine_e (LINE4,Up_Down_Next,1);
           auto_scroll_advance = FALSE;
           if(Features.auto_scroll)
           {

@@ -516,50 +516,372 @@ CONST_LCDSTRING_PTR s_station_name_text[ ] = { mBlank,m_line54,m_line55,m_line56
 // %PR:       English-Percent Proctor
 // Soil %AV:  English-Percent Soil Air Voids
 
-
+//0
 // M Count:
-CONST_LCDSTRING m_M_Count[]   = {{0,"M Count:"},  {0,"H Cuenta:"}};
+CONST_LCDSTRING m_M_Count[]    = {{0,"M Count:"},  {0,"H Cuenta:"}};
 
+//1
 // D Count:
-CONST_LCDSTRING m_D_Count[]   = {{0,"D Count:"},{0,"D Cuenta:"}};
+CONST_LCDSTRING m_D_Count[]    = {{0,"D Count:"},{0,"D Cuenta:"}};
 
+//2
 //MCR:
-CONST_LCDSTRING m_MCR[]       = {{0,"    MCR:"},{0,"     HCR:"}};
+CONST_LCDSTRING m_MCR[]        = {{0,"    MCR:"},{0,"     HCR:"}};
 
+//3
 //DCR:
-CONST_LCDSTRING m_DCR[]       = {{0,"    DCR:"},{0,"     DCR:"}};
+CONST_LCDSTRING m_DCR[]        = {{0,"    DCR:"},{0,"     DCR:"}};
 
+//4
 //DT:
-CONST_LCDSTRING m_DT[]        = {{0,"     DT:"},{0,"      DT:"}};
+CONST_LCDSTRING m_DT[]         = {{0,"     DT:"},{0,"      DT:"}};
 
+//5
 //WD:
-CONST_LCDSTRING m_WD[]        = {{0,"     WD:"},{0,"    WD:"}};
+CONST_LCDSTRING m_WD[]         = {{0,"     WD:"},{0,"    WD:"}};
 
+
+//6
 //%MAX:
-CONST_LCDSTRING m_per_max[]   = {{0,"   %MAX:"},{0,"    %HA:"}};
+CONST_LCDSTRING m_per_max[]    = {{0,"   %MAX:"},{0,"    %HA:"}};
 
+//7
 //%Voids:
-CONST_LCDSTRING m_per_voids[] = {{0," %Voids:"},{0,"%Voids"}};
+CONST_LCDSTRING m_per_voids[]  = {{0," %Voids:"},{0,"%Voids"}};
 
+//8
 //Moist:
-CONST_LCDSTRING m_Moist[]        = {{0,"Moist:"},{0,"Humedad:"}};
+CONST_LCDSTRING m_Moist[]      = {{0,"Moist:"},{0,"Humedad:"}};
 
+//9
 //%Moist:
-CONST_LCDSTRING m_per_Moist[]   = {{0,"%Moist:"},{0,"%Humedad:"}};
+CONST_LCDSTRING m_per_Moist[]  = {{0,"%Moist:"},{0,"%Humedad:"}};
 
+//10
 // DD:
-CONST_LCDSTRING m_DD[]          = {{0,"     DD:"},{0,"     DD:"}};
+CONST_LCDSTRING m_DD[]         = {{0,"     DD:"},{0,"     DD:"}};
 
+//11
 //%PR:
 CONST_LCDSTRING m_per_proct[]  = {{0,"    %PR:"},{0,"     %PR:"}};
 
+//12
 // Soil %AV
-CONST_LCDSTRING m_soil_av[]     = {{0,"Soil %AV:"},{0,"Soil %AV:"}};
+CONST_LCDSTRING m_soil_av[]    = {{0,"Soil %AV:"},{0,"Soil %AV:"}};
+
+
+
+//Station # 
+//Increments by 1
+//For Each Reading
+//
+CONST_LCDSTRING m_line57[]   = {{10,"Station # "},  {10,"Estacion# "}};
+CONST_LCDSTRING m_line58[]   = {{10,"Increments by 1"},  {10,"Encrementar en 1"}};
+CONST_LCDSTRING m_line59[]   = {{10,"For Each Reading"},  {10,"Para Cada Lectura"}};
+CONST_LCDSTRING_PTR s_station_increment[ ] = { m_line57,m_line58,m_line59,mBlank};
+
+
+
+//Starting Station
+//Number:
+//YES to Accept
+//ESC to Exit
+CONST_LCDSTRING m_line60[]   = {{0,"Starting Station"},  {0,"Estacion de inicio"}};
+CONST_LCDSTRING m_line61[]   = {{0,"Number:"},  {0,"Numero:"}};
+CONST_LCDSTRING_PTR s_station_start[ ] = { m_line60,m_line61,mYES_to_Accept,mESC_to_Exit};
+
+
+//Station Name Mode
+//1. Auto (sequential)
+//2. Manual Entry
+//Select #, ESC Exit
+CONST_LCDSTRING m_line62[]   = {{0,"Station Name Mode"},     {0,"Opc. Nombre Estacion"}};
+CONST_LCDSTRING m_line63[]   = {{0,"1. Auto (sequential)"},  {0,"1. Automatico"}};
+CONST_LCDSTRING m_line64[]   = {{0,"2. Manual Entry"},       {0,"2. Ingreso Manual"}};
+CONST_LCDSTRING_PTR s_station_mode_text[ ] = { m_line62,m_line63,m_line64,SelectNumber};
+
+
+
+//
+//Project Name
+//
+//
+CONST_LCDSTRING m_line65[]   = {{10,"Project Name"},  {10,"Nombre del Projecto"}};
+CONST_LCDSTRING_PTR s_project_name[ ] = { mBlank,m_line65,mBlank,mBlank};
+
+
+
+//Enter Project
+//Name:
+//YES to Accept
+//ESC to Exit
+CONST_LCDSTRING m_line66[]   = {{0,"Enter Project"},  {0,"Ingrese Nombre del"}};
+CONST_LCDSTRING m_line67[]   = {{10,"Name:"},  {10,"Proyecto:"}};
+CONST_LCDSTRING_PTR s_enter_project_name[ ] = { m_line66,m_line67,mYES_to_Accept,mESC_to_Exit};
+
+
+//
+//Please Enter
+//Valid Date
+//Valid Time
+CONST_LCDSTRING m_please_enter[]   = {{10,"Please Enter"},  {10,"Favor Ingresar"}};
+CONST_LCDSTRING m_line69[]   = {{10,"Valid Date"},  {10,"Fecha y Validos"}};
+CONST_LCDSTRING m_line70[]   = {{10,"Valid Time"},  {10,"Hora y Validos"}};
+CONST_LCDSTRING_PTR s_enter_valid_date[ ] = { mBlank,m_please_enter,m_line69,mBlank};
+CONST_LCDSTRING_PTR s_enter_valid_time[ ] = { mBlank,m_please_enter,m_line70,mBlank};
+
+
+//
+//Idle Shutdown
+//
+//
+CONST_LCDSTRING m_line71[]   = {{10,"Idle Shutdown"},  {10,"Inactivo Apagar"}};
+CONST_LCDSTRING_PTR s_shutdown_inactivity[ ] = { mBlank,m_line71,mBlank,mBlank};
+
+
+//
+//Shutdown
+//
+//
+CONST_LCDSTRING m_line72[]   = {{10,"Shutdown"},  {10,"Apagar"}};
+CONST_LCDSTRING_PTR s_shutdown[ ] = { mBlank,m_line72,mBlank,mBlank};
+
+//Press Any Key
+//ESC to Exit
+//
+//
+CONST_LCDSTRING m_press_any_key[]   = {{10,"Press Any Key"},  {10,"Press Any Key"}};
+CONST_LCDSTRING_PTR s_press_key_text[ ] = { m_press_any_key,mESC_to_Exit,mBlank,mBlank};
+
+
+
+//
+//DS Voltage =
+//Depth      =
+//ESC_to_Exit
+CONST_LCDSTRING m_DSVoltage[]   = {{0,"DS Voltage ="},  {0,"DS Voltaje ="}};
+CONST_LCDSTRING m_Depth[]   = {{0,"Depth      ="},  {0,"Depth      ="}};
+CONST_LCDSTRING_PTR s_depth_voltage_text[ ] = { mBlank,m_DSVoltage,m_Depth,mESC_to_Exit};
+
+
+//
+//Gauge Temp =
+//
+//ESC_to_Exit
+CONST_LCDSTRING m_gauge_temp[]   = {{0,"Gauge Temp ="},  {0,"Temperatura="}};
+CONST_LCDSTRING_PTR s_gauge_temp_text[ ] = { mBlank,m_gauge_temp,mBlank,mESC_to_Exit};
+
+
+//
+// *** WARNING ***
+//Gauge Too Hot
+//
+CONST_LCDSTRING m_warning[]   = {{10," *** WARNING ***"},  {10,"*** ADVERTENCIA ***"}};
+CONST_LCDSTRING m_tooHot[]   = {{10,"Gauge Too Hot"},  {10,"Calibrador Demasiado"}};
+CONST_LCDSTRING m_caliente[]   = {{10," "},  {10,"Caliente!"}};
+CONST_LCDSTRING_PTR s_warning_text[ ] = { mBlank,m_warning,m_tooHot,mBlank};
+
+
+//*** WARNING ***
+//Alkaline Battery
+//is  Low
+//
+CONST_LCDSTRING m_alkaline[]   = {{10,"Alkaline Battery"},  {10,"Bateria Alcalin"}};
+CONST_LCDSTRING m_islow[]      = {{10,"is  Low"},  {10,"es Baja"}};
+CONST_LCDSTRING_PTR s_display_alk_warning[ ] = { m_warning,m_alkaline,m_islow,mBlank};
+
+
+
+//1. Proctor
+//2. MAX DENS
+//3. Soil SG
+//Select #, ESC Exit
+CONST_LCDSTRING m_Proctor[]   = {{0,"1. Proctor"},  {0,"1. Proctor"}};
+CONST_LCDSTRING m_MAXDENS[]   = {{0,"2. MAX DENS"}, {0,"2. Densidad Maxima"}};
+CONST_LCDSTRING m_SoilSG[]   = {{0,"3. Soil SG"},  {0,"3. Tierra GS"}};
+CONST_LCDSTRING_PTR s_prma_text[ ] = { m_Proctor,m_MAXDENS,m_SoilSG,mESC_to_Exit};
+
+
+//
+// Battery Low
+// Shutdown: 5 sec.
+//
+CONST_LCDSTRING m_batterylow[]    = {{10,"Battery Low"},  {10,"Bateria Baja"}};
+CONST_LCDSTRING m_shutdown[]      = {{10,"Shutdown: 5 sec."},  {10,"Interrupcion: 5 seg."}};
+CONST_LCDSTRING_PTR s_battery_shutdwn_text[ ] = { mBlank,m_batterylow,m_shutdown,mBlank};
+
+//Trench Offset:
+CONST_LCDSTRING m_trench_offset[]   = {{0,"Trench Offset:"},  {0,"Zanja Compen:"}};
+
+//
+//Use Value?
+//Press YES or NO
+//ESC to Exit
+CONST_LCDSTRING m_use_value[]   = {{0,"Use Value?"},  {0,"Cambiar Valor? "}};
+CONST_LCDSTRING_PTR s_use_val_text[ ] = { mBlank,m_use_value,mPress_YES_or_NO,mESC_to_Exit};
+
+
+//
+//GET NEW OFFSET?
+//Press YES or NO
+//ESC to Exit
+CONST_LCDSTRING m_get_new_offset[]   = {{0,"Get New Offset?"},  {0,"Get New Offset? "}};
+CONST_LCDSTRING_PTR s_get_new_offset_text[ ] = { mBlank,m_get_new_offset,mPress_YES_or_NO,mESC_to_Exit};
+
+//Depth Slope:
+CONST_LCDSTRING m_depth_slope[]    = {{0,"Depth Slope:"},{0,"Depth Slope:"}};
+
+//MAX:
+CONST_LCDSTRING m_max[]    = {{0,"MAX:"},{0," HA:"}};
+
+//PR:
+//English - (Proctor)
+CONST_LCDSTRING m_pr[]    = {{0,"PR:"},{0,"PR:"}};
+
+//Shtdwn Time Hours:
+CONST_LCDSTRING m_sht_dwn_time[]    = {{0,"Shtdwn Time Hours:"},{0,"Shtdwn Time Hours:"}};
+
+
+//Cal Date
+//English - (Calibration Date)
+CONST_LCDSTRING m_cal_date[]    = {{0,"Cal Date:"},{0,"Cal Date:"}};
+
+
+//Soil SG:
+//English - (Specific Gravity)
+CONST_LCDSTRING m_soil_sg[]    = {{0,"Soil SG"},{0,"Soil SG"}};
+
+
+//
+//Change Value?
+//Press YES or NO
+//ESC to Exit
+CONST_LCDSTRING m_change_value[]   = {{0,"Change Value?"},  {0,"Cambiar Valor?"}};
+CONST_LCDSTRING_PTR s_change_val_text[ ] = { mBlank,m_change_value,mPress_YES_or_NO,mESC_to_Exit};
+
+
+
+//Select
+//1. AM
+//2. PM
+//
+CONST_LCDSTRING m_Select[]   = {{10,"Select"},  {10,"Seleccione"}};
+CONST_LCDSTRING m_AM[]   = {{0,"1. AM"},  {0,"1. AM"}};
+CONST_LCDSTRING m_PM[]   = {{0,"2. PM"},  {0,"2. PM"}};
+CONST_LCDSTRING_PTR s_am_pm_text[ ] = { m_Select,m_AM,m_PM,mBlank};
+
+
+
+//Enter Present
+//Time: hh:mm
+//YES to Accept
+//ESC to Exit
+CONST_LCDSTRING m_EnterPresent[]   = {{0,"Enter Present"},   {0,"Ingrese la Hora"}};
+CONST_LCDSTRING m_Timehhmm[]       = {{0,"Time: hh:mm"},     {0,"Actl: hh:mm"}};
+CONST_LCDSTRING_PTR s_enter_time_text[ ] = { m_EnterPresent,m_Timehhmm,mYES_to_Accept,mESC_to_Exit};
+
+
+//
+//Nomograph
+//Enabled
+//
+CONST_LCDSTRING m_Nomograph[]   = {{10,"Nomograph"},  {10,"Capa Delgada"}};
+CONST_LCDSTRING m_Enabled[]   = {{10,"Enabled"},   {10,"Habilitado"}};
+CONST_LCDSTRING_PTR s_nomograph_enabled_text[ ] = { mBlank,m_Nomograph,m_Enabled,mBlank};
+
+
+
+//Enter Bottom
+//Density:
+//Enter to Accept
+//ESC to Exit
+CONST_LCDSTRING m_enterbottom[]   = {{0,"Enter Bottom"},  {0,"Entre el Valor de la"}};
+CONST_LCDSTRING m_density[]       = {{0,"Density:"},      {0,"Densidad"}};
+CONST_LCDSTRING_PTR s_enter_bot_dense_text[ ] = { m_enterbottom,m_density,mEnter_to_Accept,mESC_to_Exit};
+
+
+
+//Enter Material
+//Thickness:
+//Enter to Accept
+//ESC to Exit
+CONST_LCDSTRING m_enter_mat[]   = {{0,"Enter Material"},  {0,"Enter Material"}};
+CONST_LCDSTRING m_thickness[]   = {{0,"Thickness:"},      {0,"Thickness:"}};
+CONST_LCDSTRING_PTR s_enter_mat_thickness_text[ ] = { m_enter_mat,m_thickness,mEnter_to_Accept,mESC_to_Exit};
+
+
+//Mat Thick=
+//Bot Dens =
+//Are Values OK?
+//Press YES or NO
+CONST_LCDSTRING m_MatThick[]      = {{0,"Mat Thick="},  {0,"Espesor Mat"}};
+CONST_LCDSTRING m_BotDens2[]      = {{0,"Bot Dens ="},  {0,"Dens. Fondo"}};
+CONST_LCDSTRING m_AreValuesOK[]   = {{0,"Are Values OK?"},  {0,"Valores Correctos?"}};
+CONST_LCDSTRING_PTR s_nomograph_vals_text[ ] = { m_MatThick,m_BotDens2,m_AreValuesOK,mPress_YES_or_NO};
+
+//Activate Saved
+//Values?
+//Press YES or NO
+//ESC to Exit
+CONST_LCDSTRING m_activate_saved[]   = {{10,"Activate Saved"},  {10,"Activar los Valore"}};
+CONST_LCDSTRING m_values[]          = {{10,"Values?"},  {10,"Guardados?"}};
+CONST_LCDSTRING_PTR s_activate_saved_vals_text[ ] = { m_activate_saved,m_values,mPress_YES_or_NO,mESC_to_Exit};
+
+
+//Disable Nomograph
+//Mode?
+//Press YES or NO
+//ESC to Exit
+CONST_LCDSTRING m_disable_nomograph[]   = {{0,"Disable Nomograph"},  {0,"desactivar el modo"}};
+CONST_LCDSTRING m_mode[]                = {{0,"Mode?"},              {0,"nomograma?"}};
+CONST_LCDSTRING_PTR s_disable_nomograph_text[ ] = { m_disable_nomograph,m_mode,mPress_YES_or_NO,mESC_to_Exit};
+
+
+//Enable Nomograph
+//Mode?
+//Press YES or NO
+//ESC to Exit
+CONST_LCDSTRING m_enable_nomograph[]   = {{0,"Enable Nomograph"},  {0,"Activar el modo"}};
+CONST_LCDSTRING_PTR s_enable_nomograph_text[ ] = { m_enable_nomograph,m_mode,mPress_YES_or_NO,mESC_to_Exit};
+
+
+//
+//Special Calibration
+//Enabled
+//
+CONST_LCDSTRING m_speccal[]     = {{10,"Special Calibration"},  {10,"Calibracion Especial"}};
+CONST_LCDSTRING m_enabled[]   = {{10,"Enabled"},  {10,"Habilitada"}};
+CONST_LCDSTRING_PTR s_speccal_enabled_text[ ] = { mBlank,m_speccal,m_enabled,mBlank};
+
+
+//# of Counts:
+//Depth:
+//Press START to
+//Begin Count
+CONST_LCDSTRING m_num_counts[]   = {{0,"# of Counts:"},   {0,"# de Cuentas"}};
+CONST_LCDSTRING m_depth[]        = {{0,"Depth:"},         {0,"Prof.:"}};
+CONST_LCDSTRING m_pstart[]       = {{0,"Press START to"}, {0,"Precione Inciar Para"}};
+CONST_LCDSTRING m_begin_count[]  = {{0,"Begin Count"},    {0,"Comensar a Contar"}};
+CONST_LCDSTRING_PTR s_start_speccal_text[ ] = { m_num_counts,m_depth,m_pstart,m_begin_count};
 
 
 
 
+//Enter Number:
+//of Counts:
+//
+//
+CONST_LCDSTRING m_line1[]   = {{0,"of Counts:"},  {
+  0,"Ingrese Numero de"}};
+CONST_LCDSTRING m_line2[]   = {{10,""},  {10,""}};
+CONST_LCDSTRING m_line3[]   = {{10,""},  {10,""}};
+CONST_LCDSTRING m_line4[]   = {{10,""},  {10,""}};
+CONST_LCDSTRING_PTR s_enter_number_counts_text[ ] = { mBlank,mBlank,mBlank,mBlank};
 
+
+
+// displine_e (
+//dispscrn_e ( 
 //
 //
 //

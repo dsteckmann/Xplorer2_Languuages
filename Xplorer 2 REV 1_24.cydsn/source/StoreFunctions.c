@@ -109,11 +109,13 @@ void start_new_project ( void )  // leads user through setup for new project
     switch ( go_to_screen )
     {
       case 0:
-          enter_project_name_text ( project );  //TEXT// display "Enter Project \nName: %s",project LINE1,2
-          YES_to_Accept(LINE3);              //TEXT// display "YES to Accept"
-          ESC_to_Exit(LINE4);                //TEXT// display "ESC to Exit"
-          lcd_line = (Features.language_f) ? LINE2+6 : LINE2+10;
+          //Enter Project
+          //Name:
+          //YES to Accept
+          //ESC to Exit    
+          lcd_line = enter_project_name_text ( project );  //TEXT// display "Enter Project \nName: %s",project LINE1,2
           enter_name ( project,lcd_line) ;
+          
           button = getLastKey();
           if(button == ESC)
           {
@@ -152,7 +154,12 @@ void start_new_project ( void )  // leads user through setup for new project
           }
           break;
       case 1:
-            project_name_text(project);  //TEXT// display "    Project Name\n    %s",project LINE2,3
+            //
+            //Project Name
+            //
+            //
+            dispscrn_e (s_project_name);
+            LCD_PrintAtPosition ( project, LINE3+4);  
             hold_buzzer();
             delay_ms(2000);
             go_to_screen = 6; // Get measurement type (Normal or Thin layer)
@@ -162,8 +169,11 @@ void start_new_project ( void )  // leads user through setup for new project
           go_to_screen = 2;        // if not, stay on enter name screen.
           break;
      case 2:
-            station_mode_text();    //TEXT// display "Station Name Mode\n1. Auto (sequential)\n2. Manual Entry" LINE1,2,3
-            up_down_select_text(0); //TEXT// display "Select #, ESC to Exit" LINE4
+            //Station Name Mode
+            //1. Auto (sequential)
+            //2. Manual Entry
+            //Select #, ESC Exit
+            dispscrn_e ( s_station_mode_text );
             while(1)
             {
               button = getKey( TIME_DELAY_MAX );
@@ -188,8 +198,10 @@ void start_new_project ( void )  // leads user through setup for new project
       case 3:
             // Auto Number Enabled
             station_start_text(num_temp);  //TEXT// display "Starting Station\nNumber: %s",num_temp
-            YES_to_Accept(LINE3);          //TEXT// display "YES to Accpet"
-            ESC_to_Exit(LINE4);            //TEXT// display "ESC to Exit"
+            //Starting Station
+            //Number:
+            //YES to Accept
+            //ESC to Exit
             auto_temp = TRUE;
             station_start = (uint16)enter_number_std ( num_temp, LINE2 + 8, 4, 0 );
             button = getLastKey();
@@ -877,22 +889,24 @@ void review_data(void)  // computes and displays stored data
       switch(display_set)
       {
         case 1:
-              LCD_position (LINE1);
-              sprintf(temp_str,"%u", review.moisture_count);
               // M Count:
               displine_e ( LINE1,m_M_Count,1);
+              sprintf(temp_str,"%u", review.moisture_count);
               print_string_backward(temp_str,LINE1+LCD_offset);
-              LCD_position (LINE2);
+       
+              //D Count
+              displine_e ( LINE2,m_D_Count,1);
               sprintf(temp_str,"%lu",(unsigned long) review.density_count);
-              count_text(1);  //TEXT// display "D Count";
               print_string_backward(temp_str,LINE2+LCD_offset);
-              LCD_position (LINE3);
+                
+              //MCR
+              displine_e ( LINE3,m_MCR,1);
               sprintf(temp_str,"%.2f",(float)review.MCR );
-              count_text(2);  //TEXT// display "    MCR:"
               print_string_backward(temp_str,LINE3+LCD_offset);
-              LCD_position (LINE4);
+              
+              //DCR
+              displine_e ( LINE4,m_DCR,1);
               sprintf(temp_str,"%.2f", (float)review.density_count / (float)review.density_stand);
-              count_text(3);  //TEXT// display "    DCR:"
               print_string_backward(temp_str,LINE4+LCD_offset);
               break;
         case 2:
@@ -908,7 +922,8 @@ void review_data(void)  // computes and displays stored data
                   sprintf(temp_str,"%.3f", unit_density);
                 }
                 strcat(temp_str,younit);
-                count_text(4);  //TEXT// display "    DT:"
+                //DT
+                displine_e ( LINE1,m_DT,1);
                 print_string_backward(temp_str,LINE1+19);
                 if ( review.MA != 0.0 )
                 {
@@ -931,7 +946,8 @@ void review_data(void)  // computes and displays stored data
                   sprintf(temp_str,"%.3f", unit_density);
                 }
                 strcat(temp_str,younit);
-                count_text(5);  //TEXT// display "    WD:"
+                //WD
+                displine_e ( LINE1,m_WD,1);
                 print_string_backward(temp_str,LINE1+19);
                 if ( review.MA != 0.0 )
                 {
@@ -945,15 +961,18 @@ void review_data(void)  // computes and displays stored data
               checkFloatLimits( & per_MA );
               LCD_position (LINE2);
               sprintf(temp_str,"%.1f",(float)per_MA);
-              count_text(6);  //TEXT// display "   %%MA:"
+              
+              //%MA
+              displine_e ( LINE2,m_per_max,1);
               print_string_backward(temp_str,LINE2+LCD_offset);
-              LCD_position (LINE3);
+   
+              //%Voids
+              displine_e ( LINE3,m_per_voids,1);
               sprintf(temp_str,"%.1f",100-(float)per_MA);
-              count_text(7);  //TEXT// display ""Voids:"
               print_string_backward(temp_str,LINE3+LCD_offset);
               break;
         case 3:
-              LCD_position (LINE1);
+              
               unit_density = convertKgM3DensityToUnitDensity ( review.moisture, review.units );
               if ( review.units != GM_CC )
               {
@@ -964,14 +983,16 @@ void review_data(void)  // computes and displays stored data
                 sprintf(temp_str,"%.3f", unit_density);
               }
               strcat(temp_str,younit);
-              count_text(8);  //TEXT// display " Moist:"
+              //Moist:
+              displine_e ( LINE1,m_Moist,1);
               print_string_backward(temp_str,LINE1+19);
-              LCD_position (LINE2);
+               
+              //%Moist:
+              displine_e ( LINE2,m_per_Moist,1);
               sprintf(temp_str,"%.1f",(float)moist_percent_rev);
-              count_text(9);  //TEXT// display "%Moist:"
               print_string_backward(temp_str,LINE2+LCD_offset);
-              LCD_position(LINE3);
-              unit_density = convertKgM3DensityToUnitDensity ( dry_dense_rev, review.units );
+              
+               unit_density = convertKgM3DensityToUnitDensity ( dry_dense_rev, review.units );
               if ( review.units != GM_CC )
               {
                 sprintf(temp_str,"%3.1f", unit_density);
@@ -981,22 +1002,25 @@ void review_data(void)  // computes and displays stored data
                 sprintf(temp_str,"%.3f", unit_density);
               }
               strcat(temp_str,younit);
-              count_text(10);  //TEXT// display "    DD:"
+              //DD:
+              displine_e ( LINE3,m_DD,1);
               print_string_backward(temp_str,LINE3+19);
-              LCD_position (LINE4);
+              
               sprintf(temp_str,"%.1f",(float)dry_dense_rev/(float)review.PR * 100);
-              count_text(11);  //TEXT// display "   %PR:"
+              //%PR:
+              displine_e ( LINE4,m_per_proct,1);              
               print_string_backward(temp_str,LINE4+LCD_offset);
               break;
               
         case 4:
-                  snprintf( temp_str,20,"LAT: %9.6f",review.gps_read.latitude); //gdata.latitude);
-                  LCD_PrintAtPosition ( temp_str, LINE1 );
-                  snprintf( temp_str,20,"LNG:%9.6f", review.gps_read.longitude); //gdata.longitude);
-                  LCD_PrintAtPosition ( temp_str, LINE2 );
-                  snprintf( temp_str,20,"ALT:%u SAT:%u ",review.gps_read.altitude,review.gps_read.sats); // gdata.altitude, gdata.sats);
-                  LCD_PrintAtPosition ( temp_str, LINE3 );
-                  break;              
+              snprintf( temp_str,20,"LAT: %9.6f",review.gps_read.latitude); //gdata.latitude);
+              LCD_PrintAtPosition ( temp_str, LINE1 );
+              snprintf( temp_str,20,"LNG:%9.6f", review.gps_read.longitude); //gdata.longitude);
+              LCD_PrintAtPosition ( temp_str, LINE2 );
+              snprintf( temp_str,20,"ALT:%u SAT:%u ",review.gps_read.altitude,review.gps_read.sats); // gdata.altitude, gdata.sats);
+              LCD_PrintAtPosition ( temp_str, LINE3 );
+              break;  
+              
         case 0:
               LCD_position(LINE1);
               printTimeDate(review.date );
@@ -1940,7 +1964,6 @@ void write_data_to_printer(void)  // leads user though process to write project(
  *****************************************************************************/
 void storeStationData ( char * project, station_data_t station  )
 {
-  uint8_t lcd_line;
   FS_FILE *  SDfile = null;
   uint16 station_num;
   strcpy ( station.name, "              ");
@@ -1976,7 +1999,7 @@ void storeStationData ( char * project, station_data_t station  )
   dispscrn_e ( s_enter_station_name_text );  //TEXT// display "Enter Station\nName:"  LINE1,2
    
   //write entered name of station
-  enter_name ( station.name, lcd_line );
+  enter_name ( station.name, LINE2 + 6 );
   if ( getLastKey() == ESC )
   {
     SDstop ( SDfile );       // stop SD card and close the opened file

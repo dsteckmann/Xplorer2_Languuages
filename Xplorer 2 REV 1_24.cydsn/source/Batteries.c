@@ -91,10 +91,13 @@ void shutdownLowBatteries ( void )
     return;
   }
   
-   // ***PANIC***
-   // do something here alkaline is also too low, we've run out of energ...
-   //TEXT// display "    Battery Low\n  Shutdown: %d sec.",5 LINE2,3   
-    battery_shutdwn_text();  
+    // ***PANIC***
+    // do something here alkaline is also too low, we've run out of energ...
+    //
+    // Battery Low
+    // Shutdown: 5 sec.
+    //  
+    dispscrn_e ( s_battery_shutdwn_text);  
 	  delay_ms(1000);
 	    
 	  // start 5 second count down to turn off
@@ -335,7 +338,11 @@ void checkAlkalines (void)	// bootup only, check for alkaline battery state to w
     {
       // display a warning on bootup if the alkaline battery is too low, 
       // just so the user is aware of the situation.
-  	  display_alk_warning();
+  	  //*** WARNING ***
+      //Alkaline Battery
+      //is  Low
+      //
+      dispscrn_e ( s_display_alk_warning );
       delay_ms(1500);
     }  
   }

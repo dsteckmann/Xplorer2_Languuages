@@ -56,7 +56,7 @@ extern CONST_LCDSTRING MP20[];
 
 extern CONST_LCDSTRING  mESC_to_Exit[];
 extern CONST_LCDSTRING_PTR sESCToExit[]  ;
-
+extern CONST_LCDSTRING  mBlank[] ;
 extern CONST_LCDSTRING_PTR s_Calibration_due[] ;
 extern CONST_LCDSTRING mGaugeReady[] ;
 extern CONST_LCDSTRING mCountTime[];
@@ -130,8 +130,47 @@ extern CONST_LCDSTRING m_per_Moist[];
 extern CONST_LCDSTRING m_DD[];       
 extern CONST_LCDSTRING m_per_proct[];
 extern CONST_LCDSTRING m_soil_av[];
+extern CONST_LCDSTRING_PTR s_station_increment[ ];
+extern CONST_LCDSTRING_PTR s_station_start[ ];
+extern CONST_LCDSTRING_PTR s_station_mode_text[ ];
+extern CONST_LCDSTRING_PTR s_project_name[ ];
+extern CONST_LCDSTRING_PTR s_enter_project_name[ ];
+extern CONST_LCDSTRING_PTR s_enter_valid_time[] ;
+extern CONST_LCDSTRING_PTR s_enter_valid_date[ ];
+extern CONST_LCDSTRING_PTR s_shutdown_inactivity[ ];
+extern CONST_LCDSTRING_PTR s_shutdown[ ];
+extern CONST_LCDSTRING_PTR s_press_key_text[ ];
+extern CONST_LCDSTRING_PTR s_depth_voltage_text[ ];
+extern CONST_LCDSTRING_PTR s_gauge_temp_text[ ];
+extern CONST_LCDSTRING_PTR s_warning_text[ ];
+extern CONST_LCDSTRING_PTR s_display_alk_warning[ ];
+extern CONST_LCDSTRING_PTR s_prma_text[ ];
+extern CONST_LCDSTRING_PTR s_battery_shutdwn_text[ ];
+extern CONST_LCDSTRING m_trench_offset[] ;
+extern CONST_LCDSTRING_PTR s_use_val_text[ ];
+extern CONST_LCDSTRING_PTR s_get_new_offset_text[ ];
+extern CONST_LCDSTRING_PTR s_change_val_text[ ];
+extern CONST_LCDSTRING m_max[];
+extern CONST_LCDSTRING m_depth_slope[] ;
+extern CONST_LCDSTRING m_pr[] ;
+extern CONST_LCDSTRING m_sht_dwn_time[] ;
+extern CONST_LCDSTRING m_cal_date[];
+extern CONST_LCDSTRING m_soil_sg[];
+extern CONST_LCDSTRING_PTR s_am_pm_text[ ];
+extern CONST_LCDSTRING_PTR s_enter_time_text[ ];
+extern CONST_LCDSTRING_PTR s_nomograph_enabled_text[ ];
+extern CONST_LCDSTRING_PTR s_enter_bot_dense_text[ ];
+extern CONST_LCDSTRING_PTR s_enter_mat_thickness_text[ ];
+extern CONST_LCDSTRING_PTR s_nomograph_vals_text[ ];
+extern CONST_LCDSTRING_PTR s_activate_saved_vals_text[ ];
+extern CONST_LCDSTRING_PTR s_disable_nomograph_text[ ] ;
+extern CONST_LCDSTRING_PTR s_enable_nomograph_text[ ];
+extern CONST_LCDSTRING_PTR s_speccal_enabled_text[ ];
+extern CONST_LCDSTRING m_Yes_to_Continue[] ;
+extern CONST_LCDSTRING_PTR s_start_speccal_text[ ];
+
 
 #endif
 
-
+//dispscrn_e ( 
 
