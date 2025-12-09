@@ -168,7 +168,8 @@ extern CONST_LCDSTRING_PTR s_enable_nomograph_text[ ];
 extern CONST_LCDSTRING_PTR s_speccal_enabled_text[ ];
 extern CONST_LCDSTRING m_Yes_to_Continue[] ;
 extern CONST_LCDSTRING_PTR s_start_speccal_text[ ];
-
+extern CONST_LCDSTRING_PTR s_enter_number_counts_text[ ];
+extern CONST_LCDSTRING_PTR s_activate_speccal_text[ ] ;
 
 #endif
 

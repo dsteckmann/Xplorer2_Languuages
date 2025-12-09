@@ -869,14 +869,20 @@ CONST_LCDSTRING_PTR s_start_speccal_text[ ] = { m_num_counts,m_depth,m_pstart,m_
 
 //Enter Number:
 //of Counts:
+//Enter to Accept
+//ESC to Exit
+CONST_LCDSTRING m_enter_number[] = {{0,"Enter Number:"},  { 0,"Ingrese Numero de"}};
+CONST_LCDSTRING m_counts[]       = {{0,"of Counts:"},     { 0,"de Cuentas:"}};
+CONST_LCDSTRING_PTR s_enter_number_counts_text[ ] = { m_enter_number,m_counts,mEnter_to_Accept,mESC_to_Exit};
+
+
 //
-//
-CONST_LCDSTRING m_line1[]   = {{0,"of Counts:"},  {
-  0,"Ingrese Numero de"}};
-CONST_LCDSTRING m_line2[]   = {{10,""},  {10,""}};
-CONST_LCDSTRING m_line3[]   = {{10,""},  {10,""}};
-CONST_LCDSTRING m_line4[]   = {{10,""},  {10,""}};
-CONST_LCDSTRING_PTR s_enter_number_counts_text[ ] = { mBlank,mBlank,mBlank,mBlank};
+//Activate Special
+//Calibration?
+//Press YES or NO
+CONST_LCDSTRING m_activateSpecial[]   = {{10,"Activate Special"},  {10,"Activar Calibracion"}};
+CONST_LCDSTRING m_calibration[]   = {{10,"Calibration?"},  {10,"Especial?"}};
+CONST_LCDSTRING_PTR s_activate_speccal_text[ ] = { mBlank,m_activateSpecial,m_calibration,mPress_YES_or_NO};
 
 
 

@@ -1632,8 +1632,12 @@ void special_cal(void)  // Acquire/Enter Special Calibration Constants
             CLEAR_DISP;
             LCD_position (LINE1);        
             _LCD_PRINTF ( "B = %.5f", spec_cal_b_value);  // display B value
-            activate_speccal_text();  //TEXT// display "Activate Special\nCalibration?" LINE2,3          
-            Press_YES_or_NO(LINE4);   //TEXT// display "Press YES or NO"
+             //
+            //Activate Special
+            //Calibration?
+            //Press YES or NO
+            dispscrn_e ( s_activate_speccal_text ); //TEXT// display "Activate Special\nCalibration?" LINE2,3      
+         
            
             while(1)
             {
@@ -1659,16 +1663,14 @@ void special_cal(void)  // Acquire/Enter Special Calibration Constants
             break;          
           } 
         }
-  //USER WANTS TO GET VALUES FROM NEW COUNTS//   
-        
-        enter_number_counts_text();  //TEXT// display "Enter Number\nof Counts = " LINE1,2      
-        
-        Enter_to_Accept(LINE3);        //TEXT// display "Enter to Accept"
-        
-        ESC_to_Exit(LINE4);          //TEXT// display "ESC to Exit"    
-        
+        //USER WANTS TO GET VALUES FROM NEW COUNTS//   
+        //Enter Number:
+        //of Counts:
+        //Enter to Accept
+        //ESC to Exit
+        dispscrn_e ( s_enter_number_counts_text );
+      
         sprintf(number_ptr,"%d",0);
-        
         loopcnt = enterNumber( number_ptr,LINE2 + 11, 3 );  // prompt user to enter number of counts
         
         if(button == ESC)
@@ -1808,9 +1810,12 @@ void special_cal(void)  // Acquire/Enter Special Calibration Constants
           LCD_position (LINE1);        
           _LCD_PRINTF ( "B = %.5f", spec_cal_b_value );
          
-          activate_speccal_text(); //TEXT// display "Activate Special\nCalibration?" LINE2,3      
-          Press_YES_or_NO(LINE4);  //TEXT// display "Press YES or NO"
-          
+          //
+          //Activate Special
+          //Calibration?
+          //Press YES or NO
+          dispscrn_e ( s_activate_speccal_text ); //TEXT// display "Activate Special\nCalibration?" LINE2,3      
+           
           while(1)
           {
             button = getKey(TIME_DELAY_MAX);

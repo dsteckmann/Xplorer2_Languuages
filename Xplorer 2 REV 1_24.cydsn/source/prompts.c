@@ -2430,38 +2430,3 @@ void use_stored_count_text(void)
       LCD_print("Data?");
     }
 }
-
-void activate_speccal_text(void)
-{
-  LCD_position (LINE2);
-  if(Features.language_f)
-  {
-    LCD_print("Activate Special");
-    LCD_position(LINE3);
-    LCD_print("Calibration?");
-  }
-    else
-    {
-      LCD_print("Activar Calibracion"); //  Activar Calibracion Especial
-      LCD_position(LINE3);
-      LCD_print("Especial?");
-    }
-}
-
-void enter_number_counts_text(void)
-{
-  CLEAR_DISP;
-  LCD_position(LINE1);
-  if(Features.language_f)
-  {
-    LCD_print("Enter Number");
-    LCD_position (LINE2);
-    LCD_print("of Counts:   ");
-  }
-    else
-    {
-      LCD_print("Ingrese Numero de");  /// Ingrese Numero de Cuentas
-      LCD_position (LINE2);
-      LCD_print("de Cuentas  ");
-    }
-}

@@ -77,9 +77,6 @@ void vals_ok_text(void);
 void use_gauge_text(void);
 void enter_value_text(BYTE which_value);
 void use_stored_count_text(void);
-
-void activate_speccal_text(void);
-void enter_number_counts_text(void);
 extern void Press_YES_or_NO (BYTE position);
 //void gauge_type_txt(BYTE display_set);
 void recount_txt();
