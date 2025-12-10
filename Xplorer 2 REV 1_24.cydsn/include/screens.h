@@ -66,10 +66,10 @@ extern CONST_LCDSTRING_PTR s_HighVoltageTest[]  ;
 extern CONST_LCDSTRING KeyPadTest[];
 extern CONST_LCDSTRING TubeTest[] ;
 extern CONST_LCDSTRING_PTR s_SelfTestPassedTest[] ;
-extern CONST_LCDSTRING DepthSafe[];
-extern CONST_LCDSTRING DepthBS[] ;
-extern CONST_LCDSTRING DepthNone[];
-extern CONST_LCDSTRING Depth[] ;
+extern CONST_LCDSTRING m_DepthSafe[];
+extern CONST_LCDSTRING m_DepthBS[] ;
+extern CONST_LCDSTRING m_DepthNone[];
+extern CONST_LCDSTRING m_Depth[] ;
 extern CONST_LCDSTRING KeypadFAIL[];
 extern CONST_LCDSTRING KeypadPass[];
 extern CONST_LCDSTRING TempFAIL[] ;
@@ -170,6 +170,93 @@ extern CONST_LCDSTRING m_Yes_to_Continue[] ;
 extern CONST_LCDSTRING_PTR s_start_speccal_text[ ];
 extern CONST_LCDSTRING_PTR s_enter_number_counts_text[ ];
 extern CONST_LCDSTRING_PTR s_activate_speccal_text[ ] ;
+extern CONST_LCDSTRING_PTR s_use_stored_count_text[ ];
+extern CONST_LCDSTRING_PTR s_EnterValue[ ] ;
+extern CONST_LCDSTRING_PTR s_BEnterValue[ ];
+extern CONST_LCDSTRING_PTR s_DensityEnterValue[ ];
+extern CONST_LCDSTRING_PTR s_DensityNowEnterValue[ ] ;
+extern CONST_LCDSTRING_PTR s_ProctEnterValue[ ] ;
+extern CONST_LCDSTRING_PTR s_MAXDensityEnterValue[ ];
+extern CONST_LCDSTRING_PTR s_SGEnterValue[ ];
+extern CONST_LCDSTRING_PTR s_ShutDownHRSEnterValue[ ];
+extern CONST_LCDSTRING_PTR s_depthslopeEnterValue[ ] ;
+extern CONST_LCDSTRING_PTR s_use_gauge_text[ ] ;
+extern CONST_LCDSTRING m_values_ok[]  ;
+extern CONST_LCDSTRING_PTR s_view_last_speccal_text[ ] ;
+extern CONST_LCDSTRING_PTR s_memory_reset_text[ ]  ;
+extern CONST_LCDSTRING_PTR s_disable_speccal_text[ ] ;
+extern  CONST_LCDSTRING_PTR s_enable_speccal_text[ ];
+extern  CONST_LCDSTRING m_moist_const[] ;
+extern CONST_LCDSTRING_PTR s_access_number_incorrect_text[ ]  ;
+extern CONST_LCDSTRING C0[] ;
+extern CONST_LCDSTRING C1[] ;
+extern CONST_LCDSTRING C2[] ;
+extern CONST_LCDSTRING C3[] ;
+extern CONST_LCDSTRING C4[] ;
+extern CONST_LCDSTRING C5[] ;
+extern CONST_LCDSTRING C6[] ;
+extern CONST_LCDSTRING C7[] ;
+extern CONST_LCDSTRING C8[] ;
+extern CONST_LCDSTRING C9[] ;
+extern CONST_LCDSTRING C10[];
+extern CONST_LCDSTRING C11[];
+extern CONST_LCDSTRING C12[];
+extern CONST_LCDSTRING C13[];
+extern CONST_LCDSTRING C14[];
+extern CONST_LCDSTRING_PTR s_enter_cal_mois_std_text[ ] ;
+extern  CONST_LCDSTRING_PTR s_enter_cal_den_std_text[ ];
+extern  CONST_LCDSTRING_PTR s_enter_access_number_text[ ] ;
+extern CONST_LCDSTRING_PTR s_offsets_text[ ]  ;
+extern  CONST_LCDSTRING_PTR s_place_in_bs_text[ ] ;
+extern  CONST_LCDSTRING m_avg_stand_mode_enabled_text[]   ;
+//extern  ;
+//extern  ;
+//extern  ;
+//extern  ;
+//extern  ;
+//extern  ;
+//extern  ;
+//extern  ;
+//extern  ;
+//extern  ;
+//extern  ;
+//extern  ;
+//extern  ;
+//extern  ;
+//extern  ;
+//extern  ;
+
+//extern  ;
+//extern  ;
+//extern  ;
+//extern  ;
+//extern  ;
+//extern  ;
+//extern  ;
+//extern  ;
+//extern  ;
+//extern  ;
+//extern  ;
+//extern  ;
+//extern  ;
+//extern  ;
+//extern  ;
+//extern  ;
+//extern  ;
+//extern  ;
+//extern  ;
+//extern  ;
+//extern  ;
+//extern  ;
+//extern  ;
+//extern  ;
+
+
+//extern 
+
+
+
+
 
 #endif
 

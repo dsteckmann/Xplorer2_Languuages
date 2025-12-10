@@ -752,10 +752,11 @@ enum buttons placeGaugeinBS (void)
    }
  do
  {
-    // Place Gauge
-    // in BS Position
-    // Press Enter to Start
-    place_in_bs_text();
+    //Thin Layer Enabled
+    //Place in BS Position
+    //
+    //Press Enter
+    dispscrn_e ( s_place_in_bs_text );
     // get ENTER or ESC key
     do
     {

@@ -9,6 +9,80 @@
 //#include <string.h>
 
 
+void cal_depth_text(int16_t depth_temp)
+{
+  char dstr[10];
+  CLEAR_DISP;   
+  
+  if ( depth_temp == 1 )
+  {
+   //Depth:BS
+   displine_e ( LINE1, m_DepthBS,1 );
+  }
+  else 
+  {
+    //Depth:
+    sprintf( dstr,"%d",depth_temp);
+    displine_e ( LINE1, m_Depth,1 );
+    _LCD_PRINTF(" %s", dstr ); 
+  }
+}
+
+
+void cal_menu_text(BYTE display_set)
+{
+    switch(display_set)
+    {
+      case 1:
+            //0. Moist Consts
+            displine_e ( LINE1,C0,1 );
+            //1. Depth BS
+            displine_e ( LINE2,C1,1 );
+            break;
+      case 2:
+            //2. Depth 2
+            //3. Depth 3
+            displine_e ( LINE1,C2,1 );
+            displine_e ( LINE2,C3,1 );
+            break;            
+      case 3:
+            //4. Depth 4
+            //5. Depth 5
+            displine_e ( LINE1,C4,1 );
+            displine_e ( LINE2,C5,1 );
+            break;  
+      case 4:
+            //6. Depth 6
+            //7. Depth 7
+            displine_e ( LINE1,C6,1 );
+            displine_e ( LINE2,C7,1 );
+            break;  
+      case 5:
+            //8. Depth 8
+            //9. Depth 9
+            displine_e ( LINE1,C8,1 );
+            displine_e ( LINE2,C9,1 );
+            break;  
+      case 6:
+            //10. Depth 10
+            //11. Depth 11
+            displine_e ( LINE1,C10,1 );
+            displine_e ( LINE2,C11,1 );
+            break;  
+      case 7:
+            //12. Depth 12
+            //13. Calibration Date
+            displine_e ( LINE1,C12,1 );
+            displine_e ( LINE2,C13,1 );
+            break; 
+      case 0:
+            //14. Calib Std Counts
+            //        
+            displine_e ( LINE1,C14,1 );
+            displine_e ( LINE2,mBlank,1 );
+            break; 
+  }
+}
 
 void speccal_results_text(int16_t loops,uint16_t cnt_temp)
 {
@@ -259,20 +333,6 @@ void display_version(void) {
   { 
     CtrStrNC("DEMO", LINE3); //LCD_PrintAtPosition("       DEMO         ",LINE3);
   }  
-}
-
-void calibration_due()
-{   //213240  213128 saves 112 bytes, could free a lot of space if all are fixed
-  if(Features.language_f)
-  {
-    CtrStrNC("Calibration Due!",LINE1);
-    CtrStrNC("Last Calibration On", LINE2);
-  }
-  else
-  {
-    CtrStrNC("Require Calibracion",LINE1);
-    CtrStrNC("Ultima cal. hecha en", LINE2);
-  }
 }
 
 void eeprom_msg(void)
@@ -1353,54 +1413,6 @@ void depth_not_in_2_text ( void )
 
 }
 
-
-void place_in_bs_text ( void )
-{
- CLEAR_DISP;
- LCD_position (LINE1);
- 
- if(Features.language_f)
- {
-  LCD_print("Thin Layer Enabled  ");
-  LCD_position (LINE2);
-  LCD_print("Place in BS Position");
-  LCD_position (LINE4);   
-  LCD_print("    Press Enter    ");
- } 
- else 
- {
-   LCD_print ("Thin Layer Enabled  ");
-  LCD_position (LINE2);
-   LCD_print ("Place in BS Position");
-  LCD_position (LINE4);   
-  LCD_print  ("    Press Enter     ");
- }  
-}  
-
-void place_in_ac_text ( void )
-{
- CLEAR_DISP;
- LCD_position (LINE1);
- 
- if(Features.language_f)
- {
-  LCD_print("Thin Layer Enabled  ");
-  LCD_position (LINE2);
-  LCD_print("Place in AC Position");
-  LCD_position (LINE4);   
-  LCD_print  ("    Press Enter     ");
- } 
- else 
- {
-   LCD_print("Thin Layer Enabled  ");
-  LCD_position (LINE2);
-  LCD_print("Place in AC Position");
-  LCD_position (LINE4);   
-  LCD_print  ("    Press Enter     ");
- }  
-}
-
-
 void nomograph_text(void)
 {
   if(Features.language_f)
@@ -1408,8 +1420,6 @@ void nomograph_text(void)
     else 
      { LCD_print("      Nomograph     "); }
 }
-
-
 
 void drift_text(void)
 {
@@ -1704,24 +1714,6 @@ void stand_mode_settings_text(void)
   }
 }
 
-
-void avg_stand_mode_enabled_text(void)
-{
-  CLEAR_DISP;
-  LCD_position(LINE1);
-  if(Features.language_f)
-  {
-    LCD_position(LINE2);
-    LCD_print("Avg Std Mode Enabled");
-  }
-  else 
-  {
-   LCD_position(LINE2);
-   LCD_print("Media Modo Activar");
-  }
-}
-
-
 void decay_stand_mode_enabled_text(void)
 {
   CLEAR_DISP;
@@ -1784,43 +1776,6 @@ void gauge_in_bs_text(void)
     }
 }
 
-
-void calibration_complete_text(void)
-{
-  CLEAR_DISP;
-  LCD_position(LINE1);
-  if(Features.language_f)
-  {
-    LCD_print("    Calibration");
-    LCD_position(LINE2);
-    LCD_print("     Complete");
-  }
-    else
-    { 
-      LCD_print("    Calibracion");  //Calibración Terminada
-      LCD_position(LINE2);
-      LCD_print("     Terminada");
-    }
-}
-
-void calibration_fail_text(void)
-{
-  CLEAR_DISP;
-  LCD_position(LINE2);
-  if(Features.language_f)
-  {
-    LCD_print("    Calibration     ");
-    LCD_position(LINE3);
-    LCD_print("     Failed         ");
-  }
-    else
-    { 
-      LCD_print("    Calibracion");  //Calibración Terminada
-      LCD_position(LINE3);
-      LCD_print("     Failed    ");
-    }
-}
-
 void set_units_text(void)
 {
   CLEAR_DISP;
@@ -1830,28 +1785,6 @@ void set_units_text(void)
   LCD_PrintAtPosition ( "3.   GCC", LINE3 );
   
 }
-void offsets_text(void)
-{
-  CLEAR_DISP;
-  LCD_position(LINE1);
-  if(Features.language_f)
-  {
-    LCD_print("1. Density");
-    LCD_position(LINE2);
-    LCD_print("2. Moisture");
-    LCD_position(LINE3);
-    LCD_print("3. Trench"); 
-  }
-    else
-    {
-      LCD_print("1. Densidad");  // 1.Densidad. 2. Humedad 3. Zanja.
-      LCD_position(LINE2);
-      LCD_print("2. Humedad");
-      LCD_position(LINE3);
-      LCD_print("3. Zanja"); 
-    }  
-}
-
 
 void offset_on_off_text(char *temp_str, int16_t enabled)
 {
@@ -1947,9 +1880,6 @@ void offset_enable_disable_text(char *temp_str, int16_t enabled)
     }
 }
 
-
-
-
 void SAV_enable_disable_text( int enabled )
 {  
   CLEAR_DISP;
@@ -2002,431 +1932,4 @@ void SAV_enable_disable_text( int enabled )
     LCD_position(LINE4);
     LCD_print("Pulsa YES or NO ");
   }
-}
-
-void enter_access_number_text(void)
-{
-  CLEAR_DISP;
-  LCD_position(LINE1);
-  if(Features.language_f)
-  {
-    LCD_print("Enter Access"); 
-    LCD_position(LINE2);
-    LCD_print("Number: ");
-  }
-    else
-    {
-      LCD_print("Ingrese el Codego de");    //Ingrese el Código de Acceso.
-      LCD_position(LINE2);
-      LCD_print("Acceso: ");
-    }
-}
-
-void enter_cal_den_std_text (void)
-{
-  CLEAR_DISP;
-  LCD_position(LINE1);
-  if(Features.language_f)
-  {
-    LCD_print("Enter Density Std   "); 
-    LCD_position(LINE2);
-    LCD_print("Count:              ");
-  }
-    else
-    {
-     LCD_print("Enter Density Std   "); 
-     LCD_position(LINE2);
-     LCD_print("Count:              ");
-    }
-}
-
-void enter_cal_mois_std_text (void)
-{
-  CLEAR_DISP;
-  LCD_position(LINE1);
-  if(Features.language_f)
-  {
-    LCD_print("Enter Moisture Std  "); 
-    LCD_position(LINE2);
-    LCD_print("Count:              ");
-  }
-    else
-    {
-     LCD_print("Enter Moisture Std  "); 
-     LCD_position(LINE2);
-     LCD_print("Count:              ");
-    }
-}
-
-void access_number_incorrect_text(void)
-{
-  CLEAR_DISP;
-  LCD_position(LINE2);
-  if(Features.language_f)
-  {
-    LCD_print("    Access Code");
-    LCD_position(LINE3);
-    LCD_print("     Incorrect"); 
-  }
-    else
-    {
-      LCD_print("  Codego de Acceso");  // Codigo de Acceso Incorrecto
-      LCD_position(LINE3);
-      LCD_print("     Incorrecto"); 
-    }  
-}
-void cal_menu_text(BYTE display_set)
-{
-  if(Features.language_f)
-  {
-    switch(display_set)
-    {
-      case 1:
-            LCD_position(LINE1);
-            LCD_print("0. Moist Consts     ");
-            LCD_position(LINE2);
-            LCD_print("1. Depth BS         ");
-            break;
-      case 2:
-            LCD_position(LINE1);
-            LCD_print("2. Depth 2          ");
-            LCD_position(LINE2);
-            LCD_print("3. Depth 3          ");
-            break;
-      case 3:
-            LCD_position(LINE1);
-            LCD_print("4. Depth 4          ");
-            LCD_position(LINE2);
-            LCD_print("5. Depth 5          ");
-            break;
-      case 4:
-            LCD_position(LINE1);
-            LCD_print("6. Depth 6          ");
-            LCD_position(LINE2);
-            LCD_print("7. Depth 7          ");
-            break;
-      case 5:
-            LCD_position(LINE1);
-            LCD_print("8. Depth 8          ");
-            LCD_position(LINE2);
-            LCD_print("9. Depth 9          ");
-            break;
-      case 6:
-            LCD_position(LINE1);
-            LCD_print("10. Depth 10        ");
-            LCD_position(LINE2);
-            LCD_print("11. Depth 11        ");
-            break;
-      case 7:
-            LCD_position(LINE1);
-            LCD_print("12. Depth 12        ");        
-             LCD_position(LINE2);
-            LCD_print("13. Calibration Date");       
-      break;
-            
-      case 0:
-            LCD_position(LINE1);
-            LCD_print("14. Calib Std Counts");
-            LCD_position(LINE2);
-            LCD_print("                    ");
-            break;
-     
-    }       
-  }
-    else
-    {
-      switch(display_set) //  0. Costantes de Humedad. 1.Retro-dispercion B. 2. Profundidad
-      {
-        case 1:
-        LCD_position(LINE1);
-        LCD_print("0. Const. de Humedad");
-        LCD_position(LINE2);
-        LCD_print("1. Retro-Dispercion ");
-        break;
-        case 2:
-        LCD_position(LINE1);
-        LCD_print("2. Profundidad # 2  ");
-        LCD_position(LINE2);
-        LCD_print("3. Profundidad # 3  ");
-        break;
-        case 3:
-        LCD_position(LINE1);
-        LCD_print("4. Profundidad # 4  ");
-        LCD_position(LINE2);
-        LCD_print("5. Profundidad # 5  ");
-        break;
-        case 4:
-        LCD_position(LINE1);
-        LCD_print("6. Profundidad # 6  ");
-        LCD_position(LINE2);
-        LCD_print("7. Profundidad # 7  ");
-        break;
-        case 5:
-        LCD_position(LINE1);
-        LCD_print("8. Profundidad # 8  ");
-        LCD_position(LINE2);
-        LCD_print("9. Profundidad # 9  ");
-        break;
-        case 6:
-            LCD_position(LINE1);
-            LCD_print("10. Profundidad # 10");
-            LCD_position(LINE2);
-            LCD_print("11. Profundidad # 11");
-        break;
-        case 7:
-             LCD_position(LINE1);
-            LCD_print("12. Profundidad # 12");        
-            LCD_position(LINE2);
-            LCD_print("13. Cal Date  ");
-            break;
-         case 0:
-            LCD_position(LINE1);
-            LCD_print("14. Cal Std Counts  ");
-            LCD_position(LINE2);
-            LCD_print("15. Thin Layer      ");
-            break;
-
-      }       
-    }
-}
-void cal_depth_text(int16_t depth_temp)
-{
-  char dstr[10];
-  
-  if ( depth_temp == 1 )
-  {
-   sprintf( dstr,"BS");
-  }
-  else if ( depth_temp == 13 )
-  {
-   sprintf( dstr,"AC");
-  }
-  else 
-  {
-   sprintf( dstr,"%d",depth_temp);
-  }
-  
-  CLEAR_DISP;   
-    
-  LCD_position(LINE1);
-  if(Features.language_f)
-   { 
-    _LCD_PRINTF("Depth # %s", dstr ); 
-   }
-   else
-   {
-     _LCD_PRINTF("Profundidad # %s", dstr); 
-   }  
-   
-   
-}
-
-
-
-void reset_cal_date_text(BYTE which_prompt)
-{
-  CLEAR_DISP;
-  LCD_position(LINE1);
-  if(Features.language_f)
-  {
-    if(which_prompt==0)
-    {
-      LCD_print("Reset Calibration   ");
-      LCD_position(LINE2);
-      LCD_print("Date?");
-    }
-    else
-    {   
-      LCD_print("  Calibration Date  ");
-      LCD_position(LINE2);
-      LCD_print("       Reset        ");
-    }
-  }
-    else
-    {
-      if(which_prompt==0)
-      {
-        LCD_print("Borrar la Fecha de  ");  // Borrar la fecha de Calibracion?
-        LCD_position(LINE2);
-        LCD_print("Calibracion?");
-      }
-      else
-      {   
-        LCD_print("Fecha de Calibracion");  // Fecha de Calibracion Borrada
-        LCD_position(LINE2);
-        LCD_print("      Borrada       ");
-      }
-    }  
-}
-
-
-
-void moisture_const_text(void)
-{
-  CLEAR_DISP;
-  LCD_position(LINE1);
-  if(Features.language_f)
-   { LCD_print("MOISTURE CONST");   }
-    else
-      LCD_print("CONSTANTE DE HUMEDAD");
-}
-void bscatter_const_text(void)
-{
-  CLEAR_DISP;
-  LCD_position(LINE1);
-  if(Features.language_f)
-   {  LCD_print("BSCATTER CONST"); }
-    else
-      LCD_print("RETRO-DISPERSION");  // Constante de Retro-Dispersión
-}
-void memory_reset_text(void)
-{
-  CLEAR_DISP;
-  LCD_position (LINE1);
-  if(Features.language_f)
-  {
-    LCD_print("Reset Memory");
-    LCD_position(LINE2);
-    LCD_print("to Default?");
-  }
-    else
-    {
-      LCD_print("Borrar Memoria");  // Borrar memoria a Inicio?
-      LCD_position(LINE2);
-      LCD_print("a Inicio?");
-    }
-}
-void enable_disable_speccal_text(int16_t condition)
-{
-  CLEAR_DISP;
-  LCD_position(LINE1);
-  if(Features.language_f)
-  {
-    if(condition)
-     { LCD_print("Disable Special"); }
-    else
-     { LCD_print("Enable Special");  }
-    
-    LCD_position(LINE2);
-    LCD_print("Calibration?");
-  }
-    else
-    {
-      if(condition)
-        LCD_print("Deshabilitar Calib.");  //   Habilitar / Deshabilitar Calibracion Especial?
-      else
-        LCD_print("Habilitar Calib."); 
-      LCD_position(LINE2);
-      LCD_print("Especial?");
-    }
-}
-void view_last_speccal_text(void)
-{
-  CLEAR_DISP;
-  LCD_position(LINE1);
-  if(Features.language_f)
-  {
-    LCD_print("View Last Saved     ");                  //   Use existing calibration value?
-    LCD_position(LINE2);
-    LCD_print("Spec Cal. Data?     ");
-  }
-    else
-    {
-      LCD_print("Vista de la Ultima");              //       Vista de la Ultima Calibracion Especial Registrada?
-      LCD_position(LINE2);
-      LCD_print("Cal. Esp Registrada?");
-    }  
-}
-void vals_ok_text(void)
-{
-  LCD_position(LINE4);
-  if(Features.language_f)
-   { LCD_print("Values OK? YES/NO   "); }
-    else
-      LCD_print("Valores OK? SI/NO  ");  
-}
-void use_gauge_text(void)
-{
-  CLEAR_DISP;
-  LCD_position(LINE1);
-  if(Features.language_f)
-  {
-    LCD_print("Use Gauge to Derive ");
-    LCD_position(LINE2);  
-    LCD_print("B Value?            ");
-  }
-    else
-    {
-      LCD_print("Use el Equipo Para");  // Use el Equipo para obtener el  valor "B"
-      LCD_position(LINE2);  
-      LCD_print("Obtener el Valor B?");
-    }
-}
-
-void enter_value_text(BYTE which_value)
-{
-  CLEAR_DISP;
-  LCD_position(LINE1);
-  if(Features.language_f)
-  {
-    LCD_print("Enter Value For");
-    LCD_position(LINE2);
-    if(which_value==0)
-      LCD_print("B =");
-    else if(which_value==1)
-      LCD_print("Density =");
-    else if(which_value==2)
-      LCD_print("Density Now?");
-    else if(which_value==3)
-      LCD_print("Proctor:");
-    else if(which_value==4)
-      LCD_print("MAX DENS:");
-    else if( which_value == 5)
-      LCD_print("SOIL SG:");  
-    else if( which_value == 6)
-    LCD_print("SHT DWN (HOURS):");     
-    else if( which_value == 7)
-      LCD_print("Depth Slope:");    
-      
-  }
-    else
-    {    
-      LCD_print("Entre el Valor de"); //  Entre el Valor de Densidad:
-      LCD_position(LINE2);
-      if(which_value==0)
-        LCD_print("B =");
-      else if(which_value==1)
-        LCD_print("Densidad=");
-      else if(which_value==2)
-        LCD_print("Densidad Ahora?");  // Entre el Valor de Densidad Ahora:
-      else if(which_value==3)
-        LCD_print("Proctor:");  // Ingresar valor Proctor
-      else if(which_value==4)
-        LCD_print("MAX DENS:");  // Ingresar valor Proctor
-      else if( which_value == 5)
-      LCD_print("SOIL SG:");    
-      else if( which_value == 6)
-      LCD_print("SHT DWN (HOURS):");   
-      else if( which_value == 7)
-      LCD_print("Depth Slope:");       
-      
-        
-    }
-}
-void use_stored_count_text(void)
-{
-  CLEAR_DISP;
-  LCD_position (LINE1);
-  if(Features.language_f)
-  {
-    LCD_print("Use Stored Count");
-    LCD_position (LINE2);
-    LCD_print("Data?");
-  }
-    else 
-    {
-      LCD_print("Usar las Cuentas");  // Usar las Cuentas Guardadas?
-      LCD_position (LINE2);
-      LCD_print("Data?");
-    }
 }

@@ -1247,10 +1247,11 @@ void enter_depth_slope(void)  //
       {
         break;
       }  
-      
-      enter_value_text(7);   //TEXT// display "Enter Value for\nDepth SLope:" LINE1,2
-      Enter_to_Accept(LINE3);  //TEXT// display "YES to Accept" 
-      ESC_to_Exit(LINE4);    //TEXT// display "ESC to Exit"
+      //Enter Value For
+      //Depth Slope:
+      //Enter to Accept
+      //ESC to Exit
+      dispscrn_e ( s_depthslopeEnterValue );   
        
       num_temp = enterNumber ( number_ptr, LINE2 + 13, 6 );
       

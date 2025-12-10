@@ -655,7 +655,9 @@ void standCountMode(void)
   else if(button == 1)
   {
     Features.avg_std_mode = TRUE;
-    avg_stand_mode_enabled_text();
+    CLEAR_DISP;
+    //Avg Std Mode Enabled
+    displine_e ( LINE1, m_avg_stand_mode_enabled_text,1);
   }  
   else if (button == 2)
   {   
@@ -916,8 +918,11 @@ void offset(void)  // leads user through process to enable/disable or enter offs
  
   while(1)                              // select either Dens, Moist or Trench offset
   {           
-    offsets_text();  //TEXT// display "1. Density\n2. Moisture\n3. Trench" on LINE1,2,3
-    up_down_select_text(0);  //TEXT// display "Select #, ESC Exit" on LINE4
+    //1. Density
+    //2. Moisture
+    //3. Trench
+    //Select #, ESC Exit
+    dispscrn_e ( s_offsets_text );  //TEXT// display "1. Density\n2. Moisture\n3. Trench" on LINE1,2,3
     Controls.shut_dwn = TRUE;                                    // enable shut down feature when NO is pressed  
    
     while(1)
@@ -1320,10 +1325,11 @@ Bool enter_access_code(void)
 {
   uint16_t access_number;
   char number_ptr[11] = "\0\0\0\0\0\0";  // enter a code here when ready to test
-  
-  enter_access_number_text();  //TEXT// display "Enter Access\,Number: " LINE1 and LINE2
-  YES_to_Accept(LINE3);        //TEXT// display "YES to Accept"  
-  ESC_to_Exit(LINE4);          //TEXT// display "ESC to Exit"      
+  //Enter Access
+  //Number: 
+  //YES to Accept
+  //ESC to Exit
+  dispscrn_e ( s_enter_access_number_text );  //TEXT// display "Enter Access\,Number: " LINE1 and LINE2
   
   access_number = enter_number_std(number_ptr,LINE2+8,4,0);  // prompt user to enter access number 
   
@@ -1337,7 +1343,11 @@ Bool enter_access_code(void)
   }   
   else
   {
-     access_number_incorrect_text();  //TEXT// display "   "Access Code\n    Incorrect" LINE2 and LINE3
+    //
+    //Access Code
+    //Incorrect
+    //    
+    dispscrn_e ( s_access_number_incorrect_text);  //TEXT// display "   "Access Code\n    Incorrect" LINE2 and LINE3
   }   
   return(0);  
 }
@@ -1362,9 +1372,12 @@ void memory_reset(void)  // Clears all Calibration Constants from Memory
   if(enter_access_code())
   {  
     Controls.shut_dwn = FALSE;                                // disable shutdown if no is pressed
-    memory_reset_text();     //TEXT// display "Reset Memory\nto Default? on LINE1,2
-    Press_YES_or_NO(LINE3);  //TEXT// display "Press YES or NO"
-    ESC_to_Exit(LINE4);      //TEXT// display "ESC to Exit"
+    //Reset Memory
+    //to Default?
+    //Press Yes or No
+    //ESC to Exit    
+    dispscrn_e ( s_memory_reset_text );     //TEXT// display "Reset Memory\nto Default? on LINE1,2
+    
         
     while(1)
     {
@@ -1428,9 +1441,23 @@ void special_cal(void)  // Acquire/Enter Special Calibration Constants
     while(1)
     {
       Controls.shut_dwn = FALSE;  
-      enable_disable_speccal_text(Spec_flags.spec_cal_flag);  //TEXT// display "Disable Special\nCalibration?" or Enable Special\nCalibration?" LINE1,2    
-      Press_YES_or_NO(LINE3);                      //TEXT// display "Press YES or NO"   
-      ESC_to_Exit(LINE4);                          //TEXT// display "ESC to Exit" 
+      
+      if ( Spec_flags.spec_cal_flag )
+      {
+       //Disable Special
+       //Calibration?
+       //Press Yes or No
+       //ESC to Exit
+       dispscrn_e (s_disable_speccal_text);
+      }
+      else
+      {
+        //Enable Special
+        //Calibration?
+        //Press Yes or No
+        //ESC to Exit        
+        dispscrn_e (s_enable_speccal_text);
+      }
       
       // Wait for YES or NO
       while(1)
@@ -1456,14 +1483,15 @@ void special_cal(void)  // Acquire/Enter Special Calibration Constants
         break;
       }    
       
-      // The special cal is enabled
-      // Get the stored special b value
-      
-      spec_cal_b_value = NV_RAM_MEMBER_RD(Constants.SPECIALCAL_B);    
-    
-        view_last_speccal_text();  //TEXT// display "View Last Saved\nSpec Cal. Data?" LINE1,2      
-        Press_YES_or_NO(LINE3);    //TEXT// display "Press YES or NO"
-        ESC_to_Exit(LINE4);        //TEXT// display "ESC to Exit"
+        // The special cal is enabled
+        // Get the stored special b value
+        spec_cal_b_value = NV_RAM_MEMBER_RD(Constants.SPECIALCAL_B);    
+        
+        //View Last Saved
+        //Spec Cal. Data?
+        //Press Yes or No
+        //ESC to Exit   
+        dispscrn_e ( s_view_last_speccal_text );  //TEXT// display "View Last Saved\nSpec Cal. Data?" LINE1,2      
           
         while(1)
         {
@@ -1512,8 +1540,10 @@ void special_cal(void)  // Acquire/Enter Special Calibration Constants
             LCD_position(LINE2);
             _LCD_PRINTF ( "B = %.5f", spec_cal_b_value);
           }
-          vals_ok_text();  //TEXT// display "Vals. OK? YES/NO" on LINE4
-           
+          
+          //Values OK? YES/NO
+          displine_e ( LINE4, m_values_ok, 1 );
+                     
           while(1)
           {
             button = getKey(TIME_DELAY_MAX);
@@ -1535,10 +1565,12 @@ void special_cal(void)  // Acquire/Enter Special Calibration Constants
         } // end of view last saved sp. cal
        
       // User wants to change the values  
-      use_gauge_text();        //TEXT// display "Use Gauge to Derive\nB Value?" LINE1,2    
-      Press_YES_or_NO(LINE3);  //TEXT// display "Press YES or NO"
-      ESC_to_Exit(LINE4);      //TEXT// display "ESC to Exit" 
-          
+      
+      //Use Gauge to Derive 
+      //B Value?
+      //Press YES or NO
+      //ESC to Exit        
+      dispscrn_e (  s_use_gauge_text );        //TEXT// display "Use Gauge to Derive\nB Value?" LINE1,2    
       while(1)
       {
         button = getKey(TIME_DELAY_MAX);
@@ -1561,9 +1593,11 @@ void special_cal(void)  // Acquire/Enter Special Calibration Constants
         {
          break;    
         } 
-        enter_value_text ( 0 );     //TEXT// display "Enter Value for\nB =" LINE1,2      
-        Enter_to_Accept ( LINE3 );  //TEXT// display "ENTER to Accept 
-        ESC_to_Exit ( LINE4 );      //TEXT// display "ESC to Exit" 
+        //Enter Value For
+        //B =
+        //Enter to Accept
+        //ESC to Exit
+        dispscrn_e ( s_BEnterValue );
                         
         sprintf ( number_ptr, "%.5f", 0.0 );
         spec_cal_b_value = enterNumber ( number_ptr, LINE2+4, 8);
@@ -1589,9 +1623,11 @@ void special_cal(void)  // Acquire/Enter Special Calibration Constants
       {
         if(NV_RAM_MEMBER_RD(ENTER_DEN_LATER) == 1)    // prompt for using stored dens cnts
         {
-          use_stored_count_text();  //TEXT// display "Use Stored Count\nData?" LINE1,2        
-          Press_YES_or_NO(LINE3);   //TEXT// display "Press YES or NO'
-          ESC_to_Exit(LINE4);       //TEXT// display "ESC to Exit"    
+          //Use Stored Count
+          //Data?
+          //Press YES or NO
+          //ESC to Exit
+          dispscrn_e ( s_use_stored_count_text );    
               
           while(1)
           {
@@ -1607,10 +1643,11 @@ void special_cal(void)  // Acquire/Enter Special Calibration Constants
           }  
           else if(button == YES)   // use stored dens cnts
           { 
-            enter_value_text(1);     //TEXT// display "Enter Value For\n Density =" LINE1,2         
-            Enter_to_Accept(LINE3);  //TEXT// display "Enter to Accept" 
-            ESC_to_Exit(LINE4);      //TEXT// display "ESC to Exit"
-    
+            //Enter Value For
+            //Density =
+            //Enter to Accept
+            //ESC to Exit
+            dispscrn_e ( s_DensityEnterValue );
             displayValueWithUnits ( 0.0, LINE2+9, number_ptr ); 
             spec_den = enterNumber ( number_ptr, LINE2 + 9, 6 );
             spec_den = convertDensityToKgM3 ( spec_den );  // value in kg/m3
@@ -1761,10 +1798,13 @@ void special_cal(void)  // Acquire/Enter Special Calibration Constants
         NV_MEMBER_STORE(SPECIALCAL_DEPTH,tst_depth_g);
         NV_MEMBER_STORE(Constants.SPECIALCAL_B,0);  //reset b value until density is entered
   
-        enter_value_text(2);    //TEXT// display "Enter Density\nValue Now?" LINE1,2      
+        //Enter Value For
+        //Density Now?
+        //Press Yes or NO
+        //ESC to Exit
+        dispscrn_e ( s_DensityNowEnterValue );        
         Press_YES_or_NO(LINE3); //TEXT// display "Press YES or NO"
-        ESC_to_Exit(LINE4);     //TEXT// display "ESC to Exit"
-        
+         
         while(1)
         {
          button = getKey(TIME_DELAY_MAX);
@@ -1785,10 +1825,12 @@ void special_cal(void)  // Acquire/Enter Special Calibration Constants
         }
         else  //yes, enter density now
         {
-          enter_value_text(1);     //TEXT// display "Enter Value for\nDensity = " LINE1,2       
-          Enter_to_Accept(LINE3);  //TEXT// display "Enter to Accept"        
-          ESC_to_Exit(LINE4);      //TEXT// display "ESC to Exit"
-   
+          //Enter Value For
+          //Density =
+          //Enter to Accept
+          //ESC to Exit
+          dispscrn_e ( s_DensityEnterValue );             
+  
           displayValueWithUnits ( 0.0, LINE2 + 9, number_ptr );
                
           spec_den = enterNumber ( number_ptr, LINE2+9, 6);
@@ -2341,11 +2383,12 @@ void ma_pr(void)  //
       if(button != YES)   // NO or ESC was pressed, exit to menu
       {
         break;
-      }   
-      enter_value_text(3);   //TEXT// display "Enter Value for\nProctor:" LINE1,2
-      Enter_to_Accept(LINE3);  //TEXT// display "Enter to Accept"
-      ESC_to_Exit(LINE4);    //TEXT// display "ESC to Exit"
- 
+      }
+      //Enter Value For
+      //Proctor:
+      //Enter to Accept
+      //ESC to Exit
+      dispscrn_e ( s_ProctEnterValue );
       num_temp = enterNumber ( number_ptr, LINE2+9, 6 );
      
       // If esc hit, don't save a new ENTRY
@@ -2397,11 +2440,11 @@ void ma_pr(void)  //
       {
         break;
       }  
-      
-      enter_value_text(4);   //TEXT// display "Enter Value for\nMarshall:" LINE1,2
-      Enter_to_Accept(LINE3);  //TEXT// display "YES to Accept" 
-      ESC_to_Exit(LINE4);    //TEXT// display "ESC to Exit"
-       
+      //Enter Value For
+      //MAX Density
+      //Enter to Accept
+      //ESC to Exit
+      dispscrn_e ( s_MAXDensityEnterValue );
       num_temp = enterNumber ( number_ptr, LINE2 + 10, 6 );
       
      // If esc hit, don't save a new ENTRY
@@ -2466,11 +2509,11 @@ void ma_pr(void)  //
           Controls.shut_dwn = TRUE;                      // enable shut down feature when NO is pressed      
           return; 
         }  
-        
-        enter_value_text(5);   //TEXT// display "Enter Value for\nSoil SG:" LINE1,2
-        Enter_to_Accept(LINE3);  //TEXT// display "YES to Accept" 
-        ESC_to_Exit(LINE4);    //TEXT// display "ESC to Exit"
-         
+        //Enter Value For
+        //SOIL SG:
+        //Enter to Accept
+        //ESC to Exit
+        dispscrn_e ( s_SGEnterValue );
         num_temp = enterNumber ( number_ptr, LINE2 + 10, 6 );
         
        // If esc hit, don't save a new ENTRY
@@ -2553,11 +2596,12 @@ void idle_shutdown(void)  //
     if(button != YES)   // NO or ESC was pressed, exit to menu
     {
       break;
-    }   
-    enter_value_text(6);     //TEXT// display "Enter Value for\nSHT DWN(HOURS):" LINE1,2
-    Enter_to_Accept(LINE3);  //TEXT// display "Enter to Accept"
-    ESC_to_Exit(LINE4);      //TEXT// display "ESC to Exit"
-
+    }  
+    //Enter Value For
+    //
+    //Enter to Accept
+    //ESC to Exit
+    dispscrn_e ( s_ShutDownHRSEnterValue );
     num_temp = enterNumber ( number_ptr, LINE2+17, 2 );
    
     if ( num_temp < 1 )

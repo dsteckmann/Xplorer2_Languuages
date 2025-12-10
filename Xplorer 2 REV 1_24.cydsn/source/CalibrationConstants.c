@@ -216,12 +216,11 @@ void enter_cal_const(void)  // Manually Enter Calibration Constants
       
       else if(selection == 0)
       {       
-     
-        moisture_const_text();  //TEXT// display " MOISTURE CONST " LINE1        
+        CLEAR_DISP;
+        displine_e ( LINE1,m_moist_const,1 );  //TEXT// display " MOISTURE CONST " LINE1        
     		LCD_position(LINE1 + 17);
   		  LCD_print ( "GCC" );
- 
-        LCD_position(LINE2);
+         LCD_position(LINE2);
 	      _LCD_PRINTF ( "E =   %+7.5f", (double)NV_CONSTANTS(E_MOIST_CONST )); 
          LCD_position(LINE3);
         _LCD_PRINTF ( "F =   %+7.5f", (double)NV_CONSTANTS(F_MOIST_CONST ));
@@ -590,11 +589,12 @@ void enter_cal_stand (void)
   uint16_t stand;
   char number_ptr[11] = "\0\0\0\0\0\0";  // enter a code here when ready to test
   
-  enter_cal_den_std_text();    //TEXT// display "Enter Density Std,Count: " LINE1 and LINE2
-  YES_to_Accept(LINE3);        //TEXT// display "YES to Accept"  
-  ESC_to_Exit(LINE4);          //TEXT// display "ESC to Exit"      
+  //Enter Density Std
+  //Count:
+  //YES to Accept
+  //ESC to Exit
+  dispscrn_e ( s_enter_cal_den_std_text );    //TEXT// display "Enter Density Std,Count: " LINE1 and LINE2
   
- 
   NV_EE_RD( DENSE_CAL_STD, &stand );
   
   if ( stand > 65535 )
@@ -610,11 +610,13 @@ void enter_cal_stand (void)
   {
     NV_MEMBER_STORE ( DENSE_CAL_STD, stand);
   }  
-     
-  enter_cal_mois_std_text();    //TEXT// display "Enter Density Std,Count: " LINE1 and LINE2
-  YES_to_Accept(LINE3);        //TEXT// display "YES to Accept"  
-  ESC_to_Exit(LINE4);          //TEXT// display "ESC to Exit"      
   
+  //Enter Moisture Std
+  //Count:
+  //YES to Accept
+  //ESC to Exit   
+  dispscrn_e ( s_enter_cal_mois_std_text);    //TEXT// display "Enter Density Std,Count: " LINE1 and LINE2
+    
   NV_EE_RD( MOIST_CAL_STD, &stand );
 
   if ( stand > 65000 )

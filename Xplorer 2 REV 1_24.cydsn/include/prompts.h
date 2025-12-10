@@ -1,11 +1,9 @@
-
 #ifndef PROMPTS_H
 #define PROMPTS_H
-
 #include "Globals.h"
 #include <project.h>
 #include "DataTypes.h"
-  
+ 
 void serial_port_text();  
 void up_down_ENTER_select_text();  
 void date_usb_error_text ( void );
@@ -56,29 +54,15 @@ void auto_depth_settings(void);
 
 void gauge_in_safe(void);
 
-void calibration_complete_text(void);
 void set_units_text(void);
-void offsets_text(void);
 void offset_on_off_text(char *temp_str, int16_t enabled);
 void enter_offset_text(char *temp_str);
 void offset_enable_disable_text(char *temp_str, int16_t enabled);
-void enter_access_number_text(void);
-void access_number_incorrect_text(void);
 void cal_menu_text(BYTE display_set);
 void cal_depth_text(int16_t depth_temp);
 void reset_cal_date_text(BYTE which_prompt);
-void moisture_const_text(void);
 void bscatter_const_text(void);
-void memory_reset_text(void);
-void enable_disable_speccal_text(int16_t condition);
-void view_last_speccal_text(void);
-
-void vals_ok_text(void);
-void use_gauge_text(void);
-void enter_value_text(BYTE which_value);
-void use_stored_count_text(void);
 extern void Press_YES_or_NO (BYTE position);
-//void gauge_type_txt(BYTE display_set);
 void recount_txt();
 void progress_bar( BYTE display_set);
 void trench_count_press_start(void);
@@ -86,7 +70,6 @@ void store_consts();
 void review_consts();
 void block_densities_txt ( BYTE display_set);
 void cnt_result_display_txt(BYTE display_set, int j);
-
 void cnt_display_txt(BYTE display_set, int j);
 void yes_when_ready_txt();
 void auto_cal_depth(BYTE display_set, int j);
@@ -97,7 +80,6 @@ void self_test_pf_text(BYTE source, int16_t test_failed);
 void stat_drift_count_text(BYTE source);
 void count_text(BYTE source);
 void select_language_text();
-
 void enter_station_name_text();
 void print_complete_text();
 void print_data_text();
@@ -124,24 +106,16 @@ void stat_text(void);
 void std_text(void);
 void drift_text(void);
 void speccal_results_text(int16_t loops, uint16_t cnt_temp);
-void enable_disable_nomograph_text(int16_t condition);
 void no_data_to_store_text ( void );
-void depth_not_in_ac_text ( void );
 void depth_not_in_bs_text ( void );
-void place_in_ac_text ( void );
-void place_in_bs_text ( void );
 void nomograph_text(void);
 void enter_valid_text(BYTE which_source);
 void no_valid_depth_selected (void);
 void current_project_text ( char *temp_str );
 void std_count_press_start(void);
-void enter_cal_mois_std_text (void);
-void enter_cal_den_std_text (void);
 void gauge_in_bs_text(void);
-void calibration_fail_text(void);
 void stand_mode_settings_text(void);
 void decay_stand_mode_enabled_text(void);
-void avg_stand_mode_enabled_text(void);
 void not_in_safe_text ( void );
 void not_in_bs_text ( void );
 void invalid_den_std_text ( void );
@@ -151,12 +125,10 @@ void mode_menu_display(unsigned int menu_trk);
 void press_off_txt(void);
 void shut_down_txt( void );
 void print_menu_display( void ) ;
-
 void count_test_txt( void );
 void display_count_text ( uint16_t moist, uint32_t dens,uint32_t dens_combo );
 void light_test_txt( void );
 void lights_are_on_txt( void );
-
 void depth_not_in_2_text ( void );
 void clock_set_error_text ( void );
 void display_offset ( struct offsets_struct  which_offsets);
@@ -165,7 +137,6 @@ void sd_menu_display(uint8_t menu_trk) ;
 void SAV_enable_disable_text( int enabled );
 void depth_strip_type(void);
 void eeprom_msg(void);
-
 
 #endif
 

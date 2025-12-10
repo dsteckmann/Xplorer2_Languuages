@@ -1,9 +1,9 @@
 
  /******************************************************************************
  *                                                                            
- *  InstroTek, Inc. 2010                  
- *  5908 Triangle Dr.
- *  Raleigh,NC 27617
+ *  InstroTek, Inc. 2025                  
+ *  1 Triangle Dr.
+ *  RTP,NC 27709
  *  www.instrotek.com  (919) 875-8371                                         
  *                                                                               
  *           File Name:  Depth.c
@@ -120,7 +120,7 @@ void display_depth(BYTE function, BYTE depth_temp_inches)
     if((depth_temp_inches == 0) && (function == 0))
     { 
       // Depth:SAFE
-      printStringOnLCD_e( DepthSafe);   // Print the string. 
+      printStringOnLCD_e( m_DepthSafe);   // Print the string. 
     }
   }    
   else if( bit_test(valid_depth,depth_temp_inches))    
@@ -128,25 +128,25 @@ void display_depth(BYTE function, BYTE depth_temp_inches)
     if ( depth_temp_inches == 1)
     {
       // Depth:SAFE
-      printStringOnLCD_e(DepthBS);
+      printStringOnLCD_e(m_DepthBS);
     }
     else if ( depth_temp_inches == 13  )
     {
       // Depth:None
-      printStringOnLCD_e(DepthNone);
+      printStringOnLCD_e(m_DepthNone);
     }
     else
     {
       if(Features.SI_units)       // in "kg/m3" mode
       { 
         // Depth:
-        printStringOnLCD_e(Depth);
+        printStringOnLCD_e(m_Depth);
         _LCD_PRINTF("%3umm", depth_temp_inches * 25);
       }
       else
       {
         // Depth:
-        printStringOnLCD_e(Depth);
+        printStringOnLCD_e(m_Depth);
         _LCD_PRINTF("%2uin.", depth_temp_inches); 
       }        // in "PCF" mode   
     } 
@@ -154,7 +154,7 @@ void display_depth(BYTE function, BYTE depth_temp_inches)
   else
   {
     //Depth:None
-    printStringOnLCD_e(DepthNone);  
+    printStringOnLCD_e(m_DepthNone);  
   }
 }
 /******************************************************************************
