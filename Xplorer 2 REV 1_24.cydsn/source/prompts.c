@@ -8,7 +8,112 @@
 //#include <stdio.h>
 //#include <string.h>
 
+void set_units_text(void)
+{
+  CLEAR_DISP;
+  LCD_PrintAtPosition ( "1.   PCF", LINE1 );
+  LCD_PrintAtPosition ( "2. kg/m3", LINE2 );
+  LCD_PrintAtPosition ( "3.   GCC", LINE3 );
+}
 
+///******************************************************************************************************/
+// Redo the whole offet routine to make it compatible with new message screens of multiple languages
+void offset_on_off_text(char *temp_str, int16_t enabled)
+{
+  if(Features.language_f)
+  {
+    if(enabled)                              
+    {        
+      LCD_position (LINE1);
+      _LCD_PRINTF("%s Offset ON",temp_str);        
+      LCD_position (LINE2);
+      LCD_print("Want to Disable?");
+    }
+    else
+    {
+      LCD_position (LINE1);
+      _LCD_PRINTF("%s Offset OFF",temp_str);             
+      LCD_position (LINE2);
+      LCD_print("Want to Enable?");
+    }      
+  }
+    else
+    {
+      if(enabled)                             //    Densidad / Humedad / Zanja  Compensacion Habilitado Desea Deshabilitarlo?   
+      {        
+        LCD_position (LINE1);
+        _LCD_PRINTF("%s Compensacion",temp_str);        
+        LCD_position (LINE2);
+        LCD_print("Habilitado Desea");
+        LCD_position(LINE3); 
+        LCD_print("Deshabilitarlo?");
+      }
+      else
+      {
+        LCD_position (LINE1);
+        _LCD_PRINTF("%s Compensacion",temp_str);  // Densidad / Humedad / Zanja - Compensacion Deshabilitado desea Habilitarlo?               
+        LCD_position (LINE2);
+        LCD_print("Deshabilitado Desea");
+        LCD_position(LINE3);
+        LCD_print("Habilitarlo?");
+      }      
+    }  
+}
+
+void enter_offset_text(char *temp_str)
+{
+  LCD_position(LINE1);
+  if(Features.language_f)
+  {
+    _LCD_PRINTF("Enter %s",temp_str);  
+    LCD_position(LINE2);
+    LCD_print("Offset:");
+  }
+    else
+    {
+      LCD_print("Ingresar Compensac'n");
+      LCD_position(LINE2);
+      _LCD_PRINTF("%s",temp_str);
+    }
+}
+void offset_enable_disable_text(char *temp_str, int16_t enabled)
+{  
+  CLEAR_DISP;
+  LCD_position(LINE2);
+  
+  if(Features.language_f)
+  {
+    if(!enabled)
+    {    
+      _LCD_PRINTF(" %s Offset",temp_str);
+      LCD_position(LINE3);
+      LCD_print("   Disabled");           
+    }
+    else
+    {
+      _LCD_PRINTF(" %s Offset",temp_str);
+      LCD_position(LINE3);
+      LCD_print("   Enabled");
+    }
+  }
+    else
+    {  
+      if(!enabled)
+      {    
+        _LCD_PRINTF(" %s Compensacion",temp_str);
+        LCD_position(LINE3);
+        LCD_print("   Deshabilitado");           
+      }
+      else
+      {
+        _LCD_PRINTF(" %s Offset",temp_str);
+        LCD_position(LINE3);
+        LCD_print("   Habilitado"); 
+      }
+    }
+}
+
+///******************************************************************************************************/
 void cal_depth_text(int16_t depth_temp)
 {
   char dstr[10];
@@ -1591,345 +1696,4 @@ void auto_depth_settings(void)
        LCD_print("2. Depth Strip Type");
       }        
     }
-}
-
-void depth_strip_type(void)
-{
-  CLEAR_DISP;
-  LCD_position(LINE1);
-  if(Features.language_f)
-  {
-    LCD_print("Depth Strip Type");
-    LCD_position(LINE2);
-    LCD_print("1. Xplorer");
-    LCD_position(LINE3);
-    LCD_print("2. 3440");
-  }
-  else 
-  {
-    LCD_print("Depth Strip Type");
-    LCD_position(LINE2);
-    LCD_print("1. Xplorer");
-    LCD_position(LINE3);
-    LCD_print("2. 3440");
-  }
-}
-
-
-void date_usb_error_text ( void )
-{
- CLEAR_DISP;
- LCD_position (LINE1);
- if(Features.language_f)
- {
-  LCD_print("Clock/USB Disabled  ");
-  LCD_position (LINE2);
-  LCD_print("Unplugging Ribbon   ");
-  LCD_position (LINE3);
-  LCD_print("Cable May Fix Issue");
-  LCD_position (LINE4);
-  LCD_print("Press <ENTER> ");
-
- } 
- else 
- { 
-  LCD_print("Clock/USB Disabled  ");
-  LCD_position (LINE2);
-  LCD_print("Unplugging Ribbon   ");
-  LCD_position (LINE3);
-  LCD_print("Cable May Fix Issue");
-  LCD_position (LINE4);
-  LCD_print("Press <ENTER> ");
- }  
-
-}
-
-
-void clock_set_error_text ( void )
-{
- CLEAR_DISP;
- LCD_position (LINE1);
- if(Features.language_f)
- {
-  LCD_print("    Error setting   ");
-  LCD_position (LINE2);
-  LCD_print("    Internal Clock  ");
-  LCD_position (LINE3);
-  LCD_print("   Restart Gauge    ");
-  LCD_position (LINE4);
-  LCD_print("   Press <ENTER>    ");
-
- } 
- else 
- { 
-  LCD_print("    Error setting   ");
-  LCD_position (LINE2);
-  LCD_print("    Internal Clock  ");
-  LCD_position (LINE3);
-  LCD_print("   Restart Gauge    ");
-  LCD_position (LINE4);
-  LCD_print("   Press <ENTER>    ");
- }  
-
-}
-
-void no_data_to_store_text ( void )
-{
- CLEAR_DISP;
- LCD_position (LINE1);
- if(Features.language_f)
- {
-  LCD_print("  No Data To Store  ");
-  LCD_position (LINE2);
-  LCD_print("        Start       ");
-  LCD_position (LINE3);
-  LCD_print("   New Measurement  ");
- } 
- else 
- {
-  LCD_print("  No Data To Store  ");
-  LCD_position (LINE2);
-  LCD_print("        Start       ");
-  LCD_position (LINE3);
-  LCD_print("   New Measurement  ");
- }  
-
-}
-
-void stand_mode_settings_text(void)
-{
-  CLEAR_DISP;
-  LCD_position(LINE1);
-  if(Features.language_f)
-  {
-    LCD_print("1. Average Mode     ");
-    LCD_position(LINE2);
-    LCD_print("2. Decay Mode       ");
-  }
-  else 
-  {
-    LCD_print("1. Media Modo     ");
-    LCD_position(LINE2);
-    LCD_print("2. Desinteg. Modo");
-  }
-}
-
-void decay_stand_mode_enabled_text(void)
-{
-  CLEAR_DISP;
-  LCD_position(LINE1);
-  if(Features.language_f)
-  {
-    LCD_position(LINE2);
-    LCD_print("Decay Mode Enabled  ");
-  }
-  else 
-  {
-   LCD_position(LINE2);
-   LCD_print("Desint. Modo Activar");
-  }
-}
-
-
-void gauge_in_safe(void)
-{
-  CLEAR_DISP;
-  LCD_position(LINE1);
-  if(Features.language_f)
-  {
-    LCD_print("Place Gauge in");
-    LCD_position(LINE2);
-    LCD_print("SAFE Position");
-    LCD_position(LINE3);
-    LCD_print("and Press ENTER"); 
-  }
-    else
-    {    
-      LCD_print("Coloque el Equipo");  // Coloque el equipo en posicion de seguridad.  Presione Iniciar
-      LCD_position(LINE2);
-      LCD_print("en Posicion de Segur");
-      LCD_position(LINE3);
-      LCD_print("Presione Inciar.");
-    }
-}
-
-
-void gauge_in_bs_text(void)
-{
-  CLEAR_DISP;
-  LCD_position(LINE1);
-  if(Features.language_f)
-  {
-    LCD_print("Place Gauge in      ");
-    LCD_position(LINE2);
-    LCD_print("BS Position         ");
-    LCD_position(LINE3);
-    LCD_print("and Press ENTER     "); 
-  }
-    else
-    {    
-      LCD_print("Coloque el Equipo");  // Coloque el equipo en posicion de seguridad.  Presione Iniciar
-      LCD_position(LINE2);
-      LCD_print("en Posicion de BS");
-      LCD_position(LINE3);
-      LCD_print("Presione Inciar.");
-    }
-}
-
-void set_units_text(void)
-{
-  CLEAR_DISP;
- 
-  LCD_PrintAtPosition ( "1.   PCF", LINE1 );
-  LCD_PrintAtPosition ( "2. kg/m3", LINE2 );
-  LCD_PrintAtPosition ( "3.   GCC", LINE3 );
-  
-}
-
-void offset_on_off_text(char *temp_str, int16_t enabled)
-{
-  if(Features.language_f)
-  {
-    if(enabled)                              
-    {        
-      LCD_position (LINE1);
-      _LCD_PRINTF("%s Offset ON",temp_str);        
-      LCD_position (LINE2);
-      LCD_print("Want to Disable?");
-    }
-    else
-    {
-      LCD_position (LINE1);
-      _LCD_PRINTF("%s Offset OFF",temp_str);             
-      LCD_position (LINE2);
-      LCD_print("Want to Enable?");
-    }      
-  }
-    else
-    {
-      if(enabled)                             //    Densidad / Humedad / Zanja  Compensacion Habilitado Desea Deshabilitarlo?   
-      {        
-        LCD_position (LINE1);
-        _LCD_PRINTF("%s Compensacion",temp_str);        
-        LCD_position (LINE2);
-        LCD_print("Habilitado Desea");
-        LCD_position(LINE3); 
-        LCD_print("Deshabilitarlo?");
-      }
-      else
-      {
-        LCD_position (LINE1);
-        _LCD_PRINTF("%s Compensacion",temp_str);  // Densidad / Humedad / Zanja - Compensacion Deshabilitado desea Habilitarlo?               
-        LCD_position (LINE2);
-        LCD_print("Deshabilitado Desea");
-        LCD_position(LINE3);
-        LCD_print("Habilitarlo?");
-      }      
-    }  
-}
-void enter_offset_text(char *temp_str)
-{
-  LCD_position(LINE1);
-  if(Features.language_f)
-  {
-    _LCD_PRINTF("Enter %s",temp_str);  
-    LCD_position(LINE2);
-    LCD_print("Offset:");
-  }
-    else
-    {
-      LCD_print("Ingresar Compensac'n");
-      LCD_position(LINE2);
-      _LCD_PRINTF("%s",temp_str);
-    }
-}
-
-void offset_enable_disable_text(char *temp_str, int16_t enabled)
-{  
-  CLEAR_DISP;
-  LCD_position(LINE2);
-  if(Features.language_f)
-  {
-    if(!enabled)
-    {    
-      _LCD_PRINTF(" %s Offset",temp_str);
-      LCD_position(LINE3);
-      LCD_print("   Disabled");           
-    }
-    else
-    {
-      _LCD_PRINTF(" %s Offset",temp_str);
-      LCD_position(LINE3);
-      LCD_print("   Enabled");
-    }
-  }
-    else
-    {  
-      if(!enabled)
-      {    
-        _LCD_PRINTF(" %s Compensacion",temp_str);
-        LCD_position(LINE3);
-        LCD_print("   Deshabilitado");           
-      }
-      else
-      {
-        _LCD_PRINTF(" %s Offset",temp_str);
-        LCD_position(LINE3);
-        LCD_print("   Habilitado"); 
-      }
-    }
-}
-
-void SAV_enable_disable_text( int enabled )
-{  
-  CLEAR_DISP;
-  LCD_position(LINE1);
-  if(Features.language_f)
-  {
-    if(enabled == 0)
-    {    
-      LCD_position(LINE1);
-      LCD_print("%%Soil Air Voids ");
-      LCD_position(LINE2);
-      LCD_print("   Disabled");           
-      LCD_position(LINE3);
-      LCD_print("Want to Enable?");           
-    }
-    else
-    {
-      LCD_position(LINE1);
-      LCD_print("%%Soil Air Voids ");
-      LCD_position(LINE2);
-      LCD_print("   Enabled");           
-      LCD_position(LINE3);
-      LCD_print("Want to Disable?");  
-    }
-     LCD_position(LINE4);
-     LCD_print("Press YES or NO ");
-    
-  }
-  else
-  {  
-    if(!enabled)
-    {    
-      LCD_position(LINE1);
-      LCD_print("%%Tiearra Aire Nulo  ");  // Soil air voids
-      LCD_position(LINE2);
-      LCD_print("   Deshabilitado");       // Disabled
-      LCD_position(LINE3);
-      LCD_print("desea habilitar?");       //Want to Enable
-      
-    }
-    else
-    {
-      LCD_position(LINE1);
-      LCD_print("%%Tiearra Aire Nulo  ");
-      LCD_position(LINE2);
-      LCD_print("   Habilitado"); 
-       LCD_position(LINE3);
-      LCD_print("desea desactivar?");    // Want to disable
-    }
-    LCD_position(LINE4);
-    LCD_print("Pulsa YES or NO ");
-  }
 }

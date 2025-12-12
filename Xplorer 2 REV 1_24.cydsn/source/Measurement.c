@@ -688,7 +688,11 @@ uint8_t measureMoistureDensity(void)
           {
             if ( Spec_flags.recall_flag )
             {
-            no_data_to_store_text( );
+              //No Data To Store
+              //Start
+              //New Measurement
+              //
+              dispscrn_e ( s_no_data_to_store_text );
             delay_ms ( 1500 );
             }
             else

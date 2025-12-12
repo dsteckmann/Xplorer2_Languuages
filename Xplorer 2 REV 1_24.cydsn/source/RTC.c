@@ -1205,7 +1205,11 @@ void enterTimeRTCI2C (void)  // leads user through process to set the time and d
         }  
         else
         {
-         clock_set_error_text();
+          //Error setting
+          //Clock
+          //Restart Gauge
+          //Press <ENTER>
+          dispscrn_e ( s_clock_set_error_text );
          break; 
         }
       }  

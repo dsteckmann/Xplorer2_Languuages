@@ -6,7 +6,6 @@
  
 void serial_port_text();  
 void up_down_ENTER_select_text();  
-void date_usb_error_text ( void );
 void trench_text(void);
 void select_test_or_spec_cal(int16_t inspec);
 void ESC_to_Exit(BYTE position);
@@ -106,17 +105,12 @@ void stat_text(void);
 void std_text(void);
 void drift_text(void);
 void speccal_results_text(int16_t loops, uint16_t cnt_temp);
-void no_data_to_store_text ( void );
 void depth_not_in_bs_text ( void );
 void nomograph_text(void);
 void enter_valid_text(BYTE which_source);
 void no_valid_depth_selected (void);
 void current_project_text ( char *temp_str );
 void std_count_press_start(void);
-void gauge_in_bs_text(void);
-void stand_mode_settings_text(void);
-void decay_stand_mode_enabled_text(void);
-void not_in_safe_text ( void );
 void not_in_bs_text ( void );
 void invalid_den_std_text ( void );
 void invalid_mois_std_text( void );
@@ -130,12 +124,9 @@ void display_count_text ( uint16_t moist, uint32_t dens,uint32_t dens_combo );
 void light_test_txt( void );
 void lights_are_on_txt( void );
 void depth_not_in_2_text ( void );
-void clock_set_error_text ( void );
 void display_offset ( struct offsets_struct  which_offsets);
 void display_offset_on ( struct offsets_struct  which_offsets);
 void sd_menu_display(uint8_t menu_trk) ;
-void SAV_enable_disable_text( int enabled );
-void depth_strip_type(void);
 void eeprom_msg(void);
 
 #endif

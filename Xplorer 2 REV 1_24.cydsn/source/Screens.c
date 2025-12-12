@@ -50,6 +50,9 @@ CONST_LCDSTRING Up_Down_Change[]        =  {{ 10, "UP/DOWN to Change" },  { 10, 
 //Select #, ESC Exit
 CONST_LCDSTRING SelectNumber[]        =  {{ 10, "Select #, ESC Exit" },{ 10, "Sel #,ESC para Salir"}  };
 
+//Select #
+CONST_LCDSTRING m_Select[]        =  {{ 10, "Select #" },{ 10, "Sel #"}  };
+
 //Press START to Test
 CONST_LCDSTRING m_PressStart[]                = {{ 10, "Press START" }, { 10, "Presione <START>"} };
 
@@ -768,10 +771,10 @@ CONST_LCDSTRING_PTR s_change_val_text[ ] = { mBlank,m_change_value,mPress_YES_or
 //1. AM
 //2. PM
 //
-CONST_LCDSTRING m_Select[]   = {{10,"Select"},  {10,"Seleccione"}};
+CONST_LCDSTRING m_Select1[]   = {{10,"Select"},  {10,"Seleccione"}};
 CONST_LCDSTRING m_AM[]   = {{0,"1. AM"},  {0,"1. AM"}};
 CONST_LCDSTRING m_PM[]   = {{0,"2. PM"},  {0,"2. PM"}};
-CONST_LCDSTRING_PTR s_am_pm_text[ ] = { m_Select,m_AM,m_PM,mBlank};
+CONST_LCDSTRING_PTR s_am_pm_text[ ] = { m_Select1,m_AM,m_PM,mBlank};
 
 
 
@@ -1081,6 +1084,65 @@ CONST_LCDSTRING_PTR s_place_in_bs_text[ ] = { m_tl_enable,m_place_bs,mBlank,mPre
 //Avg Std Mode Enabled
 CONST_LCDSTRING m_avg_stand_mode_enabled_text[]   = {{10,"Avg Std Mode Enabled"},  {10,"Media Modo Activar"}};
 
+
+//%Soil Air Voids
+//Disabled
+//Want to Enable?
+//Press YES or NO
+CONST_LCDSTRING m_Soil_Air[]   = {{10,"%Soil Air Voids"},  {10,"%Tiearra Aire Nulo"}};
+CONST_LCDSTRING m_Disabled[]   = {{10,"Disabled"},         {10,"Deshabilitado"}};
+CONST_LCDSTRING m_WanttoEnable[]   = {{10,"Want to Enable?"},  {10,"desea habilitar?"}};
+CONST_LCDSTRING_PTR s_SAV_disabled_text[ ] = { m_Soil_Air,m_Disabled,m_WanttoEnable,mPress_YES_or_NO};
+
+//%Soil Air Voids
+//Enabled
+//Want to Disable?
+//Press YES or NO
+CONST_LCDSTRING m_WanttoDisable[]   = {{10,"Want to Disable?"},  {10,"desea desactivar?"}};
+CONST_LCDSTRING_PTR s_SAV_enabled_text[ ] = { m_Soil_Air,m_Enabled,m_WanttoDisable,mPress_YES_or_NO};
+
+//Decay Mode Enabled
+CONST_LCDSTRING m_decay_mode_en[]   = {{10,"Decay Mode Enabled"},  {10,"Desint. Modo Activar"}};
+
+
+//1. Average Mode
+//2. Decay Mode
+// 
+////ESC to Exit
+CONST_LCDSTRING m_AverageMode[]   = {{0,"1. Average Mode"}, {0,"1. Media Mod"}};
+CONST_LCDSTRING m_DecayMode[]     = {{0,"2. Decay Mode"},   {0,"2. Desinteg. Mod"}};
+CONST_LCDSTRING_PTR s_stand_mode_settings_text[ ] = { m_AverageMode,m_DecayMode,mBlank,mESC_to_Exit};
+
+//No Data To Store
+//Start
+//New Measurement
+//
+// (English uses 3 lines, Spaniah needs 4 lines )
+CONST_LCDSTRING m_noData[]   = {{10,"No Data To Store"}, {10,"No hay datos"}};
+CONST_LCDSTRING m_start[]   = {{10,"Start"},            {10,"para almacenar"}};
+CONST_LCDSTRING m_new_meas_1[]   = {{10,"New Measurement"},  {10,"Iniciar nueva medicion"}};
+CONST_LCDSTRING m_new_meas_2[]   = {{10," "},                {10, "medicion"}};
+CONST_LCDSTRING_PTR s_no_data_to_store_text[ ] = { m_noData,m_start,m_new_meas_1,m_new_meas_2};
+
+//Error setting
+//Clock
+//Restart Gauge
+//Press <ENTER>
+CONST_LCDSTRING m_Error_setting[]   = {{10,"Error setting"},  {10,"Error al configurar"}};
+CONST_LCDSTRING m_Clock[]           = {{10,"Clock"},          {10," el Reloj"}};
+CONST_LCDSTRING m_Restart_Gauge[]   = {{10,"Restart Gauge"},  {10,"Reiniciar Medidor"}};
+CONST_LCDSTRING_PTR s_clock_set_error_text[ ] = { m_Error_setting,m_Clock,m_Restart_Gauge,mPressEnter};
+
+
+//Depth Strip Type
+//1. Xplorer
+//2. 3440
+//Select #
+//ESC to Exit
+CONST_LCDSTRING m_DepthStripType[]   = {{10,"Depth Strip Type"},  {10,"Sensor de profund."}};
+CONST_LCDSTRING m_Xplorer[]   = {{0,"1. Xplorer"},  {0,"1. Xplorer"}};
+CONST_LCDSTRING m_3440[]      = {{0,"2. 3440"},     {0,"2. 3440"}};
+CONST_LCDSTRING_PTR s_depth_strip_type[ ] = { m_DepthStripType,m_Xplorer,m_3440,m_Select,mESC_to_Exit};
 
 
 // displine_e ( m_

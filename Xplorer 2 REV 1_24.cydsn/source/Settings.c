@@ -510,8 +510,7 @@ void auto_depth_enable_or_calibrate(void)
   }
   else if ((button == 2) && ( NV_RAM_MEMBER_RD( gauge_type ) != GAUGE_3440_PLUS ))
   {
-   CLEAR_DISP;
-   depth_strip_type(); // 1) Xplorer , 2) 3400
+   dispscrn_e ( s_depth_strip_type ); // 1) Xplorer , 2) 3400
    while(1)
    {
     button = getKey(TIME_DELAY_MAX);
@@ -635,8 +634,11 @@ void auto_depth_enable_or_calibrate(void)
 void standCountMode(void)
 {  
   enum buttons button;
-
-  stand_mode_settings_text(); //TEXT// display "Std Count Settings\n1. Average Mode n2.Decay Mode " on LINE1,2,3
+  //1. Average Mode
+  //2. Decay Mode
+  // 
+  //ESC to Exit
+  dispscrn_e (s_stand_mode_settings_text ); //TEXT// display "Std Count Settings\n1. Average Mode n2.Decay Mode " on LINE1,2,3
   ESC_to_Exit(LINE4);
        
   while(1)
@@ -661,7 +663,9 @@ void standCountMode(void)
   }  
   else if (button == 2)
   {   
-   decay_stand_mode_enabled_text();
+   CLEAR_DISP;
+   //Decay Mode Enabled
+   displine_e ( LINE2, m_decay_mode_en, 1);
    Features.avg_std_mode = FALSE;  
   }
 
@@ -1246,14 +1250,22 @@ void soilvoids_menu ()
     enabled = 1;
   }
     
-  
-  SAV_enable_disable_text(enabled);
- 
-  // % Soil Air Voids OFF
-  // Want to Enable?
-  
-  // % Soil Air Voids ON
-  // Want to Disable?
+  if(enabled == 0)
+  {
+    //%Soil Air Voids
+    //Disabled
+    //Want to Enable?
+    //Press YES or NO
+    dispscrn_e ( s_SAV_disabled_text );
+  }  
+  else
+  {
+    //%Soil Air Voids
+    //Enabled
+    //Want to Disable?
+    //Press YES or NO
+    dispscrn_e ( s_SAV_enabled_text );
+  }
   
   while(1)
   {

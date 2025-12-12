@@ -399,7 +399,12 @@ int main() { //initialization and main loop
                       refresh = TRUE;
                       break;
             case STORE:        
-                      no_data_to_store_text( );
+                      
+                      //No Data To Store
+                      //Start
+                      //New Measurement
+                      //
+                      dispscrn_e ( s_no_data_to_store_text );
                       delay_ms ( 1500 );
                       refresh = TRUE;
                       break;
