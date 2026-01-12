@@ -145,7 +145,7 @@ CONST_LCDSTRING m_PressStartToTest[]                = {{ 10, "Press START to Tes
 CONST_LCDSTRING m_RechargeBattery[]                = {{ 10, "RECHARGE BATTERY" }, { 10, "Recargar la Bateria"} };
 
 //Reading # 
-CONST_LCDSTRING m_ReadingNumber[]                = {{ 10, "Reading # " }, { 10, "Lectura # "} };
+CONST_LCDSTRING m_ReadingNumber[]                = {{ 0, "Reading # " }, { 0, "Lectura # "} };
 
 
 //FAIL
@@ -1143,6 +1143,222 @@ CONST_LCDSTRING m_DepthStripType[]   = {{10,"Depth Strip Type"},  {10,"Sensor de
 CONST_LCDSTRING m_Xplorer[]   = {{0,"1. Xplorer"},  {0,"1. Xplorer"}};
 CONST_LCDSTRING m_3440[]      = {{0,"2. 3440"},     {0,"2. 3440"}};
 CONST_LCDSTRING_PTR s_depth_strip_type[ ] = { m_DepthStripType,m_Xplorer,m_3440,m_Select,mESC_to_Exit};
+
+
+//Auto Depth Settings
+//1. Enable/Disable
+//2. Depth Strip Type
+//ESC to Exit
+CONST_LCDSTRING m_AutoDepthSetting[]   = {{10,"Auto Depth Settings"},  {10,"Profund. Automatica"}};
+CONST_LCDSTRING m_EnDis[]              = {{0,"1. Enable/Disable"},  {10,"1. Habil./Deshabil."}};
+CONST_LCDSTRING m_SDepthStripType[]    = {{0,"2. Depth Strip Type"},  {10,"2.Sensor de profund."}};
+CONST_LCDSTRING_PTR s_auto_depth_settings[ ] = { m_AutoDepthSetting,m_EnDis,m_SDepthStripType,mESC_to_Exit};
+
+
+CONST_LCDSTRING m_AutoDepthDisabled[]   = {{10,"Auto Depth Disabled "},  {10,"Prof. Auto. Deshabil"}};
+CONST_LCDSTRING m_AutoDepthEnabled[]    = {{10,"Auto Depth Enabled "},   {10,"Prof. Auto. Habil. "}};
+
+
+// Put Rod in SAFE
+// Position, and
+// PRESS  <ENTER>
+//
+CONST_LCDSTRING m_RodSafe[]   = {{10,"Put Rod in SAFE"},  {10,"Coloque la barra en"}};
+CONST_LCDSTRING m_SPosition[]   = {{10,"Position, and"},  {10,"posicion segura, y"}};
+CONST_LCDSTRING_PTR s_RodinSafe[ ] = { m_RodSafe,m_SPosition,mPressEnter,mBlank};
+
+
+
+// Put Rod in BS
+// Position, and
+// PRESS  <ENTER>
+//
+CONST_LCDSTRING m_RodBSe[]      = {{10,"Put Rod in SAFE"},  {10,"Coloque la barra en"}};
+CONST_LCDSTRING m_SPosition1[]   = {{10,"Position, and"},   {10,"posicion RD, y"}};
+CONST_LCDSTRING_PTR s_RodinBS[ ] = { m_RodBSe, m_SPosition1, mPressEnter, mBlank};
+
+//Trench Offset Count
+CONST_LCDSTRING m_trench_text[]   = {{0,"Trench Offset Count "},  {0,"Trench Offset Count "}};
+
+//Special Calibration
+CONST_LCDSTRING m_spec_text[]   = {{0,"Special Calibration"},  {0,"Calibracion Especial"}};
+
+//Drift Test
+CONST_LCDSTRING m_drift_text[]   = {{0,"Drift Test"},  {0,"Prueba de Desviacion"}};
+
+//Nomograph
+CONST_LCDSTRING m_nomograph_text[]   = {{10,"Nomograph"},  {10,"Nomograma"}};
+
+
+//Depth not at BS
+//Position
+//
+//
+CONST_LCDSTRING m_depthNotAtBS[]   = {{10,"Depth not at BS"},  {10,"profundidad no en la"}};
+CONST_LCDSTRING m_Position2[]      = {{10,"Position"},         {10,"position de RD"}};
+CONST_LCDSTRING_PTR s_depth_not_in_bs_text[ ] = { m_depthNotAtBS,m_Position2,mBlank,mBlank};
+
+//Nomograph Enabled
+//Depth not at BS
+//Position
+//
+CONST_LCDSTRING m_NomoEN[]   = {{10,"Nomograph Enabled"},  {10,"Nomograma habilitado"}};
+CONST_LCDSTRING_PTR s_not_in_bs_text[ ] = { m_NomoEN,m_depthNotAtBS,m_Position2,mBlank};
+
+
+// Stat Test
+CONST_LCDSTRING m_stat_text[]   = {{0,"Stat Test"},  {0,"Prueba Estadistica"}};
+
+
+//Station: 
+CONST_LCDSTRING m_Station1[]   = {{0,"Station: "},  {0,"Estacion: "}};
+
+//Printing Data
+//Please Wait
+//
+//
+CONST_LCDSTRING m_PrintingData[] = {{10,"Printing Data"},  {10,"Imprimiendo la"}};
+CONST_LCDSTRING m_PleaseWait[]   = {{10,"Please Wait"},    {10,"Informacion"}};
+CONST_LCDSTRING m_PorFavor[]     = {{10,"           "},    {10,"Por Favor Espere."}};
+CONST_LCDSTRING_PTR s_printing_data_wait_txt[ ] = { m_PrintingData,m_PleaseWait,m_PorFavor,mBlank};
+
+
+//
+//No Printer
+//Detected
+//
+CONST_LCDSTRING m_NoPrinter[]   = {{10,"No Printer"},  {10,"No se Detecta"}};
+CONST_LCDSTRING m_Detected[]   = {{10,"Detected!"},  {10,"Impresora!"}};
+CONST_LCDSTRING_PTR s_NoPrinterDetected[ ] = { mBlank,m_NoPrinter,m_Detected,mBlank};
+
+
+//Connect Printer
+//To Gauge
+//
+//Press ENTER
+CONST_LCDSTRING m_ConnectPrinter[]   = {{10,"Connect Printer"},  {10,"Conecte la Impresora"}};
+CONST_LCDSTRING m_ToGauge[]   = {{10,"To Gauge"},  {10,"al Equipo."}};
+CONST_LCDSTRING_PTR s_ConnectPrinterToGauge[ ] = { m_ConnectPrinter,m_ToGauge,mBlank,mPressEnter};
+
+//Invalid Moist. Std.
+CONST_LCDSTRING m_InvalidMoistStd[]   = {{10,"Invalid Moist. Std."},  {10,"Invalid Moist. Std."}};
+
+//Invalid Density Std.
+CONST_LCDSTRING m_InvalidDensityStd[]   = {{10,"Invalid Density Std."},  {10,"Invalid Density Std."}};
+
+
+//Disable Auto
+//Depth?
+//
+//Press Yes or No
+CONST_LCDSTRING m_DisableAuto[]   = {{10,"Disable Auto"},  {10,"Desconectar"}};
+CONST_LCDSTRING m_Depth2[]        = {{10,"Depth?"},        {10,"Profundidad Auto.?"}};
+CONST_LCDSTRING_PTR s_disable_auto_depth[ ] = { m_DisableAuto,m_Depth2,mBlank,mPress_YES_or_NO};
+
+
+//No Valid Depth Has
+//Been Selected.
+//
+//
+CONST_LCDSTRING m_NoValidDepth[]   = {{10,"No Valid Depth Has"},    {10,"No se ha seleccion."}};
+CONST_LCDSTRING m_Selected[]      = {{10,  "Been Selected."},       {10,"una Profund. valida"}};
+CONST_LCDSTRING_PTR s_no_valid_depth_selected[ ] = { m_NoValidDepth,m_Selected,mBlank,mBlank};
+
+
+//
+//Max # of Stations
+//Has Been Exceeded.
+//Start New Project
+CONST_LCDSTRING m_MaxStations[]      = {{10,"Max # of Stations"},  {10,"Max # de Estaciones"}};
+CONST_LCDSTRING m_Exceeded[]         = {{10,"Has Been Exceeded."}, {10,"Execido. Inicie un"}};
+CONST_LCDSTRING m_StartNewProject[]  = {{10,"Start New Project"},  {10,"Nuevo Proyecto."}};
+CONST_LCDSTRING_PTR s_max_stations_text[ ] = { mBlank,m_MaxStations,m_Exceeded,m_StartNewProject};
+
+
+//No Project Has Been
+//Selected. Please
+//Create or Select
+//Project.
+CONST_LCDSTRING m_NoProject[]        = {{10,"No Project Has Been"}, {10,"Ningun Projecto se a"}};
+CONST_LCDSTRING m_Selected2[]        = {{10,"Selected. Please"},    {10,"Seleccionado."}};
+CONST_LCDSTRING m_CreateOrSelect[]   = {{10,"Create or Select a"},    {10,"Elabore o Seleccione"}};
+CONST_LCDSTRING m_aProject[]          = {{10,"a Project"},           {10,"un Projecto."}};
+CONST_LCDSTRING_PTR s_no_project_selected[ ] = { m_NoProject,m_Selected2,m_CreateOrSelect,m_aProject};
+
+CONST_LCDSTRING m_Project[]          = {{10,"Project: "},           {10,"Projecto: "}};
+
+
+//Place Gauge in
+//Trench on Std. Block
+//in SAFE Position
+//Press Start
+CONST_LCDSTRING m_PlaceGauge1[]   = {{10,"Place Gauge in"},        {10,"Coloque med. en la"}};
+CONST_LCDSTRING m_TrenchBlock[]   = {{10,"Trench on Std. Block"},  {10,"zanja en bloque est."}};
+CONST_LCDSTRING m_SafePosition[]  = {{10,"in SAFE Position"},      {10,"en posicion segura"}};
+CONST_LCDSTRING_PTR s_trench_count[ ] = { m_PlaceGauge1,m_TrenchBlock,m_SafePosition,mPressEnter};
+
+
+//Stat Test
+//Press START for
+//20 one min counts
+//
+CONST_LCDSTRING m_StatTest[]      = {{10,"Stat Test"},         {10,"Prueba Eestadistica"}};
+CONST_LCDSTRING m_PressStart2[]   = {{10,"Press START for"},   {10,"Presione START para"}};
+CONST_LCDSTRING m_20Counts[]      = {{10,"20 one min counts"}, {10,"20 conteos de un min"}};
+CONST_LCDSTRING_PTR s_StatTest20[ ] = { m_StatTest,m_PressStart2,m_20Counts,mBlank};
+
+//Drift Test
+//Press START for
+//5 four min counts
+//
+CONST_LCDSTRING m_DriftTest[]    = {{10,"Stat Test"},       {10,"Prueba Eestadistica"}};
+CONST_LCDSTRING m_5Counts[]      = {{10,"5 four min counts"}, {10,"5 recuentos de 4 min"}};
+CONST_LCDSTRING_PTR s_DriftStatTest5[ ] = { m_DriftTest,m_PressStart2,m_5Counts,mBlank};
+
+//1. SD Card Test
+//2. Format SD Card
+//3. Delete Proj. Dir.
+//4. Create Proj. Dir.
+//5. Add/Delete Files
+CONST_LCDSTRING m_sd_1[]   = {{0,"1. SD Card Test"},      {0,"1.Prueba de tar. SD"}};
+CONST_LCDSTRING m_sd_2[]   = {{0,"2. Format SD Card"},    {0,"2.Form. tarjeta SD"}};
+CONST_LCDSTRING m_sd_3[]   = {{0,"3. Delete Proj. Dir."}, {0,"3.Eliminar dir. Proy"}};
+CONST_LCDSTRING m_sd_4[]   = {{0,"4. Create Proj. Dir."}, {0,"4.Crear dir. Proy."}};
+CONST_LCDSTRING m_sd_5[]   = {{0,"5. Add/Delete Files"},  {0,"5.Agreg./Elim. arch."}};
+
+
+//1. Battery Voltage
+//2. Extended Counts
+//3. Check Temperature
+//4. Memory Reset
+//5. Depth Sensor Test
+//6. KEY PAD Test
+//7. USB Store Test
+//8. Count Test
+//9. Shut Down Test
+//10.Light Test
+//11. GPS Test 
+//12. Update Firmware
+//13. SD Card Test
+//14. Reset BLE Module
+//15.Idle Shutdwn Time
+CONST_LCDSTRING m_diag_menu_1[]   = {{0,"1. Battery Voltage"},  {0,"1.Volt. Bateria"}};
+CONST_LCDSTRING m_diag_menu_2[]   = {{0,"2. Extended Counts"},  {0,"2.Recuentos extend."}};
+CONST_LCDSTRING m_diag_menu_3[]   = {{0,"3. Check Temperature"},{0,"3.Temperatura"}};
+CONST_LCDSTRING m_diag_menu_4[]   = {{0,"4. Memory Reset"},     {0,"4.Reiniciar Memoria"}};
+CONST_LCDSTRING m_diag_menu_5[]   = {{0,"5. Depth Sensor Test"},{0,"5.Sensor de profund."}};
+CONST_LCDSTRING m_diag_menu_6[]   = {{0,"6. KEY PAD Test"},     {0,"6.Prueba del Teclado"}};
+CONST_LCDSTRING m_diag_menu_7[]   = {{0,"7. USB Store Test"},   {0,"7.Prueba USB"}};
+CONST_LCDSTRING m_diag_menu_8[]   = {{0,"8. Count Test"},       {0,"8.Prueba de Conteo"}};
+CONST_LCDSTRING m_diag_menu_9[]   = {{0,"9.  Shut Down Test"},  {0,"9.Prueba de Apagado"}};
+CONST_LCDSTRING m_diag_menu_10[]   = {{0,"10. Light Test"},     {0,"10.Prueba de Luz"}};
+CONST_LCDSTRING m_diag_menu_11[]   = {{0,"11. GPS Test "},      {0,"11.Prueba de GPS"}};
+CONST_LCDSTRING m_diag_menu_12[]   = {{0,"12. Update Firmware"},{0,"12.Actual. Firmware"}};
+CONST_LCDSTRING m_diag_menu_13[]   = {{0,"13. SD Card Test"},   {0,"13.Prueba tarjeta SD"}};
+CONST_LCDSTRING m_diag_menu_14[]   = {{0,"14. Reset BLE Module"},{0,"14.Reiniciar BLE"}};
+CONST_LCDSTRING m_diag_menu_15[]   = {{0,"15.Idle Shutdwn Time"},{0,"15.Temp. inactividad"}};
+
+
 
 
 // displine_e ( m_

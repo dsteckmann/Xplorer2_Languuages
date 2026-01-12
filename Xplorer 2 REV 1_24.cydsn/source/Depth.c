@@ -434,10 +434,11 @@ void set_depth_manual( void )  // Manually set Depth it auto depth is disabled
   
   if ( Features.auto_depth && !Flags.in_spec_cal )
   { 
-    disable_auto_depth();    // display "Disable Auto\nDepth?"
-    
-    Press_YES_or_NO (LINE4);  // display "Press YES ot NO"  
-    
+    //Disable Auto
+    //Depth?
+    //
+    //Press Yes or No
+    dispscrn_e ( s_disable_auto_depth); 
     while(1)
     {
       button = getKey(TIME_DELAY_MAX);  

@@ -1988,8 +1988,9 @@ void storeStationData ( char * project, station_data_t station  )
   }
   
   CLEAR_DISP;
-  LCD_position(LINE2);
-  current_project_text( project );
+  //Project: 
+  displine_e ( LINE2, m_Project, 1 );
+  _LCD_PRINTF("%s",project);
   delay_ms(1000);
   
   //Enter Station

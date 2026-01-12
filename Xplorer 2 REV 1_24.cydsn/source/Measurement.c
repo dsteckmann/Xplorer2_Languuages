@@ -190,9 +190,13 @@ uint8_t measureMoistureDensity(void)
         } 
         if ( Spec_flags.nomograph_flag && (depth_setting != 1) ) 
         { // Must be in BS if thin layer mode is enabled
-            not_in_bs_text();                 // TEXT: "THIN LAYER NOT IN BS POSITION
-            delay_ms(1000);
-            return 0;
+          //Nomograph Enabled
+          //Depth not at BS
+          //Position
+          //  
+          dispscrn_e ( s_not_in_bs_text );               
+          delay_ms(1000);
+          return 0;
         }
   	} // end of getting depth
     if ( Features.auto_store_on && (Spec_flags.recall_flag == 0))
@@ -227,7 +231,13 @@ uint8_t measureMoistureDensity(void)
         }
         if ( SD_CheckIfProjExists ( project_info.current_project ) == FALSE ) 
         { // auto store is on and a valid project is not selected
-            no_project_selected();  //display "No Project Has Been\nSelected. Please\nCreate or Select\nProject."
+          
+            dispscrn_e ( s_no_project_selected );
+            //No Project Has Been
+            //Selected. Please
+            //Create or Select
+            //Project.           
+            
             delay_ms(1500);
             if (  sdOpened == ON  ) 
             { 
@@ -709,17 +719,21 @@ uint8_t measureMoistureDensity(void)
       else {
         if ( d_stand <= 0)
         {
-          invalid_den_std_text();
+          //Invalid Density Std.
+          displine_e ( LINE2, m_InvalidDensityStd, 1 );
           delay_ms(2000);
         }
         if ( m_stand <= 0 )
         {
-          invalid_mois_std_text();
+          //Invalid Moist. Std.
+          displine_e ( LINE2, m_InvalidMoistStd, 1 );
           delay_ms(2000);
         }
         if ( !bit_test(valid_depth, depth_setting ) )
         {
-          no_valid_depth_selected ( );
+          //No Valid Depth Has
+          //Been Selected.
+          dispscrn_e ( s_no_valid_depth_selected  );
           delay_ms(1500);
         }
         hold_buzzer();
@@ -782,7 +796,11 @@ enum buttons placeGaugeinBS (void)
       // Display Error message is not in BS
       if ( tst_depth_g != 1 )
       {
-        depth_not_in_bs_text();
+        //Depth not at BS
+        //Position
+        //
+        //
+        dispscrn_e ( s_depth_not_in_bs_text );
         delay_ms ( 1000 );
       }
     }

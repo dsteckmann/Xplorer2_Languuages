@@ -479,8 +479,12 @@ void auto_depth_enable_or_calibrate(void)
   enum buttons button;
   float volts_safe,volts_bs,slope;
   char temp_str[21];
-  auto_depth_settings(); //TEXT// display "Auto Depth Settings\n1. Enable/Disable\n
-  ESC_to_Exit(LINE4);
+  
+  //Auto Depth Settings
+  //1. Enable/Disable
+  //2. Depth Strip Type
+  //ESC to Exit
+  dispscrn_e ( s_auto_depth_settings ); //TEXT// display "Auto Depth Settings\n1. Enable/Disable\n
        
   while(1)
   {
@@ -500,11 +504,13 @@ void auto_depth_enable_or_calibrate(void)
     CLEAR_DISP;
     if (  Features.auto_depth == FALSE )
     {
-      LCD_PrintAtPosition("Auto Depth Disabled ",LINE2);
+      //Auto Depth Disabled
+      displine_e (LINE2,m_AutoDepthDisabled,1);
     }
     else
     {
-      LCD_PrintAtPosition("Auto Depth Enabled  ",LINE2);
+      //Auto Depth Enabled
+      displine_e (LINE2,m_AutoDepthEnabled,1);
     } 
     delay_ms(1000); 
   }
@@ -544,9 +550,11 @@ void auto_depth_enable_or_calibrate(void)
      IDAC8_DEPTH_Start();  // turn on the current source for the depth strip.
      
      // get depth strip voltage at SAFE
-     LCD_PrintAtPosition ("   Put Rod in SAFE  ",LINE1);  
-     LCD_PrintAtPosition ("   Position, and    ",LINE2);  
-     LCD_PrintAtPosition ("   PRESS  <ENTER>   ",LINE3);   
+     //Put Rod in SAFE 
+     //Position, and
+     //PRESS  <ENTER>
+     dispscrn_e ( s_RodinSafe );
+    
      while(1)
      {
       button = getKey(TIME_DELAY_MAX);
@@ -564,9 +572,10 @@ void auto_depth_enable_or_calibrate(void)
       
       CLEAR_DISP;
       // get the voltage at BS position
-      LCD_PrintAtPosition("   Put Rod in BS    ",LINE1);  
-      LCD_PrintAtPosition("   Position, and    ",LINE2);  
-      LCD_PrintAtPosition("   PRESS  <ENTER>   ",LINE3);  
+      //Put Rod in BS
+      //Position, and
+      //PRESS  <ENTER>
+      dispscrn_e ( s_RodinBS );
       while(1)
       {
         button = getKey(TIME_DELAY_MAX);
@@ -1088,8 +1097,11 @@ void offset(void)  // leads user through process to enable/disable or enter offs
               // Take a 1 minute reading in Standard block
               while ( 1 )
               {
-                trench_count_press_start();  // display "  Press START for\n  Standard Count" 
-                
+                //Place Gauge in
+                //Trench on Std. Block
+                //in SAFE Position
+                //Press Start  
+                dispscrn_e ( s_trench_count );
                 while(1)
                 {
                   button = getKey ( TIME_DELAY_MAX );

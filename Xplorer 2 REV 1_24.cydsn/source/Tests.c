@@ -480,44 +480,48 @@ void measurePulses ( uint8_t line, uint8_t time1, uint16_t * moisture_count, uin
     }    
     else if(Flags.stat_flag)
     {
-        stat_text();                                    //TEXT// display "Stat Test"     
+      // Stat Test
+      displine_e ( LINE1, m_stat_text, 1 );                           
     }    
     else if(Flags.drift_flag)
     {
-        drift_text();                                   //TEXT// display "Drift Test"      
+      //Drift Test
+      displine_e ( LINE1, m_drift_text , 1 );
     }    
     else if( Spec_flags.spec_cal_flag && (NV_RAM_MEMBER_RD(SPECIALCAL_DEPTH) == depth_setting))
     {
       
       if( Features.auto_store_on  )
       {
-       LCD_position(LINE1);
-       current_project_text( project_info.current_project );  
-       LCD_position(LINE2);
-       display_station_name(project_info.current_station_name);         //TEXT// display "Station: %s",current_station               
+       CLEAR_DISP;
+       //Project: 
+       displine_e ( LINE1, m_Project, 1 );
+       _LCD_PRINTF("%s",project_info.current_project);
+      
+        //Station: 
+        display_station_name(project_info.current_station_name, LINE2 );   
+        
       }
       CyDelay(1500);
-      LCD_position(LINE1);
-      spec_text();
-      //TEXT// display "Special Calibration"      
+      //Special Calibration
+      displine_e ( LINE1, m_spec_text, 1 );
     }  
     else if (Spec_flags.nomograph_flag )
     {       
       if( Features.auto_store_on  )
       {
-       LCD_position(LINE1);
-       current_project_text( project_info.current_project );  
-       LCD_position(LINE2);
-       display_station_name(project_info.current_station_name);         //TEXT// display "Station: %s",current_station               
+       displine_e ( LINE1, m_Project, 1 );
+       _LCD_PRINTF("%s",project_info.current_project);
+       display_station_name(project_info.current_station_name, LINE2);         //TEXT// display "Station: %s",current_station               
       }
       CyDelay(1500);
-      LCD_position(LINE1);
-      nomograph_text();                                //TEXT// display " Nomograph"      
+      //Nomograph
+      displine_e ( LINE1, m_nomograph_text , 1 );
     }
     else if ( Spec_flags.trench_offset_flag )
     {
-    trench_text();
-    
+      // Trench Offset Count
+      displine_e ( LINE1, m_trench_text, 1 );
     }  
     else //general purpose test
     {
@@ -525,10 +529,10 @@ void measurePulses ( uint8_t line, uint8_t time1, uint16_t * moisture_count, uin
       
       if( (Features.auto_store_on) && (Flags.in_spec_cal == FALSE ) )
       {
-       LCD_position(LINE1);
-       current_project_text( project_info.current_project );  
-       LCD_position(LINE2);
-       display_station_name(project_info.current_station_name);         //TEXT// display "Station: %s",current_station               
+       displine_e ( LINE1, m_Project, 1 );
+       _LCD_PRINTF("%s",project_info.current_project);
+      
+       display_station_name(project_info.current_station_name, LINE2);         //TEXT// display "Station: %s",current_station               
       }
       else   // Display Time 
       {
@@ -1186,7 +1190,11 @@ uint8_t stat_test(void)  // leads user through static test procedure
   {
     if(!Flags.diag)
     {
-      press_start(0);  // display "  Press START for\n  20m. STAT TEST" on LINE2 and LINE3      
+      //Stat Test
+      //Press START for
+      //20 one min counts
+      //
+      dispscrn_e ( s_StatTest20 );
       while(1)
       {
        button = getKey(TIME_DELAY_MAX);
@@ -1210,7 +1218,9 @@ uint8_t stat_test(void)  // leads user through static test procedure
       KEY_B_LIGHT_DISABLE()    ;                        // turn off keyboard backlight    
   	};
 
-    reading();  // display "Reading # " on LINE2
+    // Reading #
+    displine_e ( LINE2, m_ReadingNumber, 1 );
+    
     for(i=0; i<20; i++)                             // loop for taking (20) 1 minute counts
     {      
       LCD_position(LINE2+10);
@@ -1468,7 +1478,12 @@ void drift_test(void)  // leads user through drift test procedure
   {    
     if ( !Flags.diag )
     {
-      press_start(1);  // display "  Press START for\n  20m. DRIFT TEST" on LINE2 and LINE3      
+      //Drift Test
+      //Press START for
+      //5 four min counts
+      //   
+      dispscrn_e ( s_DriftStatTest5 );
+      
       while(1)
       {
         button = getKey(TIME_DELAY_MAX);
@@ -1490,9 +1505,8 @@ void drift_test(void)  // leads user through drift test procedure
      KEY_B_LIGHT_DISABLE(); // turn off keyboard backlight    
   	};
 
-   
-    // Get the 5, 4 minute readings
-    reading();  // display "Reading # " on LINE2
+    // Reading #
+    displine_e ( LINE2, m_ReadingNumber, 1 );
     for(i=0; i<5; i++)
     {      
       LCD_position (LINE2+10);
