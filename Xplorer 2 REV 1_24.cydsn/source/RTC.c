@@ -770,14 +770,12 @@ void enterTimeRTCI2C (void)  // leads user through process to set the time and d
   
   while(!escape)
   {
-    CLEAR_DISP;
-    LCD_position(LINE1);
-    _LCD_PRINT ( "Enter Current");
-    LCD_position(LINE2);  
-    _LCD_PRINT ( "Date: MM/DD/20YY");       
-    YES_to_Accept(LINE3);  
-    ESC_to_Exit(LINE4);
- 
+    //Enter Current
+    //Date: MM/DD/20YY
+    //Yes to Accept
+    // ESC to Exit
+    dispscrn_e ( s_EnterCurrent );
+      
     i = 0;  //initialize markers
     j = 1;
     while(1)                                    //loop for entering each cnt cycle digit

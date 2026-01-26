@@ -1358,6 +1358,94 @@ CONST_LCDSTRING m_diag_menu_13[]   = {{0,"13. SD Card Test"},   {0,"13.Prueba ta
 CONST_LCDSTRING m_diag_menu_14[]   = {{0,"14. Reset BLE Module"},{0,"14.Reiniciar BLE"}};
 CONST_LCDSTRING m_diag_menu_15[]   = {{0,"15.Idle Shutdwn Time"},{0,"15.Temp. inactividad"}};
 
+//1. NORMAL
+//2. Demo
+//3. InstroTek
+//4. Troxler  3440
+//5. Troxler 3440 Plus
+CONST_LCDSTRING m_mode_1[]   = {{0,"1. NORMAL"},         {0,"1. NORMAL"}};
+CONST_LCDSTRING m_mode_2[]   = {{0,"2. DEMO "},          {0,"2. Demostracion"}};
+CONST_LCDSTRING m_mode_3[]   = {{0,"3. InstroTek"},      {0,"3. InstroTek"}};
+CONST_LCDSTRING m_mode_4[]   = {{0,"4. Troxler  3440"},  {0,"4. Troxler  3440"}};
+CONST_LCDSTRING m_mode_5[]   = {{0,"5. Troxler 3440 Plus"},  {0,"5. Troxler 3440 Plus"}};
+
+//1. Auto Store
+//2. Start New Project
+//3. Sel. Stored Proj.
+//4. Review Data
+//5. Delete Data 
+CONST_LCDSTRING m_proj_menu_1[]   = {{0,"1. Auto Store"},        {0,"1. Auto Memoria"}};
+CONST_LCDSTRING m_proj_menu_2[]   = {{0,"2. Start New Project"}, {0,"2. Nuevo Proyecto"}};
+CONST_LCDSTRING m_proj_menu_3[]   = {{0,"3. Sel. Stored Proj."}, {0,"3. Proyect Memorizado"}};
+CONST_LCDSTRING m_proj_menu_4[]   = {{0,"4. Review Data"},       {0,"4. Revisar la Info."}};
+CONST_LCDSTRING m_proj_menu_5[]   = {{0,"5. Delete Data"},       {0,"5. Borrar la Info."}};
+
+
+//Enter Calibration
+//Date: MM/DD/20YY
+//Yes to Accept
+// ESC to Exit
+CONST_LCDSTRING m_EnterCalibration[]      = {{0,"Enter Calibration"}, {0,"Saisir Cal."}};
+CONST_LCDSTRING m_DateMMDDYY[]            = {{0,"Date: MM/DD/20YY"},  {0,"Date: MM/DD/20YY"}};
+CONST_LCDSTRING_PTR s_EnterCalibration[ ] = { m_EnterCalibration,m_DateMMDDYY,mYES_to_Accept,mESC_to_Exit};
+
+
+//Enter Current
+//Date: MM/DD/20YY
+//Yes to Accept
+// ESC to Exit
+CONST_LCDSTRING m_EnterCurrent[]          = {{0,"Enter Current"},     {0,"Enter Current"}};
+CONST_LCDSTRING_PTR s_EnterCurrent[ ]     = {m_EnterCurrent,m_DateMMDDYY,mYES_to_Accept,mESC_to_Exit};
+
+
+//
+//UP/DOWN TO CHANGE
+//Yes to Accept
+// ESC to Exit
+CONST_LCDSTRING_PTR s_UpDownYesEsc_txt[ ] = { mBlank,Up_Down_Change,mYES_to_Accept,mESC_to_Exit};
+
+
+//EXTENDED COUNT TEST
+//COUNTS:
+//Enter to Accept
+//ESC to Exit
+CONST_LCDSTRING m_extended_count[]      = {{0,"EXTENDED COUNT TEST"},  {0,"EXTENDED COUNT TEST"}};
+CONST_LCDSTRING m_counts1[]             = {{0,"COUNTS"},  {0,"COUNTS:"}};
+CONST_LCDSTRING_PTR s_extended_count[ ] = { m_extended_count,m_counts1,mEnter_to_Accept,mESC_to_Exit};
+
+
+//Enter Test Name
+//
+//Enter to Accept
+//ESC to Exit
+CONST_LCDSTRING m_EnterTestName[]  = {{0,"Enter Test Name"},  {0,"Enter Test Name"}};
+CONST_LCDSTRING_PTR s_TestName[ ]  = { m_EnterTestName, mBlank, mEnter_to_Accept, mESC_to_Exit};
+
+
+//Enter New Serial
+//Number:
+//YES_to_Accept
+//ESC to Exit
+CONST_LCDSTRING m_EnterSerial[]   = {{0,"Enter New Serial"},  {0,"Entrer Autre Serie"}};
+CONST_LCDSTRING m_Number[]        = {{0,"Number:"},  {0,"Numero:"}};
+CONST_LCDSTRING_PTR s_newserial[ ] = { m_EnterSerial,m_Number,mYES_to_Accept,mESC_to_Exit};
+
+
+//
+//Project Exists!
+//
+//ESC to Exit
+CONST_LCDSTRING m_ProjectExists[]       = {{0,"Project Exists!"},  {0,"Project Exists!"}};
+CONST_LCDSTRING_PTR s_ProjectExists[ ]  = { mBlank,m_ProjectExists,mBlank,mESC_to_Exit};
+
+
+//Ser. Num:
+//Change Serial #?
+//Press Yes or No
+//Esc to Exit
+CONST_LCDSTRING m_SerNumber[]           = {{10,"Ser. Num:"},  {10,"Ser. Num:"}};
+CONST_LCDSTRING m_ChangeSerialNumber[]  = {{10,"Change Serial #?"},  {10,"Modifier serie #?"}};
+CONST_LCDSTRING_PTR s_SerialNumber[ ]   = { m_SerNumber,m_ChangeSerialNumber,mPress_YES_or_NO,mESC_to_Exit};
 
 
 

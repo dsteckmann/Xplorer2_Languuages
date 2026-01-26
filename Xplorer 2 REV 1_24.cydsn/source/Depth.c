@@ -475,21 +475,12 @@ void set_depth_manual( void )  // Manually set Depth it auto depth is disabled
   {
    count = (tst_depth_g < 14) ? tst_depth_g : 0;  
   }
- // select_test_or_spec_cal(Flags.in_spec_cal);   // display "Select Test" or "Select Spec. Cal" on LINE1
-  LCD_position(LINE2);
-  if(Features.language_f)
-  {
-    _LCD_PRINT("UP/DOWN TO CHANGE   "); 
-  }
-   else 
-  {
-    _LCD_PRINT ("Arriba/Abajo       ");       
-  } 
-    
  
-  YES_to_Accept(LINE3);                   // display "YES to Accept"
-  
-  ESC_to_Exit(LINE4);                     // display "ESC to Exit"      
+  //
+  //UP/DOWN TO CHANGE
+  //Yes to Accept
+  // ESC to Exit
+  dispscrn_e ( s_UpDownYesEsc_txt );
   
   while(1)
   {

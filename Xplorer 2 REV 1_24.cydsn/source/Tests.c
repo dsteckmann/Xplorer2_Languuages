@@ -1855,16 +1855,13 @@ void extended_drift_test ( void )
  
   Features.auto_store_on = FALSE;
   
-  CLEAR_DISP;
-  LCD_PrintAtPosition("EXTENDED COUNT TEST",LINE1);  
-  LCD_PrintAtPosition("COUNTS:            ",LINE2);  
-
-  Enter_to_Accept(LINE3);        //TEXT// display "Enter to Accept"
-     
-  ESC_to_Exit(LINE4);          //TEXT// display "ESC to Exit"    
-        
+  //EXTENDED COUNT TEST
+  //COUNTS:
+  //Enter to Accept
+  //ESC to Exit  
+  dispscrn_e ( s_extended_count );       
+  
   sprintf(number_ptr,"%d",0);
-        
   loop_cnt = (uint16_t)enterNumber( number_ptr,LINE2 + 12, 4 );  // prompt user to enter number of counts
   button = getLastKey();      
   if(button == ESC)
@@ -1876,10 +1873,12 @@ void extended_drift_test ( void )
 
   for(;;)
   {
-    CLEAR_DISP;
-    LCD_PrintAtPosition("Enter Test Name",LINE1);  
-    YES_to_Accept(LINE3);              //TEXT// display "YES to Accept"
-    ESC_to_Exit(LINE4);                //TEXT// display "ESC to Exit" 
+    //Enter Test Name
+    //
+    //Enter to Accept
+    //ESC to Exit
+    dispscrn_e ( s_TestName );
+    
     enter_name ( test_name,LINE2) ;  
     
     button = getLastKey();

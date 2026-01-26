@@ -1,6 +1,6 @@
 /**************************   ***************************************************************** ***************************/
 //
-// Title:        Elite
+// Title:       
 // Company:     Instrotek
 //
 // Document No.:
@@ -9,9 +9,6 @@
 //
 // Filename:   Settings.c
 // Author:      
-//
-// Processor:   Microchip PIC24HJ256GP206    
-// Clock:	    12MHz	
 //
 //
 // History: date, version, personal initials with comments about any changes
@@ -308,7 +305,8 @@ if ((Controls.LCD_light && (c == 'L')) || (Features.auto_scroll && (c == 'S')) |
   }
   
   enable_disable_text(temp_str,c);  //TEXT// display Enable/Disable screen for selected feature  
-  Press_YES_or_NO(LINE4);
+  //Press YES or NO
+  displine_e (LINE4,  mPress_YES_or_NO, 1 );
   
   while(1)
   {
@@ -648,7 +646,6 @@ void standCountMode(void)
   // 
   //ESC to Exit
   dispscrn_e (s_stand_mode_settings_text ); //TEXT// display "Std Count Settings\n1. Average Mode n2.Decay Mode " on LINE1,2,3
-  ESC_to_Exit(LINE4);
        
   while(1)
   {
@@ -997,8 +994,8 @@ void offset(void)  // leads user through process to enable/disable or enter offs
       }
       
       offset_on_off_text(temp_str,enabled);  //TEXT// display "%s Offset ON\nWant to Disable?",temp_str or "%s Offset OFF\,Want to Enable?",temp_str LINE1,2
-      Press_YES_or_NO(LINE4);  //TEXT// display "Press YES or NO" on LINE4         
-      
+      //Press YES or NO
+      displine_e (LINE4,  mPress_YES_or_NO, 1 );
       while(1)
       {
         button = getKey(TIME_DELAY_MAX);
@@ -1033,10 +1030,11 @@ void offset(void)  // leads user through process to enable/disable or enter offs
         {         
           if ( (temp_str[0]=='D') || (temp_str[0]=='M') || (temp_str[0]=='H') )
           {
-            enter_offset_text(temp_str);  //TEXT// display "Enter %s\nOffset:",temp_str  on LINE1 and LINE2         
-            Enter_to_Accept(LINE3);       //TEXT// display "Enter to Accept"
-            ESC_to_Exit(LINE4);           //TEXT// display "ESC to Exit"
-            number_ptr[0] = '\0';
+            enter_offset_text(temp_str);  //TEXT// display "Enter %s\nOffset:",temp_str  on LINE1 and LINE2 
+            // display "Enter to Accept
+            displine_e ( LINE3, mEnter_to_Accept, 1 );
+            displine_e ( LINE4, mESC_to_Exit, 1 );
+             number_ptr[0] = '\0';
           }
           // Get Density, Moisture, or Trench Offset
           if(temp_str[0]=='D')
@@ -1792,7 +1790,8 @@ void special_cal(void)  // Acquire/Enter Special Calibration Constants
           
           total_dens_cnts += density_cnt;       
           speccal_results_text(loopcnt,density_cnt);  //TEXT// display "#5d Density\,Count: %u\nYES to Continue",loopcnt,density_cnt        
-          ESC_to_Exit(LINE4);  //TEXT// display "ESC to Exit"
+          //ESC to Exit
+          displine_e ( LINE4, mESC_to_Exit, 1 );
    
           loopcnt--;
           count++;
@@ -1827,8 +1826,7 @@ void special_cal(void)  // Acquire/Enter Special Calibration Constants
         //Press Yes or NO
         //ESC to Exit
         dispscrn_e ( s_DensityNowEnterValue );        
-        Press_YES_or_NO(LINE3); //TEXT// display "Press YES or NO"
-         
+        
         while(1)
         {
          button = getKey(TIME_DELAY_MAX);
@@ -2279,17 +2277,14 @@ void serial_number ( Bool source )  //Enter or Edit Serial Number 0 is gauge, 1 
     //////////////Confirm Access code then display serial number//////////////////////////////////////
     if(enter_access_code())                   // confirm access code
     {
-      Controls.shut_dwn = FALSE;                             
-      CLEAR_DISP;
-      LCD_position (LINE1);
-      _LCD_PRINT ( "Ser. Num:");
+      Controls.shut_dwn = FALSE;   
+      //Ser. Num:
+      //Change Serial #?
+      //Press Yes or No
+      //Esc to Exit        
+      dispscrn_e ( s_SerialNumber );
       LCD_position (LINE1 + 10);
       _LCD_PRINTF ( "%lu", serial_number);
-      LCD_position (LINE2);
-      _LCD_PRINT ( "Change Serial #?");
-      Press_YES_or_NO(LINE3);
-      ESC_to_Exit(LINE4);
-       
       while(1)
       {
         button = getKey(TIME_DELAY_MAX);
@@ -2302,14 +2297,11 @@ void serial_number ( Bool source )  //Enter or Edit Serial Number 0 is gauge, 1 
      
       while ( 1 )
       {
-        CLEAR_DISP;
-        LCD_position(LINE1);
-        _LCD_PRINT ( "Enter New Serial");
-        LCD_position(LINE2);
-        _LCD_PRINT ( "Number:");
-        YES_to_Accept(LINE3);   
-        ESC_to_Exit(LINE4); 
-          
+        //Enter New Serial
+        //Number:
+        //YES_to_Accept
+        //ESC to Exit 
+        dispscrn_e ( s_newserial );
         sprintf(num,"        ");  //8 + \0
         
         serial_number = enter_number_std(num,LINE2+8,8,FALSE);   // prompt user to enter new serial number

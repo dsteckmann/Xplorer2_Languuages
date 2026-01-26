@@ -127,9 +127,11 @@ void start_new_project ( void )  // leads user through setup for new project
             {
               if ( true  == SD_CheckIfProjExists ( project ) )
               {
-               CLEAR_DISP;
-               LCD_PrintAtPosition ("Project Exists!",LINE2);
-               ESC_to_Exit(LINE4);                //TEXT// display "ESC to Exit"
+               //
+               //Project Exists!
+               //
+               //ESC to Exit
+               dispscrn_e ( s_ProjectExists );
                CyDelay ( 1500 );
                go_to_screen = 0;
               }

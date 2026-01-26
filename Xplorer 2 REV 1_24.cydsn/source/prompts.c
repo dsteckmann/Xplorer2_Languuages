@@ -8,6 +8,438 @@
 //#include <stdio.h>
 //#include <string.h>
 
+///******************************************************************************************************/
+
+void enter_offset_text(char *temp_str)
+{
+  LCD_position(LINE1);
+  switch ( g_language )
+  {
+    case L_ENGLISH:
+    default:
+    {
+      _LCD_PRINTF("Enter %s",temp_str);  
+      LCD_position(LINE2);
+      LCD_print("Offset:");
+      break;
+    }    
+    case L_SPANISH:
+    {
+      LCD_print("Ingresar Compensac'n");
+      LCD_position(LINE2);
+      _LCD_PRINTF("%s",temp_str);
+      break;
+    }
+  }  
+}
+
+void offset_enable_disable_text(char *temp_str, int16_t enabled)
+{  
+  CLEAR_DISP;
+  LCD_position(LINE2);
+  switch ( g_language )
+  {
+    case L_ENGLISH:
+    default:  
+    {
+        if(!enabled)
+        {    
+          _LCD_PRINTF(" %s Offset",temp_str);
+          LCD_position(LINE3);
+          LCD_print("   Disabled");           
+        }
+        else
+        {
+          _LCD_PRINTF(" %s Offset",temp_str);
+          LCD_position(LINE3);
+          LCD_print("   Enabled");
+        }
+        break;
+    }
+    
+    case L_SPANISH:    
+    {  
+      if(!enabled)
+      {    
+        _LCD_PRINTF(" %s Compensacion",temp_str);
+        LCD_position(LINE3);
+        LCD_print("   Deshabilitado");           
+      }
+      else
+      {
+        _LCD_PRINTF(" %s Offset",temp_str);
+        LCD_position(LINE3);
+        LCD_print("   Habilitado"); 
+      }
+      break;
+    }
+  }
+}
+
+
+void YES_to_Accept(uint8 line)
+{ 
+  //<YES> to Accept
+  displine_e ( line, mYES_to_Accept , 1 );
+
+}
+
+void up_down_ENTER_select_text()
+{  
+  // <ENTER> to Select
+  //  UP/DOWN for Next   
+  //  <ESC> Exit  
+  displine_e ( LINE2, Enter_to_Select, 1 );
+  displine_e ( LINE3, Up_Down_Next, 1 );    
+  displine_e ( LINE4, mESC_to_Exit, 1 ); 
+}
+
+void display_version(void) { 
+  char temp_str[20];
+  struct features_struct  Feat        =  NV_RAM_MEMBER_RD(FEATURE_SETTINGS); 
+  CLEAR_DISP;
+  LCD_position(LINE1); 
+  // if 3440 
+  if ( GAUGE_3440 == NV_RAM_MEMBER_RD (gauge_type ) )
+  {
+     LCD_print("      3400     ");
+  }  
+  else if ( GAUGE_3500 == NV_RAM_MEMBER_RD (gauge_type ) )
+  {
+    LCD_print("      Xplorer 2");
+  } 
+  else if ( GAUGE_3440_PLUS == NV_RAM_MEMBER_RD (gauge_type ) )
+  {
+    LCD_print("    3400 PLUS  ");
+  }
+  
+  sprintf(temp_str,"    Version %.2f",VERSION );
+  LCD_PrintAtPosition(temp_str,LINE2);
+  
+  if (Feat.dummy_mode == TRUE )
+  { 
+    CtrStrNC("DEMO", LINE3); //LCD_PrintAtPosition("       DEMO         ",LINE3);
+  }  
+}
+
+void eeprom_msg(void)
+{ 
+  CLEAR_DISP;    
+  LCD_position (LINE2+9);
+  LCD_print("EE");  
+  CyDelay ( 1000 );
+}
+
+
+void initializing(void)
+{ 
+  CLEAR_DISP;    
+  LCD_position (LINE2+5);
+  LCD_print("Initializing");  // no spanish needed now.  Should only see on first programming
+}
+
+
+//1. Auto Store
+//2. Start New Project
+//3. Sel. Stored Proj.
+//4. Review Data
+//5. Delete Data 
+void project_menu_display(uint8_t menu_trk)   // display for the project menu
+{
+  switch (menu_trk)
+  {
+    case 1:
+      //1. Auto Store
+      //2. Start New Project
+      displine_e ( LINE1, m_proj_menu_1, 1 );
+      displine_e ( LINE2, m_proj_menu_2, 1 );
+      break;
+      
+    case 2:
+      //3. Sel. Stored Proj.
+      //4. Review Data
+      displine_e ( LINE1, m_proj_menu_3, 1 );
+      displine_e ( LINE2, m_proj_menu_4, 1 );
+      break;
+      
+    case 0:
+      //5. Delete Data 
+      //
+      displine_e ( LINE1, m_proj_menu_5, 1 );
+      displine_e ( LINE2, mBlank, 1 );    
+      break;   
+     }
+  if(in_menu)
+  {  up_down_select_text(1);  }
+}
+
+void cal_depth_text(int16_t depth_temp)
+{
+  char dstr[10];
+  CLEAR_DISP;   
+  
+  if ( depth_temp == 1 )
+  {
+   //Depth:BS
+   displine_e ( LINE1, m_DepthBS,1 );
+  }
+  else 
+  {
+    //Depth:
+    sprintf( dstr,"%d",depth_temp);
+    displine_e ( LINE1, m_Depth,1 );
+    _LCD_PRINTF(" %s", dstr ); 
+  }
+}
+
+
+void cal_menu_text(BYTE display_set)
+{
+    switch(display_set)
+    {
+      case 1:
+            //0. Moist Consts
+            displine_e ( LINE1,C0,1 );
+            //1. Depth BS
+            displine_e ( LINE2,C1,1 );
+            break;
+      case 2:
+            //2. Depth 2
+            //3. Depth 3
+            displine_e ( LINE1,C2,1 );
+            displine_e ( LINE2,C3,1 );
+            break;            
+      case 3:
+            //4. Depth 4
+            //5. Depth 5
+            displine_e ( LINE1,C4,1 );
+            displine_e ( LINE2,C5,1 );
+            break;  
+      case 4:
+            //6. Depth 6
+            //7. Depth 7
+            displine_e ( LINE1,C6,1 );
+            displine_e ( LINE2,C7,1 );
+            break;  
+      case 5:
+            //8. Depth 8
+            //9. Depth 9
+            displine_e ( LINE1,C8,1 );
+            displine_e ( LINE2,C9,1 );
+            break;  
+      case 6:
+            //10. Depth 10
+            //11. Depth 11
+            displine_e ( LINE1,C10,1 );
+            displine_e ( LINE2,C11,1 );
+            break;  
+      case 7:
+            //12. Depth 12
+            //13. Calibration Date
+            displine_e ( LINE1,C12,1 );
+            displine_e ( LINE2,C13,1 );
+            break; 
+      case 0:
+            //14. Calib Std Counts
+            //        
+            displine_e ( LINE1,C14,1 );
+            displine_e ( LINE2,mBlank,1 );
+            break; 
+  }
+}
+
+void speccal_results_text(int16_t loops,uint16_t cnt_temp)
+{
+  CLEAR_DISP;
+  LCD_position(LINE1);
+  
+  switch ( g_language )
+  {
+    case L_ENGLISH:
+    default:
+       _LCD_PRINTF("#%d Density",loops);
+       LCD_position(LINE2);
+       _LCD_PRINTF("Count: %u",cnt_temp);
+       LCD_position(LINE3);
+       LCD_print("YES to Continue");
+      break;
+  case L_SPANISH:
+      _LCD_PRINTF("#%d Cuentas de",loops);  // Numero de Cuentas de Densidad " Si " para Continuar
+      LCD_position(LINE2);
+      _LCD_PRINTF("Densidad: %u",cnt_temp);
+      LCD_position(LINE3);
+      LCD_print("SI para Continuar");
+      break;
+  }  
+}
+
+
+
+void display_count_text ( uint16_t moist, uint32_t dens,uint32_t dens_combo )
+{ 
+  char line_buff [21];
+  
+  //      M Count:
+  // Combo DCount:   
+  //Single DCount:    
+  //Press ESC to Exit
+  dispscrn_e ( s_display_count_text );
+  
+  // print moisture count
+  snprintf ( line_buff,20,"%u",moist);
+  LCD_position (LINE1+14);  
+  LCD_print( line_buff);
+  
+  // print density combo count
+  snprintf ( line_buff,20,"%lu",(unsigned long)dens_combo);
+  LCD_position (LINE2+14);  
+  LCD_print( line_buff);
+ 
+  // print density combo count
+  snprintf ( line_buff,20,"%lu",(unsigned long)dens);
+  LCD_position (LINE3+14);  
+  LCD_print( line_buff);  
+}
+
+//Enter Project
+//Name:
+//YES to Accept
+//ESC to Exit
+uint8 enter_project_name_text(char *temp_str)
+{
+  dispscrn_e (s_enter_project_name );
+  _LCD_PRINTF("%s",temp_str);
+  uint8 lcd_line; 
+  switch ( g_language )
+  {
+    case L_ENGLISH:
+         default:
+         lcd_line = LINE2+6;
+         break;
+  
+    case L_SPANISH:
+         lcd_line = LINE2+10;
+         break;
+  }
+  return lcd_line;
+}
+
+void station_start_text(char *temp_str)
+{ 
+  //Starting Station
+  //Number:
+  //YES to Accept
+  //ESC to Exit
+  dispscrn_e ( s_station_start ); 
+  gotoloc ( LINE1+9,1);
+  _LCD_PRINTF("%s",temp_str);
+}
+
+void station_increment_text(uint16_t inc)
+{ 
+  //Station # 
+  //Increments by 1
+  //For Each Reading
+  //
+  dispscrn_e ( s_station_increment );
+  gotoloc (LINE1+10,1);
+  _LCD_PRINTF("%u",inc);
+}
+
+void select_from_list_text(BYTE from_where)
+{
+  CLEAR_DISP;
+  if(from_where==0)
+  {  
+    displine_e ( LINE2, m_SelectProject,1 );
+    //   Select Project;
+  }
+  else if(from_where==1)
+  { 
+    displine_e ( LINE2, m_SelectStation,1 );
+    // Select Station
+  }
+
+}
+
+void stat_drift_count_text(BYTE source)
+{
+  switch (g_language )
+  {
+    case L_ENGLISH:
+    default:
+    {     
+      switch ( source )
+      {
+        case  0: LCD_print("D%% Drift:  "); break;
+        case  1: LCD_print("Dens. Avg: ");  break;
+        case  2: LCD_print("M%% Drift:  "); break;
+        case  3: LCD_print("Moist.AVG: ");  break;      
+        case  4: LCD_print("Dens. R:   ");  break;
+        case  5: LCD_print("Moist R:   ");  break;
+        default: break;
+      }
+      break;
+    }
+    
+    case L_SPANISH:
+    {     
+      switch(source)
+      {
+        case  0: LCD_print("D%% Drift:  "); break;
+        case  1: LCD_print("Dens. Avg: ");  break;
+        case  2: LCD_print("H%% Drift:  0"); break;
+        case  3: LCD_print("Humedad.AVG: ");  break;
+        case  4: LCD_print("Dens. R:   ");  break;
+        case  5: LCD_print("Humedad R:   ");  break;
+      }
+    }
+  }  
+}
+
+
+void up_down_select_text(int16_t both)
+{  
+  if(both)
+  {
+    //UP/DOWN for Next  
+    displine_e ( LINE3, Up_Down_Next, 1 );
+  }
+  //Select #, ESC Exit   
+  displine_e ( LINE4, SelectNumber, 1 );
+}
+
+void mode_menu_display(unsigned int menu_trk)
+{
+  LCD_position(LINE1);    
+  switch (menu_trk)
+  {
+    case 1:
+            //1. NORMAL
+            //2. Demo 
+            displine_e ( LINE1, m_mode_1,1 );
+            displine_e ( LINE2, m_mode_2,1 );
+            break;
+    case 2:    
+            //3. InstroTek
+            //4. Troxler  3440
+            displine_e ( LINE1, m_mode_3,1 );
+            displine_e ( LINE2, m_mode_4,1 );
+            break;
+    case 0:    
+            //5. Troxler 3440 Plus
+            displine_e ( LINE1, m_mode_5,1 );
+            displine_e ( LINE2, mBlank,1 );
+            break;
+            
+    default:
+            break;    
+   }
+ 
+  if(in_menu)
+    up_down_select_text(1);  
+}
+
 void main_menu_display(uint8_t menu_trk)   // display for the main menu
 {  
   switch (menu_trk)
@@ -540,24 +972,29 @@ void set_units_text(void)
 // Redo the whole offet routine to make it compatible with new message screens of multiple languages
 void offset_on_off_text(char *temp_str, int16_t enabled)
 {
-  if(Features.language_f)
+  switch ( g_language )
   {
-    if(enabled)                              
-    {        
-      LCD_position (LINE1);
-      _LCD_PRINTF("%s Offset ON",temp_str);        
-      LCD_position (LINE2);
-      LCD_print("Want to Disable?");
-    }
-    else
+    case L_ENGLISH:
+    default:
     {
-      LCD_position (LINE1);
-      _LCD_PRINTF("%s Offset OFF",temp_str);             
-      LCD_position (LINE2);
-      LCD_print("Want to Enable?");
-    }      
-  }
-    else
+        if(enabled)                              
+        {        
+          LCD_position (LINE1);
+          _LCD_PRINTF("%s Offset ON",temp_str);        
+          LCD_position (LINE2);
+          LCD_print("Want to Disable?");
+        }
+        else
+        {
+          LCD_position (LINE1);
+          _LCD_PRINTF("%s Offset OFF",temp_str);             
+          LCD_position (LINE2);
+          LCD_print("Want to Enable?");
+        }  
+        break;
+    }
+
+    case L_SPANISH:
     {
       if(enabled)                             //    Densidad / Humedad / Zanja  Compensacion Habilitado Desea Deshabilitarlo?   
       {        
@@ -576,546 +1013,8 @@ void offset_on_off_text(char *temp_str, int16_t enabled)
         LCD_print("Deshabilitado Desea");
         LCD_position(LINE3);
         LCD_print("Habilitarlo?");
-      }      
-    }  
-}
-
-void enter_offset_text(char *temp_str)
-{
-  LCD_position(LINE1);
-  if(Features.language_f)
-  {
-    _LCD_PRINTF("Enter %s",temp_str);  
-    LCD_position(LINE2);
-    LCD_print("Offset:");
-  }
-    else
-    {
-      LCD_print("Ingresar Compensac'n");
-      LCD_position(LINE2);
-      _LCD_PRINTF("%s",temp_str);
-    }
-}
-void offset_enable_disable_text(char *temp_str, int16_t enabled)
-{  
-  CLEAR_DISP;
-  LCD_position(LINE2);
-  
-  if(Features.language_f)
-  {
-    if(!enabled)
-    {    
-      _LCD_PRINTF(" %s Offset",temp_str);
-      LCD_position(LINE3);
-      LCD_print("   Disabled");           
-    }
-    else
-    {
-      _LCD_PRINTF(" %s Offset",temp_str);
-      LCD_position(LINE3);
-      LCD_print("   Enabled");
-    }
-  }
-    else
-    {  
-      if(!enabled)
-      {    
-        _LCD_PRINTF(" %s Compensacion",temp_str);
-        LCD_position(LINE3);
-        LCD_print("   Deshabilitado");           
-      }
-      else
-      {
-        _LCD_PRINTF(" %s Offset",temp_str);
-        LCD_position(LINE3);
-        LCD_print("   Habilitado"); 
-      }
-    }
-}
-
-///******************************************************************************************************/
-void cal_depth_text(int16_t depth_temp)
-{
-  char dstr[10];
-  CLEAR_DISP;   
-  
-  if ( depth_temp == 1 )
-  {
-   //Depth:BS
-   displine_e ( LINE1, m_DepthBS,1 );
-  }
-  else 
-  {
-    //Depth:
-    sprintf( dstr,"%d",depth_temp);
-    displine_e ( LINE1, m_Depth,1 );
-    _LCD_PRINTF(" %s", dstr ); 
-  }
-}
-
-
-void cal_menu_text(BYTE display_set)
-{
-    switch(display_set)
-    {
-      case 1:
-            //0. Moist Consts
-            displine_e ( LINE1,C0,1 );
-            //1. Depth BS
-            displine_e ( LINE2,C1,1 );
-            break;
-      case 2:
-            //2. Depth 2
-            //3. Depth 3
-            displine_e ( LINE1,C2,1 );
-            displine_e ( LINE2,C3,1 );
-            break;            
-      case 3:
-            //4. Depth 4
-            //5. Depth 5
-            displine_e ( LINE1,C4,1 );
-            displine_e ( LINE2,C5,1 );
-            break;  
-      case 4:
-            //6. Depth 6
-            //7. Depth 7
-            displine_e ( LINE1,C6,1 );
-            displine_e ( LINE2,C7,1 );
-            break;  
-      case 5:
-            //8. Depth 8
-            //9. Depth 9
-            displine_e ( LINE1,C8,1 );
-            displine_e ( LINE2,C9,1 );
-            break;  
-      case 6:
-            //10. Depth 10
-            //11. Depth 11
-            displine_e ( LINE1,C10,1 );
-            displine_e ( LINE2,C11,1 );
-            break;  
-      case 7:
-            //12. Depth 12
-            //13. Calibration Date
-            displine_e ( LINE1,C12,1 );
-            displine_e ( LINE2,C13,1 );
-            break; 
-      case 0:
-            //14. Calib Std Counts
-            //        
-            displine_e ( LINE1,C14,1 );
-            displine_e ( LINE2,mBlank,1 );
-            break; 
-  }
-}
-
-void speccal_results_text(int16_t loops,uint16_t cnt_temp)
-{
-  CLEAR_DISP;
-  LCD_position(LINE1);
-  
-  switch ( g_language )
-  {
-    case L_ENGLISH:
-    default:
-       _LCD_PRINTF("#%d Density",loops);
-       LCD_position(LINE2);
-       _LCD_PRINTF("Count: %u",cnt_temp);
-       LCD_position(LINE3);
-       LCD_print("YES to Continue");
-      break;
-  case L_SPANISH:
-      _LCD_PRINTF("#%d Cuentas de",loops);  // Numero de Cuentas de Densidad " Si " para Continuar
-      LCD_position(LINE2);
-      _LCD_PRINTF("Densidad: %u",cnt_temp);
-      LCD_position(LINE3);
-      LCD_print("SI para Continuar");
-      break;
-  }  
-}
-
-
-//Enter Project
-//Name:
-//YES to Accept
-//ESC to Exit
-uint8 enter_project_name_text(char *temp_str)
-{
-  dispscrn_e (s_enter_project_name );
-  _LCD_PRINTF("%s",temp_str);
-  uint8 lcd_line; 
-  switch ( g_language )
-  {
-    case L_ENGLISH:
-         default:
-         lcd_line = LINE2+6;
-         break;
-  
-    case L_SPANISH:
-         lcd_line = LINE2+10;
-         break;
-  }
-  return lcd_line;
-}
-
-void station_start_text(char *temp_str)
-{ 
-  //Starting Station
-  //Number:
-  //YES to Accept
-  //ESC to Exit
-  dispscrn_e ( s_station_start ); 
-  gotoloc ( LINE1+9,1);
-  _LCD_PRINTF("%s",temp_str);
-}
-
-void station_increment_text(uint16_t inc)
-{ 
-  //Station # 
-  //Increments by 1
-  //For Each Reading
-  //
-  dispscrn_e ( s_station_increment );
-  gotoloc (LINE1+10,1);
-  _LCD_PRINTF("%u",inc);
-}
-
-void select_from_list_text(BYTE from_where)
-{
-  CLEAR_DISP;
-  if(from_where==0)
-  {  
-    displine_e ( LINE2, m_SelectProject,1 );
-    //   Select Project;
-  }
-  else if(from_where==1)
-  { 
-    displine_e ( LINE2, m_SelectStation,1 );
-    // Select Station
-  }
-
-}
-
-void stat_drift_count_text(BYTE source)
-{
-  switch (g_language )
-  {
-    case L_ENGLISH:
-    default:
-    {     
-      switch ( source )
-      {
-        case  0: LCD_print("D%% Drift:  "); break;
-        case  1: LCD_print("Dens. Avg: ");  break;
-        case  2: LCD_print("M%% Drift:  "); break;
-        case  3: LCD_print("Moist.AVG: ");  break;      
-        case  4: LCD_print("Dens. R:   ");  break;
-        case  5: LCD_print("Moist R:   ");  break;
-        default: break;
       }
       break;
     }
-    
-    case L_SPANISH:
-    {     
-      switch(source)
-      {
-        case  0: LCD_print("D%% Drift:  "); break;
-        case  1: LCD_print("Dens. Avg: ");  break;
-        case  2: LCD_print("H%% Drift:  0"); break;
-        case  3: LCD_print("Humedad.AVG: ");  break;
-        case  4: LCD_print("Dens. R:   ");  break;
-        case  5: LCD_print("Humedad R:   ");  break;
-      }
-    }
   }  
 }
-
-
-void display_count_text ( uint16_t moist, uint32_t dens,uint32_t dens_combo )
-{ 
-  char line_buff [21];
-  
-  //      M Count:
-  // Combo DCount:   
-  //Single DCount:    
-  //Press ESC to Exit
-  dispscrn_e ( s_display_count_text );
-  
-  // print moisture count
-  snprintf ( line_buff,20,"%u",moist);
-  LCD_position (LINE1+14);  
-  LCD_print( line_buff);
-  
-  // print density combo count
-  snprintf ( line_buff,20,"%lu",(unsigned long)dens_combo);
-  LCD_position (LINE2+14);  
-  LCD_print( line_buff);
- 
-  // print density combo count
-  snprintf ( line_buff,20,"%lu",(unsigned long)dens);
-  LCD_position (LINE3+14);  
-  LCD_print( line_buff);  
-}
-
-void Press_YES_or_NO (BYTE position)
-{ 
-  LCD_position(position); 
-  if(Features.language_f)
-  {  LCD_print("Press YES or NO"); }
-   else
-  {  LCD_print("Presione SI o NO"); } 
-}
-
-void ESC_to_Exit(BYTE position)
-{
-  LCD_position(position);
-  if(Features.language_f)
-  {  LCD_print("ESC to Exit"); }
-   else
-  { LCD_print("ESC para Salir");}
-}
-
-void Enter_to_Accept(BYTE position)
-{ 
-  LCD_position(position);
-  if(Features.language_f)
-    LCD_print("ENTER to Accept");
-   else
-   LCD_print("SI para Aceptar");  
-
-}
-
-
-void YES_to_Accept(BYTE position)
-{ 
-  LCD_position(position);
-  if(Features.language_f)
-    LCD_print("YES to Accept");
-   else
-   LCD_print("SI para Aceptar");  
-
-}
-
-void up_down_select_text(int16_t both)
-{  
-  if(both)
-  {
-    //UP/DOWN for Next  
-    displine_e ( LINE3, Up_Down_Next, 1 );
-  }
-  //Select #, ESC Exit   
-  displine_e ( LINE4, SelectNumber, 1 );
-}
-
-
-void up_down_ENTER_select_text()
-{  
-
-  LCD_position(LINE2);
-  if(Features.language_f)
-    LCD_print(" <ENTER> to Select  "); 
-  else
-   LCD_print(" <ENTER> a Escoger  ");
-  
-  LCD_position(LINE3);
-  if(Features.language_f)
-    LCD_print("  UP/DOWN for Next  ");
-  else 
-    LCD_print("   Arriba/Abajo     ");       
-  
-  LCD_position(LINE4);
-  if(Features.language_f)
-    LCD_print("     <ESC> Exit     "); 
-  else
-    LCD_print("     <ESC> Salir    ");  
-   
-}
-
-void display_version(void) { 
-  char temp_str[20];
-  struct features_struct  Feat        =  NV_RAM_MEMBER_RD(FEATURE_SETTINGS); 
-  CLEAR_DISP;
-  LCD_position(LINE1); 
-  // if 3440 
-  if ( GAUGE_3440 == NV_RAM_MEMBER_RD (gauge_type ) )
-  {
-     LCD_print("      3400     ");
-  }  
-  else if ( GAUGE_3500 == NV_RAM_MEMBER_RD (gauge_type ) )
-  {
-    LCD_print("      Xplorer 2");
-  } 
-  else if ( GAUGE_3440_PLUS == NV_RAM_MEMBER_RD (gauge_type ) )
-  {
-    LCD_print("    3400 PLUS  ");
-  }
-  
-  sprintf(temp_str,"    Version %.2f",VERSION );
-  LCD_PrintAtPosition(temp_str,LINE2);
-  
-  if (Feat.dummy_mode == TRUE )
-  { 
-    CtrStrNC("DEMO", LINE3); //LCD_PrintAtPosition("       DEMO         ",LINE3);
-  }  
-}
-
-void eeprom_msg(void)
-{ 
-  CLEAR_DISP;    
-  LCD_position (LINE2+9);
-  LCD_print("EE");  
-  CyDelay ( 1000 );
-}
-
-
-void initializing(void)
-{ 
-  CLEAR_DISP;    
-  LCD_position (LINE2+5);
-  LCD_print("Initializing");  // no spanish needed now.  Should only see on first programming
-}
-
-
-
-void project_menu_display(uint8_t menu_trk)   // display for the project menu
-{
-  if(Features.language_f)
-  {
-     switch (menu_trk)
-    {
-      case 1:
-      LCD_position(LINE1);
-      LCD_print("1. Auto Store       ");
-      LCD_position(LINE2);
-      LCD_print("2. Start New Project");
-      break;
-      
-      case 2:
-      LCD_position(LINE1);
-      LCD_print("3. Sel. Stored Proj.");
-      LCD_position(LINE2);
-      LCD_print("4. Review Data      ");
-      break;
-      
-      case 0:
-      LCD_position(LINE1);
-      LCD_print("5. Delete Data      ");
-      LCD_position(LINE2);
-      LCD_print("                    ");      
-      break;   
-     }
-   }
-    else
-    {
-      switch (menu_trk)
-      {
-        case 1:
-        LCD_position(LINE1);
-        LCD_print("1. Auto Memoria      ");
-        LCD_position(LINE2);
-        LCD_print("2. Nuevo Proyecto    ");
-        break;
-      
-        case 2:
-        LCD_position(LINE1);
-        LCD_print("3. Proyect Memorizado");
-        LCD_position(LINE2);
-        LCD_print("4. Revisar la Info.  ");
-        break;
-       
-        case 0 :
-        LCD_position(LINE1);
-        LCD_print("5. Borrar la Info.   ");       
-        LCD_position(LINE2);
-        LCD_print("                    ");       
-      }
-   }
-  if(in_menu)
-  {  up_down_select_text(1);  }
-}
-
-
-void mode_menu_display(unsigned int menu_trk)
-{
-  LCD_position(LINE1);    
-  switch (menu_trk)
-  {
-    case 1: LCD_print("1. NORMAL           ");     
-            LCD_position(LINE2);      
-            LCD_print("2. DUMMY            ");
-            break;
-    case 2:    
-            LCD_print("3. InstroTek        ");
-            LCD_position(LINE2);      
-            LCD_print("4. Troxler  3440    ");   
-           break; 
-    case 0:    
-            LCD_print("5. Troxler 3440 Plus");
-            LCD_position(LINE2);      
-            LCD_print("                    ");   
-            break;
-            
-    default:
-            break;    
-   }
- 
-  if(in_menu)
-    up_down_select_text(1);  
-}
-// Strat Main Menu
-void main_menu_strata_display(uint8_t menu_trk)   // display for the main menu
-{  
-  LCD_position(LINE1);  
-  switch (menu_trk)
-  {
-    
-    case 1: 
-        LCD_print(" 1. Stat Test        ");
-        LCD_position(LINE2);
-        LCD_print(" 2. Drift Test       ");     
-        break;    
-    
-    case 2: 
-        LCD_print(" 3. Recall           ");
-        LCD_position(LINE2);
-        LCD_print(" 4. Offset           ");     
-        break;    
-    case 3:    
-        LCD_print(" 5. Diagnostic Test ");            
-        LCD_position(LINE2);      
-        LCD_print(" 6. Review STD cnts.");
-        break;
-   case 4:    
-        LCD_print(" 7. Standard Mode   ");
-        LCD_position(LINE2);          
-        LCD_print(" 8. Auto Scroll     ");    
-        break;        
-    case 5:   
-        LCD_print(" 9. Set Units       ");
-         LCD_position(LINE2);
-        LCD_print("10. LCD Light       ");      
-        break;    
-    case 6:   
-        LCD_print("11. Serial Number   ");
-        LCD_position(LINE2);      
-        LCD_print("12. Date/Time       ");      
-        break;   
-    case 0:
-        LCD_print("13. Buzzer/Alarm    ");
-         LCD_position(LINE2);
-        LCD_print("14. Cal. Constants  ");
-         break;    
-  }  
- 
-  if( in_menu )
-  {  
-   up_down_select_text(1);  
-  }
-
-}
-
-
-
-
-

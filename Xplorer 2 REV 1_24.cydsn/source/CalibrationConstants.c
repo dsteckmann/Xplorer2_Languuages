@@ -224,12 +224,10 @@ void enter_cal_const(void)  // Manually Enter Calibration Constants
 	      _LCD_PRINTF ( "E =   %+7.5f", (double)NV_CONSTANTS(E_MOIST_CONST )); 
          LCD_position(LINE3);
         _LCD_PRINTF ( "F =   %+7.5f", (double)NV_CONSTANTS(F_MOIST_CONST ));
-        YES_to_Accept(LINE4);  
-      
+        //<YES> to Accept
+        displine_e ( LINE4, mYES_to_Accept , 1 );
         sprintf ( number_ptr, "%+7.5f", (double)NV_CONSTANTS(E_MOIST_CONST )); 
-   
-    		a_temp = enterNumber (number_ptr, LINE2 + 6, 10 );    // *number_ptr1 will hold the entered number
-  
+     	a_temp = enterNumber (number_ptr, LINE2 + 6, 10 );    // *number_ptr1 will hold the entered number
         button = getLastKey();
         if (button == ESC)                             // ESC was pressed, exit to menu      
         {
@@ -239,7 +237,7 @@ void enter_cal_const(void)  // Manually Enter Calibration Constants
 
 	     sprintf ( number_ptr, "%+7.5f", (double)NV_CONSTANTS(F_MOIST_CONST ));  // PCF
  	     b_temp = enterNumber ( number_ptr, LINE3 + 6, 10);     // *number_ptr1 will hold the entered number
-       button = getLastKey();     
+         button = getLastKey();     
         if(button == ESC)                             // ESC was pressed, exit to menu
         {
             //return;
@@ -337,14 +335,11 @@ void enter_calibration_time(void)  // leads user through process to set the time
   CURSOR_OFF;
   while(!escape)
   {
-    CLEAR_DISP;
-    LCD_position(LINE1);
-    _LCD_PRINT ( "Enter Calibration");
-    LCD_position(LINE2);  
-    _LCD_PRINT ( "Date: MM/DD/20YY");       
-    YES_to_Accept(LINE3);  
-    ESC_to_Exit(LINE4);
- 
+    //Enter Calibration
+    //Date: MM/DD/20YY
+    //Yes to Accept
+    // ESC to Exit
+    dispscrn_e ( s_EnterCalibration );
     i = 0;  //initialize markers
     j = 1;
     while(1)                                    //loop for entering each cnt cycle digit

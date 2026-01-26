@@ -411,7 +411,8 @@ void gps_test ( void )
   wait_for_key_release();
   global_special_key_flag = FALSE;
   CLEAR_DISP;
-  ESC_to_Exit(LINE4);               //  "ESC to Exit"
+  //ESC to Exit
+  displine_e ( LINE4, mESC_to_Exit, 1 );
   while ( global_special_key_flag == FALSE )
   {
      if (( gps_fix == '1' ) || ( gps_fix == '2') )
